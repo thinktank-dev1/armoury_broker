@@ -1,5 +1,5 @@
 <div>
-    <div class="section">
+    <div class="section how-it-works">
         <div class="container">
             <div class="row align-items-center mb-4">
                 <div class="col-md-12 text-center">
@@ -8,7 +8,10 @@
             </div>
             <div class="row">
                 @foreach($data AS $k => $dt)
-                <div class="col-md-6 mb-3">
+                @php
+                $i = $loop->index;
+                @endphp
+                <div class="col-md-5 mb-3">
                     <div class="bloc">
                         <div class="esarfa">
                             <span class="bloc-icon"><i class="{{ $dt['icon'] }}"></i></span>
@@ -26,6 +29,17 @@
                         </div>
                     </div>
                 </div>
+                @if($i % 2 == 0)
+                <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                    <img src="{{ asset('img/hiw-arrow.png') }}">
+                </div>
+                @endif
+                @if($i % 2 == 1 && $i != (count($data) - 1))
+                <div class="col-md-12 text-center d-flex align-items-center justify-content-center">
+                    <img src="{{ asset('img/hiw-btm-arrow.png') }}">
+                </div>
+                @endif
+
                 @endforeach
             </div>
             <div class="row">

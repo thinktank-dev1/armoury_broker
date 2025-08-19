@@ -125,7 +125,7 @@ body, p{
 .bloc-icon{
 	font-size: 35px;
 	font-weight: 600;
-	margin-left: 50%;
+	margin-left: 48%;
 	margin-right: 15px;
 }
 
@@ -470,4 +470,47 @@ body, p{
 }
 .faq_nav .nav-link.active{
 	width: 100%;
+}
+/*
+.how-it-works {
+  position: relative;
+  padding: 2rem;
+}
+
+.how-it-works::before,
+.how-it-works::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+}
+
+.how-it-works::before {
+  left: 0;
+  background-image: url("../../img/hiw-bg2.png");
+}
+
+.how-it-works::after {
+  right: 0;
+  background-image: url("../../img/hiw-bg1.png");
+}
+*/
+.how-it-works {
+  position: relative;
+  background-image: url("../../img/hiw-bg2.png"), url("../../img/hiw-bg2.png"),
+                    url("../../img/hiw-bg1.png"), url("../../img/hiw-bg1.png");
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  
+  background-position: 
+    left 0,      /* first left wing */
+    left 400px,  /* second left wing (space before it) */
+    right 0,     /* first right wing */
+    right 400px; /* second right wing (space before it) */
+
+  /* Size of each image */
+  background-size: auto 200px, auto 200px, auto 200px, auto 200px;
 }
