@@ -7,11 +7,53 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Faker\Factory as Faker;
 
+use Auth;
+use App\Models\Contact;
+
 class Support extends Component
 {
     public $data = [];
+    public $name, $surname, $email, $contact_number, $message;
 
     public function mount(){
+        $this->setFaq();
+        if(!Auth::guest()){
+            $this->name = Auth::user()->name;
+            $this->surname = Auth::user()->surname;
+            $this->email = Auth::user()->email;
+            $this->contact_number = Auth::user()->mobile_number;
+        }
+    }
+
+    public function sendContact(){
+        $this->validate([
+            'name' => 'required', 
+            'surname' => 'required', 
+            'email' => 'required', 
+            'contact_number' => 'required', 
+            'message' => 'required'
+        ]);
+
+        $cnt = new Contact();
+
+        if(!Auth::guest()){
+            $cnt->user_id = Auth::user()->id;
+        }
+        $cnt->name = $this->name; 
+        $cnt->surname = $this->surname;
+        $cnt->email = $this->email;
+        $cnt->contact_number = $this->contact_number;
+        $cnt->message = $this->message;
+        $cnt->save();
+        session()->flash('status', 'Contact successfully sent.');
+    }
+
+    #[Layout('components.layouts.landing')]
+    public function render(){
+        return view('livewire.landing.support');
+    }
+
+    public function setFaq(){
         $this->data = [
             "General Platform Questions" => [
                 'What is Armoury Broker?' => "Armoury Broker is a multi-vendor marketplace designed specifically for South Africa's firearms and firearm related equipment community. We facilitate secure peer-to-peer transactions of weapons, peripherals, and related tactical equipment through our platform.",
@@ -104,20 +146,5 @@ class Support extends Component
                 "How can I stay updated on new features?" => "Follow our announcements through the platform notifications, email updates, and our official communications channels on our social media accounts.",
             ],
         ];
-        /*
-        $faker = Faker::create();
-        for($i=0; $i < 5; $i++){
-            $arr = [
-                'title' => $faker->realText($maxNbChars = 100, $indexSize = 2),
-                'description' => $faker->realText($maxNbChars = 1000, $indexSize = 2),
-            ];
-            $this->data[] = $arr;
-        }
-        */
-    }
-
-    #[Layout('components.layouts.landing')]
-    public function render(){
-        return view('livewire.landing.support');
     }
 }

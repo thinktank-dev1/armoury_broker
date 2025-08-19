@@ -113,36 +113,56 @@
                     </div>
                 </div>
                 <div class="col-md-9">
+                    @if($errors->any())
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <input type="text" class="form-control line_form-control" placeholder="Name" name="name" wire:model.defer="name">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <input type="text" class="form-control line_form-control" placeholder="Surname" name="surname" wire:model.defer="surname">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <input type="email" class="form-control line_form-control" placeholder="Email" name="email" wire:model.defer="email">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <input type="email" class="form-control line_form-control" placeholder="Contact Number" name="contact_number" wire:model.defer="contact_number">
-                            </div>
-                        </div>
                         <div class="col-md-12">
-                            <div class="mb-3">
-                                <textarea class="form-control line_form-control" placeholder="Message" name="message" wire:model.defer="message"></textarea>
+                            <div class="alert alert-danger">
+                                {{ $errors->first() }}
                             </div>
-                        </div>
-                        <div class="col-md-12 text-end">
-                            <a href="#" class="btn btn-primary-outline">Submit Form</a>
                         </div>
                     </div>
+                    @endif
+                    @if (session('status'))
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    <form wire:submit.prevent="sendContact">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control line_form-control" placeholder="Name" name="name" wire:model.defer="name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control line_form-control" placeholder="Surname" name="surname" wire:model.defer="surname">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input type="email" class="form-control line_form-control" placeholder="Email" name="email" wire:model.defer="email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input type="email" class="form-control line_form-control" placeholder="Contact Number" name="contact_number" wire:model.defer="contact_number">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <textarea class="form-control line_form-control" placeholder="Message" name="message" wire:model.defer="message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-end">
+                                <a href="#" class="btn btn-primary-outline" wire:click.prevent="sendContact">Submit Form</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
