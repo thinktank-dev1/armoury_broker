@@ -25,10 +25,7 @@
                     @if($product->images->count() > 0)
                     <div class="product-image">
                         <div class="product_img_box">
-                            <img id="product_img" src="{{ asset('storage/'.$product->images->first()->image_url) }}" data-zoom-image="{{ asset('img/banner1.png') }}" alt="product_img1">
-                            <a href="#" class="product_img_zoom" title="Zoom">
-                                <span class="linearicons-zoom-in"></span>
-                            </a>
+                            <img id="product_img" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="product_img1">
                         </div>
                         <div id="pr_item_gallery" class="product_gallery_item slick_slider slick-initialized slick-slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
                             <div class="slick-list draggable">
