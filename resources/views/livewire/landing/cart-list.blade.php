@@ -1,0 +1,85 @@
+<div>
+    <div class="section py-5">
+        <div class="container">
+            <div class="row">
+                @foreach($cart_items_model AS $k=>$item_group)
+                @php
+                    $f_item = $item_group->first();
+                @endphp
+                <div class="col-md-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <h4 class="card-title">{{ ucwords($f_item->vendor->name) }}</h4>
+                                <div class="ms-auto">
+                                    <a href="{{ url('cart/'.$f_item->vendor->id) }}" class="btn btn-primary-outline">Checkout</a>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mt-3">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-end">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($item_group AS $item)
+                                        <tr>
+                                            <td>{{ ucwords($item->product->item_name) }}</td>
+                                            <td>{{ $item->product->item_description }}</td>
+                                            <td class="text-center">{{ $item->quantity }}</td>
+                                            <td class="text-end">R{{ number_format($item->price,2) }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @foreach($cart_items_session AS $item_group)
+                <div class="col-md-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <h4 class="card-title">{{ ucwords($item_group[0]['product']->vendor->name) }}</h4>
+                                <div class="ms-auto">
+                                    <a href="{{ url('cart/'.$item_group[0]['product']->vendor->id) }}" class="btn btn-primary-outline">Checkout</a>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="mt-3">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-end">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($item_group AS $item)
+                                        <tr>
+                                            <td>{{ ucwords($item['product']->item_name) }}</td>
+                                            <td>{{ $item['product']->item_description }}</td>
+                                            <td class="text-center">{{ $item['cart_item']['quantity'] }}</td>
+                                            <td class="text-end">R{{ number_format($item['cart_item']['price'],2) }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>

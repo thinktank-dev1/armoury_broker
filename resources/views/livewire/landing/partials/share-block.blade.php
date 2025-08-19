@@ -1,0 +1,137 @@
+<div class="h-100">
+    @if($view_type == "vendor-detail")
+    <div class="h-100 text-end d-flex flex-column justify-content-around">
+        @if(!Auth::guest())
+        <div class="">
+            <a href="#" wire:click.prevent="likeVendor">
+                Like 
+                @if($vendor->likes->where('user_id', Auth::user()->id)->first())
+                <i class="fas fa-star"></i>
+                @else
+                <i class="far fa-star"></i>
+                @endif
+            </a>
+        </div>
+        @endif
+        <div class="">
+            <a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">
+                Share <i class="fas fa-share-alt"></i>
+            </a>
+        </div>
+        <div class="">
+            <a href="#" wire:click.prevent="copyLink">
+                Copy Link <i class="fas fa-paperclip"></i>
+            </a>
+        </div>
+        <div class="">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">
+                Message Seller <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+    @elseif($view_type == "product-detail")
+    <div class="row mt-3">
+        <div class="col-md-12 d-flex justify-content-between">
+            <a href="{{ url($vendor->url_name) }}"><u>View Seller Profile</u></a>
+            <span><a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">Share <i class="fas fa-share-alt"></i></a></span>
+            <span><a href="#" wire:click.prevent="copyLink">Copy link <i class="fas fa-paperclip"></i></a></span>
+            <span><a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">Message seller <i class="fas fa-envelope"></i></a></span>
+        </div>
+    </div>
+    @endif
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="rightSidebar">
+        <div class="offcanvas-header bg-grey">
+            <h5 class="offcanvas-title">Share Options</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="mt-5 mb-3 d-grid">
+                <a href="https://www.facebook.com/sharer/sharer.php?u='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1877F2;">Share on Facebook</a>
+            </div>
+            <div class="mt-5 mb-3 d-grid">
+                <a href="https://twitter.com/share?url='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1DA1F2;">Share on X</a>
+            </div>
+            <div class="mt-5 mb-3 d-grid">
+                <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url='+link+'&title=&summary=" target="_blank" class="btn btn-primary" style="background-color: #0077B5;">Share on LinkedIn</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="message-modal" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contact {{ $vendor->name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent="saveMessage">
+                        @if($errors->any())
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger">
+                                    {{ $errors->first() }}
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="row">
+                            @if(Auth::guest())
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" name="name" wire:model.defer="name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Surname</label>
+                                    <input type="text" class="form-control" name="surname" wire:model.defer="surname">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" wire:model.defer="email">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Contact Number</label>
+                                    <input type="text" class="form-control" name="contact_number" wire:model.defer="contact_number">
+                                </div>
+                            </div>
+                            @endif
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Message</label>
+                                    <textarea class="form-control" name="message" wire:model.defer="message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary-outline" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="saveMessage">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('message-sent', () => {
+                $('.modal').modal('hide');
+                $.notify("Message has been sent", "success");
+            });
+            @this.on('copy-link', (event) => {
+                var link = event.link;
+                navigator.clipboard.writeText(link);
+                $.notify("Link has been copied", "success");
+            });
+        });
+    </script>
+    @endpush
+</div>

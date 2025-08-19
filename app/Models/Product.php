@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    protected $fillable = [
+        'featured',
+        'vendor_id',
+        'user_id',
+        'brand_id',
+        'category_id', 
+        'sub_category_id', 
+        'sub_sub_category_id', 
+        'listing_type', 
+        'item_name', 
+        'model_number', 
+        'item_description', 
+        'condition', 
+        'quantity', 
+        'size', 
+        'service_fee_payer', 
+        'item_price', 
+        'allow_offers', 
+        'acknowledgement',
+        'status',
+    ];
+
+    public function images(){
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function vendor(){
+        return $this->belongsTo(Vendor::class);
+    }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
+    public function subCategory(){
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function sub_sub(){
+        return $this->belongsTo(SubCategory::class, 'sub_sub_category_id');
+    }
+
+    public function wishlists(){
+        return $this->hasMany(WishList::class);
+    }
+
+    public function shippingOptions(){
+        return $this->hasMany(DeliverOption::class);
+    }
+}

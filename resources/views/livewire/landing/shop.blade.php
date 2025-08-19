@@ -1,0 +1,278 @@
+<div>
+    <div class="section head shop-bg">
+        <div class="head-back">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-title text-center">
+                            <h3 class="text-white">
+                                @if($page_title)
+                                    {{ $page_title }}
+                                @else
+                                    Shop
+                                @endif
+                            </h3>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-white">Lorem ipsum labore ad do minim irure ut ut sit dolore tempor duis dolor esse aliqua minim sunt eu officia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <b class="text-dark-blue text-upper">Filter Options</b>
+                    <div class="shop-filters mt-4">
+                        <div class="accordion" id="filter_accodion" wire:ignore.self>
+                            <div class="accordion-item mb-2">
+                                <h2 class="accordion-header" id="category_filter" wire:ignore>
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
+                                        By Category
+                                    </button>
+                                </h2>
+                                <div id="collapseCategory" class="accordion-collapse collapse show" aria-labelledby="category_filter" data-bs-parent="#filter_accodion" wire:ignore.self>
+                                    <div class="accordion-body">
+                                        <div class="">
+                                            <div class="accordion" id="innerCategoryFilter">
+                                                @php
+                                                $cnt = 0;
+                                                @endphp
+                                                @foreach($cats AS $cat)
+                                                @php
+                                                $cnt += 1;
+                                                $collapsed = "collapsed";
+                                                $expanded = "false";
+                                                $show = "";
+                                                /*
+                                                if($cnt == 1){
+                                                    $collapsed = "";
+                                                    $expanded = "true";
+                                                    $show = "show";
+                                                }
+                                                */
+                                                @endphp
+                                                <div class="accordion-item" wire:ignore.self>
+                                                    <h2 class="accordion-header" id="heading_{{ $cat->id }}">
+                                                        <button class="accordion-button {{ $collapsed }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ $cat->id }}" aria-expanded="{{ $expanded }}" aria-controls="collapse_{{ $cat->id }}" wire:ignore>
+                                                            {{ $cat->category_name }}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapse_{{ $cat->id }}" class="accordion-collapse collapse {{ $show }}" aria-labelledby="heading_{{ $cat->id }}" data-bs-parent="#innerCategoryFilter" wire:ignore.self>
+                                                        <div class="accordion-body">
+                                                            <ul class="sub_cat_filter_list">
+                                                                @foreach($cat->sub_cats->whereNull('parent_id') AS $sub)
+                                                                <li>
+                                                                    @php
+                                                                    $checked = "";
+                                                                    if(isset($current_filters['sub-category'])){
+                                                                        if(in_array($sub->slug, $current_filters['sub-category'])){
+                                                                            $checked = "checked";
+                                                                        }
+                                                                    }
+                                                                    @endphp
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value="" id="sub_check_{{ $sub->id }}" wire:key="sub_cat_{{ $sub->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $sub->slug }}')" {{ $checked }}>
+                                                                        <label class="form-check-label" for="sub_check_{{ $sub->id }}">
+                                                                            {{ $sub->sub_category_name }}
+                                                                        </label>
+                                                                    </div>
+                                                                </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="accordion-item mb-2" wire:ignore.self>
+                                <h2 class="accordion-header" id="headingBrand">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBrand" aria-expanded="false" aria-controls="collapseBrand" wire:ignore>
+                                        By Brand
+                                    </button>
+                                </h2>
+                                <div id="collapseBrand" class="accordion-collapse collapse" aria-labelledby="headingBrand" data-bs-parent="#filter_accodion" wire:ignore.self>
+                                    <div class="accordion-body" wire:ignore.self>
+                                        <ul class="sub_cat_filter_list">
+                                            @foreach($brands AS $brand)
+                                            
+                                            @php
+                                            $brand_checked = "";
+                                            if(isset($current_filters['brands'])){
+                                                if(in_array($brand->slug, $current_filters['brands'])){
+                                                    $brand_checked = "checked";
+                                                }
+                                            }
+                                            @endphp
+                                            <li>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="brand_check_{{ $brand->id }}" wire:key="brand_fl_{{ $brand->id.now() }}" wire:click.prevent="updateFilters('brands', '{{ $brand->slug }}')" {{ $brand_checked }} />
+                                                    <label class="form-check-label" for="brand_check_{{ $brand->id }}">
+                                                        {{ $brand->brand_name }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mb-2" wire:ignore.self>
+                                <h2 class="accordion-header" id="headingCondition" wire:ignore>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCondition" aria-expanded="false" aria-controls="collapseCondition">
+                                        By Condition
+                                    </button>
+                                </h2>
+                                <div id="collapseCondition" class="accordion-collapse collapse" aria-labelledby="headingCondition" data-bs-parent="#filter_accodion" wire:ignore.self>
+                                    <div class="accordion-body">
+                                        <ul class="sub_cat_filter_list">
+                                            @foreach($conditions AS $k => $cond)
+                                            @php
+                                            $cond_checked = "";
+                                            if(isset($current_filters['condition'])){
+                                                if(in_array($cond, $current_filters['condition'])){
+                                                    $cond_checked = "checked";
+                                                }
+                                            }
+                                            @endphp
+                                            <li>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" wire:key="cond_fl_{{ $cond.now() }}" id="cond_check_{{ $k }}" wire:click.prevent="updateFilters('condition', '{{ $cond }}')" {{ $cond_checked }} />
+                                                    <label class="form-check-label" for="cond_check_{{ $k }}">
+                                                        {{ $cond }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mb-2" wire:ignore.self>
+                                <h2 class="accordion-header" id="headingPrice" wire:ignore.self>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice" wire:ignore>
+                                        By Price
+                                    </button>
+                                </h2>
+                                <div id="collapsePrice" class="accordion-collapse collapse" aria-labelledby="headingPrice" data-bs-parent="#filter_accodion" wire:ignore.self>
+                                    <div class="accordion-body">
+                                        <div class="" wire:ignore>
+                                            <input type="text" class="js-range-slider" name="my_range" value="" data-min="{{ $static_min_price }}" data-max="{{ $static_max_price }}" data-skin="round" data-type="double" data-grid="false" />
+                                            <input type="hidden" class="from" wire:model.live="min_price" />
+                                            <input type="hidden"  class="to" wire:model.live="max_price" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    @if($results_count)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <b class="text-dark-blue">{{ $results_count }} Results</b>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="row">
+                        <div class="col-md-7">
+                            @if(count($current_filters) > 0)
+                                <span class="text-dark-blue">Active filter:</span> 
+                                @foreach($current_filters AS $filters)
+                                    @foreach($filters AS $filter)
+                                    <span class="badge bg-dark">{{ $filter }} &nbsp;&nbsp;<a href="#" class="text-white">x</a></span>
+                                    @endforeach
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-md-5 d-flex">
+                            <div class="ms-auto d-flex">
+                                <span class="me-3 text-dark-blue">Sort By:</span>
+                                <div class="">
+                                    <select class="form-control filter-options" name="sort" wire:model.live="sort_by">
+                                        @foreach($sort_options AS $op)
+                                        <option value="{{ $op }}">{{ $op }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 product_list">
+                        @foreach($products AS $product)
+                            <livewire:landing.shop.partials.product-list-item wire:key="{{ $product->id.now() }}" :id="$product->id" />
+                        @endforeach
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+    @push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css">
+    @endpush
+    @push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+    <script>
+        var $range = $(".js-range-slider"),
+        $from = $(".from"),
+        $to = $(".to"), 
+        range, 
+        min = $range.data('min'), 
+        max = $range.data('max'), 
+        from, 
+        to;
+        console.log(max);
+
+        var updateValues = function () {
+            $from.prop("value", from);
+            $to.prop("value", to);
+            @this.set('min_price', from);
+            @this.set('max_price', to);
+        };
+        $range.ionRangeSlider({
+            onChange: function (data) {
+                from = data.from;
+                to = data.to;
+                updateValues();
+            }
+        });
+        range = $range.data("ionRangeSlider");
+        var updateRange = function () {
+            range.update({
+                from: from,
+                to: to
+            });
+        };
+        $from.on("input", function () {
+            from = +$(this).prop("value");
+            if (from < min) {
+                from = min;
+            }
+            if (from > to) {
+                from = to;
+            }
+            updateValues();    
+            updateRange();
+        });
+        $to.on("input", function () {
+            to = +$(this).prop("value");
+            if (to > max) {
+                to = max;
+            }
+            if (to < from) {
+                to = from;
+            }
+            updateValues();    
+            updateRange();
+        });
+    </script>
+    @endpush
+</div>

@@ -1,0 +1,64 @@
+<div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card auth-cont">
+                        <div class="card-body px-4">
+                            <div class="d-grid mt-3">
+                                <div class="btn-group">
+                                    <a href="{{ url('auth/login') }}" class="btn btn-auth active">Login</a>
+                                    <a href="{{ url('auth/register') }}" class="btn btn-auth">Register</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center mt-4">
+                                    <h4 class="page-title">Welcome back</h4>
+                                </div>
+                            </div>
+                            @if($errors->any())
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger">
+                                        {{ $errors->first() }}
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            <form wire:submit="logInUser">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="mb-4">
+                                            <input type="text" class="form-control" placeholder="Email" name="email" wire:model.defer="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="password" class="form-control" placeholder="Password" name="password" wire:model.defer="password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <p><a href="{{ url('auth/forgot-password') }}">Forgot Password?</a></p>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12 text-center">
+                                        <input type="submit" class="bnt dark-btn" wire:click.prevent="logInUser" value="Login">
+                                    </div>
+                                </div>
+                                <div class="row mt-5 mb-5">
+                                    <div class="col-md-6 d-grid">
+                                        <a href="{{ url('auth/social-login/google') }}" class="btn bt-white"><img src="{{ asset('img/auth-gl.png') }}"> Continue With Google</a>
+                                    </div>
+                                    <div class="col-md-6 d-grid">
+                                        <a href="{{ url('auth/social-login/facebook') }}" class="btn bt-white"><img src="{{ asset('img/auth-fb.png') }}"> Continue With Facebook</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
