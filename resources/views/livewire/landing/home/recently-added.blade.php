@@ -1,7 +1,7 @@
 <div class="section pb_20 small_pt">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <div class="text-center">
                     <h2 class="page-title">Recently Added</h2>
                 </div>
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-3 mb-4">
             <div class="col-md-12 text-center">
                 <a href="{{ url('dashboard') }}" class="btn dark-btn">Start Selling</a>
             </div>

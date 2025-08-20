@@ -2,7 +2,7 @@
     @if($products->count() > 0)
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <div class="heading_tab_header">
                     <div class="text-center">
                         <h2 class="page-title">Featured</h2>

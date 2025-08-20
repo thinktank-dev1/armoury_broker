@@ -1,7 +1,7 @@
 <div class="section pb_20 small_pt bg-grey">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center mb-3">
                 <h2 class="page-title">Shop by brands</h2>
             </div>
         </div>
@@ -14,7 +14,7 @@
             </div>
             @endforeach
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3 mb-4">
             <div class="col-md-12 text-center">
                 <a href="{{ url('brands') }}" class="bnt dark-btn">View All</a>
             </div>
