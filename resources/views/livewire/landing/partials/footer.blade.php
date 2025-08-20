@@ -7,7 +7,9 @@
                         <div class="footer_logo">
                             <a href="#"><img src="{{ asset('img/footer_logo.png') }}" alt="logo"/></a>
                         </div>
-                        <p>The trading platform built specifically for South Africa's firearm and tactical equipment community.</p>
+                        <div class="text-center footer-right-p mt-2">
+                            <p>The trading platform built specifically for South Africa's firearm and tactical equipment community.</p>
+                        </div>
                         <div class="mt-3 d-flex justify-content-around">
                             <a href="#"><img src="{{ asset('img/fb.png') }}"></a>
                             <a href="#"><img src="{{ asset('img/ins.png') }}"></a>
@@ -31,8 +33,8 @@
                         @if(Auth::guest())
                         <a href="{{ url('auth/login') }}"><h6 class="widget_title">Login</h6></a>
                         @endif
-                        <a href="#"><h6 class="widget_title">Cart</h6></a>
-                        <a href="#"><h6 class="widget_title">Wishlist</h6></a>
+                        <a href="{{ url('cart') }}"><h6 class="widget_title">Cart</h6></a>
+                        <a href="{{ url('wishlist') }}"><h6 class="widget_title">Wishlist</h6></a>
                         <div class="mt-3">
                             <livewire:landing.partials.search />
                         </div>
