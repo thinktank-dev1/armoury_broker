@@ -1,4 +1,4 @@
-<div class="section pb_20 small_pt">
+<div class="section pb_50 small_pt">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center mb-3">
@@ -17,7 +17,7 @@
             </div>
             @endforeach
         </div>
-        <div class="row mt-3 mb-3">
+        <div class="row mt-3">
             <div class="co-md-12 text-center">
                 <a href="{{ url('categories') }}" class="btn btn-primary-outline">View All</a>
             </div>

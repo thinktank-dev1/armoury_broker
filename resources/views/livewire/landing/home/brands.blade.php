@@ -1,4 +1,4 @@
-<div class="section pb_20 small_pt bg-grey">
+<div class="section pb_50 small_pt bg-grey">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center mb-3">

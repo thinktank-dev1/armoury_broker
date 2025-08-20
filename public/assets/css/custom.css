@@ -43,6 +43,10 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
     color: #d65027 !important;
 }
 
+.section.pb_50, .pb_50, .footer_top.pb_50 {
+    padding-bottom: 50px;
+}
+
 .page-title{
 	text-transform: uppercase;
 	font-size: 28px;
@@ -310,6 +314,7 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
 .product_list .product_img {
 	width: 100%;
 	max-width: 100%;
+	min-height: 200px;
 }
 .product_img{
 	max-height: 150px;
@@ -334,7 +339,7 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
     left: 15px;
     top: 15px;
     text-transform: uppercase;
-    color: #fff;
+    color: #0f1f24;
     padding: 2px 8px;
     font-size: 13px;
     z-index: 1;
