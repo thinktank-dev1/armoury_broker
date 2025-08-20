@@ -38,6 +38,18 @@
     </div>
     @push('scripts')
     <script>
+        $(document).ready(function(){
+            $('.product_img img').each(function () {
+                let src = $(this).attr('src');
+                $(this).hide();
+                $(this).parent().parent().css({
+                    'background-image': 'url(' + src + ')',
+                    'background-size': 'cover',
+                    'background-position': 'center',
+                    'background-repeat': 'no-repeat'
+                });
+            });
+        })
         document.addEventListener('livewire:initialized', () => {
             @this.on('added-to-cart', () => {
                 $.notify("Product added to cart successfully!", "success");

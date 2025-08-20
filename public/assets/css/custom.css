@@ -46,6 +46,17 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
 .section.pb_50, .pb_50, .footer_top.pb_50 {
     padding-bottom: 50px;
 }
+.navbar .navbar-nav .dropdown-item {
+    padding: 8px 20px 8px 20px;
+    color: #333;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+.dropdown-item:focus, .dropdown-item:hover, .dropdown-item.active, .dropdown-item:active {
+    background-color: #e6e6e6;
+}
+
 
 .page-title{
 	text-transform: uppercase;
@@ -355,6 +366,7 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
     font-size: 13px;
     z-index: 1;
 }
+
 .section.head {
     padding: 30px 0;
     position: relative;
