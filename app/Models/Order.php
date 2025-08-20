@@ -11,10 +11,14 @@ class Order extends Model
         'cart_total',
         'fee',
         'total_shipping_fee',
-        'payment_id',
+        'g_payment_id',
         'uuid',
         'short_reference',
         'amount_paid',
         'status',
     ];
+
+    public function items(){
+        return $this->hasMany(OrderItem::class);
+    }
 }

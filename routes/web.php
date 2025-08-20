@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use App\Http\Middleware\AdminMiddleware;
 
+use App\Http\Controllers\ProcessPayment;
+
 use App\Livewire\Auth\Login;
 use App\Http\Controllers\SocialAuthController;
 use App\Livewire\Auth\Register;
@@ -16,6 +18,7 @@ use App\Livewire\Landing\Shop;
 
 use App\Livewire\Landing\CartList;
 use App\Livewire\Landing\Checkout;
+use App\Livewire\Landing\PaymentNotice;
 
 use App\Livewire\Landing\ProductDetail;
 use App\Livewire\Landing\VendorDetail;
@@ -60,6 +63,8 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+Route::post('pf-notify-payment/{id}', [ProcessPayment::class, 'pfPayment']);
+
 Route::middleware(['auth', 'verified'])->group(function (){
 	Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('add-product', ProductForm::class);
@@ -69,6 +74,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
 
     Route::get('cart/{id}', Checkout::class);
     Route::get('cart/{id}/{order_id}', Checkout::class);
+    Route::get('pf-payment/{id}/{status}', PaymentNotice::class);
 
     Route::middleware([AdminMiddleware::class])->group(function (){
         Route::get('settings', Settings::class);

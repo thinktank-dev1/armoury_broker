@@ -133,6 +133,25 @@
             @this.on('go-to-top', () => {
                 $("html, body").animate({ scrollTop: 0 }, "slow");
             });
+            @this.on('process-payment', (event) => {
+                var data = JSON.parse(event.data);
+
+                url = '{{ $payment_url }}';
+                console.log(url);
+                
+                var form = $(document.createElement('form'));
+                $(form).attr("action", url);
+                $(form).attr("method", "POST");
+
+                $.each(data, function(key,val){
+                    var input = $("<input>").attr("type", "hidden").attr("name", key).val(val);
+                    $(form).append($(input));
+                });
+                // console.log(form)
+                $(document.body).append(form);
+                $(form).submit();
+                
+            });
         });
         $(document).ready(function(){
             $('.qty').on('change', function(){

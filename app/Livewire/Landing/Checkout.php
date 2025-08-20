@@ -7,6 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 
 use App\Lib\BobPay;
+use App\Lib\PayFastApi;
 
 use Auth;
 use App\Models\OrderItem;
@@ -20,12 +21,14 @@ class Checkout extends Component
     public $shipping_tot, $service_fees, $cart_sub_total, $cart_total;
     public $cart = [];
     public $terms_and_conditions;
+    public $payment_url;
 
     public function mount($id, $order_id = null){
         $this->vendor_id = $id;
         if($order_id){
             $this->order_id = $order_id;
         }
+        $this->payment_url = env('PAYFAST_SANDBOX_URL');
         $this->getCart();
     }
 
@@ -67,68 +70,19 @@ class Checkout extends Component
             }
         }
 
-        $payload = [
-            'recipient_account_code' => str_replace(' ', '+',env('BOB_PAY_ACCOUNT_CODE')),
-            'custom_payment_id' => str_replace(' ', '+',$order->id),
-            'email' => str_replace(' ', '+',Auth::user()->email),
-            // 'phone_number' => str_replace(' ', '+',Auth::user()->mobile_number), //API has both phone_number & mobile_number
-            'amount' => str_replace(' ', '+',$this->cart_total),
-            'item_name' => str_replace(' ', '+','Armoury Broker Purchase'),
-            'item_description' => str_replace(' ', '+',$order->id.' - Armoury Broker'),
-            'notify_url' => str_replace(' ', '+',url('payment_notify')),
-            'success_url' => str_replace(' ', '+',url('payment/'.$order->id.'/success')),
-            'pending_url' => str_replace(' ', '+',url('payment/'.$order->id.'/pending')),
-            'cancel_url' => str_replace(' ', '+',url('payment/'.$order->id.'/cancelled')),
+        $data = [
+            'user_first_name' => Auth::user()->name,
+            'user_last_name' => Auth::user()->surname,
+            'user_email' => Auth::user()->email,
+            'user_cell_number' => Auth::user()->mobile_number,
+            'payment_id' => $order->id,
+            'amount' => $this->cart_total,
         ];
-        $bob_pay = new BobPay();
-        $sig = $bob_pay->genSignature($payload);
 
-        /*
-        $url_string = '';
-        foreach($payload AS $k=>$v){
-            $url_string .= '&'.$k.'='.$v;
-        }
-        $url_string = $str = substr($url_string, 1);
-        $url_string .= '&passphrase='.env('BOB_PAY_PASSPHRASE'); 
-        
-        
-        $base_url = env('BOB_PAY_URL');
-        $sig_url = $base_url . '/payments/intents/signature/generate';
-        $postFields = http_build_query($payload);
-
-        $ch1 = curl_init($sig_url);
-
-        curl_setopt($ch1, CURLOPT_POST, true);
-        curl_setopt($ch1, CURLOPT_POSTFIELDS, $postFields);
-        curl_setopt($ch1, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/x-www-form-urlencoded',
-            "Content-Length: " . strlen($postFields)
-        ]);
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
-        
-        $response = curl_exec($ch1);
-
-        if (curl_errno($ch1)) {
-            dd('cURL Error: ' . curl_error($ch1));
-        }
-        dd(curl_getinfo($ch1),$response);
-
-
-        $sig_res = curl_exec($ch1);
-        curl_close($ch1);
-        dd($sig_res);
-
-        $url_string .= '&signature'.$hash;
-
-        $url = 'https://sandbox.bobpay.co.za/v2/pay?'.$url_string;
-        
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $res = curl_exec($ch);
-        curl_close($ch);
-        dd($res);
-        */
+        $pf = new PayFastApi();
+        $payload = $pf->setPayLoad($data);
+        $payload = json_encode($payload);
+        $this->dispatch('process-payment', data: $payload);
     }
 
     #[On('update-quantity')]
