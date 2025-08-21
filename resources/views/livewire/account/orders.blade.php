@@ -110,6 +110,7 @@
                             <span>Email:</span>
                             <span class="ms-auto"><b>{{ $cur_order->user->email }}</b></span>
                         </li>
+                        @if($cur_order->user->vendor)
                         <li class="list-group-item d-flex">
                             <span>Address:</span>
                             <span class="ms-auto text-end">
@@ -121,6 +122,7 @@
                                 </b>
                             </span>
                         </li>
+                        @endif
                     </ul>
                     @endif
                 </div>
