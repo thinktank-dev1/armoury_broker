@@ -55,6 +55,7 @@ class Checkout extends Component
             $order = new Order();
         }
         $order->user_id = Auth::user()->id;
+        $order->vendor_id = $this->vendor_id;
         $order->cart_total = $this->cart_total;
         $order->fee = $this->service_fees;
         $order->total_shipping_fee = $this->shipping_tot;

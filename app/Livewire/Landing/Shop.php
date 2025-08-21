@@ -4,6 +4,7 @@ namespace App\Livewire\Landing;
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Livewire\WithPagination;
 
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -12,6 +13,8 @@ use App\Models\Product;
 
 class Shop extends Component
 {
+    use WithPagination;
+    
     public $page_title;
     public $conditions = [], $sort_options = [];
     public $results_count, $current_filters = [];

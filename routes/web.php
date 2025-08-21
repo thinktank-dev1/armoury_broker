@@ -37,10 +37,18 @@ use App\Livewire\Account\Admin\Products\AdminPoductsView;
 use App\Livewire\Account\Admin\Vendors\ListVendors;
 use App\Livewire\Account\Admin\Vendors\ViewVendor;
 use App\Livewire\Account\Admin\ListUsers;
+use App\Livewire\Account\Admin\Withdrawals;
 
 use App\Livewire\Account\Products\ProductForm;
 use App\Livewire\Account\MyArmoury\MyArmoury;
 use App\Livewire\Account\MyArmoury\EditMyArmoury;
+use App\Livewire\Account\Orders;
+use App\Livewire\Account\Purchases;
+use App\Livewire\Account\Vault;
+use App\Livewire\Account\Messages;
+use App\Livewire\Account\MessageDetail;
+use App\Livewire\Account\Profile;
+use App\Livewire\Account\MyPromoCodes;
 
 Route::get('/', HomePage::class);
 Route::get('support', Support::class);
@@ -64,6 +72,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('pf-notify-payment/{id}', [ProcessPayment::class, 'pfPayment']);
+Route::get('approve-withdrawal/{id}', [ProcessPayment::class, 'approveWithDrawal']);
 
 Route::middleware(['auth', 'verified'])->group(function (){
 	Route::get('dashboard', Dashboard::class)->name('dashboard');
@@ -71,6 +80,14 @@ Route::middleware(['auth', 'verified'])->group(function (){
     
     Route::get('my-armoury', MyArmoury::class);
     Route::get('my-armoury/edit', EditMyArmoury::class);
+
+    Route::get('my-orders', Orders::class);
+    Route::get('my-purchases', Purchases::class);
+    Route::get('my-vault', Vault::class);
+    Route::get('messages', Messages::class);
+    Route::get('messages/{id}', MessageDetail::class);
+    Route::get('profile', Profile::class);
+    Route::get('my-promo-codes', MyPromoCodes::class);
 
     Route::get('cart/{id}', Checkout::class);
     Route::get('cart/{id}/{order_id}', Checkout::class);
@@ -92,6 +109,8 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::get('admin/vendors/{id}', ViewVendor::class);
 
         Route::get('admin/users', ListUsers::class);
+
+        Route::get('admin/withdrawals', Withdrawals::class);
     });
 });
 Route::get('/{url_name}', VendorDetail::class);

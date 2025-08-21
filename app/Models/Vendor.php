@@ -32,4 +32,8 @@ class Vendor extends Model
     public function likes(){
         return $this->hasMany(VendorLike::class);
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }

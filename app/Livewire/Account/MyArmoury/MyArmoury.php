@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use Auth;
 
 use App\Models\Product;
+use App\Models\Vendor;
 
 class MyArmoury extends Component
 {
@@ -36,8 +37,13 @@ class MyArmoury extends Component
         }
 
         $vendor_id = null;
+        $sold_count = 0;
         if(Auth::user()->vendor_id){
             $vendor_id = Auth::user()->vendor_id;
+            $v = Vendor::find($vendor_id);
+            foreach($v->orders->where('status', 'COMPLETE') AS $order){
+                $sold_count += $order->items->count();
+            }
         }
 
         $products = Product::query()
@@ -49,7 +55,8 @@ class MyArmoury extends Component
 
         return view('livewire.account.my-armoury.my-armoury', [
             'link' => $link,
-            'products' => $products
+            'products' => $products,
+            'sold_count' => $sold_count
         ]);
     }
 }

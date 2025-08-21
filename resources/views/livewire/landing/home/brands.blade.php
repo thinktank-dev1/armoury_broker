@@ -16,7 +16,7 @@
         </div>
         <div class="row mt-3 mb-4">
             <div class="col-md-12 text-center">
-                <a href="{{ url('brands') }}" class="bnt dark-btn">View All</a>
+                <a href="{{ url('shop') }}" class="bnt dark-btn">View All</a>
             </div>
         </div>
     </div>

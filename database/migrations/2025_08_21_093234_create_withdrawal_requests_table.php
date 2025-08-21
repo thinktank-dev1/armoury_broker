@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('withdrawal_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_type');
-            $table->integer('user_id')->nullable();
             $table->integer('vendor_id');
-            $table->string('direction');
             $table->float('amount');
-            $table->integer('order_id')->nullable();
-            $table->string('payment_status');
+            $table->string('bank_name'); 
+            $table->string('branch_name'); 
+            $table->string('branch_code');
+            $table->string('account_name'); 
+            $table->string('account_number');
+            $table->integer('verified')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('withdrawal_requests');
     }
 };

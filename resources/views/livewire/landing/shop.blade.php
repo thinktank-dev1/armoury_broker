@@ -211,6 +211,11 @@
                             <livewire:landing.shop.partials.product-list-item wire:key="{{ $product->id.now() }}" :id="$product->id" />
                         @endforeach
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ $products->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>    
         </div>

@@ -19,7 +19,7 @@
         </div>
         <div class="row mt-3">
             <div class="co-md-12 text-center">
-                <a href="{{ url('categories') }}" class="btn btn-primary-outline">View All</a>
+                <a href="{{ url('shop') }}" class="btn btn-primary-outline">View All</a>
             </div>
         </div>
     </div>

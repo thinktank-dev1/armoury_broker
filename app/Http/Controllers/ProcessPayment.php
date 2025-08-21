@@ -6,6 +6,7 @@ use Request;
 
 use App\Models\Order;
 use App\Models\Transaction;
+use App\Models\WithdrawalRequest;
 
 class ProcessPayment extends Controller
 {
@@ -28,6 +29,15 @@ class ProcessPayment extends Controller
                     'payment_status' => Request::input('payment_status'),
                 ]);
             }
+        }
+    }
+
+    public function approveWithDrawal($id){
+        $wd = WithdrawalRequest::find($id);
+        if($wd){
+            $wd->verified = 1;
+            $wd->save();
+            return redirect('my-vault')->with('message', 'Withdrawal has been verified');
         }
     } 
 }

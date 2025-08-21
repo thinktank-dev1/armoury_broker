@@ -17,6 +17,12 @@
                 </li>
                 @if(Auth::user()->role->name == "admin")
                 <li>
+                    <a class="waves-effect waves-dark" href="{{ url('admin/withdrawals') }}" aria-expanded="false">
+                        <i class="ti-control-eject"></i>
+                        <span class="hide-menu">Withdrawals</span>
+                    </a>
+                </li>
+                <li>
                     <a class="waves-effect waves-dark" href="{{ url('admin/brands') }}" aria-expanded="false">
                         <i class="icon-globe"></i>
                         <span class="hide-menu">Brands</span>
@@ -72,7 +78,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('my-parchases') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{{ url('my-purchases') }}" aria-expanded="false">
                         <i class="icon-basket-loaded"></i>
                         <span class="hide-menu">My Purchases</span>
                     </a>
@@ -84,7 +90,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('my-vault') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{{ url('my-promo-codes') }}" aria-expanded="false">
                         <i class="ti-ticket"></i>
                         <span class="hide-menu">Promo Codes</span>
                     </a>
@@ -96,7 +102,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('settings') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{{ url('profile') }}" aria-expanded="false">
                         <i class="ti-settings"></i>
                         <span class="hide-menu">Settings</span>
                     </a>
