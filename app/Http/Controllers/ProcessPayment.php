@@ -6,6 +6,7 @@ use Request;
 
 use App\Models\Order;
 use App\Models\Transaction;
+use App\Models\PromoCode;
 use App\Models\WithdrawalRequest;
 
 class ProcessPayment extends Controller
@@ -29,6 +30,17 @@ class ProcessPayment extends Controller
                     'payment_status' => Request::input('payment_status'),
                 ]);
             }
+        }
+    }
+
+    public function pfPromoPayment($id){
+        $pr = PromoCode::find($id);
+        if($pr){
+            $pr->payment_type = 'payfast_payment';
+            $pr->payment_reff = Request::input('pf_payment_id');
+            $pr->payment_status = Request::input('payment_status');
+            $pr->save();
+            return redirect('my-promo-codes')->with('message', 'Payment has been completed');
         }
     }
 

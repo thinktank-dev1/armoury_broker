@@ -36,4 +36,14 @@ class Vendor extends Model
     public function orders(){
         return $this->hasMany(Order::class);
     }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class, 'vendor_id');
+    }
+
+    public function balance(){
+        $in = $this->transactions->where('direction', 'in')->sum('amount');
+        $out = $this->transactions->where('direction', 'out')->sum('amount');
+        return $in - $out;
+    }
 }

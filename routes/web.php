@@ -72,6 +72,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('pf-notify-payment/{id}', [ProcessPayment::class, 'pfPayment']);
+Route::post('pf-notify-payment-promo/{id}', [ProcessPayment::class, 'pfPromoPayment']);
 Route::get('approve-withdrawal/{id}', [ProcessPayment::class, 'approveWithDrawal']);
 
 Route::middleware(['auth', 'verified'])->group(function (){
@@ -88,6 +89,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::get('messages/{id}', MessageDetail::class);
     Route::get('profile', Profile::class);
     Route::get('my-promo-codes', MyPromoCodes::class);
+    Route::get('pf-payment-promo/{id}/{status}', MyPromoCodes::class);
 
     Route::get('cart/{id}', Checkout::class);
     Route::get('cart/{id}/{order_id}', Checkout::class);
