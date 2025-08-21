@@ -122,6 +122,8 @@
                                 </b>
                             </span>
                         </li>
+                        @else
+                        Please contact buyer for delivery address
                         @endif
                     </ul>
                     @endif

@@ -6,7 +6,7 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <div class="col p-r-0">
-                                <h1 class="font-light">{{ $items_sold }}</h1>
+                                <h3 class="font-light">{{ $items_sold }}</h3>
                                 <h6 class="text-muted">Items Sold</h6>
                             </div>
                             <div class="col text-end align-self-center">
@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <div class="col p-r-0">
-                                <h1 class="font-light">R{{ number_format($tot_sales,2) }}</h1>
+                                <h3 class="font-light">R{{ number_format($tot_sales,2) }}</h3>
                                 <h6 class="text-muted">Total Sales</h6>
                             </div>
                             <div class="col text-end align-self-center">
@@ -44,8 +44,8 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <div class="col p-r-0">
-                                <h1 class="font-light">R {{ number_format($tot_withdrawals, 2) }}</h1>
-                                <h6 class="text-muted">Total withdrawals</h6>
+                                <h3 class="font-light">R {{ number_format($tot_withdrawals, 2) }}</h3>
+                                <h6 class="text-muted">Withdrawals</h6>
                             </div>
                             <div class="col text-end align-self-center">
                                 <div class="">
@@ -63,7 +63,7 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <div class="col p-r-0">
-                                <h1 class="font-light text-white">R {{ number_format($balance, 2) }}</h1>
+                                <h3 class="font-light text-white">R {{ number_format($balance, 2) }}</h3>
                                 <h6 class="text-white">Balance</h6>
                             </div>
                             <div class="col text-end align-self-center">
