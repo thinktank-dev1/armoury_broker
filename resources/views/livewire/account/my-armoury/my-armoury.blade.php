@@ -31,7 +31,8 @@
                                 </div>
                                 <div class="col-md-6 text-md-end">
                                     <div class="mb-2"><a href="javascript:void(0)" class="link" onclick="showShareOptions()">Share <i class="icon-share"></i></a></div>
-                                    <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a>
+                                    <div class="mb-2"><a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a></div>
+                                    <a href="{{ url('my-armoury/edit') }}" class="link">Edit <i class="icon-pencil"></i></a>
                                 </div>
                             </div>
                         </div>
