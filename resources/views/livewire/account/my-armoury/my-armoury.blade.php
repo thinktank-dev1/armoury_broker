@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <center class="m-t-30">
+                            <center class="mt-3">
                                 @if(Auth::user()->vendor->avatar) 
                                 <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="img-circle img-fluid">
                                 @else
