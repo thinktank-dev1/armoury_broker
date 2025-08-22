@@ -24,6 +24,7 @@
                                             <th>Description</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-end">Price</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -33,6 +34,7 @@
                                             <td>{{ $item->product->item_description }}</td>
                                             <td class="text-center">{{ $item->quantity }}</td>
                                             <td class="text-end">R{{ number_format($item->price,2) }}</td>
+                                            <td class="text-end"><a href="#" wire:click.prevent="removeItem({{ $item->id }})"><i class="fa fa-trash"></i></a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -42,7 +44,7 @@
                     </div>
                 </div>
                 @endforeach
-                @foreach($cart_items_session AS $item_group)
+                @foreach($cart_items_session AS $key=>$item_group)
                 <div class="col-md-12 mb-3">
                     <div class="card">
                         <div class="card-body">
@@ -61,15 +63,17 @@
                                             <th>Description</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-end">Price</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($item_group AS $item)
+                                        @foreach($item_group AS $k => $item)
                                         <tr>
                                             <td>{{ ucwords($item['product']->item_name) }}</td>
                                             <td>{{ $item['product']->item_description }}</td>
                                             <td class="text-center">{{ $item['cart_item']['quantity'] }}</td>
                                             <td class="text-end">R{{ number_format($item['cart_item']['price'],2) }}</td>
+                                            <td class="text-end"><a href="#" wire:click.prevent="removeSessionItem({{ $item['cart_item']['product_id'] }})"><i class="fa fa-trash"></i></a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

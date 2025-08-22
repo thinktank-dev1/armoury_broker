@@ -1,5 +1,7 @@
 <div class="product col-md-3">
-    <span class="pr_flash">New</span>
+    @if($tag)
+    <span class="pr_flash @if($tag == 'Sold') bg-warning @endif">{{ $tag }}</span>
+    @endif
     @if(!Auth::guest())
     <span class="lr_flash">
         <a href="#" wire:click.prevent="addToWishList({{ $product->id }})">

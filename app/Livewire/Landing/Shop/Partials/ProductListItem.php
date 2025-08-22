@@ -12,9 +12,29 @@ use App\Models\OrderItem;
 class ProductListItem extends Component
 {
     public $product;
+    public $tag;
 
     public function mount($id){
         $this->product = Product::find($id);
+        $qty = $this->product->quantity;
+        
+        $itms_count = OrderItem::query()
+        ->where('product_id', $id)
+        ->whereHas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        ->sum('quantity');
+        // if($id == 1){
+        //     dd($itms_count, $qty);
+        // }
+        
+        if($qty <= $itms_count){
+            $this->tag = "Sold";
+        }
+
+        elseif ($this->product->created_at->gte(now()->subDays(30))) {
+            $this->tag = "New";
+        }
     }
 
     public function addToCart(){

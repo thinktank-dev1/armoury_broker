@@ -21,7 +21,7 @@
                         <a class="ms-3" href="{{ url('auth/login') }}">Login</a>
                         @else
                         <a class="ms-3" href="{{ url('dashboard') }}">Dashboard</a>
-                        <a class="ms-3" href="#">Wishlist</a>
+                        <a class="ms-3" href="{{ url('wishlist') }}">Wishlist</a>
                         @endif
                         <a class="ms-3" href="{{ url('cart') }}">Cart @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif</a>
                     </div>

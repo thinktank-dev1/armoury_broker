@@ -19,6 +19,28 @@ class CartList extends Component
             
     }
 
+    public function removeItem($id){
+        if(!Auth::guest()){
+            $itm = OrderItem::where('user_id', Auth::user()->id)->where('id', $id)->first();
+            if($itm){
+                $itm->delete();
+            }
+        }
+    }
+
+    public function removeSessionItem($id){
+        $cart = session()->get('cart');
+        foreach($cart As $k => $ct){
+            if($ct['product_id'] == $id){
+                unset($cart[$k]);
+                break;
+            }
+        }
+        session()->forget('cart');
+        session()->put('cart', $cart);
+        return redirect('cart');
+    }
+
     public function getCart(){
         if(!Auth::guest()){
             //Check If session has orders

@@ -683,7 +683,7 @@ PAGE JS
 		var image = $('#product_img');
 		//var zoomConfig = {};
 		var zoomActive = false;
-		
+		/*
 		zoomActive = !zoomActive;
 		if(zoomActive) {
 			if ($(image).length > 0){
@@ -700,6 +700,7 @@ PAGE JS
 			$.removeData(image, 'elevateZoom');//remove zoom instance from image
 			$('.zoomContainer:last-child').remove();// remove zoom container from DOM
 		}
+		*/
 		
 		$.magnificPopup.defaults.callbacks = {
 		open: function() {

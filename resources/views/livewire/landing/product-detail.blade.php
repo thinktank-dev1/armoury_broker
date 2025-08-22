@@ -25,7 +25,7 @@
                     @if($product->images->count() > 0)
                     <div class="product-image">
                         <div class="product_img_box">
-                            <img id="product_img" src="{{ asset('storage/'.$product->images->first()->image_url) }}" data-zoom-image="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="product_img1">
+                            <img id="product_img" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="product_img1">
                             <a href="#" class="product_img_zoom" title="Zoom">
                                 <span class="linearicons-zoom-in"></span>
                             </a>

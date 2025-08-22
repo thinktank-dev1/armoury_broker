@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-md-4 text-end">
                     <a href="#">Terms & Conditions</a> |
-                    <a href="#">Privacy Policy</a>
+                    <a href="{{ url('privacy-policy') }}">Privacy Policy</a>
                 </div>
             </div>
         </div>
