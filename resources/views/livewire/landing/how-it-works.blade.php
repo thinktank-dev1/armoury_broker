@@ -10,11 +10,12 @@
                 @foreach($data AS $k => $dt)
                 @php
                 $i = $loop->index;
+                $img = $i + 1;
                 @endphp
                 <div class="col-md-5 mb-3 h-100">
                     <div class="bloc h-100">
                         <div class="esarfa">
-                            <span class="bloc-icon"><i class="{{ $dt['icon'] }}"></i></span>
+                            <span class="bloc-icon"><img src="{{ asset('img/hiw/ICON S'.$img.'.png') }}" style="width: 35px"></span>
                             <span class="bloc-num">{{ str_pad($k, 2, '0', STR_PAD_LEFT) }}</span>
                         </div>
                         <div class="bloc-content h-100">
