@@ -5,7 +5,7 @@
                 @if(Auth::user()->role->name == "user")
                 <li>
                     <div class="mx-3">
-                        <a href="{{ url('add-product') }}" class="btn btn-white">Add Item</a>
+                        <a href="{{ url('add-product') }}" class="btn btn-white">Add Item +</a>
                     </div>
                 </li>
                 @endif
@@ -114,6 +114,14 @@
                     </a>
                 </li>
             </ul>
+            <div class="mt-5 mx-3">
+                <a href="{{ url('support') }}" class="btn btn-primary-outline">Support</a>
+            </div>
+            <div class="mt-3 mx-3 d-flex justify-content-around">
+                <a href="#" class="btn btn-sqr"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="btn btn-sqr"><i class=" fab fa-instagram"></i></a>
+                <a href="#" class="btn btn-sqr"><i class="fab fa-whatsapp"></i></a>
+            </div>
         </nav>
     </div>
 </aside>

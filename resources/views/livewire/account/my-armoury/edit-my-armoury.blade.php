@@ -50,8 +50,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label">Telephone Number</label>
-                                    <input type="text" class="form-control" placeholder="Telephone Number" name="tel" wire:model.defer="tel">
+                                    <label class="form-label">Cellphone Number</label>
+                                    <input type="text" class="form-control" placeholder="Cellphone Number" name="tel" wire:model.defer="tel">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -99,12 +99,6 @@
                                         <option value="{{ $province }}">{{ $province }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Armoury Biography</label>
-                                    <input type="text" class="form-control" placeholder="Armoury Biography" name="bio" wire:model.defer="bio">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -197,7 +191,10 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label">What is your monthly fee for dealer stocking?</label>
-                                    <input type="text" class="form-control" placeholder="Dealer Stocking Fee" name="dealer_stocking_fee" wire:model.defer="dealer_stocking_fee">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">R</span>
+                                        <input type="text" style="padding-left: 10px" class="form-control" placeholder="Dealer Stocking Fee" name="dealer_stocking_fee" wire:model.defer="dealer_stocking_fee">
+                                    </div>
                                 </div>
                                 <p><small>This will be included on the network list, AB charges the dealer 5% of the monthly active stocking fees while a transaction is in progress</small></p>
                             </div>

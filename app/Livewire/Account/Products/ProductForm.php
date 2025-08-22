@@ -93,7 +93,7 @@ class ProductForm extends Component
                 ]);
             }
         }
-        session()->flash('status', 'Product successfully saved.');
+        session()->flash('status', 'Product successfully listed.');
     }
 
     public function addShippingType(){

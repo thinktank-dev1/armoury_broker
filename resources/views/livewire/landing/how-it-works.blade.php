@@ -1,7 +1,7 @@
 <div>
-    <div class="section how-it-works">
+    <div class="section how-it-works bg_grey pt-5 pb-4">
         <div class="container">
-            <div class="row align-items-center mb-4">
+            <div class="row align-items-center mb-5">
                 <div class="col-md-12 text-center">
                     <h2 class="page-title">How Armoury Broker Works</h2>
                 </div>
@@ -11,16 +11,16 @@
                 @php
                 $i = $loop->index;
                 @endphp
-                <div class="col-md-5 mb-3">
-                    <div class="bloc">
+                <div class="col-md-5 mb-3 h-100">
+                    <div class="bloc h-100">
                         <div class="esarfa">
                             <span class="bloc-icon"><i class="{{ $dt['icon'] }}"></i></span>
                             <span class="bloc-num">{{ str_pad($k, 2, '0', STR_PAD_LEFT) }}</span>
                         </div>
-                        <div class="bloc-content">
+                        <div class="bloc-content h-100">
                             <div>
                                 {{ $dt['step'] }}
-                                <h5>{{ $dt['title'] }}</h5>
+                                <h5 class="text-21">{{ $dt['title'] }}</h5>
                             </div>
                             <hr />
                             <div>

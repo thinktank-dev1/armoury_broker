@@ -1,10 +1,15 @@
 <div>
     <div class="breadcrumb_section bg_gray page-title-mini support-bg">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="page-title">
-                        <h1>&nbsp;</h1>
+        <div class="head-back">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-title text-center">
+                            <h3 class="text-white mt-3">SUPPORT</h3>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-white">Frequently asked questions and contact form</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -13,7 +18,7 @@
     <div class="section suppor-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 pt-3">
                     <h3 class="page-title">Frequently asked questions</h3>
                     <ul class="nav nav-tabs flex-column faq_nav" id="myTab" role="tablist">
                         @foreach($data AS $k => $v)
@@ -32,7 +37,7 @@
                             }
                             @endphp
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link {{ $active }}" id="{{ $url }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $url }}" type="button" role="tab" aria-controls="{{ $url }}" aria-selected="{{ $selected }}">{{ $k }}</button>
+                                <button class="nav-link {{ $active }} bold-500" id="{{ $url }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $url }}" type="button" role="tab" aria-controls="{{ $url }}" aria-selected="{{ $selected }}">{{ $k }}</button>
                             </li>
                         @endforeach
                     </ul>
@@ -58,19 +63,21 @@
                                         @php
                                         $i = $loop->index;
                                         $xpanded = "false";
+                                        $collapsed = "collapsed";
                                         $show = "";
                                         if($i == 0){
                                             $xpanded = "true";
                                             $show = "show";
+                                            $collapsed = "";
                                         }
                                         @endphp
                                         <div class="accordion-item mb-2">
                                             <h2 class="accordion-header" id="heading_{{ $url.$i }}">
-                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ $url.$i }}" aria-expanded="{{ $xpanded }}" aria-controls="collapse_{{ $url.$i }}">
+                                                <button class="accordion-button {{ $collapsed }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ $url.$i }}" aria-expanded="{{ $xpanded }}" aria-controls="collapse_{{ $url.$i }}">
                                                     {{ $title }}
                                                 </button>
                                             </h2>
-                                            <div id="collapse_{{ $url.$i }}" class="accordion-collapse collapse {{ $show }}" aria-labelledby="heading_{{ $url.$i }}" data-bs-parent="#accordion_{{ $url}}">
+                                            <div id="collapse_{{ $url.$i }}" class="faq accordion-collapse collapse {{ $show }}" aria-labelledby="heading_{{ $url.$i }}" data-bs-parent="#accordion_{{ $url}}">
                                                 <div class="accordion-body">
                                                     @if(is_array($vals))
                                                         @foreach($vals AS $sub_title => $val)
@@ -102,8 +109,10 @@
                 <div class="col-md-3">
                     <div class="">
                         <h4 class="page-title">Need Support?</h4>
-                        <h6 class="page-title">Get in touch</h6>
-                        <p>For support, get in touch via email or fill in and submit the contact form and we we will get in touch with you.</p>
+                        <h5 class="bold-600 font-21 text-upper">Get in touch</h5>
+                        <div class="mt-3">
+                            <p>For support, get in touch via email or fill in and submit the contact form and we we will get in touch with you.</p>
+                        </div>
                     </div>
                     <div class="">
                         <div class="">

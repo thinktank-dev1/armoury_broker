@@ -79,6 +79,17 @@
                     </div>
                 </div>
                 @endforeach
+
+                @if(!$cart_items_model && !$cart_items_session)
+                <div class="row">
+                    <div class="col-md-12 text-center mt-5 mb-3">
+                        <h1 class="text-muted">YOUR SHOPPING CART IS EMPTY</h1>
+                    </div>
+                    <div class="col-md-12 mb-5 text-center">
+                        <a href="{{ url('shop') }}" class="btn btn-secondary">Continue Shopping</a>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

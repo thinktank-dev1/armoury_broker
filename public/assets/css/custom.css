@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5, h6, p, a{
 b{
 	font-weight: 600;
 }
+p {
+    line-height: 20px;
+    margin-bottom: 25px;
+}
 
 .nav-link:focus, .nav-link:hover {
     color: #d65027 !important;
@@ -59,11 +63,25 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
     background-color: #e6e6e6;
 }
 
+.navbar .navbar-nav > li > .nav-link {
+    padding: 25px 22px;
+}
+
+.upper-cat-header::after{
+    filter: brightness(0) invert(1);
+}
+
 .product-name, .product-name a{
 	text-transform: uppercase;
 	color: #687188;
 	font-size: 18px;
 	font-weight: 400;
+}
+
+.btn-secondary{
+	border-radius: 0;
+	background-color: #0f1f24;
+	border: 2px solid #0f1f24;
 }
 
 .footer-right-p p{
@@ -148,13 +166,18 @@ footer .widget {
 .bt-white{
 	height: 50px;
 	border-radius: 0;
-	padding: 6px 35px;
+	padding: 5px 35px;
 	background-color: #FFF;
-	border: none;
+	border: 2px solid #FFF;
 	color: #293c47;
 }
-.heder-search-btn:hover, .dark-btn:hover{
+.bt-white:hover, .bt-white:active, .bt-white:focus{
+	border: 2px solid #FFF;
+	background-color: transparent;
+}
+.heder-search-btn:hover, .dark-btn:hover, .heder-search-btn:active{
 	background-color: #0f1f24;
+	color: #FFF !important;
 }
 .main_menu_uppercase{
 	background-color: #293c47;
@@ -327,6 +350,8 @@ footer .widget {
 }
 .auth-cont{
 	background-color: #155b7110;
+	border: none;
+	border-radius: 0;
 }
 .form-control{
 	border-radius: 2px;
@@ -604,12 +629,31 @@ footer .widget {
                     url("../../img/hiw-bg1.png"), url("../../img/hiw-bg1.png");
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
   
-  background-position: 
-    left 0,      /* first left wing */
-    left 400px,  /* second left wing (space before it) */
-    right 0,     /* first right wing */
-    right 400px; /* second right wing (space before it) */
+  background-position:
+    left 0 top 300px,      /* first left wing */
+    left 0 top 1329px,  /* second left wing (space before it) */
+    right 0 top 790px,     /* first right wing */
+    right 0 top 1683px; /* second right wing (space before it) */ 
 
   /* Size of each image */
   background-size: auto 200px, auto 200px, auto 200px, auto 200px;
+}
+
+.faq.accordion-collapse.collapse.show{
+	background-color: #e6e6e6;
+}
+
+.bold-500{
+	font-weight: 500;
+}
+.bold-600{
+	font-weight: 600;
+}
+
+.bg_grey{
+	background-color: #e6e6e6;
+}
+
+.w-wide{
+	padding: 12px 62px;
 }

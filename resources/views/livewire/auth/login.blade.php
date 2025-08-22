@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12 text-center">
-                                        <input type="submit" class="bnt dark-btn" wire:click.prevent="logInUser" value="Login">
+                                        <input type="submit" class="btn btn-secondary w-wide" wire:click.prevent="logInUser" value="Login">
                                     </div>
                                 </div>
                                 <div class="row mt-5 mb-5">

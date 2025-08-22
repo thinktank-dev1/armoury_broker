@@ -12,7 +12,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 text-center mt-4">
+                                <div class="col-md-12 text-center mt-4 mb-3">
                                     <h4 class="page-title">Verify your Email</h4>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                             </div>
                             @endif
                             <div class="row mt-3 mb-3">
-                                <div class="col-md-12 text-center">
+                                <div class="col-md-12 text-center mb-3">
                                     <b>Please check inbox for a email verification</b>
                                 </div>
                                 <div class="col-md-12 text-center mb-3">

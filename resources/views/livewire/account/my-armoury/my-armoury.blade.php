@@ -47,7 +47,7 @@
                 @if($product->images->count() > 0)
                 <img class="card-img-top img-responsive" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
                 @endif
-                <div class="card-body produc-details">
+                <div class="card-body produc-details ps-0">
                     <div class="">
                         <h3>R{{ number_format($product->item_price, 2) }}</h3>
                     </div>

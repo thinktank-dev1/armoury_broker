@@ -11,14 +11,14 @@
         </a>
     </span>
     @endif
-    <div class="product_img">
-        <a href="{{ url('shop/product/'.$product->id) }}">
-            @if($product->images->count() > 0)
-            <img src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="product_img3">
-            @else
-            <img src="{{ asset('img/no-image.webp') }}">
-            @endif
-        </a>
+    @php
+    $img = url('img/no-image.webp');
+    if($product->images->count() > 0){
+        $img = url('storage/'.$product->images->first()->image_url);
+    }
+    @endphp
+    <div class="product_img" style="background-image: url('{{ $img }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <a href="{{ url('shop/product/'.$product->id) }}"></a>
         <div class="product_action_box">
             <ul class="list_none pr_action_btn">
                 <li class="add-to-cart"><a href="#" wire:click.prevent="addToCart"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
@@ -38,18 +38,6 @@
     </div>
     @push('scripts')
     <script>
-        $(document).ready(function(){
-            $('.product_img img').each(function () {
-                let src = $(this).attr('src');
-                $(this).hide();
-                $(this).parent().parent().css({
-                    'background-image': 'url(' + src + ')',
-                    'background-size': 'cover',
-                    'background-position': 'center',
-                    'background-repeat': 'no-repeat'
-                });
-            });
-        })
         document.addEventListener('livewire:initialized', () => {
             @this.on('added-to-cart', () => {
                 $.notify("Product added to cart successfully!", "success");

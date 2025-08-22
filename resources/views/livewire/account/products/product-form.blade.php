@@ -1,18 +1,14 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h2>ITEM LISTING OPTIONS</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form class="form-material m-t-40" wire:submit.prevent="saveProduct">
+                    <form class="form-material" wire:submit.prevent="saveProduct">
+                        <h3>ITEM LISTING OPTIONS</h3>
                         <div class="row mb-3">
                             <p>Select Listing Type</p>
                             <div class="col-md-12">
-                                <a href="#" class="btn @if($listing_type == 'sale') btn-dark-blue @else btn-dark-blue-outline @endif" wire:click.prevent="setListingType('sale')">Sale</a>
+                                <a href="#" class="btn @if($listing_type == 'sale') btn-dark-blue @else btn-dark-blue-outline @endif" wire:click.prevent="setListingType('sale')">For Sale</a>
                                 <a href="#" class="btn @if($listing_type == 'wanted') btn-dark-blue @else btn-dark-blue-outline @endif" wire:click.prevent="setListingType('wanted')">Wanted</a>
                             </div>
                         </div>
@@ -34,7 +30,7 @@
                             </div>
                         </div>
                         @endif
-                        <div class="row">
+                        <div class="row mt-5">
                             <div cass="col-md-12">
                                 <h3>UPLOAD ITEM</h3>
                                 <b>Image Upload</b>
@@ -122,7 +118,7 @@
                                 </div>
                             </div>    
                             @endif
-                            <div class="col-md-4 mt-3">
+                            <div class="col-md-6 mt-3">
                                 <div class="form-group">
                                     <label>Brand</label>
                                     <select class="form-control" placeholder="Brand" name="brand_id" wire:model.defer="brand_id">
@@ -133,7 +129,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 mt-3">
+                            <div class="col-md-6 mt-3">
                                 <div class="form-group">
                                     <label>Condition</label>
                                     <select class="form-control" placeholder="Condition" name="condition" wire:model.defer="condition">
@@ -144,10 +140,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 mt-3">
+                            <div class="col-md-12 mt-3">
                                 <div class="form-group">
                                     <label>Quantity</label>
-                                    <input type="text" class="form-control" placeholder="Quantity" name="quantity" wire:model.defer="quantity"> 
+                                    <input type="number" class="form-control" placeholder="Quantity" name="quantity" wire:model.defer="quantity"> 
                                 </div>
                             </div>
                             @if($category)

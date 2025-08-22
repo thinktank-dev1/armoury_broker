@@ -5,7 +5,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-title text-center">
-                            <h3 class="text-white">
+                            <h3 class="text-white mt-3">
                                 @if($page_title)
                                     {{ $page_title }}
                                 @else
@@ -30,7 +30,7 @@
                         <div class="accordion" id="filter_accodion" wire:ignore.self>
                             <div class="accordion-item mb-2">
                                 <h2 class="accordion-header" id="category_filter" wire:ignore>
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
+                                    <button class="accordion-button upper-cat-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
                                         By Category
                                     </button>
                                 </h2>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="accordion-item mb-2" wire:ignore.self>
                                 <h2 class="accordion-header" id="headingBrand">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBrand" aria-expanded="false" aria-controls="collapseBrand" wire:ignore>
+                                    <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBrand" aria-expanded="false" aria-controls="collapseBrand" wire:ignore>
                                         By Brand
                                     </button>
                                 </h2>
@@ -126,7 +126,7 @@
                             </div>
                             <div class="accordion-item mb-2" wire:ignore.self>
                                 <h2 class="accordion-header" id="headingCondition" wire:ignore>
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCondition" aria-expanded="false" aria-controls="collapseCondition">
+                                    <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCondition" aria-expanded="false" aria-controls="collapseCondition">
                                         By Condition
                                     </button>
                                 </h2>
@@ -157,7 +157,7 @@
                             </div>
                             <div class="accordion-item mb-2" wire:ignore.self>
                                 <h2 class="accordion-header" id="headingPrice" wire:ignore.self>
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice" wire:ignore>
+                                    <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice" wire:ignore>
                                         By Price
                                     </button>
                                 </h2>
@@ -186,9 +186,9 @@
                         <div class="col-md-7">
                             @if(count($current_filters) > 0)
                                 <span class="text-dark-blue">Active filter:</span> 
-                                @foreach($current_filters AS $filters)
-                                    @foreach($filters AS $filter)
-                                    <span class="badge bg-dark">{{ $filter }} &nbsp;&nbsp;<a href="#" class="text-white">x</a></span>
+                                @foreach($current_filters AS $key => $filters)
+                                    @foreach($filters AS $k => $filter)
+                                    <span class="badge bg-dark mb-1">{{ $filter }} &nbsp;&nbsp;<a href="#" class="text-white" wire:click.prevent="removeFilter('{{ $key }}', {{ $k }})">x</a></span>
                                     @endforeach
                                 @endforeach
                             @endif

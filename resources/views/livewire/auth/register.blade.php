@@ -56,7 +56,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" id="terms_check_box" wire:model.defer="terms_and_condotions">
                                                     <label class="form-check-label" for="terms_check_box">
-                                                        I Accept <a href="#">Terms & Conditions</a>
+                                                        I Accept The <a href="#">Terms & Conditions</a>
                                                     </label>
                                                 </div>
                                             </div>
@@ -65,12 +65,12 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12 text-center">
-                                        <p><a href="{{ url('auth/login') }}">Login</a></p>
+                                        <p><a href="{{ url('auth/login') }}">Already have an account? Login</a></p>
                                     </div>
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-md-12 text-center">
-                                        <input type="submit" class="bnt dark-btn" wire:click.prevent="RegisterUser" value="Register">
+                                        <input type="submit" class="btn btn-secondary w-wide" wire:click.prevent="RegisterUser" value="Register">
                                     </div>
                                 </div>
                             </form>

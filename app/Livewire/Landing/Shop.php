@@ -71,6 +71,10 @@ class Shop extends Component
         }
     }
 
+    public function removeFilter($k, $sk){
+        unset($this->current_filters[$k][$sk]);
+    }
+
     public function setStaticData(){
         $this->conditions = [
             "New",

@@ -127,3 +127,27 @@
     border-radius: 100%;
     background: #01c0c8;
 }
+.nav-link:hover {
+    color: #d65027 !important;
+}
+
+.btn-primary-outline{
+    background-color: transparent;
+    color: #FFF;
+    text-transform: uppercase;
+    padding: 8px 60px;
+    border-radius: 0px;
+    border: 1px solid #FFF;
+}
+.btn-primary-outline:hover{
+	background-color: #FFF;
+	color: #000;
+}
+
+.btn-sqr{
+	background-color: #0f1f24;
+	color: #FFF;
+}
+.form-control::placeholder {
+  color: #dddddd;
+}
