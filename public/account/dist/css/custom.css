@@ -148,6 +148,9 @@
 	background-color: #0f1f24;
 	color: #FFF;
 }
+.btn-sqr:hover{
+	color: #FFFFFF !important;
+}
 .form-control::placeholder {
   color: #dddddd;
 }
