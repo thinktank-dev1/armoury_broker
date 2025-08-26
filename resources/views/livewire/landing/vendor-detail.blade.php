@@ -14,7 +14,8 @@
             <div class="row">
                 @if($vendor->avatar)
                 <div class="col-md-3">
-                    <img src="{{ asset('storage/'.$vendor->avatar) }}" class="img-fluid img-rounded">
+                    <img src="{{ asset('storage/'.$vendor->avatar) }}" class="img-fluid img-circle">
+                    
                 </div>
                 @endif
                 <div class="@if($vendor->avatar) col-md-9 @else col-md-12 @endif">

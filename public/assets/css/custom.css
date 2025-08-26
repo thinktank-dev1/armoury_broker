@@ -704,3 +704,10 @@ footer .widget {
   height: 50px;
   border: 1px solid #ccc;
 }
+
+.img-circle {
+  	width: 180px;
+  	height: 180px;
+  	border-radius: 50%;
+  	object-fit: cover;
+}
