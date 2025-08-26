@@ -164,7 +164,11 @@
                                         <td>{{ $item->user->name.' '.$item->user->surname }}</td>
                                         <td>{{ ucwords($item->product->item_name) }}</td>
                                         <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
-                                        <td>{{ $item->order->status }}</td>
+                                        <td>
+                                            @if($item->order)
+                                            {{ $item->order->status }}
+                                            @endif
+                                        </td>
                                         <td>R {{ number_format($item->price,2) }}</td>
                                     </tr>
                                     @endforeach
@@ -199,7 +203,11 @@
                                         <td>{{ $item->user->name.' '.$item->user->surname }}</td>
                                         <td>{{ ucwords($item->product->item_name) }}</td>
                                         <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
-                                        <td>{{ $item->order->status }}</td>
+                                        <td>
+                                            @if($item->order)
+                                            {{ $item->order->status }}
+                                            @endif
+                                        </td>
                                         <td>R {{ number_format($item->price,2) }}</td>
                                     </tr>
                                     @endforeach
