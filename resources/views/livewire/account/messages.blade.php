@@ -42,6 +42,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @if($mesages->count() == 0)
+                        <div class="text-center mt-5">
+                            <h1 class="text-muted">Nothing here</h1>
+                            <p>Your messages will show here when buyers contact you.</p>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

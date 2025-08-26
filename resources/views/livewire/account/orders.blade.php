@@ -81,6 +81,11 @@
                                 </tbody>
                                 @endforeach
                             </table>
+                            @esle
+                            <div class="text-center mt-5">
+                                <h1 class="text-muted">Nothing here</h1>
+                                <p>Your orders will show here when buyers purchase them.</p>
+                            </div>
                             @endif
                         </div>
                     </div>

@@ -62,6 +62,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
+                            @if($codes->count() > 0)
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -92,6 +93,12 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @else
+                            <div class="text-center mt-5">
+                                <h1 class="text-muted">Nothing here</h1>
+                                <p>Your promo codes will show here when you purchase them.</p>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

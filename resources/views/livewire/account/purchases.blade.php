@@ -82,6 +82,11 @@
                                 </tbody>
                                 @endforeach
                             </table>
+                            @else
+                            <div class="text-center mt-5">
+                                <h1 class="text-muted">Nothing here</h1>
+                                <p>Your purchases will show here when.</p>
+                            </div>
                             @endif
                         </div>
                     </div>

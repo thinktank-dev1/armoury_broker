@@ -45,7 +45,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p>Refer to our <b><a href="#">terms of use</a></b> for more information</p>
+                    <p>Refer to our <b><a href="{{ url('terms-and-conditions') }}">terms of use</a></b> for more information</p>
                 </div>
             </div>
         </div>
