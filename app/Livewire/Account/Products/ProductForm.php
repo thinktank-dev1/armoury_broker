@@ -23,13 +23,53 @@ class ProductForm extends Component
     public $category, $sub_sub = [], $conditions = [], $sizes = [];
     public $listing_type, $item_name, $model_number, $item_description, $category_id, $sub_category_id, $sub_sub_category_id, $brand_id, $condition, $quantity, $size, $service_fee_payer, $item_price, $allow_offers, $acknowledgement;
     public $shipping_types = [], $product_images = [];
+    public $cur_images = [];
 
-    public function mount(){
+    public function mount($id = null){
         if(!Auth::user()->vendor_id){
             return redirect('my-armoury/edit')->with('error', 'Please fill in this form before you can upload products!');
         }
         $this->setStaticData();
         $this->addShippingType();
+
+        if($id){
+            $this->cur_id = $id;
+            $this->getData();
+        }
+    }
+
+    public function getData(){
+        $prdt = Product::find($this->cur_id);
+        if($prdt){
+            $this->listing_type = $prdt->listing_type;
+            $this->item_name = $prdt->item_name;
+            $this->model_number = $prdt->model_number;
+            $this->item_description = $prdt->item_description;
+            $this->category_id = $prdt->category_id;
+            $this->sub_category_id = $prdt->sub_category_id;
+            $this->sub_sub_category_id = $prdt->sub_sub_category_id;
+            $this->brand_id = $prdt->brand_id;
+            $this->condition = $prdt->condition;
+            $this->quantity = $prdt->quantity;
+            $this->size = $prdt->size;
+            $this->service_fee_payer = $prdt->service_fee_payer; 
+            $this->item_price = $prdt->item_price;
+            if($this->allow_offers){
+                $this->allow_offers = true;
+            }
+            $this->acknowledgement = true;
+            if($prdt->shippingOptions->count() > 0){
+                $this->shipping_types = [];
+                foreach($prdt->shippingOptions AS $opt){
+                    $arr = [
+                        "id" => $opt->id,
+                        "type" => $opt->type,
+                        "cost" => $opt->cost,
+                    ];
+                    $this->shipping_types[] = $arr;
+                }
+            }
+        }
     }
 
     public function saveProduct(){

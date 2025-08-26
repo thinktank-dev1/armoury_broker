@@ -3,17 +3,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="widget">
-                        <div class="footer_logo">
+                    <div class="widget text-center">
+                        <div class="footer_logo text-center">
                             <a href="#"><img src="{{ asset('img/footer_logo.png') }}" alt="logo"/></a>
                         </div>
                         <div class="text-center footer-right-p mt-2">
                             <p>The trading platform built specifically for South Africa's firearm and tactical equipment community.</p>
                         </div>
+                        {{--
                         <div class="mt-3 d-flex justify-content-around">
                             <a href="#"><img src="{{ asset('img/fb.png') }}"></a>
                             <a href="#"><img src="{{ asset('img/ins.png') }}"></a>
                             <a href="#"><img src="{{ asset('img/wa.png') }}"></a>
+                        </div>
+                        --}}
+                        <div class="mt-3 mx-3 d-flex justify-content-around">
+                            <a href="#" class="btn btn-sqr"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="btn btn-sqr"><i class=" fab fa-instagram"></i></a>
+                            <a href="#" class="btn btn-sqr"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +63,7 @@
                     <p>Copyright &copy; {{ date('Y') }} ARMOURY BROKER. All Rights Reserved. | Designed and developed by <a href="https://thinktank.co.za" target="_blank">Thinktank Creative</a></p>
                 </div>
                 <div class="col-md-4 text-end">
-                    <a href="#">Terms & Conditions</a> |
+                    <a href="{{ url('terms-and-conditions') }}">Terms & Conditions</a> |
                     <a href="{{ url('privacy-policy') }}">Privacy Policy</a>
                 </div>
             </div>

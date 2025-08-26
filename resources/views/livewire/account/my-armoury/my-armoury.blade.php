@@ -3,12 +3,12 @@
     <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body px-5">
                     <div class="row">
                         <div class="col-md-2">
                             <center class="mt-3">
                                 @if(Auth::user()->vendor->avatar) 
-                                <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="img-circle img-fluid">
+                                <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle img-fluid">
                                 @else
                                 <img src="{{ asset('img/logo-placeholder.webp') }}" class="img-circle img-fluid">
                                 @endif
@@ -44,7 +44,7 @@
     <div class="row mt-4">
         @foreach($products AS $product)
         <div class="col-md-2">
-            <div class="card">
+            <div class="card img-container">
                 @if($product->images->count() > 0)
                 <img class="card-img-top img-responsive" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
                 @endif
@@ -53,6 +53,10 @@
                         <h3>R{{ number_format($product->item_price, 2) }}</h3>
                     </div>
                     <p class="m-b-0 m-t-10">{{ $product->item_name }}</p>
+                </div>
+                <div class="overlay-icons">
+                    <a href="{{ url('add-product/'.$product->id) }}"><i class=" icon-pencil"></i></a>
+                    <a href="{{ url('shop/product/'.$product->id) }}"><i class="icon-eye"></i></a>
                 </div>
             </div>
         </div>

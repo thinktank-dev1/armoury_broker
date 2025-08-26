@@ -5,6 +5,7 @@ namespace App\Livewire\Landing;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
+use Livewire\Attributes\On; 
 
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -40,6 +41,14 @@ class Shop extends Component
         }
         $this->setStaticData();
     }
+
+    #[On('brand-updated')]
+    public function brandUpdated($brands){
+        $this->current_filters['brands'] = [];
+        foreach($brands AS $brand){
+            $this->current_filters['brands'][] = $brand;    
+        }
+    } 
 
     public function updatedMaxPrice(){}
 

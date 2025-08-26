@@ -75,7 +75,7 @@
                                                                     }
                                                                     @endphp
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" value="" id="sub_check_{{ $sub->id }}" wire:key="sub_cat_{{ $sub->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $sub->slug }}')" {{ $checked }}>
+                                                                        <input class="form-check-input" type="checkbox" value="" wire:key="{{ $sub->id.now() }}" id="sub_check_{{ $sub->id }}" wire:key="sub_cat_{{ $sub->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $sub->slug }}')" {{ $checked }}>
                                                                         <label class="form-check-label" for="sub_check_{{ $sub->id }}">
                                                                             {{ $sub->sub_category_name }}
                                                                         </label>
@@ -100,6 +100,7 @@
                                 </h2>
                                 <div id="collapseBrand" class="accordion-collapse collapse" aria-labelledby="headingBrand" data-bs-parent="#filter_accodion" wire:ignore.self>
                                     <div class="accordion-body" wire:ignore.self>
+                                        {{--
                                         <ul class="sub_cat_filter_list">
                                             @foreach($brands AS $brand)
                                             
@@ -121,6 +122,15 @@
                                             </li>
                                             @endforeach
                                         </ul>
+                                        --}}
+                                        <div wire:ignore>
+                                            <label>Select Brand</label>
+                                            <select class="brands-select-multiple" name="states[]" multiple="multiple" style="width: 100%;" onchange="updatedBrands()" wire:ignore>
+                                                @foreach($brands AS $brand)
+                                                <option value="{{ $brand->slug }}" wire:click.prevent="updateFilters('brands', '{{ $brand->slug }}')">{{ $brand->brand_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -222,10 +232,23 @@
     </div>
     @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @endpush
     @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        document.addEventListener('livewire:initialized', () => {
+            $(document).ready(function() {
+                $('.brands-select-multiple').select2();
+            });
+        })
+
+        function updatedBrands(){
+            var values = $('.brands-select-multiple').val();
+            @this.dispatch('brand-updated', { brands: values });
+        }
+
         var $range = $(".js-range-slider"),
         $from = $(".from"),
         $to = $(".to"), 

@@ -37,6 +37,10 @@ class Vendor extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function sold(){
+        return $this->orders->whereNotNull('g_payment_id')->count();
+    }
+
     public function transactions(){
         return $this->hasMany(Transaction::class, 'vendor_id');
     }

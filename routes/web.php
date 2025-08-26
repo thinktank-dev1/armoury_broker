@@ -16,6 +16,7 @@ use App\Livewire\Auth\VerifyEmail;
 use App\Livewire\Landing\HomePage;
 use App\Livewire\Landing\Shop;
 use App\Livewire\Landing\PrivacyPolicy;
+use App\Livewire\Landing\TermsConaditions;
 
 use App\Livewire\Landing\CartList;
 use App\Livewire\Landing\Checkout;
@@ -57,6 +58,7 @@ Route::get('/', HomePage::class);
 Route::get('support', Support::class);
 Route::get('how-it-works', HowItWorks::class);
 Route::get('privacy-policy', PrivacyPolicy::class);
+Route::get('terms-and-conditions', TermsConaditions::class);
 
 Route::get('shop', Shop::class);
 Route::get('shop/product/{id}', ProductDetail::class);
@@ -82,6 +84,7 @@ Route::get('approve-withdrawal/{id}', [ProcessPayment::class, 'approveWithDrawal
 Route::middleware(['auth', 'verified'])->group(function (){
 	Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('add-product', ProductForm::class);
+    Route::get('add-product/{id}', ProductForm::class);
     Route::get('wishlist', WishList::class);
     
     Route::get('my-armoury', MyArmoury::class);

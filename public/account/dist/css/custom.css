@@ -56,7 +56,7 @@
 	color: #FFF;
 }
 .text-black{
-	color: #000;
+	color: #000 !important;
 }
 .img-cont{
 	border: 2px solid #CCC;
@@ -153,4 +153,56 @@
 }
 .form-control::placeholder {
   color: #dddddd;
+}
+
+.bg-grey{
+	background-color: #eaedee;
+}
+.bold{
+	font-weight: 600;
+}
+.bg-dark-blue{
+	background-color: #293c47;
+}
+.text-white{
+	color: #FFF !important;
+}
+
+.ct-bar {
+  stroke: #293c47 !important;
+  stroke-width: 20px;
+}
+
+.circle {
+  	width: 160px;
+  	height: 160px;
+  	border-radius: 50%;
+  	object-fit: cover;
+}
+
+.overlay-icons {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	gap: 10px;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.overlay-icons a {
+	color: white;
+	background: rgba(255,255,255,0.8);
+	padding: 8px;
+	font-size: 20px;
+	text-decoration: none;
+}
+.overlay-icons a:hover{
+	background-color: #d65027;
+}
+
+/* show on hover */
+.img-container:hover .overlay-icons {
+  opacity: 1;
 }

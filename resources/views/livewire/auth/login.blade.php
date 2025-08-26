@@ -47,10 +47,10 @@
                                     </div>
                                 </div>
                                 <div class="row mt-5 mb-5">
-                                    <div class="col-md-6 d-grid">
-                                        <a href="{{ url('auth/social-login/google') }}" class="btn bt-white"><img src="{{ asset('img/auth-gl.png') }}"> Continue With Google</a>
+                                    <div class="col-md-6 d-grid social-login-cont">
+                                        <a href="{{ url('auth/social-login/google') }}" class="btn bt-white"><img src="{{ asset('img/auth-gl.png') }}" style="height: 20px;"> Continue With Google</a>
                                     </div>
-                                    <div class="col-md-6 d-grid">
+                                    <div class="col-md-6 d-grid social-login-cont">
                                         <a href="{{ url('auth/social-login/facebook') }}" class="btn bt-white"><img src="{{ asset('img/auth-fb.png') }}"> Continue With Facebook</a>
                                     </div>
                                 </div>

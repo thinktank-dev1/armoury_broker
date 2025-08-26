@@ -95,7 +95,7 @@
                                             <div class="header_banner_content">
                                                 <div class="shop_banner">
                                                     <div class="banner_img overlay_bg_40">
-                                                        <img src="assets/images/shop_banner.jpg" alt="shop_banner"/>
+                                                        <img src="{{ asset('img/shop_banner.jpg') }}" alt="shop_banner"/>
                                                     </div> 
                                                     <div class="shop_bn_content">
                                                         <h5 class="text-uppercase shop_subtitle">New Collection</h5>
