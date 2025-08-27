@@ -25,6 +25,8 @@ class Product extends Model
         'item_price', 
         'allow_offers', 
         'acknowledgement',
+        'allow_collection',
+        'collection_address',
         'status',
     ];
 

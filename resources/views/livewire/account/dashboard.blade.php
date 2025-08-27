@@ -71,7 +71,11 @@
                         </div>
                         <div class="m-l-10 align-self-center">
                             <h5 class="text-muted m-b-0 bold text-white">Wallet Total</h5>
+                            @if(Auth::user()->vendor)
                             <h3 class="m-b-0 bold text-white">{{ number_format(Auth::user()->vendor->balance() , 2) }}</h3>
+                            @else
+                                <h3 class="m-b-0 bold text-white">0.00</h3>
+                            @endif
                             <div class="mt-2">
                                 <a href="{{ url('my-vault') }}" class="text-white"><u>View Details</u></a>
                             </div>
@@ -98,8 +102,10 @@
                         <div class="col-md-3">
                             @php
                             $img = "img/no-image.webp";
-                            if(Auth::user()->vendor->avatar){
-                                $img = 'storage/'.Auth::user()->vendor->avatar;
+                            if(Auth::user()->vendor){
+                                if(Auth::user()->vendor->avatar){
+                                    $img = 'storage/'.Auth::user()->vendor->avatar;
+                                }
                             }
                             @endphp
                             <div>
@@ -108,6 +114,7 @@
                         </div>
                         <div class="col-md-9 ps-5">
                             <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
+                            @if(Auth::user()->vendor)
                             <div class="d-flex">
                                 <div>
                                     <b>{{ Auth::user()->vendor->likes->count() }}</b> Likes
@@ -119,8 +126,10 @@
                             <div class="">
                                 <p>{{ Auth::user()->vendor->description }}</p>
                             </div>
+                            @endif
                         </div>
                     </div>
+                    @if(Auth::user()->vendor)
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-between mt-3">
                             <div class="mb-2">
@@ -137,6 +146,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

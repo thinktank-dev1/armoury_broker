@@ -58,7 +58,7 @@
                         <span class="hide-menu">Users</span>
                     </a>
                 </li>
-                @endif
+                @else
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('dashboard') }}" aria-expanded="false">
                         <i class="icon-speedometer"></i>
@@ -107,6 +107,7 @@
                         <span class="hide-menu">Settings</span>
                     </a>
                 </li>
+                @endif
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('auth/logout') }}" aria-expanded="false">
                         <i class="icon-logout"></i>

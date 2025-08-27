@@ -15,7 +15,7 @@ class Dashboard extends Component
     public $orders, $listed, $purchases;
 
     public function mount(){
-        if(!Auth::user()->vendor_id){
+        if(!Auth::user()->vendor_id && Auth::user()->role->name != "admin"){
             return redirect('my-armoury/edit')->with('error', 'Please fill in this form before you can upload products!');
         }
         $this->getData();

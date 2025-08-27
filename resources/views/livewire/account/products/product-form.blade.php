@@ -175,6 +175,24 @@
                                 <h3>SHIPPING</h3>
                                 <p><small><b>Please Note:</b> To be managed outside of the platform by the Seller.</small></p>
                             </div>
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="collection_check" wire:model.live="allow_collection">
+                                        <label class="form-check-label" for="collection_check">
+                                            Allow Collections
+                                        </label>
+                                    </div>
+                                    @if($allow_collection)
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Collection Address</label>
+                                            <textarea class="form-control" name="collection_address" wire:model.defer="collection_address"></textarea>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
                             @foreach($shipping_types AS $k => $shipping)
                             <div class="col-md-12">
                                 <div class="row">

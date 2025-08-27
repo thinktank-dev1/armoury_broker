@@ -24,6 +24,7 @@ class ProductForm extends Component
     public $listing_type, $item_name, $model_number, $item_description, $category_id, $sub_category_id, $sub_sub_category_id, $brand_id, $condition, $quantity, $size, $service_fee_payer, $item_price, $allow_offers, $acknowledgement;
     public $shipping_types = [], $product_images = [];
     public $cur_images = [];
+    public $allow_collection, $collection_address;
 
     public function mount($id = null){
         if(!Auth::user()->vendor_id){
@@ -58,6 +59,12 @@ class ProductForm extends Component
                 $this->allow_offers = true;
             }
             $this->acknowledgement = true;
+            if($prdt->allow_collection){
+                $this->allow_collection = true;
+            }
+            $this->collection_address = $prdt->collection_address;
+
+
             if($prdt->shippingOptions->count() > 0){
                 $this->shipping_types = [];
                 foreach($prdt->shippingOptions AS $opt){
@@ -112,6 +119,8 @@ class ProductForm extends Component
         $prdt->allow_offers = $this->allow_offers;
         $prdt->acknowledgement = $this->acknowledgement;
         $prdt->status = 1;
+        $prdt->allow_collection = $this->allow_collection;
+        $prdt->collection_address = $this->collection_address;
         $prdt->save();
 
         foreach($this->product_images AS $image){
