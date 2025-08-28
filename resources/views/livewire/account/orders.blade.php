@@ -12,7 +12,7 @@
                     <h6 class="card-subtitle"><b>Note:</b> click order shipped on order details to alert buyer order is on its way.</h6>
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            @if($orders)
+                            @if($orders->count() > 0)
                             <table class="table table-striped">
                                 @foreach($orders AS $order)
                                 <thead>
@@ -81,7 +81,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
-                            @esle
+                            @else
                             <div class="text-center mt-5">
                                 <h1 class="text-muted">Get started</h1>
                                 <p>Your orders will show here when buyers purchase them.</p>
