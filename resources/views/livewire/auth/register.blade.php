@@ -56,7 +56,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" id="terms_check_box" wire:model.defer="terms_and_condotions">
                                                     <label class="form-check-label" for="terms_check_box">
-                                                        I Accept The <a href="{{ url('terms-and-conditions') }}">Terms & Conditions</a>
+                                                        I accept the <a href="{{ url('terms-and-conditions') }}">Terms & Conditions</a>
                                                     </label>
                                                 </div>
                                             </div>

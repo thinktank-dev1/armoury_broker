@@ -75,7 +75,7 @@
                                                                     }
                                                                     @endphp
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" value="" wire:key="{{ $sub->id.now() }}" id="sub_check_{{ $sub->id }}" wire:key="sub_cat_{{ $sub->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $sub->slug }}')" {{ $checked }}>
+                                                                        <input class="form-check-input" type="checkbox" wire:key="{{ $sub->id.now() }}" id="sub_check_{{ $sub->id }}" wire:key="sub_cat_{{ $sub->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $sub->slug }}')" {{ $checked }}>
                                                                         <label class="form-check-label" for="sub_check_{{ $sub->id }}">
                                                                             {{ $sub->sub_category_name }}
                                                                         </label>

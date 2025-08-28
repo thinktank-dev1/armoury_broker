@@ -18,12 +18,12 @@
                     </div>
                     <div class="col-md-3 text-end g-4">
                         @if(Auth::guest())
-                        <a class="ms-3" href="{{ url('auth/login') }}">Login</a>
+                        <a class="ms-3 bold" href="{{ url('auth/login') }}">Login</a>
                         @else
-                        <a class="ms-3" href="{{ url('dashboard') }}">Dashboard</a>
-                        <a class="ms-3" href="{{ url('wishlist') }}">Wishlist</a>
+                        <a class="ms-3 bold" href="{{ url('dashboard') }}">Dashboard</a>
+                        <a class="ms-3 bold" href="{{ url('wishlist') }}">Wishlist</a>
                         @endif
-                        <a class="ms-3" href="{{ url('cart') }}">Cart @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif</a>
+                        <a class="ms-3 bold" href="{{ url('cart') }}">Cart @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif</a>
                     </div>
                 </div>
             </div>

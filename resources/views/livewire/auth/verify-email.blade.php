@@ -27,7 +27,7 @@
                             @endif
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-12 text-center mb-3">
-                                    <b>Please check inbox for a email verification</b>
+                                    <b>Please check your inbox for an email verification</b>
                                 </div>
                                 <div class="col-md-12 text-center mb-3">
                                     <p><a href="{{ url('auth/login') }}">Login</a></p>

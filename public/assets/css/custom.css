@@ -344,7 +344,7 @@ footer .widget {
 }
 .btn-auth:hover{
 	border: 4px solid #FFF;
-	background-color: #FFF;
+	background-color: transparent;
 }
 .btn-auth.active{
 	background-color: #FFF;
@@ -685,6 +685,9 @@ footer .widget {
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+.btn-sqr i{
+    margin-right: 0px; 
+}
 .btn-sqr {
     background-color: #0f1f24;
     color: #FFF !important;
@@ -710,4 +713,14 @@ footer .widget {
   	height: 180px;
   	border-radius: 50%;
   	object-fit: cover;
+}
+
+.img-circle-sm {
+  	width: 60px;
+  	height: 60px;
+  	border-radius: 50%;
+  	object-fit: cover;
+}
+.bold{
+	font-weight: 600;
 }

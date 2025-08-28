@@ -96,10 +96,10 @@
                             <div class="mt-4 bg-grey text-dark-blue px-3 py-2">
                                 <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchase. <a href="#"><b>Learn More</b></a></small>
                             </div>
-                            <div class="row mt-4">
+                            <div class="row mt-4 px-3">
                                 @if($product->vendor->avatar)
                                 <div class="col-md-2">
-                                    <img class="user_img img-fluid" src="{{ asset('storage/'.$product->vendor->avatar) }}">
+                                    <img class="img-circle-sm img-fluid" src="{{ asset('storage/'.$product->vendor->avatar) }}">
                                 </div>
                                 @endif
                                 <div class="@if($product->vendor->avatar) col-md-10 @else col-md-12 @endif mt-2">

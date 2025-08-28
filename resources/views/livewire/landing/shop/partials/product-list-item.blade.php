@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="product_info mt-2">
-        <h6 class="product_title mb-1">
+        <h6 class="product_title mb-1 bold">
             R {{ number_format($product->item_price, 2) }}
         </h6>
         <div class="product-name">

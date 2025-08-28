@@ -29,8 +29,8 @@ class EditDb extends Command
      */
     public function handle()
     {
-        // $this->editCats();
-        // $this->editSubCats();
+        $this->editCats();
+        $this->editSubCats();
         $this->editBrands();
     }
 

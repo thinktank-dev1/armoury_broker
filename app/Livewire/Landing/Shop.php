@@ -106,10 +106,22 @@ class Shop extends Component
     #[Layout('components.layouts.landing')] 
     public function render(){
         $filters = $this->current_filters;
+
         $key = $this->search_key;
 
         $query = Product::query();
         if(count($filters) > 0){
+            if(isset($filters['category'])){
+                if(count($filters['category']) == 0){
+                    unset($filters['category']);
+                }
+            }
+            if(isset($filters['sub-category'])){
+                if(count($filters['sub-category']) == 0){
+                    unset($filters['sub-category']);
+                }
+            }
+
             foreach($filters AS $k => $v){
                 if($k == "category"){
                     $query->whereHas('category', function($q) use($v){
