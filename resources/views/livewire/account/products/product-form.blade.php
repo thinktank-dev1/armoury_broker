@@ -34,7 +34,7 @@
                             <div cass="col-md-12">
                                 <h3 class="bold">UPLOAD ITEM</h3>
                                 <b class="bold">Image Upload</b>
-                                <p>Upload up to 6 images <span class="ms-5"><a href="#" class="text-black"><b>View image upload guide</b></a></span></p>
+                                <p>Upload up to 6 images <span class="ms-5"><a href="#" class="text-black"><b><u>View image upload guide</u></b></a></span></p>
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
@@ -224,7 +224,7 @@
                                     </div>
                                 </div>
                                 @endforeach
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-3">
                                     <a href="#" class="btn btn-secondary" wire:click.prevent="addShippingType">ADD MORE</a>
                                 </div>
                             @endif

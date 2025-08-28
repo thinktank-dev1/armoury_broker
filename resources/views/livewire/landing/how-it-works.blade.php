@@ -21,7 +21,7 @@
                         <div class="bloc-content h-100">
                             <div>
                                 {{ $dt['step'] }}
-                                <h5 class="text-21">{{ $dt['title'] }}</h5>
+                                <h5 class="text-21 bold">{{ $dt['title'] }}</h5>
                             </div>
                             <hr />
                             <div>

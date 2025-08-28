@@ -10,6 +10,7 @@ use App\Models\SubCategory;
 use Auth;
 use App\Models\Product;
 use App\Models\OrderItem;
+use App\Models\Message;
 
 class Header extends Component
 {
@@ -67,8 +68,17 @@ class Header extends Component
 
     public function render(){
         $categories = Category::orderBy('category_name', 'ASC')->get();
+
+        $msg_count = null;
+        if(!Auth::guest()){
+            if(Auth::user()->vendor_id){
+                $msg_count = Message::where('vendor_id', Auth::user()->vendor_id)->where('status', 0)->count();
+            }
+        }
+
         return view('livewire.landing.partials.header', [
-            'categories' => $categories
+            'categories' => $categories,
+            'msg_count' => $msg_count
         ]);
     }
 }

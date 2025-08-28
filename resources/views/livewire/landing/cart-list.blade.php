@@ -83,8 +83,7 @@
                     </div>
                 </div>
                 @endforeach
-
-                @if(!$cart_items_model && !$cart_items_session)
+                @if($cart_items_model->count() == 0 && !$cart_items_session)
                 <div class="row">
                     <div class="col-md-12 text-center mt-5 mb-3">
                         <h1 class="text-muted">YOUR SHOPPING CART IS EMPTY</h1>

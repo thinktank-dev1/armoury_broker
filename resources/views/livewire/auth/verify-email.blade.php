@@ -5,12 +5,14 @@
                 <div class="col-md-8 offset-md-2">
                     <div class="card auth-cont">
                         <div class="card-body px-4">
+                            {{--
                             <div class="d-grid mt-3">
                                 <div class="btn-group">
                                     <a href="{{ url('auth/login') }}" class="btn btn-auth =">Login</a>
                                     <a href="{{ url('auth/register') }}" class="btn btn-auth">Register</a>
                                 </div>
                             </div>
+                            --}}
                             <div class="row">
                                 <div class="col-md-12 text-center mt-4 mb-3">
                                     <h4 class="page-title">Verify your Email</h4>
@@ -26,14 +28,14 @@
                             </div>
                             @endif
                             <div class="row mt-3 mb-3">
-                                <div class="col-md-12 text-center mb-3">
-                                    <b>Please check your inbox for an email verification</b>
+                                <div class="col-md-12 text-center mb-4">
+                                    <b>Please check your inbox for an email verification.</b>
                                 </div>
                                 <div class="col-md-12 text-center mb-3">
-                                    <p><a href="{{ url('auth/login') }}">Login</a></p>
+                                    <p><a href="{{ url('auth/login') }}"><b>Login</b></a></p>
                                 </div>
                                 <div class="col-md-12 mb-5 text-center">
-                                    <a href="" class="bnt dark-btn" wire:click.prevent="ResendEmail">Resend Email</a>
+                                    <a href="" class="bnt btn-primary" wire:click.prevent="ResendEmail">Resend Email</a>
                                 </div>
                             </div>
                         </div>

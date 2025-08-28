@@ -46,7 +46,7 @@
         <div class="col-md-2">
             <div class="card img-container">
                 @if($product->images->count() > 0)
-                <img class="card-img-top img-responsive" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
+                <img class="my-amoury-product-image img-fluid" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
                 @endif
                 <div class="card-body produc-details ps-0">
                     <div class="">

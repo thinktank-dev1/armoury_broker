@@ -61,7 +61,7 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
     font-weight: 400;
 }
 .dropdown-item:focus, .dropdown-item:hover, .dropdown-item.active, .dropdown-item:active {
-    background-color: #e6e6e6;
+    background-color: transparent;
 }
 
 .navbar .navbar-nav > li > .nav-link {
@@ -113,7 +113,11 @@ footer .widget {
 }
 
 .product_title{
-	font-size: 21px;
+	font-size: 16px;
+}
+
+.text-14{
+	font-size: 14px;
 }
 
 .sale_banner {
@@ -473,8 +477,9 @@ footer .widget {
 }
 #collapseCategory .accordion-button:not(.collapsed)::after {
     background-image: var(--bs-accordion-btn-active-icon);
-    transform: rotate(-90deg);
-    fill: #000;
+    transform: rotate(-180deg);
+    /*fill: #000;*/
+    filter: brightness(1) invert(0);
 }
 .sub_cat_filter_list{
 	list-style-type: none;

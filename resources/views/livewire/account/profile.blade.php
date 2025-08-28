@@ -7,9 +7,9 @@
                         <center class="m-t-30"> 
                             <div class="profile-pic">
                                 @if(Auth::user()->avatar)
-                                <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="img-circle" width="150">
+                                <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="circle img-fluid" width="150">
                                 @else
-                                <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="img-circle" width="150">
+                                <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle img-fluid" width="150">
                                 @endif
                                 <span class="edit-btn">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>

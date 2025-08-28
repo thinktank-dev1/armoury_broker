@@ -30,6 +30,7 @@ class EditMyArmoury extends Component
     }
 
     public function saveArmoury(){
+        $this->dispatch('go-to-top');
         $this->validate([
             'armoury_name' => 'required',
             'tel' => 'required', 

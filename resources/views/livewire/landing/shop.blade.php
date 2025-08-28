@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <b class="text-dark-blue text-upper">Filter Options</b>
+                    <b class="text-dark-blue text-upper text-14">Filter Options</b>
                     <div class="shop-filters mt-4">
                         <div class="accordion" id="filter_accodion" wire:ignore.self>
                             <div class="accordion-item mb-2">
@@ -188,7 +188,7 @@
                     @if($results_count)
                     <div class="row">
                         <div class="col-md-12">
-                            <b class="text-dark-blue">{{ $results_count }} Results</b>
+                            <b class="text-dark-blue text-14">{{ $results_count }} Results</b>
                         </div>
                     </div>
                     @endif

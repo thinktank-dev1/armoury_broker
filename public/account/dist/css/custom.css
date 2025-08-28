@@ -221,3 +221,11 @@
 .card-title{
      margin-bottom: 0px; 
 }
+.bg-dark{
+	background-color: #293c47 !important;
+}
+.my-amoury-product-image{
+	width: 190px;
+    height: 190px;
+    object-fit: cover;
+}

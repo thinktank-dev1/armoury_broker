@@ -113,8 +113,8 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Profile Summery</h4>
-                    <div class="row">
+                    <h4 class="card-title">Profile Summary</h4>
+                    <div class="row mt-3">
                         <div class="col-md-3">
                             @php
                             $img = "img/no-image.webp";
@@ -158,7 +158,7 @@
                                 <a href="{{ url('messages') }}" class="link">Messages <i class="icon-envelope"></i></a>
                             </div>
                             <div class="mb-2">
-                                <a href="{{ url('profile') }}" class="link">View Profile</a>
+                                <a href="{{ url('my-armoury') }}" class="link"><u>View Profile</u></a>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,11 @@
                                 <tbody>
                                     @foreach($order_items AS $item)
                                     <tr>
-                                        <td>{{ $item->user->name.' '.$item->user->surname }}</td>
+                                        <td>
+                                            <a href="{{ url('/'.$item->user->vendor->url_name) }}">
+                                            {{ $item->user->name.' '.$item->user->surname }}
+                                            </a>
+                                        </td>
                                         <td>{{ ucwords($item->product->item_name) }}</td>
                                         <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
                                         <td>
@@ -200,6 +204,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="text-end">
+                                <a href="{{ url('my-orders') }}" class="btn btn-primary">View All</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -226,7 +233,11 @@
                                 <tbody>
                                     @foreach($purcahse_items AS $item)
                                     <tr>
-                                        <td>{{ $item->user->name.' '.$item->user->surname }}</td>
+                                        <td>
+                                            <a href="{{ url('/'.$item->user->vendor->url_name) }}">
+                                            {{ $item->user->name.' '.$item->user->surname }}
+                                            </a>
+                                        </td>
                                         <td>{{ ucwords($item->product->item_name) }}</td>
                                         <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
                                         <td>
@@ -239,6 +250,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="text-end">
+                                <a href="{{ url('my-purchases') }}" class="btn btn-primary">View All</a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -114,8 +114,10 @@
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
                     @if(!Auth::guest())
-                    <li><a href="#" class="nav-link"><i class="linearicons-alarm"></i></a></li>
-                    <li><a href="#" class="nav-link"><i class="linearicons-envelope"></i><span class="cart_count">2</span></a></li>
+                    <!-- <li><a href="#" class="nav-link"><i class="linearicons-alarm"></i></a></li> -->
+                    @if($msg_count)
+                    <li><a href="#" class="nav-link"><i class="linearicons-envelope"></i><span class="cart_count">{{ $msg_count }}</span></a></li>
+                    @endif
                     @endif
                 </ul>
             </nav>

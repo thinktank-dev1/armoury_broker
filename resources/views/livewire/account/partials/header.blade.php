@@ -24,7 +24,7 @@
                 <li class="nav-item right-side-toggle"> 
                     <a class="nav-link  waves-effect waves-light" href="{{ url('profile') }}">
                         @if(Auth::user()->avatar)
-                            <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head">
+                            <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
                         @else
                             <i class="ti-user"></i>
                         @endif

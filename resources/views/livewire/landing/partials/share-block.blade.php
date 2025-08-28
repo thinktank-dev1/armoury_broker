@@ -48,13 +48,13 @@
         </div>
         <div class="offcanvas-body">
             <div class="mt-5 mb-3 d-grid">
-                <a href="https://www.facebook.com/sharer/sharer.php?u='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1877F2;">Share on Facebook</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1877F2; padding: 14px 30px;">Share on Facebook</a>
             </div>
             <div class="mt-5 mb-3 d-grid">
-                <a href="https://twitter.com/share?url='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1DA1F2;">Share on X</a>
+                <a href="https://twitter.com/share?url='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1DA1F2; padding: 14px 30px;">Share on X</a>
             </div>
             <div class="mt-5 mb-3 d-grid">
-                <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url='+link+'&title=&summary=" target="_blank" class="btn btn-primary" style="background-color: #0077B5;">Share on LinkedIn</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url='+link+'&title=&summary=" target="_blank" class="btn btn-primary" style="background-color: #0077B5; padding: 14px 30px;">Share on LinkedIn</a>
             </div>
         </div>
     </div>
