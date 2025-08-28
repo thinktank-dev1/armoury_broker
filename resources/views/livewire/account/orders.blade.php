@@ -1,14 +1,9 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h2>My Orders</h2>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Orders Items</h4>
+                    <h3 class="page-title bold">MY ORDERS</h3>
                     <h6 class="card-subtitle"><b>Note:</b> click order shipped on order details to alert buyer order is on its way.</h6>
                     <div class="row mt-3">
                         <div class="col-md-12">

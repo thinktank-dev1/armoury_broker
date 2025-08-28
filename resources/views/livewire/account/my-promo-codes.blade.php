@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h2>My Promo Codes</h2>
+            <h3 class="page-title bold">MY PROMO CODES</h3>
         </div>
     </div>
     <div class="row mt-3">

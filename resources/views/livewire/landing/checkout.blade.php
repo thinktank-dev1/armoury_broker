@@ -59,12 +59,26 @@
                                         <td class="pb-0 mb-0 pt-4">R {{ number_format($item['price'], 2) }}</td>
                                         <td class="pb-0 mb-0 pt-4">R {{ number_format($item['total'], 2) }}</td>
                                         <td class="pb-0 mb-0 pt-4">
+                                            @if($item['product']->shippingOptions->count() > 0)
                                             <select class="form-control"name="shipping" wire:model.live="cart.{{ $k }}.shipping_id" style="max-width: 150px; height: 30px; padding: 2px 8px;">
                                                 <option value="">Select Option</option>
                                                 @foreach($item['product']->shippingOptions AS $sh)
                                                 <option value="{{ $sh->id }}">{{ $sh->type.'(R'.$sh->price.')' }}</option>
                                                 @endforeach
                                             </select>
+                                            @endif
+                                            @if($item['product']->allow_collection == 1)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="collection_free_shipping" id="collction_radio" value="Collection" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
+                                                    <label class="form-check-label" for="collction_radio">Collection</label>
+                                                </div>
+                                            @endif
+                                            @if($item['product']->delivery_type == "Free Delivery")
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="collection_free_shipping" id="free_deliver_radio" value="Free Delivery" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
+                                                    <label class="form-check-label" for="free_deliver_radio">Free Delivery</label>
+                                                </div>
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>

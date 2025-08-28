@@ -4,7 +4,7 @@
     <link href="{{ asset('account/assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h2>ACCOUNT SUMMARY</h2>
+            <h3 class="page-title bold">ACCOUNT SUMMARY</h3>
         </div>
     </div>
     <div class="row mt-3">

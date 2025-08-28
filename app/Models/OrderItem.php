@@ -18,6 +18,7 @@ class OrderItem extends Model
         'shipping_id',
         'shipping_price',
         'service_fee',
+        'collection_free_shipping',
     ];
 
     public function vendor(){

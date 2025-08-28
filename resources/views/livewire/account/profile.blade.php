@@ -16,7 +16,7 @@
                                 </span>
                             </div>
                             <h4 class="card-title m-t-10">{{ Auth::user()->name.' '.Auth::user()->surname }}</h4>
-                            <h6 class="card-subtitle">
+                            <h6 class="card-subtitle mt-1">
                                 @if(Auth::user()->vendor)
                                 {{ Auth::user()->vendor->name }}
                                 @endif

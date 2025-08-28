@@ -25,6 +25,7 @@ class ProductForm extends Component
     public $shipping_types = [], $product_images = [];
     public $cur_images = [];
     public $allow_collection, $collection_address;
+    public $delivery_type;
 
     public function mount($id = null){
         if(!Auth::user()->vendor_id){
@@ -63,6 +64,7 @@ class ProductForm extends Component
                 $this->allow_collection = true;
             }
             $this->collection_address = $prdt->collection_address;
+            $this->delivery_type = $prdt->delivery_type;
 
 
             if($prdt->shippingOptions->count() > 0){
@@ -121,6 +123,7 @@ class ProductForm extends Component
         $prdt->status = 1;
         $prdt->allow_collection = $this->allow_collection;
         $prdt->collection_address = $this->collection_address;
+        $prdt->delivery_type = $this->delivery_type;
         $prdt->save();
 
         foreach($this->product_images AS $image){

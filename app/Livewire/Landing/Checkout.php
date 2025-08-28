@@ -22,6 +22,7 @@ class Checkout extends Component
     public $cart = [];
     public $terms_and_conditions;
     public $payment_url;
+    public $collection_free_shipping;
 
     public function mount($id, $order_id = null){
         $this->vendor_id = $id;
@@ -42,7 +43,7 @@ class Checkout extends Component
         ]);
 
         foreach($this->cart AS $ct){
-            if($ct["shipping_id"] == ""){
+            if($ct["shipping_id"] == "" && !$ct["collection_free_shipping"]){
                 $this->addError("error", "Please select shipping for all items");
                 return;
             }
@@ -67,6 +68,7 @@ class Checkout extends Component
             $itm = OrderItem::find($ct['id']);
             if($itm){
                 $itm->order_id = $order->id;
+                $itm->collection_free_shipping = $ct['collection_free_shipping'];
                 $itm->save();
             }
         }
@@ -177,6 +179,7 @@ class Checkout extends Component
                 "shipping_price" => $ct->shipping_price,
                 "service_fee" => $ct->service_fee,
                 "product" => $ct->product,
+                "collection_free_shipping" => $ct->collection_free_shipping,
             ];
             $this->cart[] = $arr;
         }

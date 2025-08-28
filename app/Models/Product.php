@@ -27,6 +27,7 @@ class Product extends Model
         'acknowledgement',
         'allow_collection',
         'collection_address',
+        'delivery_type',
         'status',
     ];
 

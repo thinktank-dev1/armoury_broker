@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-md-10">
                             <h4 class="card-title m-t-10">{{ Auth::user()->vendor->name }} </h4>
-                            <h6 class="card-subtitle">{{ url(Auth::user()->vendor->url_name) }}</h6>
+                            <h6 class="card-subtitle mt-2">{{ url(Auth::user()->vendor->url_name) }}</h6>
                             <div>
                                 <a href="javascript:void(0)" class="link me-5"><i class="icon-like"></i> <font class="font-medium">{{ Auth::user()->vendor->likes->count() }}</font> Likes</a>
                                 <a href="javascript:void(0)" class="link"><i class="icon-grid"></i> <font class="font-medium">{{ $sold_count }}</font> Items Sold</a>

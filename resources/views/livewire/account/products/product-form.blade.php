@@ -175,7 +175,7 @@
                                 <h3 class="bold">SHIPPING</h3>
                                 <p><small><b>Please Note:</b> To be managed outside of the platform by the Seller.</small></p>
                             </div>
-                            <div class="row mt-4">
+                            <div class="row mt-4 mb-3">
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="collection_check" wire:model.live="allow_collection">
@@ -184,7 +184,7 @@
                                         </label>
                                     </div>
                                     @if($allow_collection)
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mt-3">
                                         <div class="mb-3">
                                             <label class="form-label">Collection Address</label>
                                             <textarea class="form-control" name="collection_address" wire:model.defer="collection_address"></textarea>
@@ -193,27 +193,41 @@
                                     @endif
                                 </div>
                             </div>
-                            @foreach($shipping_types AS $k => $shipping)
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Shipping Type / Courier Name</label>
-                                            <input type="text" class="form-control" placeholder="Shipping Type / Courier Name" name="shipping_name" wire:model.defer="shipping_types.{{ $k }}.type">
-                                        </div>
+                                <div class="mb-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="courier_free_delivery" id="courier_free_delivery_courier" value="Courier" wire:model.live="delivery_type">
+                                        <label class="form-check-label" for="courier_free_delivery_courier">Courier</label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Price</label>
-                                            <input type="number" class="form-control" placeholder="Shipping Price" name="shipping_price" wire:model.defer="shipping_types.{{ $k }}.cost">
-                                        </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="courier_free_delivery" id="courier_free_delivery_Free" value="Free Delivery" wire:model.live="delivery_type">
+                                        <label class="form-check-label" for="courier_free_delivery_Free">Free Delivery</label>
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-                            <div class="col-md-12">
-                                <a href="#" class="btn btn-secondary" wire:click.prevent="addShippingType">ADD MORE</a>
-                            </div>
+                            @if($delivery_type == "Courier")
+                                @foreach($shipping_types AS $k => $shipping)
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Shipping Type / Courier Name</label>
+                                                <input type="text" class="form-control" placeholder="Shipping Type / Courier Name" name="shipping_name" wire:model.defer="shipping_types.{{ $k }}.type">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Price</label>
+                                                <input type="number" class="form-control" placeholder="Shipping Price" name="shipping_price" wire:model.defer="shipping_types.{{ $k }}.cost">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                                <div class="col-md-12">
+                                    <a href="#" class="btn btn-secondary" wire:click.prevent="addShippingType">ADD MORE</a>
+                                </div>
+                            @endif
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-12">

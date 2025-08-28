@@ -1,14 +1,9 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h2>My Purchases</h2>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Purchased Items</h4>
+                    <h3 class="page-title bold">MY PURCHASES</h3>
                     <div class="row mt-3">
                         <div class="col-md-12">
                             @if($orders->count() > 0)

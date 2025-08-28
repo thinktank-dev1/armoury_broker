@@ -74,7 +74,7 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="@if($product->allow_offers) col-md-6 @else col-md-12 @endif d-grid">
-                                    <a href="#" class="bnt dark-btn" wire:click.prevent="addToCart">Buy</a>
+                                    <a href="#" class="bnt btn-primary" wire:click.prevent="addToCart">Buy</a>
                                 </div>
                                 @if($product->allow_offers)
                                 <div class="col-md-6 d-grid">
@@ -94,7 +94,7 @@
                                 <span class="badge badge-outine-dark-blue">Brand: {{ $product->brand->brand_name }}</span>
                             </div>
                             <div class="mt-4 bg-grey text-dark-blue px-3 py-2">
-                                <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchase. <a href="#"><b>Learn More</b></a></small>
+                                <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchase. <a href="{{ url('terms-and-conditions') }}"><b>Learn More</b></a></small>
                             </div>
                             <div class="row mt-4 px-3">
                                 @if($product->vendor->avatar)
