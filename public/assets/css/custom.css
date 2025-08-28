@@ -86,7 +86,7 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
 }
 
 .footer-right-p p{
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 20px;
 	font-weight: 300;
 
@@ -723,4 +723,15 @@ footer .widget {
 }
 .bold{
 	font-weight: 600 !important;
+}
+
+.widget_links li {
+    list-style: none;
+    padding-bottom: 2px;
+}
+footer .widget_title {
+    text-transform: capitalize;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-size: 16px;
 }
