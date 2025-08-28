@@ -95,7 +95,7 @@
                             </table>
                             @else
                             <div class="text-center mt-5">
-                                <h1 class="text-muted">Nothing here</h1>
+                                <h1 class="text-muted">Get started</h1>
                                 <p>Your promo codes will show here when you purchase them.</p>
                             </div>
                             @endif

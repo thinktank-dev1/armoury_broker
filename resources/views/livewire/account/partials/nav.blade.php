@@ -115,17 +115,19 @@
                     </a>
                 </li>
             </ul>
-            <div class="mt-5 mx-3">
+            <div class="mt-5 mx-3 hide-menu">
                 <a href="{{ url('support') }}" class="btn btn-primary-outline">Support</a>
             </div>
-            <div class="mt-3 text-center">
+            <div class="mt-3 text-center hide-menu">
                 <a class="text-white" href="{{ url('support') }}">FAQ</a><br />
                 <a class="text-white" href="{{ url('how-it-works') }}">How Armoury Broker Works</a>
             </div>
-            <div class="mt-3 mx-3 d-flex justify-content-around">
-                <a href="#" class="btn btn-sqr"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="btn btn-sqr"><i class=" fab fa-instagram"></i></a>
-                <a href="#" class="btn btn-sqr"><i class="fab fa-whatsapp"></i></a>
+            <div class="hide-menu">
+                <div class="mt-3 mx-3 d-flex justify-content-around">
+                    <a href="#" class="btn btn-sqr"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="btn btn-sqr"><i class=" fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-sqr"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
         </nav>
     </div>

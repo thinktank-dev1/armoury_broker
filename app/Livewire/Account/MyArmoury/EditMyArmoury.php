@@ -71,8 +71,11 @@ class EditMyArmoury extends Component
         $vendor->street = $this->street;
         $vendor->suburb = $this->suburb;
         $vendor->city = $this->city;
+        $vendor->province = $this->province;
+        $vendor->postal_code = $this->postal_code;
         $vendor->country = "South Africa";
         $vendor->status = 1;
+        $vendor->instagram_handle = $this->instagram_handle;
         $vendor->save();
 
         Auth::user()->vendor_id = $vendor->id;
@@ -122,13 +125,16 @@ class EditMyArmoury extends Component
         if(Auth::user()->vendor_id){
             $vendor = Vendor::find(Auth::user()->vendor_id);
             if($vendor){
-                $this->bio = $vendor->biography;
+                $this->bio = $vendor->description;
                 $this->tel = $vendor->tel;
                 $this->email = $vendor->email;
                 $this->street = $vendor->street;
                 $this->suburb = $vendor->suburb;
                 $this->city = $vendor->city;
                 $this->armoury_name = $vendor->name;
+                $this->province = $vendor->province;
+                $this->postal_code = $vendor->postal_code;
+                $this->instagram_handle = $vendor->instagram_handle;
             }
 
             $dealer = Dealer::where('user_id', Auth::user()->id)->first();

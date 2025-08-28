@@ -11,7 +11,7 @@
                     <h4 class="card-title">Purchased Items</h4>
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            @if($orders)
+                            @if($orders->count() > 0)
                             <table class="table table-striped">
                                 @foreach($orders AS $order)
                                 <thead>
@@ -84,8 +84,8 @@
                             </table>
                             @else
                             <div class="text-center mt-5">
-                                <h1 class="text-muted">Nothing here</h1>
-                                <p>Your purchases will show here when.</p>
+                                <h1 class="text-muted">Get started</h1>
+                                <p>Your purchases will show here.</p>
                             </div>
                             @endif
                         </div>

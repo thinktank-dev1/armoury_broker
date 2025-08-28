@@ -21,6 +21,14 @@ class Dashboard extends Component
         $this->getData();
     }
 
+    public function copyLink(){
+        if(Auth::user()->vendor){
+            $link = url(Auth::user()->vendor->url_name);
+            $this->link = $link;
+            $this->dispatch('copy-link', link: $link);
+        }
+    }
+
     public function getData(){
         $this->orders = Order::where('vendor_id', Auth::user()->vendor_id)->count();
         $this->listed = Product::where('vendor_id', Auth::user()->vendor_id)->count();
@@ -31,9 +39,17 @@ class Dashboard extends Component
         $order_items = OrderItem::where('vendor_id', Auth::user()->vendor_id)->orderBy('created_at', 'DESC')->take(5)->get();
         $purcahse_items = OrderItem::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->take(5)->get();
         
+        $link = null;
+        if(Auth::user()->vendor){
+            $link = url(Auth::user()->vendor->url_name);
+            $this->link = $link;
+            $this->dispatch('copy-link', link: $link);
+        }
+
         return view('livewire.account.dashboard', [
             'order_items' => $order_items,
-            'purcahse_items' => $purcahse_items
+            'purcahse_items' => $purcahse_items,
+            'link' => $link
         ]);
     }
 }

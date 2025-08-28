@@ -37,9 +37,9 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <li><a class="nav-link nav_item" href="{{ url('/') }}">Home</a></li>
+                        <li><a class="nav-link nav_item bold" href="{{ url('/') }}">Home</a></li>
                         <li class="dropdown dropdown-mega-menu">
-                            <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">Categories</a>
+                            <a class="dropdown-toggle nav-link bold" href="#" data-bs-toggle="dropdown">Categories</a>
                             <div class="dropdown-menu">
                                 <ul class="mega-menu d-lg-flex">
                                     <li class="mega-menu-col col-lg-9">
@@ -109,7 +109,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a class="nav-link nav_item" href="{{ url('support') }}">Support</a></li> 
+                        <li><a class="nav-link nav_item bold" href="{{ url('support') }}">Support</a></li> 
                     </ul>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">

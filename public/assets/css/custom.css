@@ -722,5 +722,5 @@ footer .widget {
   	object-fit: cover;
 }
 .bold{
-	font-weight: 600;
+	font-weight: 600 !important;
 }

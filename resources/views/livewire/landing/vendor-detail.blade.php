@@ -34,8 +34,8 @@
                                 <p class="text-dark-blue">{{ $vendor->description }}</p>
                             </div>
                             <div class="">
-                                <p class="mb-0"><i class="fas fa-truck-moving"></i> Usually delivers in <b>0 days</b></p>
-                                <p class="mt-1"><i class="fas fa-map-marker-alt"></i> {{ $vendor->city }}</p>
+                                <p class="mb-0"><i class="ti ti-truck"></i> Usually delivers in <b>0 days</b></p>
+                                <p class="mt-1"><i class="ti-location-pin"></i> {{ $vendor->city }}</p>
                             </div>
                         </div>
                         <div class="col-md-4">

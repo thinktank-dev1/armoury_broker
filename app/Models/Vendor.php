@@ -17,7 +17,10 @@ class Vendor extends Model
         'street',
         'suburb',
         'city',
+        'province',
+        'postal_code',
         'country',
+        'instagram_handle',
         'status',
     ];
 

@@ -32,13 +32,14 @@
             </div>
         </div>
         @endif
+
         <div class="row">
             <div class="@if(!$dealer_stock_service) col-md-12 @else col-md-6 @endif">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4 class="card-title">My Armoury Deails</h4>
+                                <h4 class="card-title">My Armoury Details</h4>
                             </div>
                         </div>
                         <div class="row">
@@ -46,6 +47,12 @@
                                 <div class="mb-3">
                                     <label class="form-label">Armoury Name</label>
                                     <input type="text" class="form-control" placeholder="Armoury Name" name="armoury_name" wire:model.defer="armoury_name">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Armoury Biography</label>
+                                    <textarea class="form-control" placeholder="Armoury Biography" name="bio" wire:model.defer="bio"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">

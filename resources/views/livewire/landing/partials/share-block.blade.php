@@ -1,41 +1,43 @@
-<div class="h-100">
+<div class="h-100 mt-auto">
     @if($view_type == "vendor-detail")
-    <div class="h-100 text-end d-flex flex-column justify-content-around">
-        @if(!Auth::guest())
-        <div class="">
-            <a href="#" wire:click.prevent="likeVendor">
-                Like 
-                @if($vendor->likes->where('user_id', Auth::user()->id)->first())
-                <i class="fas fa-star"></i>
-                @else
-                <i class="far fa-star"></i>
-                @endif
-            </a>
-        </div>
-        @endif
-        <div class="">
-            <a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">
-                Share <i class="fas fa-share-alt"></i>
-            </a>
-        </div>
-        <div class="">
-            <a href="#" wire:click.prevent="copyLink">
-                Copy Link <i class="fas fa-paperclip"></i>
-            </a>
-        </div>
-        <div class="">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">
-                Message Seller <i class="fas fa-envelope"></i>
-            </a>
+    <div class="d-flex align-items-end flex-column h-100">
+        <div class="text-end d-flex flex-column gap-2 mt-auto mb-3">
+            @if(!Auth::guest())
+            <div class="">
+                <a href="#" wire:click.prevent="likeVendor">
+                    Like 
+                    @if($vendor->likes->where('user_id', Auth::user()->id)->first())
+                    <i class="fas fa-star"></i>
+                    @else
+                    <i class="icon-star"></i>
+                    @endif
+                </a>
+            </div>
+            @endif
+            <div class="">
+                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">
+                    Share <i class="icon-share"></i>
+                </a>
+            </div>
+            <div class="">
+                <a href="#" wire:click.prevent="copyLink">
+                    Copy Link <i class="icon-paper-clip"></i>
+                </a>
+            </div>
+            <div class="">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">
+                    Message Seller <i class="icon-envelope"></i>
+                </a>
+            </div>
         </div>
     </div>
     @elseif($view_type == "product-detail")
     <div class="row mt-3">
         <div class="col-md-12 d-flex justify-content-between">
             <a href="{{ url($vendor->url_name) }}"><u>View Seller Profile</u></a>
-            <span><a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">Share <i class="fas fa-share-alt"></i></a></span>
-            <span><a href="#" wire:click.prevent="copyLink">Copy link <i class="fas fa-paperclip"></i></a></span>
-            <span><a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">Message seller <i class="fas fa-envelope"></i></a></span>
+            <span><a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">Share <i class="icon-share"></i></a></span>
+            <span><a href="#" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a></span>
+            <span><a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">Message seller <i class="icon-envelope"></i></a></span>
         </div>
     </div>
     @endif

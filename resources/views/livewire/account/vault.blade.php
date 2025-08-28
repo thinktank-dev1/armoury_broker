@@ -12,7 +12,7 @@
                             <div class="col text-end align-self-center">
                                 <div class="">
                                     <div class="round align-self-center round-primary">
-                                        <i class="ti-shopping-cart-full"></i>
+                                        <i class="icon-basket-loaded"></i>
                                     </div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
                             <div class="col text-end align-self-center">
                                 <div class="">
                                     <div class="round align-self-center round-primary">
-                                        <i class="ti-money"></i>
+                                        R
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                             <div class="col text-end align-self-center">
                                 <div class="">
                                     <div class="round align-self-center round-white">
-                                        <i class="ti-wallet"></i>
+                                        <i class="icon-wallet"></i>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex">
-                        <h4 class="m-b-0">Transactions</h4>
+                        <h4 class="card-title mt-2">Transactions</h4>
                         <span class="ms-auto">
                             <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#withdrawal-modal">Request Withdrawal</a>
                         </span>

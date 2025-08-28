@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-body">
                     <form class="form-material" wire:submit.prevent="saveProduct">
-                        <h3>ITEM LISTING OPTIONS</h3>
+                        <h3 class="bold">ITEM LISTING OPTIONS</h3>
                         <div class="row mb-3">
                             <p>Select Listing Type</p>
                             <div class="col-md-12">
@@ -32,8 +32,8 @@
                         @endif
                         <div class="row mt-5">
                             <div cass="col-md-12">
-                                <h3>UPLOAD ITEM</h3>
-                                <b>Image Upload</b>
+                                <h3 class="bold">UPLOAD ITEM</h3>
+                                <b class="bold">Image Upload</b>
                                 <p>Upload up to 6 images <span class="ms-5"><a href="#" class="text-black"><b>View image upload guide</b></a></span></p>
                             </div>
                             <div class="col-md-12">
@@ -59,29 +59,29 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-12">
-                                <h3>ITEM DETAILS</h3>
+                                <h3 class="bold">ITEM DETAILS</h3>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
-                                    <label>Item Name</label>
+                                    <label class="form-label">Item Name</label>
                                     <input type="text" class="form-control" placeholder="Item Name" name="item_name" wire:model.defer="item_name"> 
                                 </div>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
-                                    <label>Model Number</label>
+                                    <label class="form-label">Model Number</label>
                                     <input type="text" class="form-control" placeholder="Model Number" name="model_number" wire:model.defer="model_number"> 
                                 </div>
                             </div>
                             <div class="col-md-12 mt-3">
                                 <div class="form-group">
-                                    <label>Item Description</label>
+                                    <label class="form-label">Item Description</label>
                                     <textarea class="form-control" placeholder="Item Description" name="item_description" wire:model.defer="item_description"></textarea>
                                 </div>
                             </div>
                             <div class="@if(count($sub_sub) > 0) col-md-4 @else col-md-6 @endif mt-3">
                                 <div class="form-group">
-                                    <label>Category</label>
+                                    <label class="form-label">Category</label>
                                     <select class="form-control" placeholder="Category" name="category_id" wire:model.live="category_id">
                                         <option value="">Select Option</option>
                                         @foreach($cats AS $cat)
@@ -92,7 +92,7 @@
                             </div>
                             <div class="@if(count($sub_sub) > 0) col-md-4 @else col-md-6 @endif mt-3">
                                 <div class="form-group">
-                                    <label>Sub Category</label>
+                                    <label class="form-label">Sub Category</label>
                                     <select class="form-control" placeholder="Sub category" name="sub_category_id" wire:model.live="sub_category_id">
                                         <option value="">Select Option</option>
                                         @if($category)
@@ -106,7 +106,7 @@
                             @if(count($sub_sub) > 0)
                             <div class="col-md-4 mt-3">
                                 <div class="form-group">
-                                    <label>Sub Sub Category</label>
+                                    <label class="form-label">Sub Sub Category</label>
                                     <select class="form-control" placeholder="Sub Sub category" name="sub_sub_category_id" wire:model.defer="sub_sub_category_id">
                                         <option value="">Select Option</option>
                                         @if($sub_sub)
@@ -120,7 +120,7 @@
                             @endif
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
-                                    <label>Brand</label>
+                                    <label class="form-label">Brand</label>
                                     <select class="form-control" placeholder="Brand" name="brand_id" wire:model.defer="brand_id">
                                         <option value="">Select Option</option>
                                         @foreach($brands AS $brand)
@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
-                                    <label>Condition</label>
+                                    <label class="form-label">Condition</label>
                                     <select class="form-control" placeholder="Condition" name="condition" wire:model.defer="condition">
                                         <option value="">Select Option</option>
                                         @foreach($conditions AS $cond)
@@ -142,7 +142,7 @@
                             </div>
                             <div class="col-md-12 mt-3">
                                 <div class="form-group">
-                                    <label>Quantity</label>
+                                    <label class="form-label">Quantity</label>
                                     <input type="number" class="form-control" placeholder="Quantity" name="quantity" wire:model.defer="quantity"> 
                                 </div>
                             </div>
@@ -151,10 +151,10 @@
                                 <div class="col-md-12 mt-3">
                                     <div class="form-group">
                                         @if($category->measurement_type == "caliber")
-                                            <label>Caliber</label>
+                                            <label class="form-label">Caliber</label>
                                             <input type="text" class="form-control" name="size" wire:model.defer="size">
                                         @elseif($category->measurement_type == "size")
-                                            <label>Size</label>
+                                            <label class="form-label">Size</label>
                                             <select class="form-control" name="size" wire:model.defer="size">
                                                 <option value="">Select Option</option>
                                                 @foreach($sizes AS $sz)
@@ -162,7 +162,7 @@
                                                 @endforeach
                                             </select>
                                         @else
-                                            <label>{{ ucwords($category->measurement_type) }}</label>
+                                            <label class="form-label">{{ ucwords($category->measurement_type) }}</label>
                                             <input type="text" class="form-control" name="size" wire:model.defer="size">
                                         @endif
                                     </div>
@@ -172,7 +172,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-12">
-                                <h3>SHIPPING</h3>
+                                <h3 class="bold">SHIPPING</h3>
                                 <p><small><b>Please Note:</b> To be managed outside of the platform by the Seller.</small></p>
                             </div>
                             <div class="row mt-4">
@@ -198,13 +198,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label>Shipping Type / Courier Name</label>
+                                            <label class="form-label">Shipping Type / Courier Name</label>
                                             <input type="text" class="form-control" placeholder="Shipping Type / Courier Name" name="shipping_name" wire:model.defer="shipping_types.{{ $k }}.type">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label>Price</label>
+                                            <label class="form-label">Price</label>
                                             <input type="number" class="form-control" placeholder="Shipping Price" name="shipping_price" wire:model.defer="shipping_types.{{ $k }}.cost">
                                         </div>
                                     </div>
@@ -217,7 +217,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-12">
-                                <h3>PLATFROM FEES</h3>
+                                <h3 class="bold">PLATFROM FEES</h3>
                                 <p><small><b>Please Note:</b> Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on 50 - 50 basis.</small></p>
                             </div>
                             <div class="col-md-12 mb-3">
@@ -247,11 +247,11 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-md-12">
-                                <h3>ITEM PRICE</h3>
+                                <h3 class="bold">ITEM PRICE</h3>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Item Price</label>
+                                    <label class="form-label">Item Price</label>
                                     <input type="number" class="form-control" placeholder="Item Price" name="item_price" wire:model.defer="item_price"> 
                                 </div>
                             </div>

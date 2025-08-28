@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-md-12 bg-light border-start">
+        <div class="col-md-12">
             <div class="card-body p-t-0">
                 <div class="card b-all shadow-none">
                     <div class="inbox-center table-responsive">
@@ -44,7 +44,7 @@
                         </table>
                         @if($mesages->count() == 0)
                         <div class="text-center mt-5">
-                            <h1 class="text-muted">Nothing here</h1>
+                            <h1 class="text-muted">Get started</h1>
                             <p>Your messages will show here when buyers contact you.</p>
                         </div>
                         @endif
