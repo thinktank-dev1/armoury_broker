@@ -36,7 +36,7 @@
                 </div>
                 @endif
                 @if($i % 2 == 1 && $i != (count($data) - 1))
-                <div class="col-md-12 text-center d-flex align-items-center justify-content-center">
+                <div class="col-md-12 text-center d-flex align-items-center justify-content-center mb-3">
                     <img src="{{ asset('img/hiw-btm-arrow.png') }}">
                 </div>
                 @endif
