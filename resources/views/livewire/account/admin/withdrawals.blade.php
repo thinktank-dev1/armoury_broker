@@ -14,7 +14,7 @@
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Vendot</th>
+                                        <th>Vendor</th>
                                         <th>Bank</th>
                                         <th>Branch Name</th>
                                         <th>Branch Code</th>
