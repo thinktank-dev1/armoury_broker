@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             @foreach($brands AS $brand)
-            <div class="col-md-2 mb-3">
+            <div class="col-6 col-md-2 mb-3">
                 <a href="{{ url('shop?brands='.$brand->slug) }}">
                     <img src="{{ asset('storage/'.$brand->brand_logo) }}" class="img-fluid">
                 </a>
