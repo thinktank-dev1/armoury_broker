@@ -41,7 +41,7 @@
         <script src="{{ asset('account/dist/js/sidebarmenu.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
-        <script src="{{ asset('account/dist/js/custom.min.js') }}"></script>
+        <script src="{{ asset('account/dist/js/custom.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
         @stack('scripts')
     </body>

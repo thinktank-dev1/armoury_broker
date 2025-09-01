@@ -8,18 +8,18 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <div class="text-end align-self-center">
+                    <div class="row">
+                        <div class="col-3 col-md-4 align-self-center">
                             <div class="">
                                 <div class="round align-self-center round-primary">
                                     <i class="icon-basket"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-l-10 align-self-center">
+                        <div class="col p-l-0">
                             <h5 class="text-muted m-b-0 bold text-black">Orders</h5>
                             <h3 class="m-b-0 bold">{{ $orders }}</h3>
                             <div class="mt-2">
@@ -30,18 +30,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <div class="text-end align-self-center">
+                    <div class="row">
+                        <div class="col-3 col-md-4 align-self-center">
                             <div class="">
                                 <div class="round align-self-center round-primary">
                                     <i class="icon-list"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-l-10 align-self-center">
+                        <div class="col p-l-0">
                             <h5 class="text-muted m-b-0 bold text-black">Listed Items</h5>
                             <h3 class="m-b-0 bold">{{ $listed }}</h3>
                             <div class="mt-2">
@@ -52,18 +52,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <div class="text-end align-self-center">
+                    <div class="row">
+                        <div class="col-3 col-md-4 align-self-center">
                             <div class="">
                                 <div class="round align-self-center round-primary">
                                     <i class="icon-basket-loaded"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-l-10 align-self-center">
+                        <div class="col p-l-0">
                             <h5 class="text-muted m-b-0 bold text-black">Purchases</h5>
                             <h3 class="m-b-0 bold">{{ $purchases }}</h3>
                             <div class="mt-2">
@@ -74,18 +74,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-6">
             <div class="card bg-dark-blue">
                 <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <div class="text-end align-self-center">
+                    <div class="row">
+                        <div class="col-3 col-md-4 align-self-center">
                             <div class="">
                                 <div class="round align-self-center round-white">
                                     <i class="icon-wallet"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-l-10 align-self-center">
+                        <div class="col p-l-0">
                             <h5 class="text-muted m-b-0 bold text-white">Wallet Total</h5>
                             @if(Auth::user()->vendor)
                             <h3 class="m-b-0 bold text-white">{{ number_format(Auth::user()->vendor->balance() , 2) }}</h3>
@@ -115,7 +115,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Profile Summary</h4>
                     <div class="row mt-3">
-                        <div class="col-md-3">
+                        <div class="col-md-3 d-flex text-center justify-content-md-center">
                             @php
                             $img = "img/no-image.webp";
                             if(Auth::user()->vendor){
@@ -124,18 +124,18 @@
                                 }
                             }
                             @endphp
-                            <div>
+                            <div class="d-flex justify-content-center">
                                 <img src="{{ asset($img) }}" class="circle" />
                             </div>
                         </div>
-                        <div class="col-md-9 ps-5">
+                        <div class="text-center text-md-start col-md-9 ps-md-5">
                             <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
                             @if(Auth::user()->vendor)
-                            <div class="d-flex">
+                            <div class="d-flex d-sm-flex justify-content-around justify-content-md-start">
                                 <div>
                                     <b>{{ Auth::user()->vendor->likes->count() }}</b> Likes
                                 </div>
-                                <div class="ms-5">
+                                <div class="ms-md-5">
                                     <b>{{ Auth::user()->vendor->sold() }}</b> Items Sold
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                     </div>
                     @if(Auth::user()->vendor)
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-between mt-3">
+                        <div class="col-md-12 d-flex d-sm-flex justify-content-between mt-3">
                             <div class="mb-2">
                                 <a href="javascript:void(0)" class="link" onclick="showShareOptions()">Share <i class="icon-share"></i></a>
                             </div>
@@ -172,7 +172,49 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Orders Summary</h4>
-                    <div class="row">
+                    <div class="row d-md-none">
+                        <div class="col-md-12">
+                            @foreach($order_items AS $item)
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Name:</span>
+                                    <div class="ms-auto">
+                                        <a href="{{ url('/'.$item->user->vendor->url_name) }}">
+                                            {{ $item->user->name.' '.$item->user->surname }}
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Item:</span>
+                                    <div class="ms-auto">
+                                        {{ ucwords($item->product->item_name) }}
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Date:</span>
+                                    <div class="ms-auto">
+                                        {{ date('d M Y', strtotime($item->created_at)) }}
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Status:</span>
+                                    <div class="ms-auto">
+                                        @if($item->order)
+                                            {{ $item->order->status }}
+                                        @endif
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Total Price:</span>
+                                    <div class="ms-auto">
+                                        R {{ number_format($item->price,2) }}
+                                    </div>
+                                </li>
+                            </ul>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="row d-none d-md-block">
                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
@@ -204,6 +246,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="text-end">
                                 <a href="{{ url('my-orders') }}" class="btn btn-primary">View All</a>
                             </div>
@@ -218,7 +264,49 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Purchase Summary</h4>
-                    <div class="row">
+                    <div class="row d-md-none">
+                        <div class="col-md-12">
+                            @foreach($purcahse_items AS $item)
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Name:</span>
+                                    <div class="ms-auto">
+                                        <a href="{{ url('/'.$item->user->vendor->url_name) }}">
+                                            {{ $item->user->name.' '.$item->user->surname }}
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Item:</span>
+                                    <div class="ms-auto">
+                                        {{ ucwords($item->product->item_name) }}
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Date:</span>
+                                    <div class="ms-auto">
+                                        {{ date('d M Y', strtotime($item->created_at)) }}
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Status:</span>
+                                    <div class="ms-auto">
+                                        @if($item->order)
+                                            {{ $item->order->status }}
+                                        @endif
+                                    </div>
+                                </li>
+                                <li class="list-group-item d-flex">
+                                    <span class="text-muted">Total Price:</span>
+                                    <div class="ms-auto">
+                                        R {{ number_format($item->price,2) }}
+                                    </div>
+                                </li>
+                            </ul>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="row d-none d-md-block">
                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
@@ -250,6 +338,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="text-end">
                                 <a href="{{ url('my-purchases') }}" class="btn btn-primary">View All</a>
                             </div>

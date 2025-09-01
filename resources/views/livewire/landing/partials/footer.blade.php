@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="widget">
+                    <div class="widget text-center text-md-start">
                         <h6 class="widget_title">Quick Links</h6>
                         <ul class="widget_links">
                             <li><a href="{{ url('/') }}">Home</a></li>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="widget">
+                    <div class="widget text-center text-md-start">
                         @if(Auth::guest())
                         <a href="{{ url('auth/login') }}"><h6 class="widget_title">Login</h6></a>
                         @endif

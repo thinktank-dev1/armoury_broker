@@ -229,3 +229,12 @@
     height: 190px;
     object-fit: cover;
 }
+
+@media only screen and (max-width: 991px) {
+	.mini-sidebar .hide-menu {
+	    display: inline-block;
+	}
+	.d-sm-flex{
+		display: flex !important;
+	}
+}

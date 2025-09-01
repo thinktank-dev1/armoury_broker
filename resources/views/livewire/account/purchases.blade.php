@@ -4,7 +4,53 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="page-title bold">MY PURCHASES</h3>
-                    <div class="row mt-3">
+                    <div class="row d-md-none">
+                        <div class="co-md-12">
+                            @if($orders->count() > 0)
+                                @foreach($orders AS $order)
+                                <ul class="list-group mb-3">
+                                    <li class="list-group-item d-sm-flex">
+                                        <span class="text-muted">Order No</span>
+                                        <div class="ms-auto">
+                                            #{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-sm-flex">
+                                        <span class="text-muted">Seller</span>
+                                        <div class="ms-auto">
+                                            {{ $order->vendor->name }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-sm-flex">
+                                        <span class="text-muted">Payment Ref</span>
+                                        <div class="ms-auto">
+                                            {{ $order->g_payment_id }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-sm-flex">
+                                        <span class="text-muted">Cart Total</span>
+                                        <div class="ms-auto">
+                                            R {{ number_format($order->cart_total, 2) }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-sm-flex">
+                                        <span class="text-muted">Status</span>
+                                        <div class="ms-auto">
+                                            @if($order->shipping_status == 1 && $order->receipt_status == 1)
+                                            <span class="badge bg-success">Complete</span>
+                                            @elseif($order->shipping_status == 0 && $order->receipt_status == 0)
+                                            <span class="badge bg-warning">Pending</span>
+                                            @elseif($order->shipping_status == 1 && $order->receipt_status == 0)
+                                            <span class="badge bg-primary">Shipped</span>
+                                            @endif
+                                        </div>
+                                    </li>
+                                </ul>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row mt-3 d-none d-md-block">
                         <div class="col-md-12">
                             @if($orders->count() > 0)
                             <table class="table table-striped">

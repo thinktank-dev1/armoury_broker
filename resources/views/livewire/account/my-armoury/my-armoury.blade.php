@@ -14,7 +14,7 @@
                                 @endif
                             </center>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 text-center text-md-start">
                             <h4 class="card-title m-t-10">{{ Auth::user()->vendor->name }} </h4>
                             <h6 class="card-subtitle mt-2">{{ url(Auth::user()->vendor->url_name) }}</h6>
                             <div>
@@ -25,11 +25,11 @@
                                 {{ Auth::user()->vendor->description }}
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-6">
+                                <div class="col-6 col-md-6 text-start">
                                     <div class="mb-2"><a href="javascript:void(0)" class="link"><i class="ti-truck"></i> Usually ships in <font class="font-medium">0 days</font></a></div>
                                     <a href="javascript:void(0)" class="link"><i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}</a>
                                 </div>
-                                <div class="col-md-6 text-md-end">
+                                <div class="col-6 col-md-6 text-end">
                                     <div class="mb-2"><a href="javascript:void(0)" class="link" onclick="showShareOptions()">Share <i class="icon-share"></i></a></div>
                                     <div class="mb-2"><a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a></div>
                                     <a href="{{ url('my-armoury/edit') }}" class="link">Edit <i class="icon-pencil"></i></a>
@@ -43,7 +43,7 @@
     </div>
     <div class="row mt-4">
         @foreach($products AS $product)
-        <div class="col-md-2">
+        <div class="col-6 col-md-2">
             <div class="card img-container">
                 @if($product->images->count() > 0)
                 <img class="my-amoury-product-image img-fluid" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">

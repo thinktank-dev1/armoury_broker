@@ -6,7 +6,7 @@
                 @php
                     $f_item = $item_group->first();
                 @endphp
-                <div class="col-md-12 mb-3">
+                <div class="col-md-12 mb-3 d-none d-md-block">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex">
@@ -44,8 +44,30 @@
                     </div>
                 </div>
                 @endforeach
+
+                <div class="col-md-12 d-md-none">
+                    @foreach($cart_items_model AS $k=>$item_group)
+                    <ul class="list-group">
+                        <li class="list-group-item active d-flex align-items-center" aria-current="true">
+                            <h3>{{ ucwords($f_item->vendor->name) }}</h3>
+                            <div class="ms-auto">
+                                <a href="{{ url('cart/'.$f_item->vendor->id) }}" class="btn btn-primary-outline btn-sm">Checkout</a>
+                            </div>
+                        </li>
+                        @foreach($item_group AS $item)
+                        <li class="list-group-item d-flex">
+                            <span>{{ ucwords($item->product->item_name) }}</span>
+                            <div class="ms-auto text-end">
+                                R{{ number_format($item->price,2) }}
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endforeach
+                </div>
+
                 @foreach($cart_items_session AS $key=>$item_group)
-                <div class="col-md-12 mb-3">
+                <div class="col-md-12 mb-3 d-none d-md-block">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex">
@@ -83,7 +105,41 @@
                     </div>
                 </div>
                 @endforeach
-                @if($cart_items_model->count() == 0 && !$cart_items_session)
+                <div class="col-md-12 d-md-none">
+                    @foreach($cart_items_session AS $key=>$item_group)
+                    <ul class="list-group">
+                        <li class="list-group-item active d-flex align-items-center" aria-current="true">
+                            <h3>{{ ucwords($item_group[0]['product']->vendor->name) }}</h3>
+                            <div class="ms-auto">
+                                <a href="{{ url('cart/'.$item_group[0]['product']->vendor->id) }}" class="btn btn-primary-outline btn-sm">Checkout</a>
+                            </div>
+                        </li>
+                        @foreach($item_group AS $k => $item)
+                        <li class="list-group-item d-flex">
+                            <span>{{ ucwords($item['product']->item_name) }}</span>
+                            <div class="ms-auto text-end">
+                                R{{ number_format($item['cart_item']['price'],2) }}
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endforeach
+                </div>
+
+                @php
+                $md = null;
+                if(is_array($cart_items_model)){
+                    if(count($cart_items_model) > 0){
+                        $md = true;
+                    }
+                }
+                if($cart_items_model instanceof stdClass){
+                    if($cart_items_model->count() > 0){
+                        $md = true;
+                    }
+                }
+                @endphp
+                @if(!$md && !$cart_items_session)
                 <div class="row">
                     <div class="col-md-12 text-center mt-5 mb-3">
                         <h1 class="text-muted">YOUR SHOPPING CART IS EMPTY</h1>

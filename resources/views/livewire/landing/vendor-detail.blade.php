@@ -13,24 +13,23 @@
             </div>
             <div class="row">
                 @if($vendor->avatar)
-                <div class="col-md-3">
+                <div class="col-md-3 text-center">
                     <img src="{{ asset('storage/'.$vendor->avatar) }}" class="img-fluid img-circle">
-                    
                 </div>
                 @endif
                 <div class="@if($vendor->avatar) col-md-9 @else col-md-12 @endif">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-12 col-md-8 text-center text-md-start">
                             <h3>{{ ucwords($vendor->name) }}</h3>
-                            <div class="d-flex gap-5">
+                            <div class="d-flex justify-content-around justify-content-md-start gap-5">
                                 <div class="text-dark-blue">
                                     <b>{{ $vendor->likes->count() }}</b> Likes
                                 </div>
                                 <div class="text-dark-blue">
-                                    <b>0</b> Items Sold
+                                    <b>{{ $vendor->sold() }}</b> Items Sold
                                 </div>
                             </div>
-                            <div class="">
+                            <div class="mt-2">
                                 <p class="text-dark-blue">{{ $vendor->description }}</p>
                             </div>
                             <div class="">
@@ -38,7 +37,7 @@
                                 <p class="mt-1"><i class="ti-location-pin"></i> {{ $vendor->city }}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-12 col-md-4">
                             <livewire:landing.partials.share-block :vendor_id="$vendor->id" type="vendor-detail" />
                         </div>
                     </div>

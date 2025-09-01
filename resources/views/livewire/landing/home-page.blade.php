@@ -6,7 +6,7 @@
                     <div class="banner_slide_content">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-6 col-6">
+                                <div class="col-12 col-lg-6">
                                     <div class="banner_content overflow-hidden">
                                         <h5 class="mb-3 staggered-animation text-26 text-bold font-weight-light text-white" data-animation="slideInLeft" data-animation-delay="0.5s">SECURE | VERIFIED | RELIABLE</h5>
                                         <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">The trading platform built specifically<br /> for South Africa's firearm and tactical <br />equipment community.</p>
@@ -22,7 +22,7 @@
                     <div class="banner_slide_content">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-12 col-lg-6">
                                     <div class="banner_content overflow-hidden">
                                         <h5 class="mb-3 staggered-animation text-26 text-bold font-weight-light text-white" data-animation="slideInLeft" data-animation-delay="0.5s">THREE STEPS TO SECURE TRADING</h5>
                                         <ul class="staggered-animation text-white" data-animation="slideInLeft" data-animation-delay="1s">

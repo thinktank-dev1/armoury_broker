@@ -1,4 +1,4 @@
-<div class="product col-md-3">
+<div class="product col-6 col-md-3">
     @if($tag)
     <span class="pr_flash @if($tag == 'Sold') bg-warning @endif">{{ $tag }}</span>
     @endif

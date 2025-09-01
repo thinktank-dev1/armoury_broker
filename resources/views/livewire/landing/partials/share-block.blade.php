@@ -1,6 +1,6 @@
 <div class="h-100 mt-auto">
     @if($view_type == "vendor-detail")
-    <div class="d-flex align-items-end flex-column h-100">
+    <div class="d-none d-md-flex align-items-end flex-column h-100">
         <div class="text-end d-flex flex-column gap-2 mt-auto mb-3">
             @if(!Auth::guest())
             <div class="">
@@ -25,6 +25,39 @@
                 </a>
             </div>
             <div class="">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">
+                    Message Seller <i class="icon-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row d-md-none">
+        <div class="col-6">
+            @if(!Auth::guest())
+            <div class="">
+                <a href="#" wire:click.prevent="likeVendor">
+                    @if($vendor->likes->where('user_id', Auth::user()->id)->first())
+                    <i class="fas fa-star"></i>
+                    @else
+                    <i class="icon-star"></i>
+                    @endif
+                    Like 
+                </a>
+            </div>
+            @endif
+            <div class="mt-3">
+                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">
+                    <i class="icon-share"></i> Share
+                </a>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="text-end">
+                <a href="#" wire:click.prevent="copyLink">
+                    Copy Link <i class="icon-paper-clip"></i>
+                </a>
+            </div>
+            <div class="mt-3 text-end">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">
                     Message Seller <i class="icon-envelope"></i>
                 </a>

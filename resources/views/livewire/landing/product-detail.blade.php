@@ -73,11 +73,11 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="@if($product->allow_offers) col-md-6 @else col-md-12 @endif d-grid">
+                                <div class="@if($product->allow_offers) col-md-6 @else col-md-12 @endif d-grid mb-2">
                                     <a href="#" class="bnt btn-primary" wire:click.prevent="addToCart">Buy</a>
                                 </div>
                                 @if($product->allow_offers)
-                                <div class="col-md-6 d-grid">
+                                <div class="col-md-6 d-grid mb-2">
                                     <a href="#" class="btn btn-primary-outline" wire:click.prevent="showOfferModal">Make An Offer</a>
                                 </div>
                                 @endif
@@ -98,11 +98,11 @@
                             </div>
                             <div class="row mt-4 px-3">
                                 @if($product->vendor->avatar)
-                                <div class="col-md-2">
+                                <div class="col-4 col-md-2">
                                     <img class="img-circle-sm img-fluid" src="{{ asset('storage/'.$product->vendor->avatar) }}">
                                 </div>
                                 @endif
-                                <div class="@if($product->vendor->avatar) col-md-10 @else col-md-12 @endif mt-2">
+                                <div class="@if($product->vendor->avatar) col-8 col-md-10 @else col-12 col-md-12 @endif mt-2">
                                     <div class="">
                                         <b class="text-dark-blue">{{ $product->vendor->name }}</b>
                                     </div>

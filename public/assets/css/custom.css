@@ -740,3 +740,35 @@ footer .widget_title {
     margin-bottom: 25px;
     font-size: 16px;
 }
+
+.navbar-toggler {
+	color: #FFF;
+}
+.navbar-collapse .navbar-nav{
+	background-color: #293c47 !important;
+}
+
+@media only screen and (max-width: 991px) {
+	.text-26{
+		font-size: 20px;
+	}
+	.text-21{
+		font-size: 18px;
+	}
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #FFF;
+    background-color: #293c47;
+    border-color: #293c47;
+}
+.list-group-item.active h3{
+	color: #FFF;
+	font-size: 21px;
+}
+.list-group-item.active .btn{
+	padding: 15px 16px;
+	color: #FFF;
+	border: 2px solid #FFF;
+}

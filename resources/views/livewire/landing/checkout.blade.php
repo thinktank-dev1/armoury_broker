@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 @endif
-                <div class="col-md-12 mt-3 bg-grey p-3">
+                <div class="col-md-12 mt-3 bg-grey p-3 d-none d-md-block">
                     <b>Cart Items</b>
                     <div class="shop_cart_table mt-3">
                         <table class="table check-out-table">
@@ -69,14 +69,14 @@
                                             @endif
                                             @if($item['product']->allow_collection == 1)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="collection_free_shipping" id="collction_radio" value="Collection" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
-                                                    <label class="form-check-label" for="collction_radio">Collection</label>
+                                                    <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_collction_radio" value="Collection" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
+                                                    <label class="form-check-label" for="{{ $item['id'] }}_collction_radio">Collection</label>
                                                 </div>
                                             @endif
                                             @if($item['product']->delivery_type == "Free Delivery")
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="collection_free_shipping" id="free_deliver_radio" value="Free Delivery" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
-                                                    <label class="form-check-label" for="free_deliver_radio">Free Delivery</label>
+                                                    <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_free_deliver_radio" value="Free Delivery" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
+                                                    <label class="form-check-label" for="{{ $item['id'] }}_free_deliver_radio">Free Delivery</label>
                                                 </div>
                                             @endif
                                         </td>
@@ -93,6 +93,64 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-md-12 mt-3 bg-grey p-3 d-md-none">
+                    <b>Cart Items</b>
+                    @foreach($cart AS $k=>$item)
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">{{ $item['item_name'] }}</li>
+                        <li class="list-group-item d-flex">
+                            <span class="text-muted">Quantity</span>
+                            <div class="ms-auto">
+                                <div class="quantity">
+                                    <input type="button" value="-" class="minus">
+                                    <input type="text" name="quantity" value="{{ $item['qty'] }}" title="Qty" class="qty" data-id="{{ $item['id'] }}" size="4">
+                                    <input type="button" value="+" class="plus">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <span class="text-muted">Price</span>
+                            <div class="ms-auto">
+                                R {{ number_format($item['price'], 2) }}
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <span class="text-muted">Total Price</span>
+                            <div class="ms-auto">
+                                R {{ number_format($item['total'], 2) }}
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="text-muted mb-2">Shipping</div>
+                            @if($item['product']->shippingOptions->count() > 0)
+                            <div class="mb-2">
+                                <select class="form-control"name="shipping" wire:model.live="cart.{{ $k }}.shipping_id">
+                                    <option value="">Select Option</option>
+                                    @foreach($item['product']->shippingOptions AS $sh)
+                                    <option value="{{ $sh->id }}">{{ $sh->type.'(R'.$sh->price.')' }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endif
+                            <div class="mb-2">
+                                @if($item['product']->allow_collection == 1)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_collction_radio" value="Collection" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
+                                        <label class="form-check-label" for="{{ $item['id'] }}_collction_radio">Collection</label>
+                                    </div>
+                                @endif
+                                @if($item['product']->delivery_type == "Free Delivery")
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_free_deliver_radio" value="Free Delivery" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
+                                        <label class="form-check-label" for="{{ $item['id'] }}_free_deliver_radio">Free Delivery</label>
+                                    </div>
+                                @endif
+                            </div>
+                        </li>
+                    </ul>
+                    @endforeach
+                </div>
+
                 <div class="col-md-12 mt-4">
                     <h2 class="page-title pb-0 mb-0">Platform Fees</h2>
                     <p><small><b>Please Note: </b>Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on a 50-50 basis.</small></p>
