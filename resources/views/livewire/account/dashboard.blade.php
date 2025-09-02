@@ -230,9 +230,11 @@
                                     @foreach($order_items AS $item)
                                     <tr>
                                         <td>
+                                            @if($item->user->vendor)
                                             <a href="{{ url('/'.$item->user->vendor->url_name) }}">
                                             {{ $item->user->name.' '.$item->user->surname }}
                                             </a>
+                                            @endif
                                         </td>
                                         <td>{{ ucwords($item->product->item_name) }}</td>
                                         <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
