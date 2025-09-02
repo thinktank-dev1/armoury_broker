@@ -234,6 +234,8 @@
                                             <a href="{{ url('/'.$item->user->vendor->url_name) }}">
                                             {{ $item->user->name.' '.$item->user->surname }}
                                             </a>
+                                            @else
+                                            {{ $item->user->name.' '.$item->user->surname }}
                                             @endif
                                         </td>
                                         <td>{{ ucwords($item->product->item_name) }}</td>
