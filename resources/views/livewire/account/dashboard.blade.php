@@ -179,7 +179,7 @@
                                 <li class="list-group-item d-flex">
                                     <span class="text-muted">Name:</span>
                                     <div class="ms-auto">
-                                        <a href="{{ url('/'.$item->user->vendor->url_name) }}">
+                                        <a href="{{ url('/'.$item->product->vendor->url_name) }}">
                                             {{ $item->user->name.' '.$item->user->surname }}
                                         </a>
                                     </div>
