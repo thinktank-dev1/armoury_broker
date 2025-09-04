@@ -118,7 +118,7 @@ class EditMyArmoury extends Component
             $dealer->fee_agreement = $this->fee_agreement;
             $dealer->save();
 
-            session()->flash('status', 'Dealer successfully saved. The team will review your details and add you to the dealer network');
+            session()->flash('status', 'Dealer successfully saved. The team will review your details and add you to the dealer network.');
         }
     }
 

@@ -12,7 +12,7 @@
                 $i = $loop->index;
                 $img = $i + 1;
                 @endphp
-                <div class="col-12 col-md-5 mb-3 h-100">
+                <div class="col-12 col-md-5 mb-4 mb-md-3 h-100">
                     <div class="bloc h-100">
                         <div class="esarfa">
                             <span class="bloc-icon"><img src="{{ asset('img/hiw/ICON S'.$img.'.png') }}" style="width: 35px"></span>
@@ -38,6 +38,11 @@
                 @if($i % 2 == 1 && $i != (count($data) - 1))
                 <div class="d-none d-md-flex col-md-12 text-center d-flex align-items-center justify-content-center mb-3">
                     <img src="{{ asset('img/hiw-btm-arrow.png') }}">
+                </div>
+                @endif
+                @if($i != (count($data) - 1))
+                <div class="col-12 d-md-none text-center mb-5">
+                    <img src="{{ asset('img/hiw-arrow-down.png') }}">
                 </div>
                 @endif
 

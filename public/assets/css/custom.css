@@ -75,7 +75,7 @@ a.carousel-control-prev:hover, a.carousel-control-next:hover{
 .product-name, .product-name a{
 	text-transform: uppercase;
 	color: #687188;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: 400;
 }
 
@@ -329,6 +329,7 @@ footer .widget {
     border-radius: 2px;
     height: 50px;
     text-transform: uppercase;
+    padding: 13px 35px;
 }
 .btn-primary-outline:hover{
     background-color: #0f1f24;
@@ -352,7 +353,7 @@ footer .widget {
 }
 .btn-auth.active{
 	background-color: #FFF;
-	border: 2px solid #FFF;
+	border: 4px solid #FFF;
 }
 .auth-cont{
 	background-color: #155b7110;
@@ -767,6 +768,31 @@ footer .widget_title {
     	box-shadow: 5px 5px 5px #CCC;
     	background-color: #FFF;
 	}
+
+	.background_bg::before {
+    	content: "";
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 100%;
+    	background-color: rgba(0, 0, 0, 0.5);
+    	z-index: 1;
+	}
+
+	.footer-disclaimer{
+		line-height: 20px;
+	}
+
+	.social-links-sm{
+		font-size: 12px;
+	}
+	.social-links-sm i{
+		display: block;
+	}
+	.social-links-sm span{
+		text-align: center;
+	}
 }
 
 .list-group-item.active {
@@ -783,4 +809,17 @@ footer .widget_title {
 	padding: 15px 16px;
 	color: #FFF;
 	border: 2px solid #FFF;
+}
+.heading_tab_header {
+    padding-bottom: 0px;
+}
+.text-muted{
+	color: #CCC !important;
+}
+.nav_style3.owl-theme .owl-nav [class*="owl-"], .nav_style4.owl-theme .owl-nav [class*="owl-"] {
+    top: -92px;
+}
+.navbar-toggler {
+	margin: 13px 0 13px 3px;
+	border: none;
 }

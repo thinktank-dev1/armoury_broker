@@ -128,7 +128,7 @@
                                 <img src="{{ asset($img) }}" class="circle" />
                             </div>
                         </div>
-                        <div class="text-center text-md-start col-md-9 ps-md-5">
+                        <div class="text-center text-md-start col-md-9 ps-md-5 mt-3">
                             <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
                             @if(Auth::user()->vendor)
                             <div class="d-flex d-sm-flex justify-content-around justify-content-md-start">
@@ -147,17 +147,38 @@
                     </div>
                     @if(Auth::user()->vendor)
                     <div class="row">
-                        <div class="col-md-12 d-flex d-sm-flex justify-content-between mt-3">
+                        <div class="col-md-12 d-flex d-sm-flex justify-content-between mt-3 account-social-icons">
                             <div class="mb-2">
-                                <a href="javascript:void(0)" class="link" onclick="showShareOptions()">Share <i class="icon-share"></i></a>
+                                <a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">
+                                    <span class="d-sm-flex flex-column flex-md-row text-center">
+                                        <span class="order-2 order-md-1">
+                                            Share 
+                                        </span>
+                                        <i class="icon-share order-1 order-md-2 ms-md-2 pt-md-1"></i>
+                                    </span>
+                                </a>
                             </div>
                             <div class="mb-2">
-                                <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a>
+                                <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">
+                                    <span class="d-sm-flex flex-column flex-md-row text-center">
+                                        <span class="order-2 order-md-1">
+                                            Copy link 
+                                        </span>
+                                        <i class="icon-paper-clip order-1 order-md-2 ms-md-2 pt-md-1"></i>
+                                    </span>
+                                </a>
                             </div>
                             <div class="mb-2">
-                                <a href="{{ url('messages') }}" class="link">Messages <i class="icon-envelope"></i></a>
+                                <a href="{{ url('messages') }}" class="link">
+                                    <span class="d-sm-flex flex-column flex-md-row text-center">
+                                        <span class="order-2 order-md-1">
+                                            Messages 
+                                        </span>
+                                        <i class="icon-envelope order-1 order-md-2 ms-md-2 pt-md-1"></i>
+                                    </span>
+                                </a>
                             </div>
-                            <div class="mb-2">
+                            <div class="mb-2 pt-2 pt-md-0">
                                 <a href="{{ url('my-armoury') }}" class="link"><u>View Profile</u></a>
                             </div>
                         </div>
@@ -167,6 +188,7 @@
             </div>
         </div>
     </div>
+    @if($order_items->count() > 0)
     <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">
@@ -263,6 +285,8 @@
             </div>
         </div>
     </div>
+    @endif
+    @if($purcahse_items->count() > 0)
     <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">
@@ -355,6 +379,36 @@
             </div>
         </div>
     </div>
+    @endif
+
+    <div class="modal fade" tabindex="-1" id="share-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3 d-grid">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ $share_link }}" target="_blank" class="btn btn-primary" style="background-color: #1877F2; padding: 14px 30px;">Share on Facebook</a>
+                            </div>
+                            <div class="mb-3 d-grid">
+                                <a href="https://twitter.com/share?url={{ $share_link }}" target="_blank" class="btn btn-primary" style="background-color: #1DA1F2; padding: 14px 30px;">Share on X</a>
+                            </div>
+                            <div class="mb-3 d-grid">
+                                <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url={{ $share_link }}&title=&summary=" target="_blank" class="btn btn-primary" style="background-color: #0077B5; padding: 14px 30px;">Share on LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @push('scripts')
     <script src="{{ asset('account/assets/node_modules/chartist-js/dist/chartist.min.js') }}"></script>
@@ -375,8 +429,18 @@
             });
         })
         $(document).ready(function(){
+            lg_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            sm_labels = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+            
+            if(window.innerWidth < 768) {
+                us_labels = sm_labels;
+            }
+            else{
+                us_labels = lg_labels;
+            }
+
             var data = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                labels: us_labels,
                 series: [
                     [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8]
             ]};

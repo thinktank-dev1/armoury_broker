@@ -13,12 +13,14 @@ use App\Models\Product;
 class Dashboard extends Component
 {
     public $orders, $listed, $purchases;
+    public $share_link;
 
     public function mount(){
         if(!Auth::user()->vendor_id && Auth::user()->role->name != "admin"){
             return redirect('my-armoury/edit')->with('error', 'Please fill in this form before you can upload products!');
         }
         $this->getData();
+        $this->share_link = url(Auth::user()->vendor->url_name);
     }
 
     public function copyLink(){

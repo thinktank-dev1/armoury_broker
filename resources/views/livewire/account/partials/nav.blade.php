@@ -118,7 +118,7 @@
             <div class="mt-5 mx-3 hide-menu">
                 <a href="{{ url('support') }}" class="btn btn-primary-outline">Support</a>
             </div>
-            <div class="mt-3 text-center hide-menu">
+            <div class="mt-3 text-center hide-menu ms-3 ms-md-0">
                 <a class="text-white" href="{{ url('support') }}">FAQ</a><br />
                 <a class="text-white" href="{{ url('how-it-works') }}">How Armoury Broker Works</a>
             </div>

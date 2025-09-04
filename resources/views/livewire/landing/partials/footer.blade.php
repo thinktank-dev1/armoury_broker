@@ -2,7 +2,7 @@
     <div class="footer_top">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 mt-4 mt-md-0">
                     <div class="widget text-center">
                         <div class="footer_logo text-center">
                             <a href="#"><img src="{{ asset('img/footer_logo.png') }}" alt="logo"/></a>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 mt-4 mt-md-0">
                     <div class="widget text-center text-md-start">
                         <h6 class="widget_title">Quick Links</h6>
                         <ul class="widget_links">
@@ -35,7 +35,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 mt-4 mt-md-0">
                     <div class="widget text-center text-md-start">
                         @if(Auth::guest())
                         <a href="{{ url('auth/login') }}"><h6 class="widget_title">Login</h6></a>
@@ -47,8 +47,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="widget">
+                <div class="col-md-4 mt-4 mt-md-0">
+                    <div class="widget text-center text-md-start">
                         <h6 class="widget_title">Disclaimer</h6>
                         <p class="footer-disclaimer">Armoury Broker is a peer-to-peer marketplace platform. All transactions must comply with the <b>Firearms Control Act 60 of 2000</b>. We are not a licensed firearms dealer and do not handle firearms and regulated items directly. Users are solely responsible for legal compliance, licensing requirements, and all aspects of their transactions. Armoury Broker accepts no liability for user conduct, or legal compliance. Always consult licensed dealers and legal professionals regarding firearm transfers.</p>
                     </div>
@@ -59,10 +59,10 @@
     <div class="footer-bottom pt-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-12 col-md-8 text-center text-md-start">
                     <p>Copyright &copy; {{ date('Y') }} ARMOURY BROKER. All Rights Reserved. | Designed and developed by <a href="https://thinktank.co.za" target="_blank">Thinktank Creative</a></p>
                 </div>
-                <div class="col-md-4 text-end">
+                <div class="col-12 col-md-4 text-center text-md-end">
                     <a href="{{ url('terms-and-conditions') }}">Terms & Conditions</a> |
                     <a href="{{ url('privacy-policy') }}">Privacy Policy</a>
                 </div>

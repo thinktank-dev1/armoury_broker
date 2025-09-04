@@ -2,13 +2,15 @@
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ url('dashboard') }}">
-                <b class="d-none d-md-block">
-                    <img src="{{ asset('img/logo.png') }}" alt="homepage" class="dark-logo" style="width: 160px;" />
-                    <img src="{{ asset('img/logo-light.png') }}" alt="homepage" class="light-logo" style="width: 160px;" />
-                </b>
-                <b class="d-md-none">
-                    <img src="{{ asset('img/logo-sm.png') }}" alt="homepage" class="dark-logo" style="width: 60px;" />
-                    <img src="{{ asset('img/logo-sm.png') }}" alt="homepage" class="light-logo" style="width: 60px;"/>
+                <b class="">
+                    <div class="d-none d-md-block">
+                        <img src="{{ asset('img/logo.png') }}" alt="homepage" class="dark-logo" style="width: 160px;" />
+                        <img src="{{ asset('img/logo-light.png') }}" alt="homepage" class="light-logo" style="width: 160px;" />
+                    </div>
+                    <div class="d-md-none">
+                        <img src="{{ asset('img/logo-sm.png') }}" alt="homepage" class="dark-logo" style="width: 60px;" />
+                        <img src="{{ asset('img/logo-sm.png') }}" alt="homepage" class="light-logo" style="width: 60px;"/>    
+                    </div>
                 </b> 
             </a>
         </div>
@@ -26,7 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-item right-side-toggle"> 
-                    <a class="nav-link  waves-effect waves-light" href="{{ url('profile') }}">
+                    <a class="nav-link  waves-effect waves-light d-flex align-items-center h-100" href="{{ url('profile') }}">
                         @if(Auth::user()->avatar)
                             <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
                         @else

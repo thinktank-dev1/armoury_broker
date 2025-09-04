@@ -30,7 +30,7 @@
                                     <a href="javascript:void(0)" class="link"><i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}</a>
                                 </div>
                                 <div class="col-6 col-md-6 text-end">
-                                    <div class="mb-2"><a href="javascript:void(0)" class="link" onclick="showShareOptions()">Share <i class="icon-share"></i></a></div>
+                                    <div class="mb-2"><a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">Share <i class="icon-share"></i></a></div>
                                     <div class="mb-2"><a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a></div>
                                     <a href="{{ url('my-armoury/edit') }}" class="link">Edit <i class="icon-pencil"></i></a>
                                 </div>
@@ -52,7 +52,7 @@
                     <div class="">
                         <h3>R{{ number_format($product->item_price, 2) }}</h3>
                     </div>
-                    <p class="m-b-0 m-t-10">{{ $product->item_name }}</p>
+                    <p class="m-b-0 m-t-10" style="text-transform: uppercase;">{{ $product->item_name }}</p>
                 </div>
                 <div class="overlay-icons">
                     <a href="{{ url('add-product/'.$product->id) }}"><i class=" icon-pencil"></i></a>
@@ -61,6 +61,35 @@
             </div>
         </div>
         @endforeach
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="share-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3 d-grid">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ $share_link }}" target="_blank" class="btn btn-primary" style="background-color: #1877F2; padding: 14px 30px;">Share on Facebook</a>
+                            </div>
+                            <div class="mb-3 d-grid">
+                                <a href="https://twitter.com/share?url={{ $share_link }}" target="_blank" class="btn btn-primary" style="background-color: #1DA1F2; padding: 14px 30px;">Share on X</a>
+                            </div>
+                            <div class="mb-3 d-grid">
+                                <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url={{ $share_link }}&title=&summary=" target="_blank" class="btn btn-primary" style="background-color: #0077B5; padding: 14px 30px;">Share on LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
     @endif
     

@@ -24,17 +24,17 @@
     <div class="section pt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-12 col-md-3">
                     <b class="text-dark-blue text-upper text-14">Filter Options</b>
                     <div class="shop-filters mt-4">
                         <div class="accordion" id="filter_accodion" wire:ignore.self>
                             <div class="accordion-item mb-2">
                                 <h2 class="accordion-header" id="category_filter" wire:ignore>
-                                    <button class="accordion-button upper-cat-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
+                                    <button class="accordion-button collapsed upper-cat-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="false" aria-controls="collapseCategory">
                                         By Category
                                     </button>
                                 </h2>
-                                <div id="collapseCategory" class="accordion-collapse collapse show" aria-labelledby="category_filter" data-bs-parent="#filter_accodion" wire:ignore.self>
+                                <div id="collapseCategory" class="accordion-collapse collapse" aria-labelledby="category_filter" data-bs-parent="#filter_accodion" wire:ignore.self>
                                     <div class="accordion-body">
                                         <div class="">
                                             <div class="accordion" id="innerCategoryFilter">
@@ -184,7 +184,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-12 col-md-9">
                     @if($results_count)
                     <div class="row">
                         <div class="col-md-12">
@@ -193,7 +193,7 @@
                     </div>
                     @endif
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-12 col-md-7">
                             @if(count($current_filters) > 0)
                                 <span class="text-dark-blue">Active filter:</span> 
                                 @foreach($current_filters AS $key => $filters)
@@ -203,8 +203,8 @@
                                 @endforeach
                             @endif
                         </div>
-                        <div class="col-md-5 d-flex">
-                            <div class="ms-auto d-flex">
+                        <div class="col-12 col-md-5 d-flex mt-3 mt-md-0">
+                            <div class="ms-ms-auto d-flex">
                                 <span class="me-3 text-dark-blue">Sort By:</span>
                                 <div class="">
                                     <select class="form-control filter-options" name="sort" wire:model.live="sort_by">

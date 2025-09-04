@@ -14,12 +14,12 @@
                             </div>
                             --}}
                             <div class="row">
-                                <div class="col-md-12 text-center mt-4 mb-3">
+                                <div class="col-md-12 text-center mt-4 mb-3 pt-3">
                                     <h4 class="page-title">Verify your Email</h4>
                                 </div>
                             </div>
                             @if($errors->any())
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div class="alert alert-danger">
                                         {{ $errors->first() }}
@@ -27,12 +27,18 @@
                                 </div>
                             </div>
                             @endif
-                            <div class="row mt-3 mb-3">
-                                <div class="col-md-12 text-center mb-4">
-                                    <b>Please check your inbox for an email verification.</b>
+                            @if (session('status'))
+                            <div class="row mb-3">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="alert alert-success text-center">
+                                        {{ session('status') }}
+                                    </div>
                                 </div>
-                                <div class="col-md-12 text-center mb-3">
-                                    <p><a href="{{ url('auth/login') }}"><b>Login</b></a></p>
+                            </div>
+                            @endif
+                            <div class="row mt-3 mb-3">
+                                <div class="col-md-12 text-center mb-5">
+                                    <b>Please check your inbox for an email verification.</b>
                                 </div>
                                 <div class="col-md-12 mb-5 text-center">
                                     <a href="" class="bnt btn-primary" wire:click.prevent="ResendEmail">Resend Email</a>

@@ -21,6 +21,7 @@ class ShareBlock extends Component
         $this->vendor_id = $vendor_id;
         $this->view_type = $type;
         $this->vendor = Vendor::find($vendor_id);
+        $this->link = url($this->vendor->url_name);
     }
 
     public function likeVendor(){

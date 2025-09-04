@@ -43,9 +43,12 @@
                                         <div class="img-cont d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
                                             @if($value)
                                                 @if($value->temporaryUrl())
-                                                <img src="{{ $value->temporaryUrl() }}" class="img-responsive">
+                                                <div class="preview-cont w-100 h-100">
+                                                    <img src="{{ $value->temporaryUrl() }}" class="prdt-img">
+                                                    <a href="#" wire:click.prevent="removeImage('{{ $key }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
+                                                </div>
                                                 @else
-                                                <img src="{{ asset('storage/'.$value) }}" class="img-responsive">
+                                                <img src="{{ asset('storage/'.$value) }}" class="img-responsive prdt-img">
                                                 @endif
                                             @else
                                                 <i class="ti-plus"></i>
@@ -209,17 +212,20 @@
                                 @foreach($shipping_types AS $k => $shipping)
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <div class="mb-3">
                                                 <label class="form-label">Shipping Type / Courier Name</label>
                                                 <input type="text" class="form-control" placeholder="Shipping Type / Courier Name" name="shipping_name" wire:model.defer="shipping_types.{{ $k }}.type">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <div class="mb-3">
                                                 <label class="form-label">Price</label>
                                                 <input type="number" class="form-control" placeholder="Shipping Price" name="shipping_price" wire:model.defer="shipping_types.{{ $k }}.cost">
                                             </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-end pb-3">
+                                            <a href="#" class="text-danger" style="font-size: 30px;" wire:click.prevent="removeShipping({{ $k }})"><i class="fas fa-trash-alt"></i></a>
                                         </div>
                                     </div>
                                 </div>

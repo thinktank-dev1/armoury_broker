@@ -10,7 +10,8 @@ use Auth;
 class VerifyEmail extends Component
 {
     public function ResendEmail(){
-        Auth->user()->sendEmailVerificationNotification();
+        Auth::user()->sendEmailVerificationNotification();
+        session()->flash('status', 'Email successfully sent.');
     }
 
     #[Layout('components.layouts.landing')]

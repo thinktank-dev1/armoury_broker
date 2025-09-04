@@ -14,10 +14,13 @@ class MyArmoury extends Component
 {
     use WithPagination;
 
+    public $share_link;
+
     public function mount(){
         if(!Auth::user()->vendor_id){
             return redirect('my-armoury/edit')->with('error', 'Please fill in this form before you can upload products!');
         }
+        $this->share_link = url(Auth::user()->vendor->url_name);
     }
 
     public function copyLink(){

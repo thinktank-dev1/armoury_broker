@@ -141,7 +141,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="join_dealer_network" wire:model.live="join_dealer_network">
                                         <label class="form-check-label" for="join_dealer_network">
-                                            would you like to join our dealer network?
+                                            Would you like to join our dealer network?
                                         </label>
                                     </div>
                                 </div>

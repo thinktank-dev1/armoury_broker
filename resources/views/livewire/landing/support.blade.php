@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-3 pt-3">
                     <h3 class="page-title">Frequently asked questions</h3>
-                    <ul class="nav nav-tabs flex-column faq_nav" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs flex-column faq_nav mt-4" id="myTab" role="tablist">
                         @foreach($data AS $k => $v)
                             @php
                             $string = strtolower($k);
@@ -65,11 +65,13 @@
                                         $xpanded = "false";
                                         $collapsed = "collapsed";
                                         $show = "";
+                                        /*
                                         if($i == 0){
                                             $xpanded = "true";
                                             $show = "show";
                                             $collapsed = "";
                                         }
+                                        */
                                         @endphp
                                         <div class="accordion-item mb-2">
                                             <h2 class="accordion-header" id="heading_{{ $url.$i }}">

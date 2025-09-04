@@ -40,6 +40,22 @@ class ProductForm extends Component
         }
     }
 
+    public function removeImage($key){
+        // dd($key);
+        $this->product_images[$key] = null;
+    }
+
+    public function removeShipping($key){
+        $tp = $this->shipping_types[$key];
+        if(isset($tp['id'])){
+            $sh = DeliverOption::find($tp['id']);
+            if($sh){
+                $sh->delete();
+            }
+        }
+        unset($this->shipping_types[$key]);
+    }
+
     public function getData(){
         $prdt = Product::find($this->cur_id);
         if($prdt){

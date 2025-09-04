@@ -66,11 +66,38 @@
     </div>
     @elseif($view_type == "product-detail")
     <div class="row mt-3">
-        <div class="col-md-12 d-flex justify-content-between">
+        <div class="col-md-12 d-flex justify-content-between social-links-sm">
             <a href="{{ url($vendor->url_name) }}"><u>View Seller Profile</u></a>
-            <span><a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">Share <i class="icon-share"></i></a></span>
-            <span><a href="#" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a></span>
-            <span><a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">Message seller <i class="icon-envelope"></i></a></span>
+            <span>
+                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">
+                    <span class="d-flex flex-column flex-md-row">
+                        <span class="order-2 order-md-1">
+                        Share
+                        </span> 
+                        <i class="icon-share order-1 order-md-2 ms-md-2 pt-md-1"></i>
+                    </span>
+                </a>
+            </span>
+            <span>
+                <a href="#" wire:click.prevent="copyLink">
+                    <span class="d-flex flex-column flex-md-row">
+                        <span class="order-2 order-md-1">
+                        Copy link 
+                        </span>
+                        <i class="icon-paper-clip order-1 order-md-2 ms-md-2 pt-md-1"></i>
+                    </span>
+                </a>
+            </span>
+            <span>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal">
+                    <span class="d-flex flex-column flex-md-row">
+                        <span class="order-2 order-md-1">
+                            Message seller 
+                        </span>
+                        <i class="icon-envelope order-1 order-md-2 ms-md-2 pt-md-1"></i>
+                    </span>
+                </a>
+            </span>
         </div>
     </div>
     @endif
@@ -81,13 +108,13 @@
         </div>
         <div class="offcanvas-body">
             <div class="mt-5 mb-3 d-grid">
-                <a href="https://www.facebook.com/sharer/sharer.php?u='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1877F2; padding: 14px 30px;">Share on Facebook</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ $link }}" target="_blank" class="btn btn-primary" style="background-color: #1877F2; padding: 14px 30px;">Share on Facebook</a>
             </div>
             <div class="mt-5 mb-3 d-grid">
-                <a href="https://twitter.com/share?url='+link+'" target="_blank" class="btn btn-primary" style="background-color: #1DA1F2; padding: 14px 30px;">Share on X</a>
+                <a href="https://twitter.com/share?url={{ $link }}" target="_blank" class="btn btn-primary" style="background-color: #1DA1F2; padding: 14px 30px;">Share on X</a>
             </div>
             <div class="mt-5 mb-3 d-grid">
-                <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url='+link+'&title=&summary=" target="_blank" class="btn btn-primary" style="background-color: #0077B5; padding: 14px 30px;">Share on LinkedIn</a>
+                <a href="https://www.linkedin.com/sharing/share-offsite?mini=true&url={{ $link }}&title=&summary=" target="_blank" class="btn btn-primary" style="background-color: #0077B5; padding: 14px 30px;">Share on LinkedIn</a>
             </div>
         </div>
     </div>

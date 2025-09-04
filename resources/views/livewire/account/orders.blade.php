@@ -4,8 +4,10 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="page-title bold">MY ORDERS</h3>
-                    <h6 class="card-subtitle"><b>Note:</b> click order shipped on order details to alert buyer order is on its way.</h6>
-                    
+                    @if($orders->count() > 0)
+                    <h6 class="card-subtitle"><b>Note:</b> Select 'Order Shipped' in the order details to notify the buyer that their order is on its way</h6>
+                    @endif
+                    @if($orders->count() > 0)
                     <div class="row d-md-none">
                         <div class="co-md-12">
                             @if($orders->count() > 0)
@@ -127,14 +129,19 @@
                                 </tbody>
                                 @endforeach
                             </table>
-                            @else
-                            <div class="text-center mt-5">
-                                <h1 class="text-muted">Get started</h1>
-                                <p>Your orders will show here when buyers purchase them.</p>
-                            </div>
                             @endif
                         </div>
                     </div>
+                    @else
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center mt-5">
+                                <h1 class="text-muted">Get started</h1>
+                                <p>Your orders will show here when customers purchase them.</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

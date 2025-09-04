@@ -142,7 +142,7 @@
                 @if(!$md && !$cart_items_session)
                 <div class="row">
                     <div class="col-md-12 text-center mt-5 mb-3">
-                        <h1 class="text-muted">YOUR SHOPPING CART IS EMPTY</h1>
+                        <h1 class="text-muted">Your shopping cart is empty</h1>
                     </div>
                     <div class="col-md-12 mb-5 text-center">
                         <a href="{{ url('shop') }}" class="btn btn-secondary">Continue Shopping</a>

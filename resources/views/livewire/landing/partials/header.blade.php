@@ -16,7 +16,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 text-end g-4">
+                    <div class="col-md-3 text-center text-md-end g-4">
                         @if(Auth::guest())
                         <a class="ms-3 bold" href="{{ url('auth/login') }}">Login</a>
                         @else
@@ -38,9 +38,31 @@
                 <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li><a class="nav-link nav_item bold" href="{{ url('/') }}">Home</a></li>
+                        <li><a class="nav-link nav_item bold" href="{{ url('shop') }}">Shop</a></li>
                         <li class="dropdown dropdown-mega-menu">
                             <a class="dropdown-toggle nav-link bold" href="#" data-bs-toggle="dropdown">Categories</a>
-                            <div class="dropdown-menu">
+                            <div class="d-md-none dropdown-menu">
+                                <ul class="mega-menu d-lg-flex">
+                                    <li class="mega-menu-col col-lg-9">
+                                        <ul class="d-lg-flex">
+                                            <li class="mega-menu-col col-lg-4">
+                                                <ul>
+                                                    <li class="dropdown-header">Shop By Category</li>
+                                                    @foreach($categories AS $cat)
+                                                    <li>
+                                                        <a class="dropdown-item nav-link nav_item d-flex @if($cur_cat_id == $cat->id) active @endif" href="{{ url('shop?category='.$cat->slug) }}">
+                                                            {{ $cat->category_name }}
+                                                            <span class="ms-auto me-2"></span>
+                                                        </a>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="d-none d-md-block dropdown-menu">
                                 <ul class="mega-menu d-lg-flex">
                                     <li class="mega-menu-col col-lg-9">
                                         <ul class="d-lg-flex">
