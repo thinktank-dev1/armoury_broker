@@ -19,9 +19,9 @@
                 @endif
                 <div class="@if($vendor->avatar) col-md-9 @else col-md-12 @endif">
                     <div class="row">
-                        <div class="col-12 col-md-8 text-center text-md-start">
+                        <div class="col-12 col-md-8 text-center text-md-start mt-3">
                             <h3>{{ ucwords($vendor->name) }}</h3>
-                            <div class="d-flex justify-content-around justify-content-md-start gap-5">
+                            <div class="d-flex justify-content-around justify-content-md-start gap-5 mt-3">
                                 <div class="text-dark-blue">
                                     <b>{{ $vendor->likes->count() }}</b> Likes
                                 </div>
