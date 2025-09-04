@@ -62,7 +62,7 @@
                 <div class="col-12 col-md-8 text-center text-md-start">
                     <p>Copyright &copy; {{ date('Y') }} ARMOURY BROKER. All Rights Reserved. | Designed and developed by <a href="https://thinktank.co.za" target="_blank">Thinktank Creative</a></p>
                 </div>
-                <div class="col-12 col-md-4 text-center text-md-end">
+                <div class="col-12 col-md-4 text-center text-md-end mb-3 mb-md-0">
                     <a href="{{ url('terms-and-conditions') }}">Terms & Conditions</a> |
                     <a href="{{ url('privacy-policy') }}">Privacy Policy</a>
                 </div>
