@@ -67,7 +67,7 @@
     @elseif($view_type == "product-detail")
     <div class="row mt-3">
         <div class="col-md-12 d-flex justify-content-between social-links-sm">
-            <a href="{{ url($vendor->url_name) }}"><u>View Seller Profile</u></a>
+            <a href="{{ url($vendor->url_name) }}" class="mt-2 mt-md-0"><u>View Seller Profile</u></a>
             <span>
                 <a href="#" data-bs-toggle="offcanvas" data-bs-target="#rightSidebar">
                     <span class="d-flex flex-column flex-md-row">
