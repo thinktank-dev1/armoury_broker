@@ -16,10 +16,26 @@ class ProductDetail extends Component
     public $product;
     public $quantity;
     public $offer_amount;
+    public $availability;
 
     public function mount($id){
         $this->product = Product::find($id);
-        $this->quantity = 1;
+
+        $itms_count = OrderItem::query()
+        ->where('product_id', $id)
+        ->whereHas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        ->sum('quantity');
+        
+        $this->quantity = $itms_count;
+        
+        if($qty <= $itms_count){
+            $this->availability = false;
+        }
+        else{
+            $this->availability = true;
+        }
     }
 
     public function showOfferModal(){

@@ -24,9 +24,6 @@ class ProductListItem extends Component
             return $q->whereNotNull('g_payment_id');
         })
         ->sum('quantity');
-        // if($id == 1){
-        //     dd($itms_count, $qty);
-        // }
         
         if($qty <= $itms_count){
             $this->tag = "Sold";
