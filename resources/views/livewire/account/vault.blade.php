@@ -63,7 +63,7 @@
                     <div class="card-body">
                         <div class="row p-t-10 p-b-10">
                             <div class="col p-r-0">
-                                <h3 class="font-light text-white">R {{ number_format($balance, 2) }}</h3>
+                                <h3 class="font-light text-white">R {{ number_format(Auth::user()->vendor->balance(), 2) }}</h3>
                                 <h6 class="text-white">Balance</h6>
                             </div>
                             <div class="col text-end align-self-center">

@@ -32,4 +32,20 @@ class Order extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function ab_fee(){
+        $fee = 0;
+        foreach($this->items AS $item){
+            $fee += $item->service_fee;
+        }
+        return $fee;
+    }
+
+    public function shiping_fee(){
+        $fee = 0;
+        foreach($this->items AS $item){
+            $fee += $item->shipping_price;
+        }
+        return $fee;
+    }
 }

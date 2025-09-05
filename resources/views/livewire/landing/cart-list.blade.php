@@ -133,7 +133,7 @@
                         $md = true;
                     }
                 }
-                if($cart_items_model instanceof stdClass){
+                if ($cart_items_model instanceof \Illuminate\Database\Eloquent\Collection) {
                     if($cart_items_model->count() > 0){
                         $md = true;
                     }

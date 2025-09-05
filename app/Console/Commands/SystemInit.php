@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\File;
 
 use DB;
 use Schema;
@@ -33,6 +34,23 @@ class SystemInit extends Command
     public function handle()
     {
         $this->init();
+        $this->moveInitFilesToPublic();
+    }
+
+    public function moveInitFilesToPublic(){
+        $source = storage_path('init');
+        $destination = storage_path('app/public/init');
+
+        if (!File::exists($source)) {
+            $this->error("Source folder does not exist: $source");
+            return;
+        }
+
+        if (!File::exists($destination)) {
+            File::makeDirectory($destination, 0755, true);
+        }
+        File::copyDirectory($source, $destination);
+        $this->info("Folder moved from $source to $destination");
     }
 
     public function init(){

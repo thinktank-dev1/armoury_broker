@@ -19,6 +19,15 @@ class OrderItem extends Model
         'shipping_price',
         'service_fee',
         'collection_free_shipping',
+
+        'deliver_collection',
+        'delivery_address',
+        'dealer_option',
+        'ab_dealer_id',
+        'custom_dealer_details',
+
+        'vendor_status',
+        'buyer_status',
     ];
 
     public function vendor(){
@@ -35,5 +44,13 @@ class OrderItem extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function courier(){
+        return $this->belongsTo(DeliverOption::class, 'shipping_id');
+    }
+
+    public function dealer(){
+        return $this->belongsTo(Dealer::class, 'ab_dealer_id');
     }
 }

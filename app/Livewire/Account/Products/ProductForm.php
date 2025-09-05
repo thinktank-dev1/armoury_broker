@@ -26,6 +26,8 @@ class ProductForm extends Component
     public $cur_images = [];
     public $allow_collection, $collection_address;
     public $delivery_type;
+    public $deler_stock;
+    public $in_person_delivery;
 
     public function mount($id = null){
         if(!Auth::user()->vendor_id){
@@ -41,7 +43,6 @@ class ProductForm extends Component
     }
 
     public function removeImage($key){
-        // dd($key);
         $this->product_images[$key] = null;
     }
 
@@ -80,7 +81,16 @@ class ProductForm extends Component
                 $this->allow_collection = true;
             }
             $this->collection_address = $prdt->collection_address;
-            $this->delivery_type = $prdt->delivery_type;
+            if($prdt->delivery_type == "in person"){
+                $this->in_person_delivery = true;
+            }
+            else{
+                $this->delivery_type = $prdt->delivery_type;
+                $this->in_person_delivery = null;
+            }
+            if($prdt->deler_stock){
+                $this->deler_stock = true;
+            }
 
 
             if($prdt->shippingOptions->count() > 0){
@@ -94,6 +104,7 @@ class ProductForm extends Component
                     $this->shipping_types[] = $arr;
                 }
             }
+            $this->category = Category::find($this->category_id);
         }
     }
 
@@ -139,7 +150,13 @@ class ProductForm extends Component
         $prdt->status = 1;
         $prdt->allow_collection = $this->allow_collection;
         $prdt->collection_address = $this->collection_address;
-        $prdt->delivery_type = $this->delivery_type;
+        if($this->in_person_delivery){
+            $prdt->delivery_type = 'in person';
+        }
+        else{
+            $prdt->delivery_type = $this->delivery_type;
+        }
+        $prdt->deler_stock = $this->deler_stock;
         $prdt->save();
 
         foreach($this->product_images AS $image){

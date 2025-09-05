@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Setting;
+
 class Vendor extends Model
 {
     protected $fillable = [
@@ -49,8 +51,22 @@ class Vendor extends Model
     }
 
     public function balance(){
-        $in = $this->transactions->where('direction', 'in')->sum('amount');
+        $in = 0;
+        $fee = 0;
+        $stn = Setting::where('name', 'service_fee')->first();
+        $sv_per = $stn->value;
+
+        foreach($this->transactions->where('direction', 'in')->where('release', 1) AS $trx){
+            $item = $trx->item;
+            $amount = $item->price * $item->quantity;
+            $i_fee = ($sv_per / 100) * $amount;
+
+            $in += $amount;
+            $fee += $i_fee;
+        }
+        
         $out = $this->transactions->where('direction', 'out')->sum('amount');
-        return $in - $out;
+        $balance = $in - ($fee + $out);
+        return $balance;
     }
 }

@@ -30,9 +30,7 @@ class Vault extends Component
             'amount.numeric'=>"Amount must be a number"
         ]);
 
-        $trx_in = Transaction::where('vendor_id', Auth::user()->vendor_id)->where('direction', 'in')->sum('amount');
-        $trx_out = Transaction::where('vendor_id', Auth::user()->vendor_id)->where('direction', 'out')->sum('amount');
-        $balance = $trx_in - $trx_out;
+        $balance = Auth::user()->vendor->balance();
 
         if($this->amount > $balance){
             $this->addError('error', "Insufficient balance");
@@ -54,7 +52,7 @@ class Vault extends Component
                 'to' => Auth::user()->email,
                 'subject' => 'Armoury Broker Withdrawal Request',
                 'message_body' => "
-                    <b>You requested a withdrawal</b><br />
+                    You requested a withdrawal<br /><br />
                     Amount: R".number_format($this->amount)."<br /><br />
                     <a href='".url('approve-withdrawal/'.$wd->id)."'>Click here to approve</a><br /><br />
                     If this was not you, no further action is required, we do however encourage you to change your password on <a href='".url('login')."'>Armoury Broker</a>
@@ -78,17 +76,12 @@ class Vault extends Component
 
         $tot_withdrawals = Transaction::where('transaction_type', 'withdrawal')->where('vendor_id', Auth::user()->vendor_id)->sum('amount');
 
-        $trx_in = Transaction::where('vendor_id', Auth::user()->vendor_id)->where('direction', 'in')->sum('amount');
-        $trx_out = Transaction::where('vendor_id', Auth::user()->vendor_id)->where('direction', 'out')->sum('amount');
-        $balance = $trx_in - $trx_out;
-
         $trxs = Transaction::where('vendor_id', Auth::user()->vendor_id)->orderBy('created_at', 'DESC')->paginate(12);
 
         return view('livewire.account.vault', [
             'items_sold' => $items_sold,
             'tot_sales' => $tot_sales,
             'tot_withdrawals' => $tot_withdrawals,
-            'balance' => $balance,
             'trxs' => $trxs
         ]);
     }

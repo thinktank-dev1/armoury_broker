@@ -23,6 +23,8 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Ammunition',
                 'regulated' => 1,
                 'measurement_type' => 'caliber',
+                'image' => 'init/AMMUNITION.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Semi-automatic pistol Ammunition',
                     'Revolver Ammunition',
@@ -37,6 +39,8 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Firearms',
                 'regulated' => 1,
                 'measurement_type' => 'caliber',
+                'image' => 'init/FIREARMS.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Handguns' => [
                         'Antique/Collectible',
@@ -74,6 +78,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Scopes & Optics',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'image' => 'init/SCOPES _OPTICS.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Binoculars',
                     'Handgun Sights',
@@ -93,6 +99,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Reloading Equipment',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'image' => 'init/RELOADING_EQUIPMENT.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Bullet Pullers',
                     'Case Prep Tools',
@@ -113,6 +121,7 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Reloading Components',
                 'regulated' => 1,
                 'measurement_type' => 'dimensions',
+                'featured' => 0,
                 'sub-categories' => [
                     'Brass',
                     'Bullets',
@@ -124,6 +133,8 @@ class CategoriesTableSeeder extends Seeder
                 'name'=> 'Safes & Storage',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'image' => 'init/SAFES_STORAGE.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Cable Locks',
                     'Display Cases',
@@ -140,6 +151,7 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Shooting Accessories',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'featured' => 0,
                 'sub-categories' => [
                     'Ammo & Storage',
                     'Arca Rails',
@@ -174,6 +186,8 @@ class CategoriesTableSeeder extends Seeder
                 'name' => 'Gear',
                 'regulated' => 0,
                 'measurement_type' => 'size',
+                'image' => 'init/TACTICAL_GEAR.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Body Armor/Vests',
                     'Clothing',
@@ -201,6 +215,8 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Gunsmithing & Parts',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'image' => 'init/GUNSMITHING & PARTS.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Actions',
                     'Barrels',
@@ -214,6 +230,7 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Cleaning Equipment',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'featured' => 0,
                 'sub-categories' => [
                     'Cleaning Accessories',
                     'Cleaning Kits',
@@ -228,6 +245,7 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Knives & Multi-tool',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'featured' => 0,
                 'sub-categories' => [
                     'Hunting Knives',
                     'Multi-Tools',
@@ -241,6 +259,8 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Hunting & Fishing',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'image' => 'init/HUNTING_FISHING.png',
+                'featured' => 1,
                 'sub-categories' => [
                     'Fishing Rods & Reels',
                     'Fishing Tackle & Lures',
@@ -253,6 +273,7 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Outdoor Vehicles',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
+                'featured' => 0,
                 'sub-categories' => [
                     'ATVs/Quad Bikes',
                     'Boats & Watercraft',
@@ -267,6 +288,7 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Services',
                 'regulated' => 0,
                 'measurement_type' => '',
+                'featured' => 0,
                 'sub-categories' => [
                     'Annealing & Case Prep',
                     'Appraisal Services',
@@ -285,37 +307,60 @@ class CategoriesTableSeeder extends Seeder
             ],
         ];
         foreach($cats AS $cat){
+            $img = null;
+            if(isset($cat['image'])){
+                $img = $cat['image'];
+            }
+            $slug = $this->slugify($cat['name']);
             $ct = Category::create([
                 'category_name' => $cat['name'],
+                'slug' => $slug,
                 'category_image' => null,
-                'featured' => '0',
+                'featured' => $cat['featured'],
+                'category_image' => $img,
                 'status' => '1',
                 'regulated' => $cat['regulated'],
                 'measurement_type' => $cat['measurement_type'],
             ]);
             foreach($cat['sub-categories'] AS $k => $v){
                 if(is_array($v)){
+                    $slug2 = $this->slugify($k);
                     $sb = SubCategory::create([
                         'category_id' => $ct->id,
                         'parent_id' => null,
+                        'slug' => $slug2,
                         'sub_category_name' => $k
                     ]);
                     foreach($v AS $vv){
+                        $slug3 = $this->slugify($vv);
                         SubCategory::create([
                             'category_id' => $ct->id,
                             'parent_id' => $sb->id,
+                            'slug' => $slug3,
                             'sub_category_name' => $vv
                         ]);
                     }
                 }
                 else{
+                    $slug4 = $this->slugify($v);
                     $sb = SubCategory::create([
                         'category_id' => $ct->id,
                         'parent_id' => null,
+                        'slug' => $slug4,
                         'sub_category_name' => $v
                     ]);
                 }
             }
         }
+    }
+
+    public function slugify($string){
+        $slug = $string;
+        $slug = strtolower($slug);
+        $slug = iconv('UTF-8', 'ASCII//TRANSLIT', $slug);
+        $slug = preg_replace('/[^a-z0-9\s]/', ' ', $slug);
+        $slug = preg_replace('/\s+/', '-', $slug);
+        $slug = trim($slug, '-');
+        return $slug;
     }
 }

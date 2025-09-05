@@ -28,6 +28,7 @@ class Product extends Model
         'allow_collection',
         'collection_address',
         'delivery_type',
+        'deler_stock',
         'status',
     ];
 

@@ -19,9 +19,193 @@
                     </div>
                 </div>
                 @endif
-                <div class="col-md-12 mt-3 bg-grey p-3 d-none d-md-block">
+                <div class="col-md-12 mt-3 bg-grey p-3">
                     <b>Cart Items</b>
                     <div class="shop_cart_table mt-3">
+                        <div class="accordion" id="accordion_checkout">
+                            @foreach($cart AS $k=>$item)
+                                @php
+                                $i = $loop->index;
+                                $xpanded = "false";
+                                $collapsed = "collapsed";
+                                $show = "";
+                                if($i == 0){
+                                    $xpanded = "true";
+                                    $show = "show";
+                                    $collapsed = "";
+                                }
+                                $product = $item['product'];
+                                @endphp
+                                <div class="accordion-item mb-2">
+                                    <h2 class="accordion-header" id="heading_{{ $item['id'] }}" wire:ignore.self>
+                                        <button class="accordion-button {{ $collapsed }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ $item['id'] }}" aria-expanded="{{ $xpanded }}" aria-controls="collapse_{{ $item['id'] }}" wire:ignore.self>
+                                            {{ $product->item_name }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse_{{ $item['id'] }}" class="faq accordion-collapse collapse {{ $show }}" aria-labelledby="heading_{{ $item['id'] }}" data-bs-parent="#accordion__checkout" wire:ignore.self>
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Item Name</small>
+                                                        <span class="ms-auto"><b>{{ ucwords($product->item_name) }}</b></span>
+                                                    </li>
+                                                    @if($product->model_number)
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Model</small>
+                                                        <span class="ms-auto"><b>{{ $product->model_number }}</b></span>
+                                                    </li>
+                                                    @endif
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Vendor</small>
+                                                        <span class="ms-auto"><b>{{ ucwords($item['vendor_name']) }}</b></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex">
+                                                        <small>Quantity</small>
+                                                        <div class="ms-auto">
+                                                            <div class="quantity">
+                                                                <input type="button" value="-" class="minus">
+                                                                <input type="text" name="quantity" value="{{ $item['qty'] }}" title="Qty" class="qty" data-id="{{ $item['id'] }}" size="4">
+                                                                <input type="button" value="+" class="plus">
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Price</small>
+                                                        <span class="ms-auto"><b>R {{ number_format($item['price'], 2) }}</b></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Total</small>
+                                                        <span class="ms-auto"><b>R {{ number_format($item['total'], 2) }}</b></span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Delivery / Collection</small>
+                                                        <div class="ms-auto">
+                                                            <div class="">
+                                                                @if($product->allow_collection)
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="collection" id="{{ $product->id }}_collection" wire:model.live="cart.{{ $k }}.deliver_collection">
+                                                                    <label class="form-check-label" for="{{ $product->id }}_collection">
+                                                                        Collection
+                                                                    </label>
+                                                                </div>
+                                                                @endif
+                                                                @if($product->delivery_type == "in person" || $product->delivery_type == "Free Delivery")
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="seller delivery" id="{{ $product->id }}_buyer_delivery" wire:model.live="cart.{{ $k }}.deliver_collection">
+                                                                    <label class="form-check-label" for="{{ $product->id }}_buyer_delivery">
+                                                                        Delivery
+                                                                    </label>
+                                                                </div>
+                                                                @endif
+                                                                @if($product->delivery_type == "Courier")
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="Courier" id="{{ $product->id }}_courier" wire:model.live="cart.{{ $k }}.deliver_collection">
+                                                                    <label class="form-check-label" for="{{ $product->id }}_courier">
+                                                                        Courier
+                                                                    </label>
+                                                                </div>
+                                                                @endif
+                                                                @if($product->deler_stock)
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="dealer stock" id="{{ $product->id }}_dealer_tp" wire:model.live="cart.{{ $k }}.deliver_collection">
+                                                                    <label class="form-check-label" for="{{ $product->id }}_dealer_tp">
+                                                                        Dealer Stock
+                                                                    </label>
+                                                                </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    @if($item['deliver_collection'] == "dealer stock")
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Dealers</small>
+                                                        <span class="ms-auto">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="dealers" id="{{ $product->id }}_ab_dealers" value="ab dealer" wire:model.live="cart.{{ $k }}.dealer_option"> 
+                                                                <label class="form-check-label" for="{{ $product->id }}_ab_dealers">
+                                                                    Use AB dealers
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="dealers" id="{{ $product->id }}_custom_dealers" value="custom dealer" wire:model.live="cart.{{ $k }}.dealer_option"> 
+                                                                <label class="form-check-label" for="{{ $product->id }}_custom_dealers">
+                                                                    Use my dealers
+                                                                </label>
+                                                            </div>
+                                                        </span>
+                                                    </li>
+                                                    @endif
+
+                                                    @if($item['dealer_option'] == "ab dealer")
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Select AB dealer</small>
+                                                        <span class="ms-auto">
+                                                            <div class="">
+                                                                <select class="form-control" name="courier_shipping" wire:model.live="cart.{{ $k }}.ab_dealer_id">
+                                                                    <option value="">Select Option</option>
+                                                                    @foreach($dealers AS $dl)
+                                                                    <option value="{{ $dl->id }}">{{ $dl->business_name.' (R '.$dl->dealer_stocking_fee.' pm)' }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </span>
+                                                    </li>
+                                                    @endif
+                                                    @if($item['dealer_option'] == "custom dealer")
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Dealer Details</small>
+                                                        <span class="ms-auto">
+                                                            <div class="">
+                                                                <textarea name="dealer_details" wire:model.blur="cart.{{ $k }}.custom_dealer_details"></textarea>
+                                                            </div>
+                                                        </span>
+                                                    </li>
+                                                    @endif
+
+                                                    @if($item['deliver_collection'] == "Courier")
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Courier</small>
+                                                        <span class="ms-auto">
+                                                            <div class="">
+                                                                <select class="form-control" name="courier_shipping" wire:model.live="cart.{{ $k }}.shipping_id">
+                                                                    <option value="">Select Option</option>
+                                                                    @foreach($product->shippingOptions AS $sh)
+                                                                    <option value="{{ $sh->id }}">{{ $sh->type.'(R'.$sh->price.')' }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </span>
+                                                    </li>
+                                                    @endif
+                                                    @if($item['deliver_collection'] == "collection")
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Collection Address</small>
+                                                        <span class="ms-auto"><b>{{ $product->collection_address }}</b></span>
+                                                    </li>
+                                                    @endif
+                                                    @if($item['deliver_collection'] == "Courier" || $item['deliver_collection'] == "seller delivery")
+                                                    <li class="list-group-item d-flex">
+                                                        <small class="">Delivery Address</small>
+                                                        <span class="ms-auto">
+                                                            <div class="">
+                                                                <textarea class="form-control" name="delivery_address" wire:model.blur="cart.{{ $k }}.delivery_address"></textarea>
+                                                            </div>
+                                                        </span>
+                                                    </li>
+                                                    @endif
+                                                    <li class="list-group-item">
+                                                        <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee selected by Seller:</b> {{ $item['product']->service_fee_payer }}</small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        {{--
                         <table class="table check-out-table">
                             <thead>
                                 <tr>
@@ -91,6 +275,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        --}}
                     </div>
                 </div>
                 <div class="col-md-12 mt-3 bg-grey p-3 d-md-none">

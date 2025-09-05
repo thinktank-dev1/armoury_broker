@@ -28,6 +28,14 @@
             font-size: 16px;
             vertical-align: top;
         }
+
+        .table-bodered {
+            border-collapse: collapse;
+        }
+
+        .table-bodered th, .table-bodered td {
+            border: 1px solid black;
+        }
         /* -------------------------------------
         BODY & CONTAINER
         ------------------------------------- */

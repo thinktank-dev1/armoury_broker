@@ -20,7 +20,9 @@ class Dashboard extends Component
             return redirect('my-armoury/edit')->with('error', 'Please fill in this form before you can upload products!');
         }
         $this->getData();
-        $this->share_link = url(Auth::user()->vendor->url_name);
+        if(Auth::user()->vendor){
+            $this->share_link = url(Auth::user()->vendor->url_name);
+        }
     }
 
     public function copyLink(){
@@ -38,8 +40,23 @@ class Dashboard extends Component
     }
 
     public function render(){
-        $order_items = OrderItem::where('vendor_id', Auth::user()->vendor_id)->orderBy('created_at', 'DESC')->take(5)->get();
-        $purcahse_items = OrderItem::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->take(5)->get();
+        $order_items = OrderItem::query()
+        ->where('vendor_id', Auth::user()->vendor_id)
+        ->whereHas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        ->orderBy('created_at', 'DESC')
+        ->take(5)
+        ->get();
+
+        $purcahse_items = OrderItem::query()
+        ->where('user_id', Auth::user()->id)
+        ->whereHas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        ->orderBy('created_at', 'DESC')
+        ->take(5)
+        ->get();
         
         $link = null;
         if(Auth::user()->vendor){

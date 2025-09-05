@@ -14,6 +14,7 @@ use App\Models\OrderItem;
 use App\Models\DeliverOption;
 use App\Models\Setting;
 use App\Models\Order;
+use App\Models\Dealer;
 
 class Checkout extends Component
 {
@@ -23,14 +24,22 @@ class Checkout extends Component
     public $terms_and_conditions;
     public $payment_url;
     public $collection_free_shipping;
+    public $delivery_option, $delivery_address;
+    public $address; 
 
     public function mount($id, $order_id = null){
+        if(!Auth::user()->vendor_id){
+            return redirect('my-armoury/edit')->with('error', 'Please fill in this form before you can proceed!');
+        }
+
         $this->vendor_id = $id;
         if($order_id){
             $this->order_id = $order_id;
         }
         $this->payment_url = env('PAYFAST_SANDBOX_URL');
         $this->getCart();
+
+        $this->address = Auth::user()->vendor->street."\n".Auth::user()->vendor->suburb."\n".Auth::user()->vendor->city."\n".Auth::user()->vendor->province."\n".Auth::user()->vendor->postal_code;
     }
 
     public function processPayment($type = null){
@@ -39,13 +48,36 @@ class Checkout extends Component
             'terms_and_conditions' => 'required'
         ],
         [
-            'terms_and_conditions.required'=> "You did not accept terms and conditions"
+            'terms_and_conditions.required'=> "Please accept the Terms and Conditions"
         ]);
 
+        $go = True;
         foreach($this->cart AS $ct){
-            if($ct["shipping_id"] == "" && !$ct["collection_free_shipping"]){
-                $this->addError("error", "Please select shipping for all items");
+            if(!$ct['deliver_collection']){
+                $this->addError('error', "Please select collection/delivery for all items");
                 return;
+            }
+            if($ct['deliver_collection'] == "seller delivery" || $ct['deliver_collection'] == "Courier"){
+                if($ct['delivery_address'] == null){
+                    $this->addError('error', 'Please enter delivery address for all items');
+                    return;
+                }
+                if($ct['deliver_collection'] == "Courier"){
+                    if($ct['shipping_id'] == null){
+                        $this->addError('error',"Please select Courier for items that require it.");
+                        return;
+                    }
+                }
+                if($ct['deliver_collection'] == "Courier"){
+                    if(!$ct['shipping_id']){
+                        $this->addError('error', "Please select Courier for all items that need to be couriered");
+                    }
+                }
+            }
+            if($ct['deliver_collection'] == "dealer stock"){
+                if(!$ct['dealer_option']){
+                    $this->addError('error', 'Please select dealer options');
+                }
             }
         }
 
@@ -102,19 +134,57 @@ class Checkout extends Component
 
     public function updatedCart($v,$el){
         $arr = explode(".", $el);
-        if($arr[1] == "shipping_id"){
-            $itm = $this->cart[$arr[0]];
-            $ord = OrderItem::find($itm['id']);
-            if($ord){
+        $itm = $this->cart[$arr[0]];
+        $ord = OrderItem::find($itm['id']);
+        if($ord){
+            if($arr[1] == "shipping_id"){
                 $del = DeliverOption::find($v);
                 if($del){
                     $ord->shipping_id = $v;
                     $ord->shipping_price = $del->price;
-                    $ord->save();
                 }
-                $this->getCart();
             }
+            if($arr[1] == "deliver_collection"){
+                $ord->deliver_collection = $v;
+                if($v == "collection"){
+                    $ord->delivery_address = null;
+                    $ord->dealer_option = null;
+                    $ord->ab_dealer_id = null;
+                    $ord->custom_dealer_details = null;    
+                }
+                if($v == "buyer delivery" || $v == "Courier"){
+                    $ord->dealer_option = null;
+                    $ord->ab_dealer_id = null;
+                    $ord->custom_dealer_details = null;
+                    if(!$ord->delivery_address){
+                        $ord->delivery_address = $this->address;
+                    }
+                }
+                if($v == "dealer stock"){
+                    $ord->delivery_address = null;
+                }
+            }
+            if($arr[1] == "delivery_address"){
+                $ord->delivery_address = $v;
+            }
+            if($arr[1] == "dealer_option"){
+                $ord->dealer_option = $v;
+                if($v == "ab dealer"){
+                    $ord->custom_dealer_details = null;
+                }
+                if($v == "custom dealer"){
+                    $ord->ab_dealer_id = null;
+                }
+            }
+            if($arr[1] == "ab_dealer_id"){
+                $ord->ab_dealer_id = $v;
+            }
+            if($arr[1] == "custom_dealer_details"){
+                $ord->custom_dealer_details = $v;
+            }
+            $ord->save();
         }
+        $this->getCart();
     }
 
     public function getCart(){
@@ -180,6 +250,12 @@ class Checkout extends Component
                 "service_fee" => $ct->service_fee,
                 "product" => $ct->product,
                 "collection_free_shipping" => $ct->collection_free_shipping,
+
+                "deliver_collection" => $ct->deliver_collection,
+                "delivery_address" => !empty($ct->delivery_address) ? $ct->delivery_address : $this->address,
+                "dealer_option" => $ct->dealer_option,
+                "ab_dealer_id" => $ct->ab_dealer_id,
+                "custom_dealer_details" => $ct->custom_dealer_details,
             ];
             $this->cart[] = $arr;
         }
@@ -188,6 +264,9 @@ class Checkout extends Component
 
     #[Layout('components.layouts.landing')] 
     public function render(){
-        return view('livewire.landing.checkout');
+        $dealers = Dealer::where('business_province', Auth::user()->vendor->province)->orderBy('business_name', 'ASC')->get();
+        return view('livewire.landing.checkout', [
+            'dealers' => $dealers
+        ]);
     }
 }

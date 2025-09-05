@@ -13,7 +13,9 @@ class Transaction extends Model
         'direction',
         'amount',
         'order_id',
+        'order_item_id',
         'payment_status',
+        'release',
     ];
 
     public function user(){
@@ -22,5 +24,9 @@ class Transaction extends Model
 
     public function order(){
         return $this->belongsTo(Order::class);
+    }
+
+    public function item(){
+        return $this->belongsTo(OrderItem::class, 'order_item_id');
     }
 }
