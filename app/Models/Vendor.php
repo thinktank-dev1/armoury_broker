@@ -58,9 +58,16 @@ class Vendor extends Model
 
         foreach($this->transactions->where('direction', 'in')->where('release', 1) AS $trx){
             $item = $trx->item;
-            $amount = $item->price * $item->quantity;
-            $i_fee = ($sv_per / 100) * $amount;
+            $product = $item->product;
 
+            $amount = $item->price * $item->quantity;
+            if($product->service_fee_payer == "seller"){
+                $i_fee = ($sv_per / 100) * $amount;
+            }
+            if($product->service_fee_payer == "50-50"){
+                $sub_fee = ($sv_per / 100) * $amount;
+                $i_fee = (50/100) * $sub_fee;
+            }
             $in += $amount;
             $fee += $i_fee;
         }
