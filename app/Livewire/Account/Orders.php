@@ -60,7 +60,7 @@ class Orders extends Component
             $orders = Order::query()
             ->where('vendor_id', Auth::user()->vendor->id)
             ->whereNotNull('g_payment_id')
-            ->orWhere('created_at', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->get();
         }
         return view('livewire.account.orders', [
