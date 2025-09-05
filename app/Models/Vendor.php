@@ -60,6 +60,7 @@ class Vendor extends Model
             $item = $trx->item;
             $product = $item->product;
 
+            $i_fee = 0;
             $amount = $item->price * $item->quantity;
             if($product->service_fee_payer == "seller"){
                 $i_fee = ($sv_per / 100) * $amount;
