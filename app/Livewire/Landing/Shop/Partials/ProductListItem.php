@@ -13,6 +13,7 @@ class ProductListItem extends Component
 {
     public $product;
     public $tag;
+    public $availability;
 
     public function mount($id){
         $this->product = Product::find($id);
@@ -27,6 +28,10 @@ class ProductListItem extends Component
         
         if($qty <= $itms_count){
             $this->tag = "Sold";
+            $this->availability = false;
+        }
+        else{
+            $this->availability = true;
         }
 
         elseif ($this->product->created_at->gte(now()->subDays(30))) {
