@@ -13,10 +13,13 @@ class SingleListItem extends Component
 {
     public $product;
     public $tag;
+    public $availability;
 
     public function mount($id){
         $this->product = Product::find($id);
         $qty = $this->product->quantity;
+        
+        $this->availability = true;
         
         $itms_count = OrderItem::query()
         ->where('product_id', $id)
@@ -24,14 +27,11 @@ class SingleListItem extends Component
             return $q->whereNotNull('g_payment_id');
         })
         ->sum('quantity');
-        // if($id == 1){
-        //     dd($itms_count, $qty);
-        // }
         
         if($qty <= $itms_count){
             $this->tag = "Sold";
+            $this->availability = false;
         }
-
         elseif ($this->product->created_at->gte(now()->subDays(30))) {
             $this->tag = "New";
         }
