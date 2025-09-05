@@ -27,7 +27,7 @@
                     <ul class="list_none pr_action_btn">
                         @if($availability)
                         <li class="add-to-cart"><a href="#" wire:click.prevent="addToCart"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                        @else
+                        @endif
                         <li><a href="{{ url('shop/product/'.$product->id) }}"><i class="icon-magnifier-add"></i></a></li>
                     </ul>
                 </div>
