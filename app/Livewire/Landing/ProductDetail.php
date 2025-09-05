@@ -20,6 +20,7 @@ class ProductDetail extends Component
 
     public function mount($id){
         $this->product = Product::find($id);
+        $qty = $this->product->quantity;
 
         $itms_count = OrderItem::query()
         ->where('product_id', $id)
@@ -27,7 +28,7 @@ class ProductDetail extends Component
             return $q->whereNotNull('g_payment_id');
         })
         ->sum('quantity');
-        
+
         $this->quantity = $itms_count;
         
         if($qty <= $itms_count){
