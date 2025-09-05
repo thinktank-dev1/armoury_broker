@@ -222,7 +222,7 @@ class Checkout extends Component
             $total_fee_amount = ($stn->value/100) * $tot;
             $payable_fee = 0;
             
-            if($ct->product->service_fee_payer = "50-50"){
+            if($ct->product->service_fee_payer == "50-50"){
                 $payable_fee = (50/100) * $total_fee_amount;
             }
             elseif($ct->product->service_fee_payer == "buyer"){
