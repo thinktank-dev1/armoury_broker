@@ -19,6 +19,15 @@
                     </div>
                 </div>
                 @endif
+                @if (session('status'))
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    </div>
+                </div>
+                @endif
                 <div class="col-md-12 mt-3 bg-grey p-3">
                     <b>Cart Items</b>
                     <div class="shop_cart_table mt-3">
@@ -204,142 +213,40 @@
                                 </div>
                             @endforeach
                         </div>
-
-                        {{--
-                        <table class="table check-out-table">
-                            <thead>
-                                <tr>
-                                    <th class="text-start">Order Number</th>
-                                    <th class="text-start">Name</th>
-                                    <th class="text-start">Item</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Total Price</th>
-                                    <th>Shipping</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($cart AS $k=>$item)
-                                    <tr>
-                                        <td class="text-start pb-0 mb-0 pt-4">#{{ $item['oder_no'] }}</td>
-                                        <td class="text-start pb-0 mb-0 pt-4">{{ ucwords($item['vendor_name']) }}</td>
-                                        <td class="text-start pb-0 mb-0 pt-4">
-                                            <div class="d-flex">
-                                                @if($item['item_image'])
-                                                    <img src="{{ asset('storage/'.$item['item_image']) }}" class="table-image">
-                                                @else
-                                                    <img src="{{ asset('img/no-image.webp') }}" class="table-image">
-                                                @endif
-                                                <span class="ms-3">{{ $item['item_name'] }}</span>
-                                            </div>
-                                        </td>
-                                        <td class="product-quantity pb-0 mb-0 pt-4" data-title="Quantity">
-                                            <div class="quantity">
-                                                <input type="button" value="-" class="minus">
-                                                <input type="text" name="quantity" value="{{ $item['qty'] }}" title="Qty" class="qty" data-id="{{ $item['id'] }}" size="4">
-                                                <input type="button" value="+" class="plus">
-                                            </div>
-                                        </td>
-                                        <td class="pb-0 mb-0 pt-4">R {{ number_format($item['price'], 2) }}</td>
-                                        <td class="pb-0 mb-0 pt-4">R {{ number_format($item['total'], 2) }}</td>
-                                        <td class="pb-0 mb-0 pt-4">
-                                            @if($item['product']->shippingOptions->count() > 0)
-                                            <select class="form-control"name="shipping" wire:model.live="cart.{{ $k }}.shipping_id" style="max-width: 150px; height: 30px; padding: 2px 8px;">
-                                                <option value="">Select Option</option>
-                                                @foreach($item['product']->shippingOptions AS $sh)
-                                                <option value="{{ $sh->id }}">{{ $sh->type.'(R'.$sh->price.')' }}</option>
-                                                @endforeach
-                                            </select>
-                                            @endif
-                                            @if($item['product']->allow_collection == 1)
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_collction_radio" value="Collection" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
-                                                    <label class="form-check-label" for="{{ $item['id'] }}_collction_radio">Collection</label>
-                                                </div>
-                                            @endif
-                                            @if($item['product']->delivery_type == "Free Delivery")
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_free_deliver_radio" value="Free Delivery" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
-                                                    <label class="form-check-label" for="{{ $item['id'] }}_free_deliver_radio">Free Delivery</label>
-                                                </div>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="7" class="text-start pt-0 mt-0">
-                                            <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee selected by Seller:</b> {{ $item['product']->service_fee_payer }}</small>
-                                            <br />
-                                            <hr />
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        --}}
                     </div>
-                </div>
-                <div class="col-md-12 mt-3 bg-grey p-3 d-md-none">
-                    <b>Cart Items</b>
-                    @foreach($cart AS $k=>$item)
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item">{{ $item['item_name'] }}</li>
-                        <li class="list-group-item d-flex">
-                            <span class="text-muted">Quantity</span>
-                            <div class="ms-auto">
-                                <div class="quantity">
-                                    <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" value="{{ $item['qty'] }}" title="Qty" class="qty" data-id="{{ $item['id'] }}" size="4">
-                                    <input type="button" value="+" class="plus">
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex">
-                            <span class="text-muted">Price</span>
-                            <div class="ms-auto">
-                                R {{ number_format($item['price'], 2) }}
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex">
-                            <span class="text-muted">Total Price</span>
-                            <div class="ms-auto">
-                                R {{ number_format($item['total'], 2) }}
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="text-muted mb-2">Shipping</div>
-                            @if($item['product']->shippingOptions->count() > 0)
-                            <div class="mb-2">
-                                <select class="form-control"name="shipping" wire:model.live="cart.{{ $k }}.shipping_id">
-                                    <option value="">Select Option</option>
-                                    @foreach($item['product']->shippingOptions AS $sh)
-                                    <option value="{{ $sh->id }}">{{ $sh->type.'(R'.$sh->price.')' }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @endif
-                            <div class="mb-2">
-                                @if($item['product']->allow_collection == 1)
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_collction_radio" value="Collection" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
-                                        <label class="form-check-label" for="{{ $item['id'] }}_collction_radio">Collection</label>
-                                    </div>
-                                @endif
-                                @if($item['product']->delivery_type == "Free Delivery")
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="{{ $item['id'] }}_collection_free_shipping" id="{{ $item['id'] }}_free_deliver_radio" value="Free Delivery" wire:model.defer="cart.{{ $k }}.collection_free_shipping">
-                                        <label class="form-check-label" for="{{ $item['id'] }}_free_deliver_radio">Free Delivery</label>
-                                    </div>
-                                @endif
-                            </div>
-                        </li>
-                    </ul>
-                    @endforeach
                 </div>
 
                 <div class="col-md-12 mt-4">
                     <h2 class="page-title pb-0 mb-0">Platform Fees</h2>
                     <p><small><b>Please Note: </b>Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on a 50-50 basis.</small></p>
                 </div>
+
+                <div class="@if($has_vendor_promo_codes) col-md-6 @else col-md-12 @endif mt-4 mb-4">
+                    <h2 class="page-title pb-0 mb-0">Apply Voucher Code</h2>
+                    <div class="mb-3">
+                        <label class="form-label">Enter Voucher Code</label>
+                        <input type="text" class="form-control" aria-describedby="voucher_help_text" name="voucher_code" wire:model.blur="voucher_code">
+                        <div id="voucher_help_text" class="form-text text-danger">
+                            @if($voucher_error)
+                            {{ $voucher_error }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @if($has_vendor_promo_codes)
+                <div class="col-md-6 mt-4 mb-4">
+                    <h2 class="page-title pb-0 mb-0">Apply Promo Code</h2>
+                    <div class="mb-3">
+                        <label class="form-label">Enter Promo Code</label>
+                        <input type="text" class="form-control" aria-describedby="promo_help_text" name="vendor_promo_code" wire:model.blur="vendor_promo_code">
+                        <div id="promo_help_text" class="form-text text-danger">
+                            @if($vendor_promo_code_error)
+                            {{ $vendor_promo_code_error }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endif
 
                 <div class="col-md-12 mt-1">
                     <h2 class="page-title pb-0 mb-0">Summary</h2>
@@ -356,16 +263,39 @@
                             <span><b>Platform Fees</b></span>
                             <span class="ms-auto"><b>R {{ number_format($service_fees, 2) }}</b></span>
                         </li>
+                        @if($voucher_discount_amount)
+                        <li class="list-group-item d-flex">
+                            <span><b>Voucher Discount</b></span>
+                            <span class="ms-auto"><b>R {{ number_format($voucher_discount_amount, 2) }}</b></span>
+                        </li>
+                        @endif
+                        @if($vendor_promo_amount)
+                        <li class="list-group-item d-flex">
+                            <span><b>Promo Discount</b></span>
+                            <span class="ms-auto"><b>R {{ number_format($vendor_promo_amount, 2) }}</b></span>
+                        </li>
+                        @endif
                     </ul>
                     <div class="row mt-3">
                         <div class="col-md-12 d-flex">
                             <b>TOTAL</b>
-                            <b class="ms-auto">R {{ number_format($cart_total, 2) }}</b>
+                            <b class="ms-auto">R {{ number_format($total, 2) }}</b>
                         </div>
                         <div class="col-md-12">
                             <hr />
                         </div>
                     </div>
+                    @if($voucher_discount_amount)
+                        @if($voucher_discount_amount > $cart_total)
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="alert alert-info" role="alert">
+                                    <b>NOTE: </b>Voucher balance will be deposited into your AB wallet.
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endif
                 </div>
                 <div class="col-md-12 mt-4">
                     <div class="form-check">

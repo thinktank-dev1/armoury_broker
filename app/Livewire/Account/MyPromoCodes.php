@@ -9,14 +9,84 @@ use App\Lib\PayFastApi;
 use Auth;
 use App\Models\PromoCode;
 use App\Models\Transaction;
+use App\Models\VendorPromoCode;
 
 class MyPromoCodes extends Component
 {
     public $amount;
     public $payment_url;
 
+    public $code_type, $vendor_promo_code_value, $name, $vendor_promo_code, $start_date, $end_date, $start_time, $end_time;
+
     public function mount(){
         $this->payment_url = env('PAYFAST_SANDBOX_URL');
+    }
+
+    public function changeStatus($id,$status){
+        $cd = VendorPromoCode::find($id);
+        if($cd){
+            $cd->status = $status;
+            $cd->save();
+        }
+    }
+
+    public function deleteCode($id){
+        $cd = VendorPromoCode::find($id);
+        if($cd){
+            $cd->deleted = 1;
+            $cd->save();
+        }
+    }
+
+    public function createVendorPromoCode(){
+        $this->validate([
+            'code_type' => 'required', 
+            'vendor_promo_code_value' => 'required', 
+            'name' => 'required', 
+            'vendor_promo_code' => 'required'
+        ]);
+        $go = True;
+        $fnd = VendorPromoCode::where('code', $this->vendor_promo_code)->first();
+        if($fnd){
+            $go = false;
+            $this->addError('error', "Code has already been used, please try a different one");
+        }
+        if($go){
+            VendorPromoCode::create([
+                'vendor_id' => Auth::user()->vendor_id,
+                'description' => $this->name,
+                'code' => $this->vendor_promo_code,
+                'start_date' => $this->start_date,
+                'end_date' => $this->end_date,
+                'start_time' => $this->start_time,
+                'end_time' => $this->end_time,
+                'type' => $this->code_type,
+                'value' => $this->vendor_promo_code_value,
+            ]);
+            session()->flash('status', 'Purchase successfully completed.');
+        }
+    }
+
+    public function generateCode(){
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $cnt = 0;
+        $length = 6;
+        while(true){
+            $cnt += 1;
+            $str = '';
+            for ($i = 0; $i < $length; $i++) {
+                $str .= $chars[rand(0, strlen($chars) - 1)];
+            }
+            $cd = VendorPromoCode::where('code', $str)->first();
+            if(!$cd){
+                $this->vendor_promo_code = strtoupper($str);
+                break;
+            }
+            if($cnt == 0){
+                $cnt = 0;
+                $length += 1;
+            }
+        }
     }
 
     public function createPromoCode($wallet = null){
@@ -101,8 +171,10 @@ class MyPromoCodes extends Component
 
     public function render(){
         $codes = PromoCode::where('user_id', Auth::user()->id)->where('payment_status', 'COMPLETE')->orderBy('status', 'ASC')->orderBy('created_at', 'DESC')->get();
+        $v_codes = VendorPromoCode::where('vendor_id', Auth::user()->vendor_id)->where('deleted', 0)->get();
         return view('livewire.account.my-promo-codes', [
-            'codes' => $codes
+            'codes' => $codes,
+            'v_codes' => $v_codes
         ]);
     }
 }

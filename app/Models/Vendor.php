@@ -57,20 +57,25 @@ class Vendor extends Model
         $sv_per = $stn->value;
 
         foreach($this->transactions->where('direction', 'in')->where('release', 1) AS $trx){
-            $item = $trx->item;
-            $product = $item->product;
+            if($trx->transaction_type == "voucher_balance"){
+                $in += $trx->amount;
+            }
+            else{
+                $item = $trx->item;
+                $product = $item->product;
 
-            $i_fee = 0;
-            $amount = $item->price * $item->quantity;
-            if($product->service_fee_payer == "seller"){
-                $i_fee = ($sv_per / 100) * $amount;
+                $i_fee = 0;
+                $amount = $item->price * $item->quantity;
+                if($product->service_fee_payer == "seller"){
+                    $i_fee = ($sv_per / 100) * $amount;
+                }
+                if($product->service_fee_payer == "50-50"){
+                    $sub_fee = ($sv_per / 100) * $amount;
+                    $i_fee = (50/100) * $sub_fee;
+                }
+                $in += $amount;
+                $fee += $i_fee;
             }
-            if($product->service_fee_payer == "50-50"){
-                $sub_fee = ($sv_per / 100) * $amount;
-                $i_fee = (50/100) * $sub_fee;
-            }
-            $in += $amount;
-            $fee += $i_fee;
         }
         
         $out = $this->transactions->where('direction', 'out')->sum('amount');

@@ -8,13 +8,19 @@ use Livewire\Attributes\On;
 
 use App\Lib\BobPay;
 use App\Lib\PayFastApi;
+use App\Lib\Communication;
 
 use Auth;
+use App\Models\User;
 use App\Models\OrderItem;
 use App\Models\DeliverOption;
 use App\Models\Setting;
 use App\Models\Order;
 use App\Models\Dealer;
+use App\Models\PromoCode;
+use App\Models\Transaction;
+use App\Models\Vendor;
+use App\Models\VendorPromoCode;
 
 class Checkout extends Component
 {
@@ -25,7 +31,11 @@ class Checkout extends Component
     public $payment_url;
     public $collection_free_shipping;
     public $delivery_option, $delivery_address;
-    public $address; 
+    public $address;
+    public $voucher_code, $voucher_discount_amount, $voucher_code_id, $voucher_error;
+    public $total; 
+    public $has_vendor_promo_codes;
+    public $vendor_promo_code, $vendor_promo_code_id,$vendor_promo_type,$vendor_promo_value, $vendor_promo_amount, $vendor_promo_code_error;
 
     public function mount($id, $order_id = null){
         if(!Auth::user()->vendor_id){
@@ -40,6 +50,65 @@ class Checkout extends Component
         $this->getCart();
 
         $this->address = Auth::user()->vendor->street."\n".Auth::user()->vendor->suburb."\n".Auth::user()->vendor->city."\n".Auth::user()->vendor->province."\n".Auth::user()->vendor->postal_code;
+
+        $this->has_vendor_promo_codes = false;
+        $vnd = Vendor::find($this->vendor_id);
+        if($vnd){
+            $cds = VendorPromoCode::where('vendor_id', $this->vendor_id)->where('status', 1)->where('deleted', 0)->count();
+            if($cds > 0){
+                $this->has_vendor_promo_codes = true;
+            }
+        }
+    }
+
+    public function updatedVendorPromoCode(){
+        $this->vendor_promo_code_error = null;
+        if($this->vendor_promo_code){
+            $cd = VendorPromoCode::where('code', $this->vendor_promo_code)->where('vendor_id', $this->vendor_id)->where('status', 1)->where('deleted', 0)->first();
+            if($cd){
+                $this->vendor_promo_code_id = $cd->id;
+                $this->vendor_promo_type = $cd->type;
+                $this->vendor_promo_value = $cd->value;
+            }
+            else{
+                $this->vendor_promo_code_error = "Invalid promo code";
+                $this->vendor_promo_code = null;
+                $this->vendor_promo_code_id = null;
+                $this->vendor_promo_type = null;
+                $this->vendor_promo_value = null;
+                $this->vendor_promo_amount = null;
+            }
+        }
+        else{
+            $this->vendor_promo_code = null;
+            $this->vendor_promo_code_id = null;
+            $this->vendor_promo_type = null;
+            $this->vendor_promo_value = null;
+            $this->vendor_promo_amount = null;
+            $this->vendor_promo_code_error = null;
+        }
+        $this->getCart();
+    }
+
+    public function updatedVoucherCode(){
+        $this->voucher_error = null;
+        if($this->voucher_code){
+            $code = PromoCode::where('code', $this->voucher_code)->where('status', 0)->first();
+            if($code){
+                $this->voucher_code_id = $code->id;
+                $this->voucher_discount_amount = $code->amount;
+                $this->getCart();
+            }
+            else{
+                $this->voucher_error = "Invalid voucher code";
+            }
+        }
+        else{
+            $this->voucher_code = null;
+            $this->voucher_discount_amount = null;
+            $this->voucher_code_id = null;
+            $this->voucher_error = null;
+        }
     }
 
     public function processPayment($type = null){
@@ -95,7 +164,7 @@ class Checkout extends Component
         $order->save();
 
         $this->order_id = $order->id;
-        
+
         foreach($this->cart AS $ct){
             $itm = OrderItem::find($ct['id']);
             if($itm){
@@ -105,19 +174,98 @@ class Checkout extends Component
             }
         }
 
-        $data = [
-            'user_first_name' => Auth::user()->name,
-            'user_last_name' => Auth::user()->surname,
-            'user_email' => Auth::user()->email,
-            'user_cell_number' => Auth::user()->mobile_number,
-            'payment_id' => $order->id,
-            'amount' => $this->cart_total,
-        ];
+        $do_payment = true;
+        if($this->voucher_code_id){
+            $code = PromoCode::where('code', $this->voucher_code)->where('status', 0)->first();
+            if($code){
+                $amount = $code->amount;
+                $discount = $amount;
+                if($amount >= $this->cart_total){
+                    $do_payment = False;
+                    $discount = $this->cart_total;
+                    
+                    $balance = $amount - $this->cart_total;
+                    Transaction::create([
+                        'transaction_type' => 'voucher_balance',
+                        'user_id' => Auth::user()->id,
+                        'vendor_id' => Auth::user()->vendor_id,
+                        'direction' => 'in',
+                        'amount' => $balance,
+                        'code' => $code->code,
+                        'payment_status' => 'COMPLETE',
+                        'release' => 1,
+                    ]);
+                    foreach($order->items AS $item){
+                        $amount = $item->price * $item->quantity;
+                        $amount += $item->shipping_fee;
+                        $amount += $item->service_fee;
+                        Transaction::create([
+                            'transaction_type' => 'voucher_payment',
+                            'user_id' => $order->user_id,
+                            'vendor_id' => $item->vendor_id,
+                            'direction' => 'in',
+                            'amount' => $amount,
+                            'order_id' => $order->id,
+                            'order_item_id' => $item->id,
+                            'payment_status' => 'COMPLETE',
+                        ]);
+                    }
+                    $this->sendComm($order->id);
 
-        $pf = new PayFastApi();
-        $payload = $pf->setPayLoad($data);
-        $payload = json_encode($payload);
-        $this->dispatch('process-payment', data: $payload);
+                    $order->amount_paid = 0;
+                    $order->status = "COMPLETE";
+                    $order->save();
+
+                    session()->flash('status', 'Purchase successfully completed.');
+                }
+                else{
+                    $payment_amount = $this->cart_total - $amount;
+                    $this->cart_total = $payment_amount;
+                }
+                $order->promo_code_id = $code->id;
+                $order->discount_amount = $discount;
+                $order->promo_code = $code->code;
+
+                $order->g_payment_id = $code->code;
+                $order->short_reference = "Voucher discount";
+                $order->save();
+
+                $code->status = 1;
+                $code->save();
+            }
+        }
+
+        if($this->vendor_promo_code_id){
+            $cd = VendorPromoCode::find($this->vendor_promo_code_id);
+            if($cd->status == 1 && $cd->deleted == 0){
+                $order->vendor_promo_code = $cd->code;
+                $order->save();
+                
+                if($cd->type == "value"){
+                    $this->vendor_promo_amount = $cd->value;
+                }
+                elseif($cd->type == "percentage"){
+                    $this->vendor_promo_amount = ($cd->value / 100) * $this->cart_total;
+                }
+                $this->cart_total = $this->cart_total - $this->vendor_promo_amount;
+            }
+        }
+
+        if($do_payment){
+            $data = [
+                'user_first_name' => Auth::user()->name,
+                'user_last_name' => Auth::user()->surname,
+                'user_email' => Auth::user()->email,
+                'user_cell_number' => Auth::user()->mobile_number,
+                'payment_id' => $order->id,
+                'amount' => $this->cart_total,
+            ];
+
+            $pf = new PayFastApi();
+            $payload = $pf->setPayLoad($data);
+            $payload = json_encode($payload);
+            $this->dispatch('process-payment', data: $payload);
+        }
     }
 
     #[On('update-quantity')]
@@ -260,6 +408,29 @@ class Checkout extends Component
             $this->cart[] = $arr;
         }
         $this->cart_total = $this->shipping_tot + $this->service_fees + $this->cart_sub_total;
+        $this->total = $this->cart_total;
+
+        if($this->voucher_discount_amount){
+            if($this->voucher_discount_amount > $this->cart_total){
+                $this->total = 0;
+            }
+            else{
+                $this->total = $this->cart_total - $this->voucher_discount_amount;
+            }
+        }
+
+        if($this->vendor_promo_code_id){
+            $cd = VendorPromoCode::find($this->vendor_promo_code_id);
+            if($cd->status == 1 && $cd->deleted == 0){
+                if($cd->type == "value"){
+                    $this->vendor_promo_amount = $cd->value;
+                }
+                elseif($cd->type == "percentage"){
+                    $this->vendor_promo_amount = ($cd->value / 100) * $this->cart_total;
+                }
+                $this->total = $this->total - $this->vendor_promo_amount;
+            }
+        }
     }
 
     #[Layout('components.layouts.landing')] 
@@ -268,5 +439,52 @@ class Checkout extends Component
         return view('livewire.landing.checkout', [
             'dealers' => $dealers
         ]);
+    }
+
+    public function sendComm($id){
+        $order = Order::find($id);
+        if($order){
+            $comm = new Communication();    
+            $user = User::find($order->user_id);
+            if($user){
+                $data = [
+                    'name' => $user->name,
+                    'to' => $user->email,
+                    'subject' => 'Armoury Broker Payment Received',
+                    'message_body' => "
+                        Your payment for order <b>#".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</b> was successfully completed.<br />
+                        Amount Paid: <b>R".number_format($order->amount_paid,2)."</b><br /><br />
+                        The Vendor will begin arranging collection / delivery of your product. 
+                    "
+                ];
+                $comm->sendMail($data);
+            }
+
+            $vendor = Vendor::find($order->vendor_id);
+            $order_data = "<table class='table-bodered'>";
+            $order_data .= "<thead><tr><th style='text-align: left'>Item</th><th style='text-align: left'>Qty</th><th style='text-align: left'>Price</th></tr>";
+            foreach($order->items AS $item){
+                $order_data .= "<tr>";
+                $order_data .= "<td>".$item->product->item_name."</td>";
+                $order_data .= "<td>".$item->quantity."</td>";
+                $order_data .= "<td>R".number_format($item->price,2)."</td>";
+                $order_data .= "</tr>";
+            }
+            $order_data .= "</table>";
+
+            if($vendor){
+                $data = [
+                    'name' => $vendor->user->name,
+                    'to' => $vendor->user->email,
+                    'subject' => 'Armoury Broker - New Order',
+                    'message_body' => "
+                        <b>You have a new order from armoury broker.</b><br />
+                        ".$order_data."<br /><br />
+                        Please <a href='".url('login')."'>login</a> to get order details and start the order delivery or collection process. 
+                    "
+                ];
+                $comm->sendMail($data);
+            }
+        }
     }
 }

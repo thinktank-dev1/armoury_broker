@@ -12,6 +12,13 @@ class Order extends Model
         'cart_total',
         'fee',
         'total_shipping_fee',
+
+        'promo_code_id',
+        'discount_amount',
+        'promo_code',
+
+        'vendor_promo_code',
+
         'g_payment_id',
         'uuid',
         'short_reference',

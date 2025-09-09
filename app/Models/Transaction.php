@@ -14,6 +14,7 @@ class Transaction extends Model
         'amount',
         'order_id',
         'order_item_id',
+        'code',
         'payment_status',
         'release',
     ];

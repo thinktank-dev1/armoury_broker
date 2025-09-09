@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <h3 class="page-title bold">MY PURCHASES</h3>
                     @if($orders->count() > 0)
-                    <div class="row mt-3 d-none d-md-block">
+                    <div class="row mt-3 table-responsive">
                         <div class="col-md-12">
                             <table class="table table-striped">
                                 @foreach($orders AS $order)
@@ -69,7 +69,7 @@
                                                             @endif
                                                         </td>
                                                         <td class="text-end">
-                                                            <a href="#"><i class="icon-envelope"></i></a>
+                                                            <a href="{{ url('messages/item?order-item='.$item->id) }}"><i class="icon-envelope"></i></a>
                                                             <span class="text-muted">&nbsp;|&nbsp;</span>
                                                             <a href="#" wire:click.prevent="showItemDetailsModal({{ $item->id }})"><i class="icon-eye"></i> View</a>
                                                         </td>

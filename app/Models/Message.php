@@ -9,6 +9,7 @@ class Message extends Model
     protected $fillable = [
         'user_id',
         'vendor_id',
+        'order_item_id',
         'from',
         'to',
         'name',

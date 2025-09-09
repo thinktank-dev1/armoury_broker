@@ -95,6 +95,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::get('my-vault', Vault::class);
     Route::get('messages', Messages::class);
     Route::get('messages/{id}', MessageDetail::class);
+    Route::get('messages/item', MessageDetail::class);
     Route::get('profile', Profile::class);
     Route::get('my-promo-codes', MyPromoCodes::class);
     Route::get('pf-payment-promo/{id}/{status}', MyPromoCodes::class);

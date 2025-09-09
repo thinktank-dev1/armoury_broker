@@ -72,7 +72,7 @@ class Vault extends Component
         })
         ->count();
 
-        $tot_sales = Transaction::where('vendor_id', Auth::user()->vendor_id)->sum('amount');
+        $tot_sales = Transaction::where('vendor_id', Auth::user()->vendor_id)->where('transaction_type', '<>', 'voucher_balance')->sum('amount');
 
         $tot_withdrawals = Transaction::where('transaction_type', 'withdrawal')->where('vendor_id', Auth::user()->vendor_id)->sum('amount');
 
