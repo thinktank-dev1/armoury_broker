@@ -50,7 +50,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p>Refer to our <b><a href="{{ url('terms-and-conditions') }}">terms of use</a></b> for more information</p>
+                    <p>Refer to our <b><a href="{{ url('docs/Terms of Use and User Agreement_AB_Courier amendments_v02_20250629.pdf') }}" target="_blank">Terms of Use</a></b> for more information</p>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <div class="col-md-3 text-center">
                     <img src="{{ asset('img/icon2.png') }}">
                     <div class="mt-2">
-                        <p><b>24/7 Hour reminder</b></p>
+                        <p><b>24/48 Hour Reminders</b></p>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">

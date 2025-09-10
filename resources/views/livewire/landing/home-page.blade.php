@@ -26,9 +26,9 @@
                                     <div class="banner_content overflow-hidden">
                                         <h5 class="mb-3 staggered-animation text-26 text-bold font-weight-light text-white" data-animation="slideInLeft" data-animation-delay="0.5s">THREE STEPS TO SECURE TRADING</h5>
                                         <ul class="staggered-animation text-white" data-animation="slideInLeft" data-animation-delay="1s">
-                                            <li class="text-21"><b><i class="linearicons-arrow-right"></i> Upload your item</b></li>
-                                            <li class="text-21"><b><i class="linearicons-arrow-right"></i> Ship to buyer</b></li>
-                                            <li class="text-21"><b><i class="linearicons-arrow-right"></i> Get paid safely</b></li>
+                                            <li class="text-21"><b>1. Upload your item</b></li>
+                                            <li class="text-21"><b>2. Ship to buyer</b></li>
+                                            <li class="text-21"><b>3. Get paid safely</b></li>
                                         </ul>
                                         <p class="staggered-animation text-white mt-3 text-21" data-animation="slideInLeft" data-animation-delay="1s">Our escrow system protects every transaction from start to finish.</p>
                                         <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">Ready to <b>LEVEL UP?</b></p>

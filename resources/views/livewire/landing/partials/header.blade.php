@@ -2,28 +2,22 @@
     <div class="middle-header dark_skin header-top-section">
         <div class="container">
             <div class="nav_block">
-                <div class="row">
-                    <div class="col-md-3 g-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-4 g-3">
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <img class="logo_light" src="{{ asset('img/logo.png') }}" alt="logo" />
                             <img class="logo_dark" src="{{ asset('img/logo.png') }}" alt="logo" />
                         </a>        
                     </div>
-                    <div class="col-md-6 g-3 d-flex justify-content-center">
-                        <div class="row">
-                            <div class="col-md-10 offset-md-1">
-                                <livewire:landing.partials.search />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 text-center text-md-end g-4">
-                        @if(Auth::guest())
-                        <a class="ms-3 bold" href="{{ url('auth/login') }}">Login</a>
-                        @else
+                    <div class="col-md-8 text-center ms-md-auto text-md-end g-4 d-none d-md-block">
+                        @if(!Auth::guest())
                         <a class="ms-3 bold" href="{{ url('dashboard') }}">Dashboard</a>
                         <a class="ms-3 bold" href="{{ url('wishlist') }}">Wishlist</a>
                         @endif
                         <a class="ms-3 bold" href="{{ url('cart') }}">Cart @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif</a>
+                        @if(Auth::guest())
+                        <a class="ms-3 btn btn-primary-outline" href="{{ url('auth/login') }}">Register / Login</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -64,9 +58,9 @@
                             </div>
                             <div class="d-none d-md-block dropdown-menu">
                                 <ul class="mega-menu d-lg-flex">
-                                    <li class="mega-menu-col col-lg-9">
+                                    <li class="mega-menu-col col-lg-12">
                                         <ul class="d-lg-flex">
-                                            <li class="mega-menu-col col-lg-4">
+                                            <li class="mega-menu-col {{ $menu_col }}">
                                                 <ul>
                                                     <li class="dropdown-header">Shop By Category</li>
                                                     @foreach($categories AS $cat)
@@ -80,22 +74,30 @@
                                                 </ul>
                                             </li>
                                             @if($subs)
-                                            <li class="mega-menu-col col-lg-4">
+                                            <li class="mega-menu-col {{ $menu_col }}" wire:key="{{ $cat->id.'-'.now() }}">
                                                 <ul>
-                                                    <li class="dropdown-header">Sub Categories</li>
+                                                    <li class="dropdown-header">Sub Categories {{ $sub_row_count }}</li>
                                                     @foreach($subs AS $sub)
-                                                    <li>
-                                                        @if($sub->sub_sub->count() > 0)
-                                                            <a class="dropdown-item nav-link nav_item d-flex" href="#" wire:click.prevent="getSubSub({{ $sub->id }})">
-                                                        @else
-                                                            <a class="dropdown-item nav-link nav_item d-flex" href="{{ url('shop?category='.$sub->category->slug.'&sub-category='.$sub->slug) }}">
-                                                        @endif
-                                                            {{ $sub->sub_category_name }}
-                                                            @if($sub->sub_sub->count() > 0)
-                                                            <span class="ms-auto me-2"><i class="ion-chevron-right"></i></span>
+                                                        @if($show_third_level_menu && $sub_row_count)
+                                                            @if($loop->index == $sub_row_count)
+                                                                </ul>
+                                                                <li class="mega-menu-col {{ $menu_col }}">
+                                                                <ul>
+                                                                <li class="dropdown-header">&nbsp;</li>
                                                             @endif
-                                                        </a>
-                                                    </li>
+                                                        @endif
+                                                        <li>
+                                                            @if($sub->sub_sub->count() > 0)
+                                                                <a class="dropdown-item nav-link nav_item d-flex" href="#" wire:click.prevent="getSubSub({{ $sub->id }})">
+                                                            @else
+                                                                <a class="dropdown-item nav-link nav_item d-flex" href="{{ url('shop?category='.$sub->category->slug.'&sub-category='.$sub->slug) }}">
+                                                            @endif
+                                                                {{ $sub->sub_category_name }}
+                                                                @if($sub->sub_sub->count() > 0)
+                                                                <span class="ms-auto me-2"><i class="ion-chevron-right"></i></span>
+                                                                @endif
+                                                            </a>
+                                                        </li>
                                                     @endforeach
                                                 </ul>
                                             </li>
@@ -112,35 +114,29 @@
                                             @endif
                                         </ul>
                                     </li>
-                                    <li class="mega-menu-col col-lg-3">
-                                        <div class="header_banner">
-                                            <div class="header_banner_content">
-                                                <div class="shop_banner">
-                                                    <div class="banner_img overlay_bg_40">
-                                                        <img src="{{ asset('img/shop_banner.jpg') }}" alt="shop_banner"/>
-                                                    </div> 
-                                                    <div class="shop_bn_content">
-                                                        <h5 class="text-uppercase shop_subtitle">New Collection</h5>
-                                                        <h3 class="text-uppercase shop_title">Sale 30% Off</h3>
-                                                        <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">Shop Now</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                         </li>
-                        <li><a class="nav-link nav_item bold" href="{{ url('support') }}">Support</a></li> 
+                        <li><a class="nav-link nav_item bold" href="{{ url('support') }}">Support</a></li>
+                        @if(!Auth::guest())
+                        <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('dashboard') }}">Dashboard</a></li>
+                        <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('wishlist') }}">Wishlist</a></li>
+                        @endif
+                        <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('cart') }}">Cart</a></li>
+                        <li class="d-md-none mb-5 text-center">
+                            <a class="ms-3 btn btn-secondary btn-header-sm btn-nav" href="{{ url('auth/login') }}">Register / Login</a>
+                        </li> 
                     </ul>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
                     @if(!Auth::guest())
-                    <!-- <li><a href="#" class="nav-link"><i class="linearicons-alarm"></i></a></li> -->
-                    @if($msg_count)
-                    <li><a href="{{ url('messages') }}" class="nav-link"><i class="linearicons-envelope"></i><span class="cart_count">{{ $msg_count }}</span></a></li>
+                        @if($msg_count)
+                            <li><a href="{{ url('messages') }}" class="nav-link"><i class="linearicons-envelope"></i><span class="cart_count">{{ $msg_count }}</span></a></li>
+                        @endif
                     @endif
-                    @endif
+                    <li class="d-none d-md-block nav-search">
+                        <livewire:landing.partials.search />
+                    </li>
                 </ul>
             </nav>
         </div>

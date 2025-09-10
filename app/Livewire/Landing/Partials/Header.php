@@ -18,9 +18,14 @@ class Header extends Component
     public $cur_cat_id;
     public $cart_count;
 
+    public $menu_col, $show_third_level_menu, $sub_row_count;
+
     public function mount(){
         $this->getSubCats(Category::orderBy('category_name', 'ASC')->first()->id);
         $this->getCartCount();
+
+        $this->menu_col = "col-lg-6";
+        $this->show_third_level_menu = false;
     }
 
     public function getCartCount(){
@@ -44,6 +49,7 @@ class Header extends Component
         if($sub){
             if($sub->sub_sub->count() > 0){
                 $this->sub_subs = $sub->sub_sub;
+                $this->menu_col = "col-lg-4";
             }
             else{
                 return redirect('category/'.strtolower(str_replace(' ','-', $sub->category->category_name)).'/'.strtolower(str_replace(' ','-', $sub->sub_category_name)));
@@ -52,13 +58,29 @@ class Header extends Component
     }
 
     public function getSubCats($id){
+        $cats_count = Category::orderBy('category_name', 'ASC')->count();
+
         $this->sub_subs = [];
         $this->subs = [];
+        $this->menu_col = "col-lg-6";
+        $this->show_third_level_menu = false;
         $cat = Category::find($id);
         if($cat){
             if($cat->sub_cats->count() > 0){
                 $this->cur_cat_id = $cat->id;
-                $this->subs = $cat->sub_cats->whereNull('parent_id');
+                $subs = $cat->sub_cats->whereNull('parent_id');
+
+                if($cats_count < $subs->count()){
+                    $this->menu_col = "col-lg-4"; 
+                    $this->show_third_level_menu = true;
+                    $this->sub_row_count = intdiv($subs->count(), 2);
+                }
+                else{
+                    $this->menu_col = "col-lg-6"; 
+                    $this->show_third_level_menu = false;
+                    $this->sub_row_count = null;
+                }
+                $this->subs = $subs;
             }
             else{
                 return redirect('category/'.strtolower(str_replace(' ','-', $cat->category_name)));

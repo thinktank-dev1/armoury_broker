@@ -1,5 +1,5 @@
 <div>
-    <div class="section">
+    <div class="section auth-bg">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="row mb-5">
                                     <div class="col-md-12 text-center">
-                                        <input type="submit" class="btn btn-secondary w-wide" wire:click.prevent="RegisterUser" value="Register">
+                                        <input type="submit" class="btn btn-primary-outline w-wide" wire:click.prevent="RegisterUser" value="Register">
                                     </div>
                                 </div>
                             </form>

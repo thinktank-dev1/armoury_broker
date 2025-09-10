@@ -3028,6 +3028,7 @@ input.text {
 .sale_banner img {
 	width: 100%;
 }
+
 .hover_effect1 {
 	overflow: hidden;
 	position: relative;
@@ -3041,7 +3042,7 @@ input.text {
 	opacity: 1;
 	position: absolute;
 	top: 0;
-	transition: all 0.9s ease 0s;
+	transition: all 0.5s ease 0s;
 	width: 100%;
 	z-index: 1;
 }
@@ -3057,12 +3058,13 @@ input.text {
 	-webkit-transform: translate(-105%, 0%);
 	transform: translate(-105%, 0%);
 }
-.hover_effect1:hover:before, .hover_effect1:hover:after {
+.hover_effect1:active:before, .hover_effect1:active:after {
 	opacity: 0;
 	-moz-transform: translate(0px, 0px);
 	-webkit-transform: translate(0px, 0px);
 	transform: translate(0px, 0px);
 }
+
 .fb_info {
 	position: absolute;
 	top: 15px;

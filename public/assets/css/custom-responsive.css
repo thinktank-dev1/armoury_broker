@@ -1,0 +1,69 @@
+@media only screen and (min-width: 1400px) {
+    .container {
+        max-width: 1380px;
+    }
+}
+.nav_block {
+    /*display: -ms-flexbox;*/
+    display: block;
+    /*-ms-flex-align: center;*/
+    /*align-items: center;*/
+    /*-ms-flex-pack: justify;*/
+    /*justify-content: space-between; */
+}
+.btn-header-sm{
+     height: 50px;
+     padding: 7px 20px;
+     font-weight: 600;   
+}
+.btn-nav:hover, .btn-nav:active, .btn-nav:focus{
+    border: 2px solid #fff;
+    color: #FFF !important;
+}
+.nav-search .header-search-input{
+    border: 1px solid #fff;
+    padding: 8px 12px;
+    height: 40px;
+    color: #fff;
+}
+.nav-search .header-search-input::placeholder{
+    color: #fff;
+}
+.nav-search .header-search-input:active, .nav-search .header-search-input:focus{
+    color: #000;
+}
+.nav-search .heder-search-btn{
+    border: 1px solid #fff;
+    background: #fff;
+    color: #000;
+}
+.nav-search .heder-search-btn:hover,.nav-search .heder-search-btn:active,.nav-search .heder-search-btn:focus{
+    background-color: transparent;
+}
+.text-overlay{
+    background-color: rgba(0, 0, 0, 0.6);;
+}
+.brand-cont{
+    width: 100%;
+    height: 70px;
+    border: 1px solid #0f1f24;
+}
+.pr_action_btn li a:has(span) {
+    width: 80px;
+}
+.pr_action_btn li a span {
+    vertical-align: middle;
+    line-height: 37px;
+    font-size: 18px;
+    padding: 5px 5px;
+}
+
+.auth-bg{
+    width: 100%;
+  /*height: 500px; adjust height */
+  background-image: url('../../img/auth-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

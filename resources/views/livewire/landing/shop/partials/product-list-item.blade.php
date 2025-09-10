@@ -26,7 +26,7 @@
                 @if($availability)
                 <li class="add-to-cart"><a href="#" wire:click.prevent="addToCart"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
                 @endif
-                <li><a href="{{ url('shop/product/'.$product->id) }}"><i class="icon-magnifier-add"></i></a></li>
+                <li><a href="{{ url('shop/product/'.$product->id) }}"><span>View</span></a></li>
             </ul>
         </div>
     </div>

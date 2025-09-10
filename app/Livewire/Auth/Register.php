@@ -19,13 +19,15 @@ class Register extends Component
         $this->validate([
             'name' => "required", 
             'surname' => "required",
-            'mobile_number' => "required",
+            'mobile_number' => "required|phone:ZA",
             'email' => "required|email|unique:users,email", 
             'password' => "required",
             'terms_and_condotions' => 'required',
         ],
         [
             'terms_and_condotions.required' => "You need to agree to the platform's T&Cs to proceed with your profile creation",
+            'mobile_number.phone' => "Please enter a valid mobile number",
+
         ]);
 
         $role = Role::where('name', 'user')->first();

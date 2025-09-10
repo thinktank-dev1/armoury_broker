@@ -173,12 +173,12 @@ footer .widget {
 	border-radius: 0;
 	padding: 6px 35px;
 	background-color: #FFF;
-	border: 2px solid #FFF;
+	border: 2px solid #eaedee;
 	color: #293c47;
 }
 .bt-white:hover, .bt-white:active, .bt-white:focus{
-	border: 2px solid #FFF;
-	background-color: transparent;
+	border: 2px solid #eaedee;
+	background-color: #e6e6e6;
 }
 .heder-search-btn:hover, .dark-btn:hover, .heder-search-btn:active{
 	background-color: #0f1f24;
@@ -338,8 +338,9 @@ footer .widget {
 }
 .btn-auth{
 	background-color: transparent;
-    border: 4px solid #FFF;
+    border: 2px solid #293c47;
     color: #0f1f24;
+    font-weight: 600;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -348,15 +349,16 @@ footer .widget {
     text-transform: uppercase;
 }
 .btn-auth:hover{
-	border: 4px solid #FFF;
+	border: 2px solid #293c47;
 	background-color: transparent;
 }
 .btn-auth.active{
-	background-color: #FFF;
-	border: 4px solid #FFF;
+	background-color: #293c47;
+	border: 2px solid #293c47;
+	color: #FFF;
 }
 .auth-cont{
-	background-color: #155b7110;
+	background-color: #fff; /* #eaedee */
 	border: none;
 	border-radius: 0;
 }
@@ -675,6 +677,7 @@ footer .widget {
 }
 .btn{
 	text-transform: uppercase;
+	font-weight: 600;
 }
 
 .btn.btn-sqr {
@@ -708,10 +711,10 @@ footer .widget {
 }
 .social-login-cont a{
 	display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  border: 1px solid #ccc;
+  	justify-content: center;
+  	align-items: center;
+  	height: 50px;
+  	border: 2px solid #ccc;
 }
 
 .img-circle {
