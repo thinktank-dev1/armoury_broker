@@ -48,7 +48,10 @@
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-12">
-                                                <input type="password" class="form-control" placeholder="Password" name="password" wire:model.defer="password">
+                                                <div class="password-wrapper">
+                                                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" wire:model.defer="password">
+                                                    <span id="togglePassword" class="toggle-icon">👁️</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -56,7 +59,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" id="terms_check_box" wire:model.defer="terms_and_condotions">
                                                     <label class="form-check-label" for="terms_check_box">
-                                                        I accept the <a href="{{ url('terms-and-conditions') }}">Terms & Conditions</a>
+                                                        I accept the <a href="{{ url('docs/Terms of Use and User Agreement_AB_Courier amendments_v02_20250629.pdf') }}" target="_blank">Terms & Conditions</a>
                                                     </label>
                                                 </div>
                                             </div>
@@ -80,4 +83,16 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        const passwordInput = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", () => {
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+            togglePassword.textContent = isPassword ? "🙈" : "👁️"; // toggle icon
+        });
+    </script>
+    @endpush
 </div>

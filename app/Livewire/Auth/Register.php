@@ -19,7 +19,7 @@ class Register extends Component
         $this->validate([
             'name' => "required", 
             'surname' => "required",
-            'mobile_number' => "required|phone:ZA",
+            'mobile_number' => "required|phone:ZA|unique:users,mobile_number",
             'email' => "required|email|unique:users,email", 
             'password' => "required",
             'terms_and_condotions' => 'required',

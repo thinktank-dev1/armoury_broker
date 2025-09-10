@@ -32,7 +32,10 @@
                                             <input type="text" class="form-control" placeholder="Email" name="email" wire:model.defer="email">
                                         </div>
                                         <div class="mb-3">
-                                            <input type="password" class="form-control" placeholder="Password" name="password" wire:model.defer="password">
+                                            <div class="password-wrapper">
+                                                <input type="password" class="form-control" placeholder="Password" id="password" name="password" wire:model.defer="password">
+                                                <span id="togglePassword" class="toggle-icon">👁️</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -61,4 +64,16 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        const passwordInput = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", () => {
+            const isPassword = passwordInput.type === "password";
+            passwordInput.type = isPassword ? "text" : "password";
+            togglePassword.textContent = isPassword ? "🙈" : "👁️"; // toggle icon
+        });
+    </script>
+    @endpush
 </div>
