@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\EnsureHasVendor;
 
 use App\Http\Controllers\ProcessPayment;
 
@@ -82,27 +83,29 @@ Route::post('pf-notify-payment-promo/{id}', [ProcessPayment::class, 'pfPromoPaym
 Route::get('approve-withdrawal/{id}', [ProcessPayment::class, 'approveWithDrawal']);
 
 Route::middleware(['auth', 'verified'])->group(function (){
-	Route::get('dashboard', Dashboard::class)->name('dashboard');
-    Route::get('add-product', ProductForm::class);
-    Route::get('add-product/{id}', ProductForm::class);
-    Route::get('wishlist', WishList::class);
-    
-    Route::get('my-armoury', MyArmoury::class);
-    Route::get('my-armoury/edit', EditMyArmoury::class);
+	Route::get('my-armoury/edit', EditMyArmoury::class);
+    Route::middleware([EnsureHasVendor::class])->group(function (){
+        Route::get('dashboard', Dashboard::class)->name('dashboard');
+        Route::get('add-product', ProductForm::class);
+        Route::get('add-product/{id}', ProductForm::class);
+        Route::get('wishlist', WishList::class);
+        
+        Route::get('my-armoury', MyArmoury::class);
 
-    Route::get('my-orders', Orders::class);
-    Route::get('my-purchases', Purchases::class);
-    Route::get('my-vault', Vault::class);
-    Route::get('messages', Messages::class);
-    Route::get('messages/{id}', MessageDetail::class);
-    Route::get('messages/item', MessageDetail::class);
-    Route::get('profile', Profile::class);
-    Route::get('my-promo-codes', MyPromoCodes::class);
-    Route::get('pf-payment-promo/{id}/{status}', MyPromoCodes::class);
+        Route::get('my-orders', Orders::class);
+        Route::get('my-purchases', Purchases::class);
+        Route::get('my-vault', Vault::class);
+        Route::get('messages', Messages::class);
+        Route::get('messages/{id}', MessageDetail::class);
+        Route::get('messages/item', MessageDetail::class);
+        Route::get('profile', Profile::class);
+        Route::get('my-promo-codes', MyPromoCodes::class);
+        Route::get('pf-payment-promo/{id}/{status}', MyPromoCodes::class);
 
-    Route::get('cart/{id}', Checkout::class);
-    Route::get('cart/{id}/{order_id}', Checkout::class);
-    Route::get('pf-payment/{id}/{status}', PaymentNotice::class);
+        Route::get('cart/{id}', Checkout::class);
+        Route::get('cart/{id}/{order_id}', Checkout::class);
+        Route::get('pf-payment/{id}/{status}', PaymentNotice::class);
+    });
 
     Route::middleware([AdminMiddleware::class])->group(function (){
         Route::get('settings', Settings::class);

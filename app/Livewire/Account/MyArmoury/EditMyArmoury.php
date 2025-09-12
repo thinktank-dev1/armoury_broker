@@ -14,34 +14,36 @@ class EditMyArmoury extends Component
     use WithFileUploads;
 
     public $provinces = [];
-    public $armoury_name, $tel, $email, $instagram_handle, $street, $suburb, $city, $postal_code, $province, $bio, $avatar;
+    public $armoury_name, $instagram_handle, $suburb, $city, $province, $bio, $avatar;
     public $dealer_stock_service, $join_dealer_network;
     public $business_name, $license_number, $business_street, $business_suburb, $business_city, $business_postal_code, $business_province, $dealer_stocking_fee, $ab_dealer_network_agreement, $license_agreement, $fee_agreement;
+    public $view, $btn_text;
 
     public function mount(){
         $this->setStaticData();
         $this->getData();
+
+        $this->btn_text = "SAVE";
+        $this->view = "armoury";
     }
 
     public function updatedDealerStockService(){
         if($this->dealer_stock_service){
-            $this->dispatch('go-to-top');
+            $this->btn_text = "NEXT";
+        }
+        else{
+            $this->btn_text = "SAVE";
         }
     }
 
     public function saveArmoury(){
-        $this->dispatch('go-to-top');
         $this->validate([
-            'armoury_name' => 'required',
-            'tel' => 'required', 
-            'email' => 'required',
-            'street' => 'required',
+            'armoury_name' => 'required', 
             'suburb' => 'required',
             'city' => 'required',
-            'postal_code' => 'required',
             'province' => 'required',
         ]);
-        if(Auth::user()->vendor_id){
+        if(Auth::user()->vendor_id && Vendor::find(Auth::user()->vendor_id)){
             $vendor = Vendor::find(Auth::user()->vendor_id);
         }
         else{
@@ -67,15 +69,12 @@ class EditMyArmoury extends Component
             $vendor->avatar = $file_url;
         }
         $vendor->description = $this->bio;
-        $vendor->tel = $this->tel;
-        $vendor->email = $this->email;
-        $vendor->street = $this->street;
         $vendor->suburb = $this->suburb;
         $vendor->city = $this->city;
         $vendor->province = $this->province;
-        $vendor->postal_code = $this->postal_code;
-        $vendor->country = "South Africa";
-        $vendor->status = 1;
+        if(!Auth::user()->vendor_id){
+            $vendor->status = 1;
+        }
         $vendor->instagram_handle = $this->instagram_handle;
         $vendor->save();
 
@@ -83,17 +82,19 @@ class EditMyArmoury extends Component
         Auth::user()->save();
         $this->getData();
 
-        session()->flash('status', 'Vendor successfully saved.');
+        if($this->dealer_stock_service){
+            $this->view = "dealer";
+        }
+        else{
+            session()->flash('status', 'Vendor successfully saved.');    
+        }
+    }
 
+    public function saveDealer(){
         if($this->join_dealer_network){
             $this->validate([
                 'business_name' => 'required', 
-                'license_number' => 'required', 
-                'business_street' => 'required', 
-                'business_suburb' => 'required', 
-                'business_city' => 'required',
-                'business_postal_code' => 'required', 
-                'business_province' => 'required', 
+                'license_number' => 'required',  
                 'dealer_stocking_fee' => 'required', 
                 'ab_dealer_network_agreement' => 'required', 
                 'license_agreement' => 'required', 
@@ -107,11 +108,6 @@ class EditMyArmoury extends Component
             $dealer->status = 0;
             $dealer->business_name = $this->business_name; 
             $dealer->license_number = $this->license_number;
-            $dealer->business_street = $this->business_street;
-            $dealer->business_suburb = $this->business_suburb;
-            $dealer->business_city = $this->business_city;
-            $dealer->business_postal_code = $this->business_postal_code;
-            $dealer->business_province = $this->business_province;
             $dealer->dealer_stocking_fee = $this->dealer_stocking_fee;
             $dealer->ab_dealer_network_agreement = $this->ab_dealer_network_agreement; 
             $dealer->license_agreement = $this->license_agreement;
@@ -145,11 +141,6 @@ class EditMyArmoury extends Component
 
                 $this->business_name = $dealer->business_name; 
                 $this->license_number = $dealer->license_number;
-                $this->business_street = $dealer->business_street;
-                $this->business_suburb = $dealer->business_suburb;
-                $this->business_city = $dealer->business_city;
-                $this->business_postal_code = $dealer->business_postal_code;
-                $this->business_province = $dealer->business_province;
                 $this->dealer_stocking_fee = $dealer->dealer_stocking_fee;
                 $this->ab_dealer_network_agreement = true; 
                 $this->license_agreement = true;
@@ -179,8 +170,8 @@ class EditMyArmoury extends Component
         $string = trim($string, '-');
         return $string;
     }
-    public function render()
-    {
+
+    public function render(){
         return view('livewire.account.my-armoury.edit-my-armoury');
     }
 }

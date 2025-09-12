@@ -14,14 +14,9 @@ class Vendor extends Model
         'avatar',
         'banner',
         'description',
-        'tel',
-        'email',
-        'street',
         'suburb',
         'city',
         'province',
-        'postal_code',
-        'country',
         'instagram_handle',
         'status',
     ];
@@ -62,19 +57,22 @@ class Vendor extends Model
             }
             else{
                 $item = $trx->item;
-                $product = $item->product;
-
-                $i_fee = 0;
-                $amount = $item->price * $item->quantity;
-                if($product->service_fee_payer == "seller"){
-                    $i_fee = ($sv_per / 100) * $amount;
+                if($item){
+                    $product = $item->product;
+                    if($product){
+                        $i_fee = 0;
+                        $amount = $item->price * $item->quantity;
+                        if($product->service_fee_payer == "seller"){
+                            $i_fee = ($sv_per / 100) * $amount;
+                        }
+                        if($product->service_fee_payer == "50-50"){
+                            $sub_fee = ($sv_per / 100) * $amount;
+                            $i_fee = (50/100) * $sub_fee;
+                        }
+                        $in += $amount;
+                        $fee += $i_fee;
+                    }
                 }
-                if($product->service_fee_payer == "50-50"){
-                    $sub_fee = ($sv_per / 100) * $amount;
-                    $i_fee = (50/100) * $sub_fee;
-                }
-                $in += $amount;
-                $fee += $i_fee;
             }
         }
         
