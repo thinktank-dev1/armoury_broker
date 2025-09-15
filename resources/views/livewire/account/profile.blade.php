@@ -47,6 +47,9 @@
                         @if(Auth::user()->vendor_id)
                         <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">Vendor</a> </li>
                         @endif
+                        @if(Auth::user()->dealer)
+                        <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#dealer" role="tab" aria-selected="false">Dealer</a> </li>
+                        @endif
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="home" role="tabpanel" wire:ignore.self>
@@ -54,6 +57,9 @@
                         </div>
                         <div class="tab-pane" id="profile" role="tabpanel" wire:ignore.self>
                             <livewire:account.profile.vendor-details />
+                        </div>
+                        <div class="tab-pane" id="dealer" role="tabpanel" wire:ignore.self>
+                            <livewire:account.profile.dealer-form />
                         </div>
                     </div>
                 </div>

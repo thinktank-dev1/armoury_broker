@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row mt-3">
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
             <h2>MY ARMOURY</h2>
-        </div>
+        </div> -->
     </div>
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -129,18 +129,48 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <p><small>This will allow sellers to nominate your business as their dealer stocking location for firearms sales. You will be able to charge a fee for this service.</small></p>
+                                        <p><small>As part of our firearms sales process, dealer stocking may be required. We're building a network of certified dealers to facilitate this service.</small></p>
+                                        <b>How it works</b>
+                                        <p>
+                                            <small>
+                                                <ul>
+                                                    <li>Seller nomination - When listing firearms, sellers can nominate you as their preferred dealer</li>
+                                                    <li>Buyer connection - After purchase, buyers coordinate with sellers to arrange dealer stocking and receive your business details</li>
+                                                    <li>Service arrangement - You can set a monthly fee on the platform and collect fees directly with buyers for this service</li>
+                                                </ul>
+                                            </small>
+                                        </p>
+                                        <b>Fees</b>
+                                        <small>
+                                            <p>
+                                                Set your own monthly dealer stocking fee<br/>
+                                                Armoury Broker charges dealers 5% on successful referrals (monthly billing for "dealer stocked" sales)<br/>
+                                                Sales are marked as complete when items are released to buyers.
+                                            </p>
+                                        </small>
                                     </div>
                                     @if($join_dealer_network)
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Business Name</label>
+                                            <label class="form-label">Registered Business Name</label>
                                             <input type="text" class="form-control" placeholder="Business Name" name="business_name" wire:model.defer="business_name">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label">License Number</label>
+                                            <label class="form-label">Business Registration Number</label>
+                                            <input type="text" class="form-control" placeholder="Business Registration Number" name="business_reg_number" wire:model.defer="business_reg_number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">VAT Number</label>
+                                            <input type="text" class="form-control" placeholder="VAT Number" name="vat_number" wire:model.defer="vat_number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Fire Arms Dealer License Number</label>
                                             <input type="text" class="form-control" placeholder="License Number" name="license_number" wire:model.defer="license_number">
                                         </div>
                                     </div>
@@ -154,11 +184,61 @@
                                         </div>
                                         <p><small>This will be included on the network list, AB charges the dealer 5% of the monthly active stocking fees while a transaction is in progress</small></p>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Street</label>
+                                            <input type="text" class="form-control" placeholder="Street" name="street" wire:model.defer="d_street">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Suburb</label>
+                                            <input type="text" class="form-control" placeholder="Suburb" name="suburb" wire:model.defer="d_suburb">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Town</label>
+                                            <input type="text" class="form-control" placeholder="Town" name="town" wire:model.defer="d_town">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Postal Code</label>
+                                            <input type="text" class="form-control" placeholder="Postal Code" name="postal_code" wire:model.defer="postal_code">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Province</label>
+                                            <input type="text" class="form-control" placeholder="Province" name="province" wire:model.defer="d_province">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Billing Contact Name</label>
+                                            <input type="text" class="form-control" placeholder="Billing Contact Name" name="billing_contact" wire:model.defer="billing_contact">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label">Billing Contact Number</label>
+                                            <input type="text" class="form-control" placeholder="Billing Contact Number" name="billing_contact_number" wire:model.defer="billing_contact_number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="mb-3">
+                                            <label class="form-label">Billing Email Address</label>
+                                            <input type="text" class="form-control" placeholder="Billing Email Address" name="billing_email" wire:model.defer="billing_email">
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-md-12">
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="checkbox" value="" id="ab_dealer_network_agreement" wire:model.defer="ab_dealer_network_agreement">
                                             <label class="form-check-label" for="ab_dealer_network_agreement">
-                                                I would like to be added to AB dealer network.
+                                                I would like to be added to Armoury Broker dealer network.
                                             </label>
                                         </div>
                                     </div>
@@ -174,7 +254,7 @@
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="checkbox" value="" id="fee_agreement" wire:model.defer="fee_agreement">
                                             <label class="form-check-label" for="fee_agreement">
-                                                I agree to be charged 5% monthly referral fee by AB for firearms stocked as a result of an AB transaction for the duration of the stocking timeline.
+                                                I agree to be charged 5% monthly referral fee by Armoury Broker for firearms stocked as a result of an AB transaction for the duration of the stocking timeline.
                                             </label>
                                         </div>
                                     </div>

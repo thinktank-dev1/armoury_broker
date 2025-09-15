@@ -29,10 +29,10 @@
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <div class="row mb-3">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-3">
                                                 <input type="text" class="form-control" placeholder="Name" name="name" wire:model.defer="name">
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-3">
                                                 <input type="text" class="form-control" placeholder="Surname" name="surname" wire:model.defer="surname">
                                             </div>
                                         </div>

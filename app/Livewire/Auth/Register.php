@@ -11,6 +11,7 @@ use Auth;
 use Hash;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Message;
 
 class Register extends Component
 {
@@ -41,6 +42,7 @@ class Register extends Component
                 'password' => Hash::make($this->password),
                 'status' => 1,
             ]);
+
             event(new Registered($user));
             
             $credentials = [

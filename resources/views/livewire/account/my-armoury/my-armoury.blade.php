@@ -32,7 +32,7 @@
                                 <div class="col-6 col-md-6 text-end">
                                     <div class="mb-2"><a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">Share <i class="icon-share"></i></a></div>
                                     <div class="mb-2"><a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a></div>
-                                    <a href="{{ url('my-armoury/edit') }}" class="link">Edit <i class="icon-pencil"></i></a>
+                                    <!-- <a href="{{ url('my-armoury/edit') }}" class="link">Edit <i class="icon-pencil"></i></a> -->
                                 </div>
                             </div>
                         </div>

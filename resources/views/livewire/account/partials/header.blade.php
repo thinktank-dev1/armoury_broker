@@ -21,7 +21,8 @@
             </ul>
             <ul class="navbar-nav my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('messages') }}" id="2"> <i class="ti-email"></i>
+                    <a class="nav-link" href="{{ url('messages') }}" id="2"> 
+                        Messages <i class="ti-email"></i>
                         @if($msg_count)
                         <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                         @endif
@@ -29,6 +30,7 @@
                 </li>
                 <li class="nav-item right-side-toggle"> 
                     <a class="nav-link  waves-effect waves-light d-flex align-items-center h-100" href="{{ url('profile') }}">
+                        Profile
                         @if(Auth::user()->avatar)
                             <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
                         @else

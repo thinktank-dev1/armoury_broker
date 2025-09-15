@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->string('order_item_id')->nullable()->change();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->string('vendor_id')->nullable()->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->string('order_item_id')->nullable(false)->change();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->string('vendor_id')->nullable(false)->change();
         });
     }
 };

@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use Auth;
 use App\Models\Vendor;
 use App\Models\Dealer;
+use App\Models\Message;
 
 class EditMyArmoury extends Component
 {
@@ -16,7 +17,7 @@ class EditMyArmoury extends Component
     public $provinces = [];
     public $armoury_name, $instagram_handle, $suburb, $city, $province, $bio, $avatar;
     public $dealer_stock_service, $join_dealer_network;
-    public $business_name, $license_number, $business_street, $business_suburb, $business_city, $business_postal_code, $business_province, $dealer_stocking_fee, $ab_dealer_network_agreement, $license_agreement, $fee_agreement;
+    public $business_name, $business_reg_number, $vat_number, $license_number, $d_street, $d_suburb, $d_town, $postal_code, $d_province, $billing_contact, $billing_email, $billing_contact_number, $dealer_stocking_fee, $ab_dealer_network_agreement, $license_agreement, $fee_agreement;
     public $view, $btn_text;
 
     public function mount(){
@@ -77,6 +78,18 @@ class EditMyArmoury extends Component
         }
         $vendor->instagram_handle = $this->instagram_handle;
         $vendor->save();
+        if(!Auth::user()->vendor_id){
+            Message::create([
+                'vendor_id' => $vendor->id,
+                'to' => Auth::user()->id,
+                'name'=> 'Armoury Broker',
+                'surname' => "",
+                'email' => "",
+                'contact_number' => "",
+                'message' => "Welcome to armory broker.",
+                'status' => 0,
+            ]);
+        }
 
         Auth::user()->vendor_id = $vendor->id;
         Auth::user()->save();
@@ -106,9 +119,23 @@ class EditMyArmoury extends Component
             }
             $dealer->user_id = Auth::user()->id;
             $dealer->status = 0;
-            $dealer->business_name = $this->business_name; 
+
+            $dealer->business_name = $this->business_name;
+            $dealer->business_reg_number = $this->business_reg_number;
+            $dealer->vat_number = $this->vat_number;
             $dealer->license_number = $this->license_number;
+
+            $dealer->street = $this->d_street;
+            $dealer->suburb = $this->d_suburb;
+            $dealer->town = $this->d_town;
+            $dealer->postal_code = $this->postal_code;
+            $dealer->province = $this->d_province;
+            $dealer->billing_contact = $this->billing_contact;
+            $dealer->billing_email = $this->billing_email;
+            $dealer->billing_contact_number = $this->billing_contact_number;
+             
             $dealer->dealer_stocking_fee = $this->dealer_stocking_fee;
+
             $dealer->ab_dealer_network_agreement = $this->ab_dealer_network_agreement; 
             $dealer->license_agreement = $this->license_agreement;
             $dealer->fee_agreement = $this->fee_agreement;
@@ -136,12 +163,22 @@ class EditMyArmoury extends Component
 
             $dealer = Dealer::where('user_id', Auth::user()->id)->first();
             if($dealer){
+                $this->business_name = $dealer->business_name;
+                $this->business_reg_number = $dealer->business_reg_number;
+                $this->vat_number = $dealer->vat_number;
+                $this->license_number = $dealer->license_number;
+                $this->d_street = $dealer->street;
+                $this->d_suburb = $dealer->suburb;
+                $this->d_town = $dealer->town;
+                $this->postal_code = $dealer->postal_code;
+                $this->d_province = $dealer->province;
+                $this->billing_contact = $dealer->billing_contact;
+                $this->billing_email = $dealer->billing_email;
+                $this->billing_contact_number = $dealer->billing_contact_number;
+                $this->dealer_stocking_fee = $dealer->dealer_stocking_fee;
+
                 $this->dealer_stock_service = true;
                 $this->join_dealer_network = true;
-
-                $this->business_name = $dealer->business_name; 
-                $this->license_number = $dealer->license_number;
-                $this->dealer_stocking_fee = $dealer->dealer_stocking_fee;
                 $this->ab_dealer_network_agreement = true; 
                 $this->license_agreement = true;
                 $this->fee_agreement = true;
