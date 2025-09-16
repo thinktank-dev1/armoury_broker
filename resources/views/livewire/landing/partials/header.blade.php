@@ -76,7 +76,7 @@
                                             @if($subs)
                                             <li class="mega-menu-col {{ $menu_col }}" wire:key="{{ $cat->id.'-'.now() }}">
                                                 <ul>
-                                                    <li class="dropdown-header">Sub Categories {{ $sub_row_count }}</li>
+                                                    <li class="dropdown-header">Sub Categories</li>
                                                     @foreach($subs AS $sub)
                                                         @if($show_third_level_menu && $sub_row_count)
                                                             @if($loop->index == $sub_row_count)
