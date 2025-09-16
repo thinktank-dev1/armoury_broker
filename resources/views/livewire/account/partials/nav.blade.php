@@ -5,7 +5,7 @@
                 @if(Auth::user()->role->name == "user")
                 <li>
                     <div class="mx-3">
-                        <button onclick="window.location.href='{{ url("add-product") }}'" class="btn btn-white"><span class="hide-menu">Add Item</span> +</button>
+                        <button onclick="window.location.href='{{ url("add-product") }}'" class="btn btn-primary-outline btn-bg-white"><span class="hide-menu">Add Item</span>&nbsp;+</button>
                     </div>
                 </li>
                 @endif
@@ -59,6 +59,12 @@
                     </a>
                 </li>
                 @else
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ url('wishlist') }}" aria-expanded="false">
+                        <i class="icon-basket"></i>
+                        <span class="hide-menu">Wishlist</span>
+                    </a>
+                </li>
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('dashboard') }}" aria-expanded="false">
                         <i class="icon-speedometer"></i>

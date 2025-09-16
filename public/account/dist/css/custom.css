@@ -275,3 +275,18 @@
 .img-rem-icon i{
 	font-size: 20px;
 }
+
+.floating-btn{
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.btn-bg-white{
+	background-color: #FFF;
+	color: #293c47 !important;
+	padding: 8px 5px;
+	width: 100%;
+	font-weight: 600;
+}

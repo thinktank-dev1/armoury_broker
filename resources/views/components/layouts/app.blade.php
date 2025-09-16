@@ -9,6 +9,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon.png') }}">
         <title>Armoury Broker</title>
         <link href="{{ asset('account/assets/node_modules/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('account/assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
         <link href="{{ asset('account/dist/css/style.min.css') }}" rel="stylesheet">
         <link href="{{ asset('account/dist/css/custom.css') }}" rel="stylesheet">
     </head>
@@ -24,7 +25,9 @@
             @include('livewire/account/partials/nav')
             <div class="page-wrapper">
                 {{ $slot }}
+                <a href="{{ url('add-product') }}" class="floating-btn btn btn-primary">+ ADD ITEM</a>
             </div>
+            {{--
             <footer class="footer">
                 <div class="row">
                     <div class="col-md-12">
@@ -33,6 +36,7 @@
                     </div>
                 </div>
             </footer>
+            --}}
         </div>
         <script src="{{ asset('account/assets/node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -43,6 +47,7 @@
         <script src="{{ asset('account/assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
         <script src="{{ asset('account/dist/js/custom.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+        <script src="{{ asset('account/assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
         @stack('scripts')
     </body>
 </html>

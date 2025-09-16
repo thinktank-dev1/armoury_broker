@@ -4,7 +4,7 @@
     <link href="{{ asset('account/assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h3 class="page-title bold">ACCOUNT SUMMARY</h3>
+            <h3 class="page-title bold">DASHBOARD</h3>
         </div>
     </div>
     <div class="row mt-3">
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                         <div class="text-center text-md-start col-md-9 ps-md-5 mt-3">
-                            <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
+                            <h3>{{ Auth::user()->vendor->name }}</h3>
                             @if(Auth::user()->vendor)
                             <div class="d-flex d-sm-flex justify-content-around justify-content-md-start">
                                 <div>
@@ -151,36 +151,38 @@
                             <div class="mb-2">
                                 <a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">
                                     <span class="d-sm-flex flex-column flex-md-row text-center">
-                                        <span class="order-2 order-md-1">
+                                        <i class="icon-share order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                        <span class="order-2 order-md-2">
                                             Share 
                                         </span>
-                                        <i class="icon-share order-1 order-md-2 ms-md-2 pt-md-1"></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="mb-2">
                                 <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">
                                     <span class="d-sm-flex flex-column flex-md-row text-center">
-                                        <span class="order-2 order-md-1">
+                                        <i class="icon-paper-clip order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                        <span class="order-2 order-md-2">
                                             Copy link 
                                         </span>
-                                        <i class="icon-paper-clip order-1 order-md-2 ms-md-2 pt-md-1"></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="mb-2">
                                 <a href="{{ url('messages') }}" class="link">
                                     <span class="d-sm-flex flex-column flex-md-row text-center">
-                                        <span class="order-2 order-md-1">
+                                        <i class="icon-envelope order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                        <span class="order-2 order-md-2">
                                             Messages 
                                         </span>
-                                        <i class="icon-envelope order-1 order-md-2 ms-md-2 pt-md-1"></i>
                                     </span>
                                 </a>
                             </div>
+                            {{--
                             <div class="mb-2 pt-2 pt-md-0">
                                 <a href="{{ url('my-armoury') }}" class="link"><u>View Profile</u></a>
                             </div>
+                            --}}
                         </div>
                     </div>
                     @endif

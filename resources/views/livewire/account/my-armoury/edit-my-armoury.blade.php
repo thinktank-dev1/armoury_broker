@@ -101,7 +101,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-md-12 d-grid mb-5">
+                                <div class="col-md-12">
                                     <input type="submit" class="btn btn-primary" wire:click.prevent="saveArmoury" value="{{ $btn_text }}">
                                 </div>
                             </div>
@@ -258,9 +258,17 @@
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" value="" id="terms_agreement" wire:model.defer="terms_agreement">
+                                            <label class="form-check-label" for="terms_agreement">
+                                                I accept the <a href="{{ url('docs/Terms%20of%20Use%20and%20User%20Agreement_AB_Courier%20amendments_v02_20250629.pdf') }}" target="_blank">Terms & Conditions</a>
+                                            </label>
+                                        </div>
+                                    </div>
                                     @endif
                                 </div>
-                                <div class="col-md-12 d-grid mt-3">
+                                <div class="col-md-12 mt-3">
                                     <input type="submit" class="btn btn-primary" wire:click.prevent="saveDealer" value="SAVE">
                                 </div>
                             </form>
@@ -301,6 +309,18 @@
             }
         })
         document.addEventListener('livewire:initialized', () => {
+            @this.on('success-message', (e) => {
+                console.log(e.message);
+                $.toast({
+                    heading: 'Success',
+                    text: e.message,
+                    position: 'top-right',
+                    loaderBg:'#ff6849',
+                    icon: 'success',
+                    hideAfter: 3500, 
+                    stack: 6
+                });
+            });
             @this.on('go-to-top', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });

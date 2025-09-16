@@ -28,6 +28,7 @@ class Register extends Component
         [
             'terms_and_condotions.required' => "You need to agree to the platform's T&Cs to proceed with your profile creation",
             'mobile_number.phone' => "Please enter a valid mobile number",
+            'email.email' => "The email field must contain a valid email address",
 
         ]);
 

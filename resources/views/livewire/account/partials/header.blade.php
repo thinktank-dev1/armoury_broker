@@ -1,7 +1,7 @@
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url('dashboard') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 <b class="">
                     <div class="d-none d-md-block">
                         <img src="{{ asset('img/logo.png') }}" alt="homepage" class="dark-logo" style="width: 160px;" />

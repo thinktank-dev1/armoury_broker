@@ -19,6 +19,7 @@ class EditMyArmoury extends Component
     public $dealer_stock_service, $join_dealer_network;
     public $business_name, $business_reg_number, $vat_number, $license_number, $d_street, $d_suburb, $d_town, $postal_code, $d_province, $billing_contact, $billing_email, $billing_contact_number, $dealer_stocking_fee, $ab_dealer_network_agreement, $license_agreement, $fee_agreement;
     public $view, $btn_text;
+    public $terms_agreement;
 
     public function mount(){
         $this->setStaticData();
@@ -99,7 +100,9 @@ class EditMyArmoury extends Component
             $this->view = "dealer";
         }
         else{
-            session()->flash('status', 'Vendor successfully saved.');    
+            session()->flash('status', 'Vendor successfully saved.');
+            $this->dispatch('success-message', message: "Vendor successfully saved.");
+            $this->redirect('/my-armoury'); 
         }
     }
 
@@ -111,7 +114,8 @@ class EditMyArmoury extends Component
                 'dealer_stocking_fee' => 'required', 
                 'ab_dealer_network_agreement' => 'required', 
                 'license_agreement' => 'required', 
-                'fee_agreement' => 'required'
+                'fee_agreement' => 'required',
+                'terms_agreement' => 'required',
             ]);
             $dealer = Dealer::where('user_id', Auth::user()->id)->first();
             if(!$dealer){
@@ -142,6 +146,8 @@ class EditMyArmoury extends Component
             $dealer->save();
 
             session()->flash('status', 'Dealer successfully saved. The team will review your details and add you to the dealer network.');
+            $this->dispatch('success-message', message: "Dealer successfully saved. The team will review your details and add you to the dealer network.");
+            $this->redirect('/my-armoury');
         }
     }
 
