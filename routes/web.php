@@ -13,6 +13,8 @@ use App\Livewire\Auth\Login;
 use App\Http\Controllers\SocialAuthController;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\VerifyEmail;
+use App\Livewire\Auth\ForgotPassword;
+use App\Livewire\Auth\PasswordReset;
 
 use App\Livewire\Landing\HomePage;
 use App\Livewire\Landing\Shop;
@@ -70,6 +72,8 @@ Route::get('auth/social-login/{social}', [SocialAuthController::class, 'socialLo
 Route::get('auth/social-login/{social}/callback', [SocialAuthController::class, 'handleProviderCallback'])->where('social','facebook|google');
 Route::get('auth/logout', [SocialAuthController::class, 'logout']);
 Route::get('auth/register', Register::class);
+Route::get('auth/forgot-password', ForgotPassword::class);
+Route::get('password-reset', PasswordReset::class)->name('password.reset');
 
 Route::get('/email/verify', VerifyEmail::class)->middleware('auth')->name('verification.notice');
 
