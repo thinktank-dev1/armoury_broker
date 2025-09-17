@@ -5,6 +5,8 @@ namespace App\Livewire\Account\MyArmoury;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+use App\Lib\Communication;
+
 use Auth;
 use App\Models\Vendor;
 use App\Models\Dealer;
@@ -105,6 +107,7 @@ class EditMyArmoury extends Component
         else{
             session()->flash('status', 'Vendor successfully saved.');
             $this->dispatch('success-message', message: "Vendor successfully saved.");
+            $this->sendWelcomeMessage();
             $this->redirect('/my-armoury'); 
         }
     }
@@ -150,8 +153,32 @@ class EditMyArmoury extends Component
 
             session()->flash('status', 'Dealer successfully saved. The team will review your details and add you to the dealer network.');
             $this->dispatch('success-message', message: "Dealer successfully saved. The team will review your details and add you to the dealer network.");
+            $this->sendWelcomeMessage();
             $this->redirect('/my-armoury');
         }
+    }
+
+    public function sendWelcomeMessage(){
+        $comm = new Communication();    
+        $user = Auth::user();
+        $data = [
+            'name' => $user->name,
+            'to' => $user->email,
+            'subject' => 'Welcome to Armoury Broker',
+            'message_body' => "
+                Welcome to Armoury Broker – we’re glad to have you on board!<br />
+                Here’s a quick guide to help you get started:<br />
+                <ul>
+                    <li><a href='".url('how-it-works')."'>How It Works</a> – Learn the basics of buying and selling with Armoury Broker.</li>
+                    <li><a href='".url('support')."'>FAQs</a> – Find answers to the most common questions.</li>
+                    <li><a href='".url('support')."'>Support</a> – Need help? Our team is ready to assist.</li>
+                </ul>
+                <br />
+                We’re excited to help you find exactly what you’re looking for.<br />
+                Happy trading,<br /><br /> 
+            "
+        ];
+        $comm->sendMail($data);
     }
 
     public function getData(){

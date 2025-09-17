@@ -272,6 +272,18 @@
     <body>
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
             <tr>
+                <td></td>
+                <td style="text-align: center;">
+                    <img src="{{ asset('img/logo.png') }}" class="logo" alt="Armoury Broker">
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
                 <td>&nbsp;</td>
                 <td class="container">
                     <div class="content">
@@ -281,7 +293,7 @@
                                 <td class="wrapper">
                                     <p>Hi {{ $name }}</p>
                                     {!! $message_body !!}
-                                    <p>Regards.</p>
+                                    <b>The Armoury Broker Team</b>
                                 </td>
                             </tr>
                         </table>
