@@ -27,113 +27,7 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h4 class="card-title">Create New Promo Code</h4>
-                </div>
-                <div class="card-body">
-                    <form wire:submit.prevent="createVendorPromoCode">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Type</label>
-                                    <div class="">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="code_type" id="code_type_per" value="percentage" wire:model.defer="code_type">
-                                            <label class="form-check-label" for="code_type_per">Percentage</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="code_type" id="code_type_value" value="value" wire:model.defer="code_type">
-                                            <label class="form-check-label" for="code_type_value">Rand Value</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Value</label>
-                                    <input type="number" class="form-control" name="vendor_promo_code_value" wire:model="vendor_promo_code_value">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control" name="name" wire:model.live="name">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Code</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" aria-describedby="button-gen" name="vendor_promo_code" wire:model.defer="vendor_promo_code">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-gen" wire:click.prevent="generateCode">Generate</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Start Date</label>
-                                    <input type="date" class="form-control" name="start_date" wire:model="start_date">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">End Date</label>
-                                    <input type="date" class="form-control" name="end_date" wire:model="end_date">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Start Time</label>
-                                    <input type="time" class="form-control" name="start_time" wire:model="start_time">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">End Time</label>
-                                    <input type="time" class="form-control" name="end_time" wire:model="end_time">
-                                </div>
-                            </div>
-                            <div class="col-md-12 d-grid mt-3">
-                                <input type="submit" class="btn btn-primary" value="Save Promo Code">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Buy New Gift Voucher</h4>
-                </div>
-                <div class="card-body">
-                    <form wire:submit.prevent="createPromoCode">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Amount</label>
-                                    <input type="number" class="form-control" name="amount" wire:model.live="amount">
-                                </div>
-                            </div>
-                            @if($amount)
-                                <div class="col-md-12 d-grid mt-3">
-                                    <input type="submit" class="btn btn-primary" value="Proceed To payment">
-                                </div>
-                                @if(Auth::user()->vendor)
-                                    @if(Auth::user()->vendor->balance() > $amount)
-                                        <div class="col-md-12 d-grid mt-3">
-                                            <a href="#" class="btn btn-secondary" wire:click.prevent="createPromoCode('wallet')">Pay With Wallet</a>
-                                        </div>
-                                    @endif
-                                @endif
-                            @endif
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <ul class="nav nav-tabs profile-tab" role="tablist" wire:ignore>
                     <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#promo_codes" role="tab" aria-selected="true">Promo Codes</a> </li>
@@ -147,7 +41,79 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <h3>Create New Promo Code</h3>
+                                        </div>
+                                        <form wire:submit.prevent="createVendorPromoCode">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Type</label>
+                                                        <div class="">
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="code_type" id="code_type_per" value="percentage" wire:model.defer="code_type">
+                                                                <label class="form-check-label" for="code_type_per">Percentage</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="code_type" id="code_type_value" value="value" wire:model.defer="code_type">
+                                                                <label class="form-check-label" for="code_type_value">Rand Value</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Value</label>
+                                                        <input type="number" class="form-control" name="vendor_promo_code_value" wire:model="vendor_promo_code_value">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Name</label>
+                                                        <input type="text" class="form-control" name="name" wire:model.live="name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Code</label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" aria-describedby="button-gen" name="vendor_promo_code" wire:model.defer="vendor_promo_code">
+                                                            <button class="btn btn-outline-secondary" type="button" id="button-gen" wire:click.prevent="generateCode">Generate</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Start Date</label>
+                                                        <input type="date" class="form-control" name="start_date" wire:model="start_date">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">End Date</label>
+                                                        <input type="date" class="form-control" name="end_date" wire:model="end_date">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Start Time</label>
+                                                        <input type="time" class="form-control" name="start_time" wire:model="start_time">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">End Time</label>
+                                                        <input type="time" class="form-control" name="end_time" wire:model="end_time">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 d-grid mt-3">
+                                                    <input type="submit" class="btn btn-primary" value="Save Promo Code">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-8">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -216,6 +182,33 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <h3>By New Gift Voucher</h3>
+                                        </div>
+                                        <form wire:submit.prevent="createPromoCode">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Amount</label>
+                                                        <input type="number" class="form-control" name="amount" wire:model.live="amount">
+                                                    </div>
+                                                </div>
+                                                @if($amount)
+                                                    <div class="col-md-12 d-grid mt-3">
+                                                        <input type="submit" class="btn btn-primary" value="Proceed To payment">
+                                                    </div>
+                                                    @if(Auth::user()->vendor)
+                                                        @if(Auth::user()->vendor->balance() > $amount)
+                                                            <div class="col-md-12 d-grid mt-3">
+                                                                <a href="#" class="btn btn-secondary" wire:click.prevent="createPromoCode('wallet')">Pay With Wallet</a>
+                                                            </div>
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            </div>
+                                        </form>
+                                    </div>
                                     <div class="col-md-12">
                                         @if($codes->count() > 0)
                                         <table class="table">
@@ -249,10 +242,12 @@
                                             </tbody>
                                         </table>
                                         @else
+                                        {{--
                                         <div class="text-center mt-5">
                                             <h1 class="text-muted">Get started</h1>
                                             <p>Your promo codes will show here when you purchase them.</p>
                                         </div>
+                                        --}}
                                         @endif
                                     </div>
                                 </div>
