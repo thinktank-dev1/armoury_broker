@@ -67,7 +67,7 @@
                 <div class="col-md-3 text-center">
                     <img src="{{ asset('img/icon2.png') }}">
                     <div class="mt-2">
-                        <p><b>24/48 Hour Reminders</b></p>
+                        <p><b>Reminders</b></p>
                     </div>
                 </div>
                 <div class="col-md-3 text-center">

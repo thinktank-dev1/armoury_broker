@@ -129,7 +129,7 @@
                             </div>
                         </div>
                         <div class="text-center text-md-start col-md-9 ps-md-5 mt-3">
-                            <h3>{{ Auth::user()->vendor->name }}</h3>
+                            <h3><a href="{{ url('profile') }}">{{ Auth::user()->vendor->name }}</a></h3>
                             @if(Auth::user()->vendor)
                             <div class="d-flex d-sm-flex justify-content-around justify-content-md-start">
                                 <div>

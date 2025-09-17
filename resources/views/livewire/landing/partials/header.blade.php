@@ -3,13 +3,13 @@
         <div class="container">
             <div class="nav_block">
                 <div class="row d-flex align-items-center">
-                    <div class="col-md-4 g-3">
+                    <div class="col-md-3 g-3">
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <img class="logo_light" src="{{ asset('img/logo.png') }}" alt="logo" />
                             <img class="logo_dark" src="{{ asset('img/logo.png') }}" alt="logo" />
                         </a>        
                     </div>
-                    <div class="col-md-8 text-center ms-md-auto text-md-end g-4 d-none d-md-block">
+                    <div class="col-md-9 text-center ms-md-auto text-md-end g-4 d-none d-md-block">
                         @if(!Auth::guest())
                         <a class="ms-3 bold" href="{{ url('dashboard') }}">Dashboard</a>
                         <a class="ms-3 bold" href="{{ url('wishlist') }}">Wishlist</a>

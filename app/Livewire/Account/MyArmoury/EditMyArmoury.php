@@ -44,7 +44,9 @@ class EditMyArmoury extends Component
             'suburb' => 'required',
             'city' => 'required',
             'province' => 'required',
+            'avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
         ]);
+
         if(Auth::user()->vendor_id && Vendor::find(Auth::user()->vendor_id)){
             $vendor = Vendor::find(Auth::user()->vendor_id);
         }
@@ -89,6 +91,7 @@ class EditMyArmoury extends Component
                 'contact_number' => "",
                 'message' => "Welcome to armory broker.",
                 'status' => 0,
+                ''
             ]);
         }
 
