@@ -37,8 +37,8 @@ class FakeData extends Command
      */
     public function handle(){
         // $this->createUsers();
-        // $this->init();
-        $this->changeShippingPices();
+        $this->init();
+        // $this->changeShippingPices();
     }
 
     public function changeShippingPices(){

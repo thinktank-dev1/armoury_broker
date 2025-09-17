@@ -22,6 +22,7 @@ class Shop extends Component
     public $static_min_price, $static_max_price, $max_price, $min_price;
     public $sort_by;
     public $search_key;
+    public $items_count;
 
     public function mount(){
         if(isset($_GET['category'])){
@@ -40,6 +41,8 @@ class Shop extends Component
             $this->search_key = $_GET['search'];
         }
         $this->setStaticData();
+
+        $this->items_count = 12;
     }
 
     #[On('brand-updated')]
@@ -101,6 +104,10 @@ class Shop extends Component
             'Most Popular',
         ];
         $this->results_count = 0;
+    }
+
+    public function loadMore(){
+        $this->items_count += 12;
     }
 
     #[Layout('components.layouts.landing')] 
@@ -170,8 +177,8 @@ class Shop extends Component
             }
             // if($this->sort_by == 'Most Popular')
         }
-        $products = $query->paginate(16);
-        $this->results_count = $products->total();
+        $products = $query->take($this->items_count)->get();
+        $this->results_count = $query->count();
         
         $min_max_query = Product::query();
         if(count($filters) > 0){

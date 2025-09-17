@@ -222,8 +222,10 @@
                         @endforeach
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            {{ $products->links() }}
+                        <div class="col-md-12 text-center">
+                            @if($results_count > $items_count)
+                            <a href="#" class="btn btn-primary-outline" wire:click.prevent="loadMore">Load More</a>
+                            @endif
                         </div>
                     </div>
                 </div>
