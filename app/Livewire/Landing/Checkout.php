@@ -435,7 +435,7 @@ class Checkout extends Component
 
     #[Layout('components.layouts.landing')] 
     public function render(){
-        $dealers = Dealer::where('business_province', Auth::user()->vendor->province)->orderBy('business_name', 'ASC')->get();
+        $dealers = Dealer::where('province', Auth::user()->vendor->province)->orderBy('business_name', 'ASC')->get();
         return view('livewire.landing.checkout', [
             'dealers' => $dealers
         ]);
