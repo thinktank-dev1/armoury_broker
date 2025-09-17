@@ -273,6 +273,11 @@
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
             <tr>
                 <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
                 <td style="text-align: center;">
                     <img src="{{ asset('img/logo.png') }}" style="width: 300px;" class="logo" alt="Armoury Broker">
                 </td>
