@@ -274,7 +274,7 @@
             <tr>
                 <td></td>
                 <td style="text-align: center;">
-                    <img src="{{ asset('img/logo.png') }}" class="logo" alt="Armoury Broker">
+                    <img src="{{ asset('img/logo.png') }}" style="width: 300px;" class="logo" alt="Armoury Broker">
                 </td>
                 <td></td>
             </tr>
