@@ -211,7 +211,12 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Province</label>
-                                            <input type="text" class="form-control" placeholder="Province" name="province" wire:model.defer="d_province">
+                                            <select class="form-control" placeholder="Province" name="province" wire:model.defer="d_province">
+                                                <option value="">Select Option</option>
+                                                @foreach($provinces AS $province)
+                                                <option value="{{ $province }}">{{ $province }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
