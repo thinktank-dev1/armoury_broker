@@ -17,13 +17,14 @@
         </div>
         <div class="row d-none" id="other-brands">
             @foreach($other_brands AS $brand)
-            <div class="col-6 col-md-2 mb-3">
-                <a href="{{ url('shop?brands='.$brand->slug) }}" class="hover_effect1">
+            <div class="col-6 col-md-2 mb-3" style="padding-right: 55px;">
+                <a href="{{ url('shop?brands='.$brand->slug) }}" class="hover_effect1" style="position: relative;">
                     @if($brand->brand_logo)
                     <img src="{{ asset('storage/'.$brand->brand_logo) }}" class="img-fluid">
                     @else
-                    <div class="brand-cont d-flex justify-content-center align-items-center">
-                        <h3 class="text-dark">{{ $brand->brand_name }}</h3>
+                    <div class="brand-container">
+                        <h3 class="text-dark text">{{ $brand->brand_name }}</h3>
+                        <img src="{{ asset('img/cat-placeholder-image.jpg') }}" class="img-fluid" alt="shop_banner_img3">
                     </div>
                     @endif
                 </a>

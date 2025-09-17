@@ -89,4 +89,27 @@
 .fixed-button {
     position: fixed;
     bottom: 20px;
+    right: 44.5%;
+}
+
+.brand-container{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    height: 100px;
+    overflow: hidden;
+}
+.brand-container .text {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.brand-container img {
+  width: 100%;
+  object-fit: cover;
 }
