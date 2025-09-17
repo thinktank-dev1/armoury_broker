@@ -209,7 +209,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-8">
                                         @if($codes->count() > 0)
                                         <table class="table">
                                             <thead>
