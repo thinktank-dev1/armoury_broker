@@ -17,11 +17,6 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-md-12 text-center">
-                <a href="{{ url('dashboard') }}" class="btn btn-secondary">Start Selling</a>
-            </div>
-        </div>
     </div>
     @endif
 </div>

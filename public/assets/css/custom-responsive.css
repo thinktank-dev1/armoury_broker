@@ -85,3 +85,8 @@
     cursor: pointer;
     user-select: none;
 }
+
+.fixed-button {
+    position: fixed;
+    bottom: 20px;
+}
