@@ -18,7 +18,7 @@
                         </div>
                         --}}
                         <div class="mt-3 mx-3 d-flex justify-content-around">
-                            <a href="https://www.facebook.com/share/1b3FRqbnJS/?mibextid=wwXIfr" target="_blank" class="btn btn-sqr"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.facebook.com/share/1b3FRqbnJS/?mibextid=wwXIfr" target="_blank" class="btn btn-sqr" style="padding: .375rem 1.099rem;"><i class="fab fa-facebook-f"></i></a>
                             <a href="https://www.instagram.com/armourybroker?igsh=MTU2amNjd2FlZzNqdw%3D%3D&utm_source=qr" target="_blank" class="btn btn-sqr"><i class=" fab fa-instagram"></i></a>
                             <a href="https://whatsapp.com/channel/0029VbAeBVdGU3BG6pu2kS3C" target="_blank" class="btn btn-sqr"><i class="fab fa-whatsapp"></i></a>
                         </div>
