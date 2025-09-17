@@ -114,3 +114,7 @@
   width: 100%;
   object-fit: cover;
 }
+
+.page-title{
+    font-weight: 700 !important;
+}

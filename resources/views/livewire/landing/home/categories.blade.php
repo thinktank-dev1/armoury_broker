@@ -1,8 +1,8 @@
-<div class="section pb_50 small_pt mt-5" id="categories">
+<div class="section pb_50 small_pt mt-3" id="categories">
     @if($categories->count() > 0)
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center mb-3">
+            <div class="col-md-12 text-center mb-5">
                 <h2 class="page-title">Categories</h2>
             </div>
         </div>
