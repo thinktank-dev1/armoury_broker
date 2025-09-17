@@ -32,7 +32,7 @@
         </div>
         <div class="row mt-3 mb-4">
             <div class="col-md-12 text-center">
-                <a href="javascript:void(0)" class="btn btn-secondary" id="brand-btn" onclick="showOtherCats()">View All</a>
+                <a href="javascript:void(0)" class="btn btn-secondary" id="brand-btn" onclick="showOtherBrands()">View All</a>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
 
     @push('scripts')
     <script>
-        function showOtherCats(){
+        function showOtherBrands(){
             var elem = $('#other-brands');
             if(elem.hasClass('d-none')){
                 $(elem).removeClass('d-none');

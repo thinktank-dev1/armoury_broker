@@ -49,7 +49,6 @@
         <livewire:landing.home.brands />
         <livewire:landing.home.featured />
         <livewire:landing.home.recently-added />
-
         <div class="row mt-3">
             <div class="col-md-12 text-center">
                 <a href="{{ url('dashboard') }}" class="btn btn-secondary fixed-button">Start Selling</a>
