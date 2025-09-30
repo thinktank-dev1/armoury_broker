@@ -210,7 +210,7 @@ h1, h2, h3, h4, h5, h6, p, a{
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	/*display: flex;*/
+	display: flex;
 	gap: 8px;
 	opacity: 0;
 	transition: opacity 0.3s ease;
