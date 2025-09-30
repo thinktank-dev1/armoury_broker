@@ -43,10 +43,12 @@
                                         <div class="img-cont d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
                                             @if($value)
                                                 @if($value->temporaryUrl())
-                                                <div class="preview-cont w-100 h-100">
-                                                    <img src="{{ $value->temporaryUrl() }}" class="prdt-img">
-                                                    <a href="#" wire:click.prevent="removeImage('{{ $key }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
-                                                </div>
+                                                    @if(str_starts_with($value->getMimeType(), 'image/'))
+                                                    <div class="preview-cont w-100 h-100">
+                                                        <img src="{{ $value->temporaryUrl() }}" class="prdt-img">
+                                                        <a href="#" wire:click.prevent="removeImage('{{ $key }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
+                                                    </div>
+                                                    @endif
                                                 @else
                                                 <img src="{{ asset('storage/'.$value) }}" class="img-responsive prdt-img">
                                                 @endif

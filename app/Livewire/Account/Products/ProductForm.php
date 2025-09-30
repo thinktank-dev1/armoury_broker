@@ -4,6 +4,7 @@ namespace App\Livewire\Account\Products;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
 
 use Auth;
 use App\Models\Vendor;
@@ -39,6 +40,18 @@ class ProductForm extends Component
         if($id){
             $this->cur_id = $id;
             $this->getData();
+        }
+    }
+
+    public function updatedProductImages(){
+        foreach($this->product_images AS $key => $img){
+            if($img){
+                $tp = $img->getMimeType();
+                if(!str_starts_with($tp, 'image/')){
+                    unset($this->product_images[$key]);
+                    $this->addError('error', 'Please upload images only');
+                }
+            }
         }
     }
 
@@ -241,10 +254,6 @@ class ProductForm extends Component
 
     public function setListingType($type){
         $this->listing_type = $type;
-    }
-
-    public function updatedProductImages($key,$val){
-        //dd($key,$val);
     }
 
     public function render(){

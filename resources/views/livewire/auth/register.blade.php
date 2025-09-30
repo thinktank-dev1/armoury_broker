@@ -28,7 +28,7 @@
                             <form wire:submit="RegisterUser">
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <div class="row mb-3">
+                                        <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <input type="text" class="form-control" placeholder="Name" name="name" wire:model.defer="name">
                                             </div>
@@ -50,7 +50,7 @@
                                             <div class="col-md-12">
                                                 <div class="password-wrapper">
                                                     <input type="password" class="form-control" placeholder="Password" id="password" name="password" wire:model.defer="password">
-                                                    <span id="togglePassword" class="toggle-icon">👁️</span>
+                                                    <span id="togglePassword" class="toggle-icon"><i class="fa fa-eye"></i></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
         togglePassword.addEventListener("click", () => {
             const isPassword = passwordInput.type === "password";
             passwordInput.type = isPassword ? "text" : "password";
-            togglePassword.textContent = isPassword ? "🙈" : "👁️"; // toggle icon
+            togglePassword.innerHTML = isPassword ? "<i class='fa fa-eye-slash'></i>" : "<i class='fa fa-eye'></i>";
         });
     </script>
     @endpush

@@ -46,7 +46,7 @@
         <div class="col-6 col-md-2">
             <div class="card img-container">
                 @if($product->images->count() > 0)
-                <img class="my-amoury-product-image img-fluid" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
+                <img style="border: 1px solid #CCC;" class="my-amoury-product-image img-fluid" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
                 @endif
                 <div class="card-body produc-details ps-0">
                     <div class="">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="overlay-icons">
                     <a href="{{ url('add-product/'.$product->id) }}"><i class=" icon-pencil"></i></a>
-                    <a href="{{ url('shop/product/'.$product->id) }}"><i class="icon-eye"></i></a>
+                    <a href="{{ url('shop/product/'.$product->id) }}">View</a>
                 </div>
             </div>
         </div>

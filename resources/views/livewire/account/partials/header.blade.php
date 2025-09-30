@@ -24,7 +24,7 @@
             <ul class="navbar-nav my-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('messages') }}" id="2"> 
-                        Messages <i class="ti-email"></i>
+                        Messages &nbsp;<i class="ti-email" style="font-size: 15px;"></i>
                         @if($msg_count)
                         <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                         @endif
@@ -36,7 +36,7 @@
                         @if(Auth::user()->avatar)
                             <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
                         @else
-                            <i class="ti-user"></i>
+                            &nbsp;<i class="ti-user" style="font-size: 15px;"></i>
                         @endif
                     </a>
                 </li>

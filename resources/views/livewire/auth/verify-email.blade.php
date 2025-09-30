@@ -38,7 +38,7 @@
                             @endif
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-12 text-center mb-5">
-                                    <b>Please check your inbox for an email verification.</b>
+                                    <b>We have sent a verification link to your email address.<br /><br /> Please check your inbox (and spam folder, just in case) and click the link to verify your account to log in.</b>
                                 </div>
                                 <div class="col-md-12 mb-5 text-center">
                                     <a href="" class="bnt btn-primary" wire:click.prevent="ResendEmail">Resend Email</a>

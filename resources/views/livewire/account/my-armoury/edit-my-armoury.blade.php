@@ -198,7 +198,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label class="form-label">Town</label>
+                                            <label class="form-label">City</label>
                                             <input type="text" class="form-control" placeholder="Town" name="town" wire:model.defer="d_town">
                                         </div>
                                     </div>
@@ -251,7 +251,7 @@
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="checkbox" value="" id="license_agreement" wire:model.defer="license_agreement">
                                             <label class="form-check-label" for="license_agreement">
-                                                I have an active dealer license number
+                                                I have an active dealer license number.
                                             </label>
                                         </div>
                                     </div>
@@ -293,8 +293,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="text-center">
-                        <h2>Welcome to <br />Armoury Broker</h2>
-                        <p>Your account has been successfully created. Follow the steps to set up your armoury</p>
+                        <h2>Welcome</h2>
+                        <p>Your account has been successfully created. Follow the steps to set up your armoury.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
