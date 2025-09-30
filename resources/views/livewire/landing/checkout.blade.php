@@ -306,7 +306,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-4 text-center">
-                    <a href="#" class="btn btn-primary" wire:click.prevent="processPayment">Proceed with payment</a>
+                    <a href="#" class="btn btn-secondary" wire:click.prevent="processPayment">Proceed with payment</a>
                     @if(Auth::user()->wallet_total() > $cart_total)
                     <a href="#"class="btn btn-primary-outline" wire:click.prevent="processPayment('wallet')">Pay with wallet</a>
                     @endif

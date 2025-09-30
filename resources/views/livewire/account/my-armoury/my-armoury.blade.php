@@ -46,13 +46,15 @@
         <div class="col-6 col-md-2">
             <div class="card img-container">
                 @if($product->images->count() > 0)
-                <img style="border: 1px solid #CCC;" class="my-amoury-product-image img-fluid" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
+                <div class="w-100 amoury-img-cont">
+                    <img class="my-amoury-product-image img-fluid" src="{{ asset('storage/'.$product->images->first()->image_url) }}" alt="Card image cap">
+                </div>
                 @endif
                 <div class="card-body produc-details ps-0">
-                    <div class="">
-                        <h3>R{{ number_format($product->item_price, 2) }}</h3>
+                    <div class="p-0 m-0">
+                        <h3 class="p-0 m-0">R{{ number_format($product->item_price, 2) }}</h3>
                     </div>
-                    <p class="m-b-0 m-t-10" style="text-transform: uppercase;">{{ $product->item_name }}</p>
+                    <p class="m-b-0 mt-0" style="text-transform: uppercase;">{{ $product->item_name }}</p>
                 </div>
                 <div class="overlay-icons">
                     <a href="{{ url('add-product/'.$product->id) }}"><i class=" icon-pencil"></i></a>

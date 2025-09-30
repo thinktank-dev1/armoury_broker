@@ -34,7 +34,7 @@
                     <a class="nav-link  waves-effect waves-light d-flex align-items-center h-100" href="{{ url('profile') }}">
                         Profile
                         @if(Auth::user()->avatar)
-                            <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
+                            &nbsp;<img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
                         @else
                             &nbsp;<i class="ti-user" style="font-size: 15px;"></i>
                         @endif

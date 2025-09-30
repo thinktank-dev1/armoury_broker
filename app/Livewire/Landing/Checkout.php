@@ -270,6 +270,9 @@ class Checkout extends Component
 
     #[On('update-quantity')]
     public function updateQuantity($id,$qty){
+        if($qty < 1){
+            $qty = 1;
+        }
         if($id){
             $itm = OrderItem::find($id);
             if($itm){

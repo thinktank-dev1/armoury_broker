@@ -148,7 +148,7 @@
                             <div class="col-md-12 mt-3">
                                 <div class="form-group">
                                     <label class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" placeholder="Quantity" name="quantity" wire:model.defer="quantity"> 
+                                    <input type="number" class="form-control" placeholder="Quantity" name="quantity" wire:model.live="quantity"> 
                                 </div>
                             </div>
                             @if($category)

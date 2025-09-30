@@ -94,7 +94,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="text-center mt-5">
-                                <h1 class="text-muted">Get started</h1>
                                 <p>Your orders will show here when customers purchase them.</p>
                             </div>
                         </div>

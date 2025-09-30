@@ -1,3 +1,15 @@
+body{
+	font-family: "Montserrat", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 16px;
+	color: #0f1f24;
+}
+h1, h2, h3, h4, h5, h6, p, a{
+    color: #0f1f24;
+    font-family: "Montserrat", sans-serif;
+}
 .light-logo, .dark-logo{
 	width: 200px;
 }
@@ -198,8 +210,8 @@
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	display: flex;
-	gap: 10px;
+	/*display: flex;*/
+	gap: 8px;
 	opacity: 0;
 	transition: opacity 0.3s ease;
 }
@@ -208,8 +220,9 @@
 	color: #000;
 	background: rgba(255,255,255,0.8);
 	padding: 8px;
-	font-size: 20px;
+	font-size: 16px;
 	text-decoration: none;
+	font-weight: 300;
 }
 .overlay-icons a:hover{
 	background-color: #d65027;
@@ -289,4 +302,12 @@
 	padding: 8px 5px;
 	width: 100%;
 	font-weight: 600;
+}
+
+.amoury-img-cont{
+	border: 1px solid #CCC;
+}
+.amoury-img-cont img{
+	width: 100%;
+	object-fit: cover;
 }

@@ -43,6 +43,12 @@ class ProductForm extends Component
         }
     }
 
+    public function updatedQuantity(){
+        if($this->quantity < 1){
+            $this->quantity = 1;
+        }
+    }
+
     public function updatedProductImages(){
         foreach($this->product_images AS $key => $img){
             if($img){

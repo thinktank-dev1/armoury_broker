@@ -8,6 +8,11 @@
         <meta name="author" content="">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon.png') }}">
         <title>Armoury Broker</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
         <link href="{{ asset('account/assets/node_modules/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
         <link href="{{ asset('account/assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
         <link href="{{ asset('account/dist/css/style.min.css') }}" rel="stylesheet">
