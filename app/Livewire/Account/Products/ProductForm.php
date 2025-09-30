@@ -192,6 +192,7 @@ class ProductForm extends Component
             }
         }
         session()->flash('status', 'Product successfully listed.');
+        return redirect('my-armoury');
     }
 
     public function addShippingType(){
