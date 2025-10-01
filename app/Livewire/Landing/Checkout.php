@@ -49,7 +49,7 @@ class Checkout extends Component
         $this->payment_url = env('PAYFAST_SANDBOX_URL');
         $this->getCart();
 
-        $this->address = Auth::user()->vendor->street."\n".Auth::user()->vendor->suburb."\n".Auth::user()->vendor->city."\n".Auth::user()->vendor->province."\n".Auth::user()->vendor->postal_code;
+        $this->address = Auth::user()->vendor->suburb."\n".Auth::user()->vendor->city."\n".Auth::user()->vendor->province."\n";
 
         $this->has_vendor_promo_codes = false;
         $vnd = Vendor::find($this->vendor_id);

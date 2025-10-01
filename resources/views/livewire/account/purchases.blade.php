@@ -90,7 +90,7 @@
                         <div class="col-md-12">
                             <div class="text-center mt-5">
                                 <h1 class="text-muted">Get started</h1>
-                                <p>Your purchases will show here.</p>
+                                <p>Your purchases will show here when you start buying.</p>
                             </div>
                         </div>
                     </div>

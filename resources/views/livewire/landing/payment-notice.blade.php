@@ -19,7 +19,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-12 mb-5 text-center">
-                                    <a href="{{ url('shop') }}" class="bnt btn-primary">Continue Shopping</a>
+                                    <a href="{{ url('shop') }}" class="btn btn-secondary">Continue Shopping</a>
                                 </div>
                             </div>
                         </div>

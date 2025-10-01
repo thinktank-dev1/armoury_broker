@@ -2,7 +2,7 @@
     <div class="footer_top">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 mt-4 mt-md-0">
+                <div class="col-md-3 mt-4 mt-md-0 pe-0 pe-md-5">
                     <div class="widget text-center">
                         <div class="footer_logo text-center">
                             <a href="#"><img src="{{ asset('img/footer_logo.png') }}" alt="logo"/></a>
@@ -10,13 +10,6 @@
                         <div class="text-center footer-right-p mt-2">
                             <p>The trading platform built specifically for South Africa's firearm and tactical equipment community.</p>
                         </div>
-                        {{--
-                        <div class="mt-3 d-flex justify-content-around">
-                            <a href="#"><img src="{{ asset('img/fb.png') }}"></a>
-                            <a href="#"><img src="{{ asset('img/ins.png') }}"></a>
-                            <a href="#"><img src="{{ asset('img/wa.png') }}"></a>
-                        </div>
-                        --}}
                         <div class="mt-3 mx-3 d-flex justify-content-around">
                             <a href="https://www.facebook.com/share/1b3FRqbnJS/?mibextid=wwXIfr" target="_blank" class="btn btn-sqr" style="padding: .375rem 1.099rem;"><i class="fab fa-facebook-f"></i></a>
                             <a href="https://www.instagram.com/armourybroker?igsh=MTU2amNjd2FlZzNqdw%3D%3D&utm_source=qr" target="_blank" class="btn btn-sqr"><i class=" fab fa-instagram"></i></a>
@@ -24,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 mt-4 mt-md-0">
+                <div class="col-md-2 mt-4 mt-md-0 pe-0 pe-md-5">
                     <div class="widget text-center text-md-start">
                         <h6 class="widget_title">Quick Links</h6>
                         <ul class="widget_links">
@@ -37,7 +30,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 mt-4 mt-md-0">
+                <div class="col-md-3 mt-4 mt-md-0 pe-0 pe-md-5">
                     <div class="widget text-center text-md-start">
                         @if(Auth::guest())
                         <a href="{{ url('auth/login') }}"><h6 class="widget_title">Register / Login</h6></a>

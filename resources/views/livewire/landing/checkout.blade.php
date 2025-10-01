@@ -1,5 +1,5 @@
 <div>
-    <div class="section py-5">
+    <div class="section py-5 bg-grey">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 @endif
-                <div class="col-md-12 mt-3 bg-grey p-3">
+                <div class="col-md-12 mt-3 p-3">
                     <b>Cart Items</b>
                     <div class="shop_cart_table mt-3">
                         <div class="accordion" id="accordion_checkout">
@@ -215,7 +215,12 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </div>
+    </div>
+    <div class="section py-5">
+        <div class="container">
+            <div class="row">
                 <div class="col-md-12 mt-4">
                     <h2 class="page-title pb-0 mb-0">Platform Fees</h2>
                     <p><small><b>Please Note: </b>Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on a 50-50 basis.</small></p>

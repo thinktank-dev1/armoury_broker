@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex">
-                                <h4 class="card-title">{{ ucwords($f_item->vendor->name) }}</h4>
+                                <h4 class="card-title text-bold">{{ ucwords($f_item->vendor->name) }}</h4>
                                 <div class="ms-auto">
                                     <a href="{{ url('cart/'.$f_item->vendor->id) }}" class="btn btn-primary-outline">Checkout</a>
                                 </div>

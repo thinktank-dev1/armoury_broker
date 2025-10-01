@@ -184,7 +184,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <h3>By New Gift Voucher</h3>
+                                            <h3>Purchase a Gift Voucher</h3>
                                         </div>
                                         <form wire:submit.prevent="createPromoCode">
                                             <div class="row">
@@ -216,7 +216,7 @@
                                                 <tr>
                                                     <th>Code</th>
                                                     <th>Status</th>
-                                                    <th>Payment Reff</th>
+                                                    <th>Payment Ref</th>
                                                     <th>Payment Type</th>
                                                     <th>Payment Status</th>
                                                     <th class="text-end">Amount</th>

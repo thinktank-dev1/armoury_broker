@@ -369,14 +369,14 @@ footer .widget {
 	height: 40px;
 }
 .form-control:focus{
-	border-radius: 2px;
+	/*border-radius: 2px;*/
 	border: 1px solid #0f1f24;
-	padding: 8px 12px;
+	/*padding: 8px 12px;*/
 	height: 40px;
 }
 .cat-text{
 	position: absolute;
-  	top: 63%;
+  	top: 77%;
   	left: 0%;
   	transform: none;
   	padding: 10px 20px;
