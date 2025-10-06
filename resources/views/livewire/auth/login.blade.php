@@ -34,7 +34,7 @@
                                         <div class="mb-3">
                                             <div class="password-wrapper">
                                                 <input type="password" class="form-control" placeholder="Password" id="password" name="password" wire:model.defer="password">
-                                                <span id="togglePassword" class="toggle-icon">👁️</span>
+                                                <span id="togglePassword" class="toggle-icon"><i class="fa fa-eye"></i></span>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
         togglePassword.addEventListener("click", () => {
             const isPassword = passwordInput.type === "password";
             passwordInput.type = isPassword ? "text" : "password";
-            togglePassword.textContent = isPassword ? "🙈" : "👁️"; // toggle icon
+            togglePassword.innerHTML = isPassword ? "<i class='fa fa-eye-slash'></i>" : "<i class='fa fa-eye'></i>";
         });
     </script>
     @endpush
