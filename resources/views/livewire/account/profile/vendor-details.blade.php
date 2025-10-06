@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-12">Vendor Name</label>
+                                    <label class="form-label">Vendor Name</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="name" wire:model.defer="name">
                                     </div>
@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-12">Description</label>
+                                    <label class="form-label">Description</label>
                                     <div class="col-md-12">
                                         <textarea class="form-control form-control-line" name="decription" wire:model.defer="decription"></textarea>
                                     </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Tel</label>
+                                    <label class="form-label">Tel</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="tel" wire:model.defer="tel">
                                     </div>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Email</label>
+                                    <label class="form-label">Email</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="email" wire:model.defer="email">
                                     </div>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Street</label>
+                                    <label class="form-label">Street</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="street" wire:model.defer="street">
                                     </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Suburb</label>
+                                    <label class="form-label">Suburb</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="suburb" wire:model.defer="suburb">
                                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">City</label>
+                                    <label class="form-label">City</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="city" wire:model.defer="city">
                                     </div>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Country</label>
+                                    <label class="form-label">Country</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="country" wire:model.defer="country">
                                     </div>

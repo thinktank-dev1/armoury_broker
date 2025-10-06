@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Name</label>
+                                    <label class="form-label">Name</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="name" wire:model.defer="name">
                                     </div>
@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Surname</label>
+                                    <label class="form-label">Surname</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="surname" wire:model.defer="surname">
                                     </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-12">Mobile Number</label>
+                                    <label class="form-label">Mobile Number</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="mobile_number" wire:model.defer="mobile_number">
                                     </div>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-12">Email</label>
+                                    <label class="form-label">Email</label>
                                     <div class="col-md-12">
                                         <input type="email" class="form-control form-control-line" name="email" wire:model.defer="email">
                                     </div>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-12">Password</label>
+                                    <label class="form-label">Password</label>
                                     <div class="col-md-12">
                                         <input type="password" class="form-control form-control-line" name="password" wire:model.defer="password">
                                     </div>

@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Business Name</label>
+                                    <label class="form-label">Business Name</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="business_name" wire:model.defer="business_name">
                                     </div>
@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Business Registration Number</label>
+                                    <label class="form-label">Business Registration Number</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="business_reg_number" wire:model.defer="business_reg_number">
                                     </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">VAT Number</label>
+                                    <label class="form-label">VAT Number</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="vat_number" wire:model.defer="vat_number">
                                     </div>
@@ -49,7 +49,7 @@
                             </div>                           
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-12">Fire Arms Dealer License Number</label>
+                                    <label class="form-label">Fire Arms Dealer License Number</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="license_number" wire:model.defer="license_number">
                                     </div>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Street</label>
+                                    <label class="form-label">Street</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="street" wire:model.defer="street">
                                     </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Suburb</label>
+                                    <label class="form-label">Suburb</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="suburb" wire:model.defer="suburb">
                                     </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Town</label>
+                                    <label class="form-label">Town</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="town" wire:model.defer="town">
                                     </div>
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Postal Code</label>
+                                    <label class="form-label">Postal Code</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="postal_code" wire:model.defer="postal_code">
                                     </div>
@@ -89,7 +89,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-12">Province</label>
+                                    <label class="form-label">Province</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="province" wire:model.defer="province">
                                     </div>
@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Billing contact</label>
+                                    <label class="form-label">Billing contact</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="billing_contact" wire:model.defer="billing_contact">
                                     </div>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Billing Contact Number</label>
+                                    <label class="form-label">Billing Contact Number</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="billing_contact_number" wire:model.defer="billing_contact_number">
                                     </div>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-12">Dealer Stocking Fee</label>
+                                    <label class="form-label">Dealer Stocking Fee</label>
                                     <div class="col-md-12 input-group">
                                         <span class="input-group-text">R</span>
                                         <input type="text" style="padding-left: 10px" class="form-control form-control-line" name="dealer_stocking_fee" wire:model.defer="dealer_stocking_fee">
