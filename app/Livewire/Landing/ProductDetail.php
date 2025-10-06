@@ -17,6 +17,7 @@ class ProductDetail extends Component
     public $quantity;
     public $offer_amount;
     public $availability;
+    public $qty;
 
     public function mount($id){
         $this->product = Product::find($id);
@@ -29,7 +30,12 @@ class ProductDetail extends Component
         })
         ->sum('quantity');
 
-        $this->quantity = $itms_count;
+        if($itms_count > 0){
+            $this->quantity = $itms_count;
+        }
+        else{
+            $this->quantity = 1;
+        }
         
         if($qty <= $itms_count){
             $this->availability = false;

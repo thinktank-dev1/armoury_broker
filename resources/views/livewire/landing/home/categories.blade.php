@@ -26,9 +26,9 @@
                         @if($cat->category_image)
                         <img src="{{ asset('storage/'.$cat->category_image) }}" alt="shop_banner_img3">
                         @else
-                        <img src="{{ asset('img/cat-placeholder-image.jpg') }}" alt="shop_banner_img3">
+                        <img src="{{ asset('img/CATEGORIES - PLACEHOLDER.png') }}" alt="shop_banner_img3">
                         @endif
-                        <div class="cat-text text-21 @if(!$cat->category_image) text-overlay @endif"><h3>{{ $cat->category_name }}</h3></div>
+                        <div class="cat-text text-21"><h3>{{ $cat->category_name }}</h3></div>
                     </a>
                 </div>
             </div>

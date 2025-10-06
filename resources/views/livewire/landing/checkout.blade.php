@@ -52,7 +52,7 @@
                                         </button>
                                     </h2>
                                     <div id="collapse_{{ $item['id'] }}" class="faq accordion-collapse collapse {{ $show }}" aria-labelledby="heading_{{ $item['id'] }}" data-bs-parent="#accordion__checkout" wire:ignore.self>
-                                        <div class="accordion-body">
+                                        <div class="accordion-body" style="background-color: #FFF;">
                                             <div class="row">
                                                 <ul class="list-group">
                                                     <li class="list-group-item d-flex">

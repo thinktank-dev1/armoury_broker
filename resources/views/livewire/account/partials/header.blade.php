@@ -36,7 +36,8 @@
                         @if(Auth::user()->avatar)
                             &nbsp;<img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
                         @else
-                            &nbsp;<i class="ti-user" style="font-size: 15px;"></i>
+                            <!-- &nbsp;<i class="ti-user" style="font-size: 15px;"></i> -->
+                            &nbsp;<img src="{{ asset('img/PROFILE PIC.png') }}" class="round_head img-fluid">
                         @endif
                     </a>
                 </li>
