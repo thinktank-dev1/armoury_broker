@@ -46,7 +46,7 @@ class EditMyArmoury extends Component
             'suburb' => 'required',
             'city' => 'required',
             'province' => 'required',
-            'avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
+            'avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg,webp',
         ]);
 
         if(Auth::user()->vendor_id && Vendor::find(Auth::user()->vendor_id)){
@@ -153,6 +153,10 @@ class EditMyArmoury extends Component
 
             session()->flash('status', 'Dealer successfully saved. The team will review your details and add you to the dealer network.');
             $this->dispatch('success-message', message: "Dealer successfully saved. The team will review your details and add you to the dealer network.");
+            $this->sendWelcomeMessage();
+            $this->redirect('/my-armoury');
+        }
+        else{
             $this->sendWelcomeMessage();
             $this->redirect('/my-armoury');
         }

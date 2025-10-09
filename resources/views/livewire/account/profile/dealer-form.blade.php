@@ -22,8 +22,48 @@
                     </div>
                     @endif
                     <form class="form-horizontal form-material" wire:submit.prevent="saveDealer">
+                        <div class="col-md-12 mb-5">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="dealer_stock_service" value="" name="dealer_stock_service" wire:model.live="dealer_stock_service">
+                                <label class="form-check-label" for="dealer_stock_service">
+                                    Do you offer dealer stocking as a service? 
+                                </label>
+                            </div>
+                        </div>
+                        @if($dealer_stock_service)
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="join_dealer_network" wire:model.live="join_dealer_network">
+                                        <label class="form-check-label" for="join_dealer_network">
+                                            Would you like to join our dealer network?
+                                        </label>
+                                    </div>
+                                </div>
+                                <p><small>As part of our firearms sales process, dealer stocking may be required. We're building a network of certified dealers to facilitate this service.</small></p>
+                                <b>How it works</b>
+                                <p>
+                                    <small>
+                                        <ul>
+                                            <li>Seller nomination - When listing firearms, sellers can nominate you as their preferred dealer</li>
+                                            <li>Buyer connection - After purchase, buyers coordinate with sellers to arrange dealer stocking and receive your business details</li>
+                                            <li>Service arrangement - You can set a monthly fee on the platform and collect fees directly with buyers for this service</li>
+                                        </ul>
+                                    </small>
+                                </p>
+                                <b>Fees</b>
+                                <small>
+                                    <p>
+                                        Set your own monthly dealer stocking fee<br/>
+                                        Armoury Broker charges dealers 5% on successful referrals (monthly billing for "dealer stocked" sales)<br/>
+                                        Sales are marked as complete when items are released to buyers.
+                                    </p>
+                                </small>
+                            </div>
+                        @endif
+                        @if($join_dealer_network)
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label">Business Name</label>
                                     <div class="col-md-12">
@@ -31,7 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label">Business Registration Number</label>
                                     <div class="col-md-12">
@@ -39,7 +79,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label">VAT Number</label>
                                     <div class="col-md-12">
@@ -91,7 +131,12 @@
                                 <div class="form-group">
                                     <label class="form-label">Province</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="province" wire:model.defer="province">
+                                        <select class="form-control form-control-line" name="province" wire:model.defer="province">
+                                            <option value="">Select Option</option>
+                                            @foreach($provinces AS $pr)
+                                            <option value="{{ $pr }}">{{ $pr }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -128,13 +173,55 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(Auth::user()->dealer)
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="opt_out_dealer_network" wire:model.live="opt_out_dealer_network">
+                                        <label class="form-check-label" for="opt_out_dealer_network">
+                                            Would you like to opt out of our dealer network?
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             <div class="col-md-12 mt-3">
                                 <input type="submit" class="btn btn-primary" value="Update Details">
                             </div>
                         </div>
+                        @endif
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('go-to-top', () => {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            });
+            @this.on('show-opt-out-confirmation', () => {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    // icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#293c47",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, opt out!"
+                }).then((result) => {
+                    if (result.value == true) {
+                        @this.dispatch('opt-out-confirmed');
+                        Swal.fire({
+                            title: "Success!",
+                            text: "You have been removed from dealer network list.",
+                            // icon: "success"
+                        });
+                    }
+                });
+            })
+        });
+    </script>
+    @endpush
 </div>

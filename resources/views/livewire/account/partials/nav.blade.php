@@ -12,7 +12,7 @@
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('/') }}" aria-expanded="false">
                         <i class="icon-home"></i>
-                        <span class="hide-menu">Home</span>
+                        <span class="hide-menu">Shop Now</span>
                     </a>
                 </li>
                 @if(Auth::user()->role->name == "admin")

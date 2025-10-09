@@ -6,10 +6,14 @@
                     <div class="card-body">
                         <center class="m-t-30"> 
                             <div class="profile-pic">
-                                @if(Auth::user()->avatar)
-                                <img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="circle img-fluid" width="150">
+                                @if(Auth::user()->vendor)
+                                    @if(Auth::user()->vendor->avatar)
+                                        <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle img-fluid" width="150">
+                                    @else
+                                        <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle img-fluid" width="150">
+                                    @endif
                                 @else
-                                <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle img-fluid" width="150">
+                                    <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle img-fluid" width="150">
                                 @endif
                                 <span class="edit-btn">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>
@@ -42,13 +46,13 @@
             </div>
             <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
-                    <ul class="nav nav-tabs profile-tab" role="tablist" wire:ignore>
-                        <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab" aria-selected="true">Profile</a> </li>
+                    <ul class="nav nav-tabs profile-tab" role="tablist" wire:ignore.self>
+                        <li class="nav-item" wire:ignore> <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab" aria-selected="true">Profile</a> </li>
                         @if(Auth::user()->vendor_id)
-                        <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">Vendor</a> </li>
+                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">Vendor</a> </li>
                         @endif
-                        @if(Auth::user()->dealer)
-                        <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#dealer" role="tab" aria-selected="false">Dealer</a> </li>
+                        @if(Auth::user()->vendor_id)
+                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#dealer" role="tab" aria-selected="false">Dealer</a> </li>
                         @endif
                     </ul>
                     <div class="tab-content">

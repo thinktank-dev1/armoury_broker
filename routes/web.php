@@ -63,7 +63,7 @@ Route::get('how-it-works', HowItWorks::class);
 Route::get('privacy-policy', PrivacyPolicy::class);
 Route::get('terms-and-conditions', TermsConaditions::class);
 
-Route::get('shop', Shop::class);
+Route::get('shop', Shop::class)->name('shop');
 Route::get('shop/product/{id}', ProductDetail::class);
 Route::get('cart', CartList::class);
 

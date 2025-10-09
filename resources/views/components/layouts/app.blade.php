@@ -15,6 +15,9 @@
 
         <link href="{{ asset('account/assets/node_modules/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
         <link href="{{ asset('account/assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+
+         <link href="{{ asset('account/dist/css/pages/stylish-tooltip.css') }}" rel="stylesheet">
+
         <link href="{{ asset('account/dist/css/style.min.css') }}" rel="stylesheet">
         <link href="{{ asset('account/dist/css/custom.css') }}" rel="stylesheet">
     </head>

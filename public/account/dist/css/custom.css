@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6, p, a{
 	background-color: #293c47 !important;
 }
 .skin-default-dark .topbar .top-navbar .navbar-header {
-    background: #293c47;
+    background: #e6e6e6;
 }
 .skin-default-dark .topbar {
     background: #e6e6e6;
@@ -320,4 +320,86 @@ h1, h2, h3, h4, h5, h6, p, a{
 }
 label{
 	/*font-weight: 600 !important;*/
+}
+.btn-danger {
+    color: #FFF;
+    background-color: #e46a76;
+    border-color: #e46a76;
+    border-radius: 0px;
+}
+.circle-dash-avatar{
+	width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.text-small{
+	font-size: 15px;
+}
+
+.ribbon {
+  	position: relative;
+  	background: #f5f5f5;
+  	color: #555;
+  	font-size: 14px;
+  	text-align: center;
+  	padding: 50px 20px;
+  	width: 100px;
+}
+
+.ribbon::after {
+  	content: "";
+  	position: absolute;
+  	bottom: -15px;
+  	left: 0;
+  	width: 0;
+  	height: 0;
+  	border-left: 50px solid transparent;
+  	border-right: 50px solid transparent;
+  	border-top: 15px solid #f5f5f5;
+}
+@media (min-width: 768px) {
+    .navbar-header {
+        width: 420px;
+        flex-shrink: 0;
+    }
+}
+
+.order-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+}
+.order-box {
+	flex: 1 1 120px;
+	min-width: 120px;
+	max-width: 180px;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 1.5rem 0.5rem;
+	/*background: #fff;*/
+}
+.order-box .count {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #000;
+}
+.order-box .label {
+	margin-top: 0.5rem;
+	color: #555;
+	font-size: 0.95rem;
+}
+.tooltip-item {
+    background: transparent !important;
+}
+
+.tooltip-content-end {
+    left: -350%;
+}
+.tooltip-content-top {
+    bottom: -2666%;
+}
+.tooltip-content::after {
+	border-top-color: transparent;	
 }

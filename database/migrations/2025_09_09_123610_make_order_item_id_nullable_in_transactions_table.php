@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->string('order_item_id')->nullable(false)->change();
+            // $table->string('order_item_id')->nullable(false)->change();
         });
     }
 };

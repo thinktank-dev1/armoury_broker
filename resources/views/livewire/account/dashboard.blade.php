@@ -7,130 +7,33 @@
             <h3 class="page-title bold">DASHBOARD</h3>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-lg-3 col-md-6">
+    <div class="row">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
+                    <h4 class="card-title">My Armoury</h4>
                     <div class="row">
-                        <div class="col-3 col-md-4 align-self-center">
-                            <div class="">
-                                <div class="round align-self-center round-primary">
-                                    <i class="icon-basket"></i>
-                                </div>
-                            </div>
+                        <div class="col-md-4">
+                            <center class="profile-pic m-t-30">
+                                <div class="d-flex justify-content-center">
+                                    @if(Auth::user()->vendor)
+                                        @if(Auth::user()->vendor->avatar)
+                                            <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle-dash-avatar" />
+                                        @else
+                                            <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle-dash-avatar" />
+                                        @endif
+                                    @else
+                                        <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle-dash-avatar" />
+                                    @endif
+                                    <span class="edit-btn">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>
+                                    </span>
+                                </div> 
+                            </center>
                         </div>
-                        <div class="col p-l-0">
-                            <h5 class="text-muted m-b-0 bold text-black">Orders</h5>
-                            <h3 class="m-b-0 bold">{{ $orders }}</h3>
-                            <div class="mt-2">
-                                <a href="{{ url('my-orders') }}" class="text-black"><u>View Details</u></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-3 col-md-4 align-self-center">
-                            <div class="">
-                                <div class="round align-self-center round-primary">
-                                    <i class="icon-list"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col p-l-0">
-                            <h5 class="text-muted m-b-0 bold text-black">Listed Items</h5>
-                            <h3 class="m-b-0 bold">{{ $listed }}</h3>
-                            <div class="mt-2">
-                                <a href="{{ url('my-armoury') }}" class="text-black"><u>View Details</u></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-3 col-md-4 align-self-center">
-                            <div class="">
-                                <div class="round align-self-center round-primary">
-                                    <i class="icon-basket-loaded"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col p-l-0">
-                            <h5 class="text-muted m-b-0 bold text-black">Purchases</h5>
-                            <h3 class="m-b-0 bold">{{ $purchases }}</h3>
-                            <div class="mt-2">
-                                <a href="{{ url('my-purchases') }}" class="text-black"><u>View Details</u></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card bg-dark-blue">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-3 col-md-4 align-self-center">
-                            <div class="">
-                                <div class="round align-self-center round-white">
-                                    <i class="icon-wallet"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col p-l-0">
-                            <h5 class="text-muted m-b-0 bold text-white">Wallet Total</h5>
+                        <div class="col-md-8 ps-3 pt-4">
                             @if(Auth::user()->vendor)
-                            <h3 class="m-b-0 bold text-white">{{ number_format(Auth::user()->vendor->balance() , 2) }}</h3>
-                            @else
-                                <h3 class="m-b-0 bold text-white">0.00</h3>
-                            @endif
-                            <div class="mt-2">
-                                <a href="{{ url('my-vault') }}" class="text-white"><u>View Details</u></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-3" wire:ignore>
-        <div class="col-md-6 h-100" wire:ignore>
-            <div class="card h-100" wire:ignore>
-                <div class="card-body h-100" wire:ignore>
-                    <h4 class="card-title">Order Analytics</h4>
-                    <div class="ct-bar-chart" style="height: 200px;" wire:ignore></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Profile Summary</h4>
-                    <div class="row mt-3">
-                        <div class="col-md-3 d-flex text-center justify-content-md-center">
-                            @php
-                            $img = "img/no-image.webp";
-                            if(Auth::user()->vendor){
-                                if(Auth::user()->vendor->avatar){
-                                    $img = 'storage/'.Auth::user()->vendor->avatar;
-                                }
-                            }
-                            @endphp
-                            <div class="d-flex justify-content-center">
-                                <img src="{{ asset($img) }}" class="circle" />
-                            </div>
-                        </div>
-                        <div class="text-center text-md-start col-md-9 ps-md-5 mt-3">
-                            <h3><a href="{{ url('profile') }}">{{ Auth::user()->vendor->name }}</a></h3>
-                            @if(Auth::user()->vendor)
+                            <h3 class="bold">{{ Auth::user()->vendor->name }}</h3>
                             <div class="d-flex d-sm-flex justify-content-around justify-content-md-start">
                                 <div>
                                     <b>{{ Auth::user()->vendor->likes->count() }}</b> Likes
@@ -139,250 +42,356 @@
                                     <b>{{ Auth::user()->vendor->sold() }}</b> Items Sold
                                 </div>
                             </div>
-                            <div class="">
-                                <p>{{ Auth::user()->vendor->description }}</p>
+                            <div class="text-start mt-3">
+                                <div class="mb-2"><a href="javascript:void(0)" class="link"><i class="ti-truck"></i> Usually ships in <font class="font-medium">0 days</font></a></div>
+                                <a href="javascript:void(0)" class="link"><i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}</a>
                             </div>
                             @endif
                         </div>
-                    </div>
-                    @if(Auth::user()->vendor)
-                    <div class="row">
-                        <div class="col-md-12 d-flex d-sm-flex justify-content-between mt-3 account-social-icons">
-                            <div class="mb-2">
-                                <a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">
-                                    <span class="d-sm-flex flex-column flex-md-row text-center">
-                                        <i class="icon-share order-1 order-md-1 me-md-2 pt-md-1"></i>
-                                        <span class="order-2 order-md-2">
-                                            Share 
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="mb-2">
-                                <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">
-                                    <span class="d-sm-flex flex-column flex-md-row text-center">
-                                        <i class="icon-paper-clip order-1 order-md-1 me-md-2 pt-md-1"></i>
-                                        <span class="order-2 order-md-2">
-                                            Copy link 
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="mb-2">
-                                <a href="{{ url('messages') }}" class="link">
-                                    <span class="d-sm-flex flex-column flex-md-row text-center">
-                                        <i class="icon-envelope order-1 order-md-1 me-md-2 pt-md-1"></i>
-                                        <span class="order-2 order-md-2">
-                                            Messages 
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            {{--
-                            <div class="mb-2 pt-2 pt-md-0">
-                                <a href="{{ url('my-armoury') }}" class="link"><u>View Profile</u></a>
-                            </div>
-                            --}}
-                        </div>
-                    </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-    @if($order_items->count() > 0)
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Orders Summary</h4>
-                    <div class="row d-md-none">
-                        <div class="col-md-12">
-                            @foreach($order_items AS $item)
-                            <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Name:</span>
-                                    <div class="ms-auto">
-                                        <a href="{{ url('/'.$item->product->vendor->url_name) }}">
-                                            {{ $item->user->name.' '.$item->user->surname }}
+                        <div class="col-md-12 mt-2">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @if(Auth::user()->dealer)
+                                    <small>Registered Armoury Broker Dealer</small>
+                                    @endif
+                                </div>
+                                <div class="col-md-6 text-small">
+                                    <div class="text-end">
+                                        <a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">
+                                            <span class="">
+                                                <i class="icon-share order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                                <span class="order-2 order-md-2">
+                                                    Share 
+                                                </span>
+                                            </span>
                                         </a>
                                     </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Item:</span>
-                                    <div class="ms-auto">
-                                        {{ ucwords($item->product->item_name) }}
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Date:</span>
-                                    <div class="ms-auto">
-                                        {{ date('d M Y', strtotime($item->created_at)) }}
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Status:</span>
-                                    <div class="ms-auto">
-                                        @if($item->order)
-                                            {{ $item->order->status }}
-                                        @endif
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Total Price:</span>
-                                    <div class="ms-auto">
-                                        R {{ number_format($item->price,2) }}
-                                    </div>
-                                </li>
-                            </ul>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row d-none d-md-block">
-                        <div class="col-md-12">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Item</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Total Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($order_items AS $item)
-                                    <tr>
-                                        <td>
-                                            @if($item->user->vendor)
-                                            <a href="{{ url('/'.$item->user->vendor->url_name) }}">
-                                            {{ $item->user->name.' '.$item->user->surname }}
-                                            </a>
-                                            @else
-                                            {{ $item->user->name.' '.$item->user->surname }}
-                                            @endif
-                                        </td>
-                                        <td>{{ ucwords($item->product->item_name) }}</td>
-                                        <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
-                                        <td>
-                                            @if($item->order)
-                                            {{ $item->order->status }}
-                                            @endif
-                                        </td>
-                                        <td>R {{ number_format($item->price,2) }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="text-end">
-                                <a href="{{ url('my-orders') }}" class="btn btn-primary">View All</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-    @if($purcahse_items->count() > 0)
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Purchase Summary</h4>
-                    <div class="row d-md-none">
-                        <div class="col-md-12">
-                            @foreach($purcahse_items AS $item)
-                            <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Name:</span>
-                                    <div class="ms-auto">
-                                        <a href="{{ url('/'.$item->user->vendor->url_name) }}">
-                                            {{ $item->user->name.' '.$item->user->surname }}
+                                    <div class="text-end">
+                                        <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">
+                                            <span class="">
+                                                <i class="icon-paper-clip order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                                <span class="order-2 order-md-2">
+                                                    Copy 
+                                                </span>
+                                            </span>
                                         </a>
                                     </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Item:</span>
-                                    <div class="ms-auto">
-                                        {{ ucwords($item->product->item_name) }}
+                                    <div class="text-end">
+                                        <a href="{{ url('profile') }}" class="link">
+                                            <span class="">
+                                                <i class="icon-pencil order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                                <span class="order-2 order-md-2">
+                                                    Edit 
+                                                </span>
+                                            </span>
+                                        </a>
                                     </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Date:</span>
-                                    <div class="ms-auto">
-                                        {{ date('d M Y', strtotime($item->created_at)) }}
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Status:</span>
-                                    <div class="ms-auto">
-                                        @if($item->order)
-                                            {{ $item->order->status }}
-                                        @endif
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex">
-                                    <span class="text-muted">Total Price:</span>
-                                    <div class="ms-auto">
-                                        R {{ number_format($item->price,2) }}
-                                    </div>
-                                </li>
-                            </ul>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row d-none d-md-block">
-                        <div class="col-md-12">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Item</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Total Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($purcahse_items AS $item)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ url('/'.$item->user->vendor->url_name) }}">
-                                            {{ $item->user->name.' '.$item->user->surname }}
-                                            </a>
-                                        </td>
-                                        <td>{{ ucwords($item->product->item_name) }}</td>
-                                        <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
-                                        <td>
-                                            @if($item->order)
-                                            {{ $item->order->status }}
-                                            @endif
-                                        </td>
-                                        <td>R {{ number_format($item->price,2) }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="text-end">
-                                <a href="{{ url('my-purchases') }}" class="btn btn-primary">View All</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">My Profile</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row mt-3">
+                                <div class="col-md-6 offset-md-2">
+                                    <div class="ribbon">Coming<br>soon</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
+                            <div class="mb-2">
+                            Dealer Status: <b>@if(Auth::user()->dealer) Active @else Inactive @endif</b>
+                            </div>
+                            <div><i class=" icon-envelope"></i> {{ Auth::user()->email }}</div>
+                            <div><i class=" icon-phone"></i> {{ Auth::user()->mobile_number }}</div>
+                            <div><i class=" icon-social-instagram"></i> {{ Auth::user()->vendor->instagram_handle }}</div>
+                            <div class="mt-2">
+                                <p class="text-muted m-l-5">
+                                    {{ Auth::user()->vendor->suburb }}<br />
+                                    {{ Auth::user()->vendor->city }}<br />
+                                    {{ Auth::user()->vendor->province }}<br />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h4 class="card-title">My Vault</h4>
+                        <div class="ms-auto">
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                <span class="tooltip-content tooltip-content-end tooltip-content-top clearfix">
+                                    <span class="tooltip-text px-2">
+                                        <b>My vault info</b>
+                                        <p class="text-white">Fund Types:</p>
+                                        <ul>
+                                            <li><b>Available for shopping</b> - Money you can spend right now (withdrawable funds + gift voucher credit)</li>
+                                            <li><b>Armoury broker credit</b> - Platform credits for covering fees only (promotional credits, not cashable)</li>
+                                            <li><b>Gift voucher credit</b> - Unspent gift card balance (expires in 12 months, spend-only)</li>
+                                            <li><b>Withdrawable funds</b> - Your completed transaction earnings (can spend or cash out via EFT)</li>
+                                            <li><b>Orders in progress</b> - Money held in escrow until orders are confirmed received</li>
+                                            <li><b>Total balance</b> - Complete overview of all your funds across all categories</li>
+                                        </ul>
+                                    </span> 
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <h3 class="mb-0" style="line-height: 10px;">R {{ number_format(Auth::user()->vendor->balance() , 2) }}</h3>
+                            <small>Available for shopping</small>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-sm table-borderless">
+                            <tr>
+                                <td>R {{ number_format($ab_credit, 2) }}</td>
+                                <td>Armoury Broker Credit</td>
+                            </tr>
+                            <tr>
+                                <td>R {{ number_format($gf_voucher, 2) }}</td>
+                                <td>Gift Voucher Credit</td>
+                            </tr>
+                            <tr>
+                                <td>R {{ number_format($wd_funds, 2) }}</td>
+                                <td>Withdrawable Funds</td>
+                            </tr>
+                            <tr>
+                                <td>R {{ number_format($ord_progress, 2) }}</td>
+                                <td>Orders In Progress</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">R {{ number_format($tot_balance, 2) }}</td>
+                                <td class="bold">Total Balance</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    @endif
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h4 class="card-title">My Orders - This Month</h4>
+                        <div class="ms-auto">
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                <span class="tooltip-content clearfix">
+                                    <span class="tooltip-text px-2">
+                                        <b>My Orders</b>
+                                        <p class="text-white">Data from last 30 days</p>
+                                        <ul>
+                                            <li><b>New:</b> Recently placed orders awaiting processing.</li>
+                                            <li><b>In Progress:</b> Orders shipped, awaiting delivery/collection, or pending dealer stocking and awaiting buyer confirmation.</li>
+                                            <li><b>Completed:</b> Fulfilled orders (completed or canceled).</li>
+                                        </ul>
+                                    </span> 
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="order-grid mt-2">
+                        <a href="" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">New</div>
+                        </a>
+                        <a href="#" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">In Progress</div>
+                        </a>
+                        <a href="#" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">Completed</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h4 class="card-title">My Purchases - This Month</h4>
+                        <div class="ms-auto">
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                <span class="tooltip-content clearfix">
+                                    <span class="tooltip-text px-2">
+                                        <b>My Purchases</b>
+                                        <p class="text-white">Data from last 30 days</p>
+                                        <ul>
+                                            <li><b>In Progress:</b> Orders waiting for seller to fulfill and ship or currently in transit.</li>
+                                            <li><b>Completed:</b> Purchases that have been received or cancelled.</li>
+                                        </ul>
+                                    </span> 
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-8 offset-md-2">
+                            <div class="order-grid mt-2">
+                                <a href="" class="order-box">
+                                    <div class="count">0</div>
+                                    <div class="label">New</div>
+                                </a>
+                                <a href="" class="order-box">
+                                    <div class="count">0</div>
+                                    <div class="label">Completed</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h4 class="card-title">My Actions</h4>
+                        <div class="ms-auto">
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                <span class="tooltip-content tooltip-content-end clearfix">
+                                    <span class="tooltip-text px-2">
+                                        <b>My Actions</b>
+                                        <ul>
+                                            <li><b>New offers:</b> Offers you have made and/or received that need confirmation, counter, or decline.</li>
+                                            <li><b>Active orders:</b> Combination of new and in-progress orders requiring your action, including shipping, arranging delivery/collection or dealer stocking.</li>
+                                            <li><b>Purchases to confirm:</b> Shipped items waiting for your delivery confirmation to release payment.</li>
+                                        </ul>
+                                    </span> 
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="order-grid mt-2">
+                        <a href="" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">New Offers</div>
+                        </a>
+                        <a href="" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">Active Orders</div>
+                        </a>
+                        <a href="" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">Purchases To Confirm</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h4 class="card-title">My Listings</h4>
+                        <div class="ms-auto">
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                <span class="tooltip-content clearfix">
+                                    <span class="tooltip-text px-2">
+                                        <b>My Listings</b>
+                                        <ul>
+                                            <li><b>Active:</b> Items currently listed and available in your Armoury.</li>
+                                            <li><b>Sold:</b> Total number of items you've sold.</li>
+                                            <li><b>Add new item:</b> Quick link to list a new item for sale.</li>
+                                        </ul>
+                                    </span> 
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="order-grid mt-2">
+                        <a href="" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">Active</div>
+                        </a>
+                        <a href="" class="order-box">
+                            <div class="count">0</div>
+                            <div class="label">Sold</div>
+                        </a>
+                        <a href="#" class="order-box bg-dark-blue">
+                            <div class="count text-white">+</div>
+                            <div class="label text-white">Add New Item</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h4 class="card-title">Order Analytics</h4>
+                        <div class="ms-auto">
+                            <span class="mytooltip tooltip-effect-1">
+                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                <span class="tooltip-content tooltip-content-end clearfix">
+                                    <span class="tooltip-text px-2">
+                                        <b>Order Analytics</b>
+                                        <p class="text-white">Monthly overview chart showing your sales performance over the past year:</p>
+                                        <ul>
+                                            <li><b>Left axis:</b> Number of orders sold</li>
+                                            <li><b>Right axis:</b> Total value in ZAR</li>
+                                            <li><b>Bottom axis:</b> Monthly timeline</li>
+                                        </ul>
+                                    </span> 
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ct-bar-chart" style="height: 140px;" wire:ignore></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="modal fade" tabindex="-1" id="avatar-edit-modal" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Avatar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Select Avatar</label>
+                                <input type="file" class="form-control" name="avatar" wire:model.defer="avatar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="saveAvater">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" tabindex="-1" id="share-modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -417,6 +426,9 @@
     <script src="{{ asset('account/assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js') }}"></script>
     <script>
         document.addEventListener('livewire:initialized', () => {
+            @this.on('close-modal', (event) => {
+                $('.modal').modal('hide');
+            });
             @this.on('copy-link', (event) => {
                 var link = event.link;
                 navigator.clipboard.writeText(link);
@@ -429,7 +441,7 @@
                     timer: 1500
                 })
             });
-        })
+        });
         $(document).ready(function(){
             lg_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             sm_labels = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
@@ -467,7 +479,7 @@
         })
 
         function showShareOptions(){
-            var link = '{{ $link }}';
+            var link = '{{ $share_link }}';
             console.log(link);
             Swal.fire({
                 position: 'top-end',

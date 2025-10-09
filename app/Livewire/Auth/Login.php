@@ -17,7 +17,7 @@ class Login extends Component
             if(!Auth::user()->vendor_id){
                 return redirect('my-armoury/edit')->with('error', 'Please fill in this form before you can upload products!');
             }
-            return redirect('dashboard');
+            return redirect('shop');
         }
     }
 
@@ -37,7 +37,7 @@ class Login extends Component
                 Auth::logout();
                 $this->addError('user', 'Your account is inactive.');
             }
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('shop'));
         }
         else{
             $this->addError('user', 'Invalid email or password.');

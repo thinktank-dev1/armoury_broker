@@ -4,8 +4,8 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 <b class="">
                     <div class="d-none d-md-block">
-                        <img src="{{ asset('img/logo.png') }}" alt="homepage" class="dark-logo" style="width: 160px;" />
-                        <img src="{{ asset('img/logo-light.png') }}" alt="homepage" class="light-logo" style="width: 160px;" />
+                        <img src="{{ asset('img/HEADER LOGO.png') }}" alt="homepage" class="dark-logo" style="width: 360px;" />
+                        <img src="{{ asset('img/HEADER LOGO.png') }}" alt="homepage" class="light-logo" style="width: 360px;" />
                     </div>
                     <div class="d-md-none">
                         <img src="{{ asset('img/logo-sm.png') }}" alt="homepage" class="dark-logo" style="width: 60px;" />
@@ -33,10 +33,14 @@
                 <li class="nav-item right-side-toggle"> 
                     <a class="nav-link  waves-effect waves-light d-flex align-items-center h-100" href="{{ url('profile') }}">
                         Profile
-                        @if(Auth::user()->avatar)
-                            &nbsp;<img src="{{ asset('storage/'.Auth::user()->avatar) }}" class="round_head img-fluid">
+                        @if(Auth::user()->vendor)
+                            @if(Auth::user()->vendor->avatar)
+                                &nbsp;<img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="round_head img-fluid">
+                            @else
+                                <!-- &nbsp;<i class="ti-user" style="font-size: 15px;"></i> -->
+                                &nbsp;<img src="{{ asset('img/PROFILE PIC.png') }}" class="round_head img-fluid">
+                            @endif
                         @else
-                            <!-- &nbsp;<i class="ti-user" style="font-size: 15px;"></i> -->
                             &nbsp;<img src="{{ asset('img/PROFILE PIC.png') }}" class="round_head img-fluid">
                         @endif
                     </a>

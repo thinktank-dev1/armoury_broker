@@ -39,31 +39,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-label">Tel</label>
+                                    <label class="form-label">Instagram Handle</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="tel" wire:model.defer="tel">
+                                        <input type="text" class="form-control form-control-line" name="instagram_handle" wire:model.defer="instagram_handle">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Email</label>
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="email" wire:model.defer="email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Street</label>
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="street" wire:model.defer="street">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="form-label">Suburb</label>
                                     <div class="col-md-12">
@@ -71,7 +55,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="form-label">City</label>
                                     <div class="col-md-12">
@@ -79,11 +63,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-label">Country</label>
+                                    <label class="form-label">Province</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="country" wire:model.defer="country">
+                                        <select class="form-control form-control-line" name="province" wire:model.defer="province">
+                                            <option value="">Select Option</option>
+                                            @foreach($provinces AS $pr)
+                                                <option value="{{ $pr }}">{{ $pr }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
