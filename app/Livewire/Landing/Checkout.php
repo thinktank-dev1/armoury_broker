@@ -122,30 +122,25 @@ class Checkout extends Component
 
         $go = True;
         foreach($this->cart AS $ct){
-            if(!$ct['deliver_collection']){
-                $this->addError('error', "Please select collection/delivery for all items");
+            if(!$ct['shipping_method']){
+                $this->addError('error', "Please select shipping method for all items");
                 return;
             }
-            if($ct['deliver_collection'] == "seller delivery" || $ct['deliver_collection'] == "Courier"){
-                if($ct['delivery_address'] == null){
-                    $this->addError('error', 'Please enter delivery address for all items');
-                    return;
+            if($ct['shipping_method'] == "dealer_stock"){
+                if(!$ct['dealer_option']){
+                    $this->addError('error', 'Please select dealer options');
                 }
-                if($ct['deliver_collection'] == "Courier"){
-                    if($ct['shipping_id'] == null){
-                        $this->addError('error',"Please select Courier for items that require it.");
+                if($ct['dealer_option'] == "ab dealer"){
+                    if(!$ct['ab_dealer_id']){
+                        $this->addError('error', 'Please select ab dealer options');
                         return;
                     }
                 }
-                if($ct['deliver_collection'] == "Courier"){
-                    if(!$ct['shipping_id']){
-                        $this->addError('error', "Please select Courier for all items that need to be couriered");
+                if($ct['dealer_option'] == "custom dealer"){
+                    if(!$ct['custom_dealer_details']){
+                        $this->addError('error', 'Please select enter dealer details');
+                        return;
                     }
-                }
-            }
-            if($ct['deliver_collection'] == "dealer stock"){
-                if(!$ct['dealer_option']){
-                    $this->addError('error', 'Please select dealer options');
                 }
             }
         }
@@ -288,35 +283,16 @@ class Checkout extends Component
         $itm = $this->cart[$arr[0]];
         $ord = OrderItem::find($itm['id']);
         if($ord){
-            if($arr[1] == "shipping_id"){
-                $del = DeliverOption::find($v);
-                if($del){
-                    $ord->shipping_id = $v;
-                    $ord->shipping_price = $del->price;
-                }
-            }
-            if($arr[1] == "deliver_collection"){
-                $ord->deliver_collection = $v;
-                if($v == "collection"){
-                    $ord->delivery_address = null;
-                    $ord->dealer_option = null;
-                    $ord->ab_dealer_id = null;
-                    $ord->custom_dealer_details = null;    
-                }
-                if($v == "buyer delivery" || $v == "Courier"){
+            if($arr[1] == "shipping_method"){
+                $ord->shipping_method = $v;
+                $del = DeliverOption::where('product_id', $ord->product_id)->where('type', $v)->first();
+                $ord->shipping_price = $del->price;
+
+                if($v != "dealer_stock"){
                     $ord->dealer_option = null;
                     $ord->ab_dealer_id = null;
                     $ord->custom_dealer_details = null;
-                    if(!$ord->delivery_address){
-                        $ord->delivery_address = $this->address;
-                    }
                 }
-                if($v == "dealer stock"){
-                    $ord->delivery_address = null;
-                }
-            }
-            if($arr[1] == "delivery_address"){
-                $ord->delivery_address = $v;
             }
             if($arr[1] == "dealer_option"){
                 $ord->dealer_option = $v;
@@ -396,6 +372,9 @@ class Checkout extends Component
                 "qty" => $ct->quantity,
                 "price" => $ct->price,
                 "total" => $tot,
+
+                "shipping_method" => $ct->shipping_method,
+                
                 "shipping_id" => $ct->shipping_id,
                 "shipping_price" => $ct->shipping_price,
                 "service_fee" => $ct->service_fee,

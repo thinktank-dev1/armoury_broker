@@ -91,42 +91,18 @@
                                                         <small class="">Delivery / Collection</small>
                                                         <div class="ms-auto">
                                                             <div class="">
-                                                                @if($product->allow_collection)
+                                                                @foreach($product->shippingOptions AS $ship)
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="collection" id="{{ $product->id }}_collection" wire:model.live="cart.{{ $k }}.deliver_collection">
-                                                                    <label class="form-check-label" for="{{ $product->id }}_collection">
-                                                                        Collection
+                                                                    <input class="form-check-input" type="radio" id="shipping_method_{{ $ship->id }}" value="{{ $ship->type }}" name="shipping_method" wire:model.live="cart.{{ $k }}.shipping_method">
+                                                                    <label class="form-check-label" for="shipping_method_{{ $ship->id }}">
+                                                                        {{ ucwords(str_replace('_', ' ',$ship->type)) }}
                                                                     </label>
                                                                 </div>
-                                                                @endif
-                                                                @if($product->delivery_type == "in person" || $product->delivery_type == "Free Delivery")
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="seller delivery" id="{{ $product->id }}_buyer_delivery" wire:model.live="cart.{{ $k }}.deliver_collection">
-                                                                    <label class="form-check-label" for="{{ $product->id }}_buyer_delivery">
-                                                                        Delivery
-                                                                    </label>
-                                                                </div>
-                                                                @endif
-                                                                @if($product->delivery_type == "Courier")
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="Courier" id="{{ $product->id }}_courier" wire:model.live="cart.{{ $k }}.deliver_collection">
-                                                                    <label class="form-check-label" for="{{ $product->id }}_courier">
-                                                                        Courier
-                                                                    </label>
-                                                                </div>
-                                                                @endif
-                                                                @if($product->deler_stock)
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="deliver_collection" value="dealer stock" id="{{ $product->id }}_dealer_tp" wire:model.live="cart.{{ $k }}.deliver_collection">
-                                                                    <label class="form-check-label" for="{{ $product->id }}_dealer_tp">
-                                                                        Dealer Stock
-                                                                    </label>
-                                                                </div>
-                                                                @endif
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    @if($item['deliver_collection'] == "dealer stock")
+                                                    @if($item['shipping_method'] == "dealer_stock")
                                                     <li class="list-group-item d-flex">
                                                         <small class="">Dealers</small>
                                                         <span class="ms-auto">

@@ -63,4 +63,8 @@ class Product extends Model
     public function shippingOptions(){
         return $this->hasMany(DeliverOption::class);
     }
+
+    public function orders(){
+        return $this->hasMany(OrderItem::class);
+    }
 }

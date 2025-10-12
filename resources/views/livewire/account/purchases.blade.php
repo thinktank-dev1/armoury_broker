@@ -1,185 +1,179 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="page-title bold">MY PURCHASES</h3>
-                    @if($orders->count() > 0)
-                    <div class="row mt-3 table-responsive">
+            <h3 class="page-title bold">MY ORDERS</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <a href="#" class="btn @if($filter == 'all_orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_orders')">All Orders</a>
+            <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
+            <a href="#" class="btn @if($filter == 'pending_payement') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_payement')">Pending Payment</a>
+            <a href="#" class="btn @if($filter == 'pending_dispatch') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_dispatch')">Pending Dispatch</a>
+            <a href="#" class="btn @if($filter == 'dispatched') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('dispatched')">Dispatched</a>
+        </div>
+    </div>
+    <div class="accordion" id="accordionOrders" wire:ignore.self>
+        @foreach($orders AS $order)
+        @php
+        $collapsed = "collapsed";
+        $expanded = "false";
+        $show = '';
+        if($loop->index == 0){
+            $collapsed = '';
+            $expanded = "true";
+            $show = 'show';
+        }
+        @endphp
+        <div class="accordion-item" wire:ignore.self>
+            <h2 class="accordion-header" id="heading_{{ $order->id }}" wire:ignore.self>
+                <button class="accordion-button {{ $collapsed }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ $order->id }}" aria-expanded="{{ $expanded }}" aria-controls="collapse_{{ $order->id }}" wire:ignore.self>
+                    <table class="table table-borderless mb-0 me-5">
+                        <thead class="p-0 m-0">
+                            <tr class="p-0 m-0">
+                                <th class="p-0 m-0">{{ 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT) }}<br/><small>Order Number</small></th>
+                                <th class="p-0 m-0">{{ $order->vendor->name }}<br/><small>Seller</small></th>
+                                <th class="p-0 m-0">{{ $order->g_payment_id }}<br/><small>Payment Ref</small></th>
+                                <th class="p-0 m-0">R {{ number_format($order->shiping_fee(),2) }}<br/><small>Shipping Fee</small></th>
+                                <th class="p-0 m-0">R {{ number_format($order->ab_fee(), 2) }}<br/><small>Platform Fee (Buyer)</small></th>
+                                <th class="p-0 m-0">R {{ number_format($order->amount_paid, 2) }}<br/><small>Amount</small></th>
+                                <th class="p-0 m-0">
+                                    @if($order->status == "COMPLETE")
+                                        Paid
+                                    @else
+                                        Not Paid
+                                    @endif
+                                    <br/><small>Payment Status</small>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </button>
+            </h2>
+            <div id="collapse_{{ $order->id }}" class="accordion-collapse collapse {{ $show }}" aria-labelledby="heading_{{ $order->id }}" data-bs-parent="#accordionOrders" wire:ignore.self>
+                <div class="accordion-body">
+                    <div class="row">
+                        @foreach($order->items AS $item)
                         <div class="col-md-12">
-                            <table class="table table-striped">
-                                @foreach($orders AS $order)
-                                <thead>
-                                    <tr>
-                                        <th>Order No.</th>
-                                        <th>Seller</th>
-                                        <th>Payment Ref</th>
-                                        <th class="text-end">AB Fee</th>
-                                        <th class="text-end">Shipping Fee</th>
-                                        <th class="text-end">Cart Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}</td>
-                                        <td>{{ $order->vendor->name }}</td>
-                                        <td>{{ $order->g_payment_id }}</td>
-                                        <td class="text-end">R{{ number_format($order->ab_fee(), 2) }}</td>
-                                        <td class="text-end">R{{ number_format($order->shiping_fee(),2) }}</td>
-                                        <td class="text-end">R {{ number_format($order->cart_total, 2) }}</td>
-                                    </tr>
-                                    @if($order->items->count() > 0)
-                                    <tr>
-                                        <td colspan="6" class="p-0">
-                                            <table class="table m-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Item Name</th>
-                                                        <th class="text-center">Qty</th>
-                                                        <th class="text-end">Price</th>
-                                                        <th class="text-end">Shipping</th>
-                                                        <th class="text-end">Service Fee</th>
-                                                        <th class="text-end">Total</th>
-                                                        <th>Status</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
+                            <div class="row align-items-stretch">
+                                <div class="col-md-6 mt-3 d-flex flex-column be">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <b class="bold">Order Details</b>
+                                        </div>
+                                        @if($item->product->images->count() > 0)
+                                        <div class="col-md-6">
+                                            <div class="mt-3">
+                                                <img src="{{ asset('storage/'.$item->product->images->first()->image_url) }}" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        @endif
+                                        <div class="@if($item->product->images->count() > 0) col-md-6 @else col-md-12 @endif mt-3">
+                                            <table class="table table-borderless">
                                                 <tbody>
-                                                    @foreach($order->items AS $item)
-                                                    @php
-                                                    $tot = $item->price + $item->shipping_price + $item->service_fee;
-
-                                                    @endphp
-                                                    <tr>
-                                                        <td>{{ ucwords($item->product->item_name) }}</td>
-                                                        <td class="text-center">{{ $item->quantity }}</td>
-                                                        <td class="text-end">R {{ number_format($item->price,2) }}</td>
-                                                        <td class="text-end">R {{ number_format($item->shipping_price,2) }}</td>
-                                                        <td class="text-end">R {{ number_format($item->service_fee,2) }}</td>
-                                                        <td class="text-end">R {{ number_format($tot, 2) }}</td>
-                                                        <td>
-                                                            @if(!$item->vendor_status && !$item->buyer_status)
-                                                                <span class="badge bg-warning">Pending</span>
-                                                            @elseif($item->vendor_status && !$item->buyer_status)
-                                                                <span class="badge bg-info">Awaiting Buyer</span>
-                                                            @elseif(!$item->vendor_status && $item->buyer_status)
-                                                                <span class="badge bg-info">Awaiting Seller</span>
-                                                            @elseif($item->vendor_status && $item->buyer_status)
-                                                                <span class="badge bg-success">Complete</span>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-end">
-                                                            <a href="{{ url('messages/item?order-item='.$item->id) }}"><i class="icon-envelope"></i></a>
-                                                            <span class="text-muted">&nbsp;|&nbsp;</span>
-                                                            <a href="#" wire:click.prevent="showItemDetailsModal({{ $item->id }})"><i class="icon-eye"></i> View</a>
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
+                                                    <tr><th class="p-0">Oder date:</th><td class="p-0">{{ date('d M Y', strtotime($order->created_at)) }}</td></tr>
+                                                    <tr><th class="p-0">Item Title:</th><td class="p-0">{{ $item->product->item_name }}</td></tr>
+                                                    <tr><th class="p-0">Quantity:</th><td class="p-0">{{ $item->quantity }}</td></tr>
+                                                    <tr><th class="p-0">Listed Price:</th><td class="p-0">R {{ number_format($item->product->item_price,2) }}</td></tr>
+                                                    <tr><th class="p-0">Sold Price:</th><td class="p-0">R {{ number_format($item->price,2) }}</td></tr>
+                                                    <tr><th class="p-0">Discount Applied:</th><td class="p-0">{{ $item->discount ?? 0 }} %</td></tr>
                                                 </tbody>
                                             </table>
-                                        </td>
-                                    </tr>
-                                    @endif
-                                </tbody>
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
-                    @else
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="text-center mt-5">
-                                <p>Your purchases will show here when you start buying.</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-auto">
+                                        <div class="row">
+                                            <div class="col-md-12 mt-3 d-grid">
+                                                <a href="#" class="btn btn-secondary">Message Buyer</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-3 d-flex flex-column">
+                                    <b class="bold">Order Status</b>
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <th class="text-end">Delivery Type</th>
+                                                <td class="">
+                                                    {{ ucwords(str_replace('_', ' ',$item->shipping_method)) }}
+                                                </td>
+                                            </tr>
+                                            @if($item->shipping_method == 'courier')
+                                                @if($item->shiping_service)
+                                                <tr>
+                                                    <th class="text-end">Delivery Service</th>
+                                                    <td>{{ $item->shiping_service }}</td>
+                                                </tr>
+                                                @endif
+                                                @if($item->tracking_number)
+                                                <tr class="mb-1">
+                                                    <th class="text-end">Tracking Number</th>
+                                                    <td class="">
+                                                        {{ $item->tracking_number }}
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                            @endif
+                                            <tr>
+                                                <th class="text-end">Order Status</th>
+                                                <td class="">
+                                                    @if($item->vendor_status == "Canceled")
+                                                        Canceled
+                                                    @elseif($item->vendor_status == null && $item->buyer_staus == null)
+                                                        Pending
+                                                    @elseif($item->vendor_status == "Order Dispatched" && $item->buyer_status == null)
+                                                        Awaiting buyer confirmation
+                                                    @else
+                                                        Complete
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="mt-auto">
+                                        <div class="d-grid gap-2">
+                                            @if($item->vendor_status == "Order Dispatched" && $item->buyer_status == null)
+                                            <a href="" class="btn btn-primary" wire:click.prevent="showReceiptConfirmation({{ $item->id }})">Item received</a>
+                                            @endif
+                                            @if($item->vendor_status == "Order Dispatched" && $item->buyer_status != 'Received')
+                                            <b>Other Actions</b>
+                                            <a href="" class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#dispute-modal">I have an issue with this order</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endif
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
-    <div class="modal fade" tabindex="-1" id="show-item-details">
+    <div class="modal fade" id="dispute-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Item Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Dispute Message</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @if($cur_item)
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex">
-                                <span>Item Name</span>
-                                <div class="ms-auto"><b>{{ $cur_item->product->item_name }}</b></div>
-                            </li>
-                            <li class="list-group-item d-flex">
-                                <span>Price</span>
-                                <div class="ms-auto"><b>R {{ number_format($cur_item->price,2) }}</b></div>
-                            </li>
-                            <li class="list-group-item d-flex">
-                                <span>Qty</span>
-                                <div class="ms-auto"><b>{{ $cur_item->quantity }}</b></div>
-                            </li>
-                            <li class="list-group-item d-flex">
-                                <span>Settlement type</span>
-                                <div class="ms-auto"><b>{{ ucwords($cur_item->deliver_collection) }}</b></div>
-                            </li>
-                            @if($cur_item->shipping_price)
-                            <li class="list-group-item d-flex">
-                                <span>Shipping Price</span>
-                                <div class="ms-auto"><b>{{ number_format($cur_item->shipping_price,2) }}</b></div>
-                            </li>
-                            <li class="list-group-item d-flex">
-                                <span>Courier</span>
-                                <div class="ms-auto"><b>{{ $cur_item->courier->type }}</b></div>
-                            </li>
-                            @endif
-                            @if($cur_item->delivery_address)
-                            <li class="list-group-item d-flex">
-                                <span>Delivery Address</span>
-                                <div class="ms-auto"><b>{!! $cur_item->delivery_address !!}</b></div>
-                            </li>
-                            @endif
-                            @if($cur_item->deliver_collection == "dealer stock")
-                            <li class="list-group-item d-flex">
-                                <span>Dealer Details</span>
-                                @if($cur_item->dealer_option == "ab dealer")
-                                    <div class="ms-auto">
-                                        <b>
-                                            {{ $cur_item->dealer->business_name }}<br />
-                                            {{ $cur_item->dealer->license_number }}<br /><br/>
-                                            {{ $cur_item->dealer->business_street }}<br />
-                                            {{ $cur_item->dealer->business_suburb }}<br />
-                                            {{ $cur_item->dealer->business_city }}<br />
-                                            {{ $cur_item->dealer->business_province }}<br />
-                                            {{ $cur_item->dealer->business_postal_code }}<br />
-                                        </b>
-                                    </div>
-                                @else
-                                <div class="ms-auto"><b>{{ $cur_item->custom_dealer_details }}</b></div>
-                                @endif
-                            </li>
-                            @endif
-                            @if($cur_item->deliver_collection == "collection")
-                            <li class="list-group-item">
-                                <small><b>Note:</b> Please contact buyer to arrange collection.</small>
-                            </li>
-                            @endif
-                            @if($cur_item->deliver_collection == "seller delivery")
-                            <li class="list-group-item">
-                                <small><b>Note:</b> Please contact buyer to arrange delivery.</small>
-                            </li>
-                            @endif
-                        </ul>
-                    @endif
+                    <form wire:submit.prevent="seveDispute">
+                        <div class="row">
+                            <div cass="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Please Enter Your Grievance Note</label>
+                                    <textarea class="form-control" name="grievance" wire:model.defer="grievance"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    @if($cur_item)
-                        @if(!$cur_item->buyer_status && $show_action_btn)
-                            <button type="button" class="btn btn-primary" wire:click.prevent="markOrderShipped({{ $cur_item->id }})">{{ $action_text }}</button>
-                        @endif
-                    @endif
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -187,6 +181,26 @@
     @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {
+            @this.on('show-confirm-receipt', () => {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Please confirm that item has been received?",
+                    showCancelButton: true,
+                    confirmButtonColor: "#293c47",
+                    cancelButtonColor: "#CCC",
+                    confirmButtonText: "Yes, Item has been received!",
+                    cancelButtonText: "No, item has not been received",
+                }).then((result) => {
+                    if(result.value == true){
+                        @this.dispatch('confirmed-receipt');
+                        Swal.fire({
+                            title: "Received!",
+                            text: "Order has been received.",
+                            confirmButtonColor: '#293c47',
+                        });
+                    }
+                });
+            });
             @this.on('show-item-details-modal', () => {
                 $('#show-item-details').modal('show');
             });

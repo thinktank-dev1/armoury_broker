@@ -20,6 +20,9 @@ class OrderItem extends Model
         'service_fee',
         'collection_free_shipping',
 
+        'shiping_service',
+        'tracking_number',
+
         'deliver_collection',
         'delivery_address',
         'dealer_option',

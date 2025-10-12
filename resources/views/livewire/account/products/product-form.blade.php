@@ -1,17 +1,20 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <form class="form-material" wire:submit.prevent="saveProduct">
-                        <h3 class="bold">ITEM LISTING OPTIONS</h3>
+            <form wire:submit.prevent="saveProduct">
+                @if($cur_id)
+                <h3 class="bold">EDIT ITEM</h3>
+                @else
+                <h3 class="bold">LIST A NEW ITEM</h3>
+                @endif
+                <div class="row">
+                    <div class="@if($preview) col-md-6 @else col-md-12 @endif">
                         <div class="row mb-3">
-                            <p>Select Listing Type</p>
                             <div class="col-md-12">
-                                <a href="#" class="btn @if($listing_type == 'sale') btn-dark-blue @else btn-dark-blue-outline @endif" wire:click.prevent="setListingType('sale')">For Sale</a>
-                                <a href="#" class="btn @if($listing_type == 'wanted') btn-dark-blue @else btn-dark-blue-outline @endif" wire:click.prevent="setListingType('wanted')">Wanted</a>
+                                <a href="#" class="btn @if($listing_type == 'sale') btn-dark-blue @else btn-dark-blue-outline @endif list-type" wire:click.prevent="setListingType('sale')">For Sale</a>
+                                <a href="#" class="btn @if($listing_type == 'wanted') btn-dark-blue @else btn-dark-blue-outline @endif list-type" wire:click.prevent="setListingType('wanted')">Wanted</a>
                             </div>
-                        </div>
+                        </div> 
                         @if($errors->any())
                         <div class="row my-3">
                             <div class="col-md-12">
@@ -38,27 +41,75 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
-                                    @foreach($product_images AS $key => $value)
-                                    <div class="col-md-2">
-                                        <div class="img-cont d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
-                                            @if($value)
-                                                @if($value->temporaryUrl())
-                                                    @if(str_starts_with($value->getMimeType(), 'image/'))
+                                    @if($cur_product)
+                                        @php
+                                        $cnt = 0;
+                                        @endphp
+                                        @foreach($cur_product->images AS $image)
+                                            @php
+                                            $cnt += 1;
+                                            @endphp
+                                            <div class="col-md-2">
+                                                <div class="img-cont @if($preview) img-cont-preview @endif d-flex justify-content-center align-items-center">
                                                     <div class="preview-cont w-100 h-100">
-                                                        <img src="{{ $value->temporaryUrl() }}" class="prdt-img">
-                                                        <a href="#" wire:click.prevent="removeImage('{{ $key }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
+                                                        <img src="{{ asset('storage/'.$image->image_url) }}" class="prdt-img">
+                                                        <a href="#" wire:click.prevent="deleteImage('{{ $image->id }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if($cnt < 5)
+                                            @foreach($product_images AS $key => $value)
+                                            @php
+                                            $cnt += 1;
+                                            @endphp
+                                            <div class="col-md-2">
+                                                <div class="img-cont @if($preview) img-cont-preview @endif d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
+                                                    @if($value)
+                                                        @if($value->temporaryUrl())
+                                                            @if(str_starts_with($value->getMimeType(), 'image/'))
+                                                            <div class="preview-cont w-100 h-100">
+                                                                <img src="{{ $value->temporaryUrl() }}" class="prdt-img">
+                                                                <a href="#" wire:click.prevent="removeImage('{{ $key }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
+                                                            </div>
+                                                            @endif
+                                                        @endif
+                                                    @else
+                                                        <i class="ti-plus"></i>
+                                                        <input type="file" accept="image/*" wire:model.live="product_images.{{ $key }}">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            @php
+                                            if($cnt == 6){
+                                                break;
+                                            }
+                                            @endphp
+                                            @endforeach
+                                        @endif
+                                    @else
+                                        @foreach($product_images AS $key => $value)
+                                        <div class="col-md-2">
+                                            <div class="img-cont @if($preview) img-cont-preview @endif d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
+                                                @if($value)
+                                                    @if($value->temporaryUrl())
+                                                        @if(str_starts_with($value->getMimeType(), 'image/'))
+                                                        <div class="preview-cont w-100 h-100">
+                                                            <img src="{{ $value->temporaryUrl() }}" class="prdt-img">
+                                                            <a href="#" wire:click.prevent="removeImage('{{ $key }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
+                                                        </div>
+                                                        @endif
+                                                    @else
+                                                    <img src="{{ asset('storage/'.$value) }}" class="img-responsive prdt-img">
                                                     @endif
                                                 @else
-                                                <img src="{{ asset('storage/'.$value) }}" class="img-responsive prdt-img">
+                                                    <i class="ti-plus"></i>
+                                                    <input type="file" accept="image/*" wire:model.live="product_images.{{ $key }}">
                                                 @endif
-                                            @else
-                                                <i class="ti-plus"></i>
-                                                <input type="file" accept="image/*" wire:model.live="product_images.{{ $key }}">
-                                            @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -66,40 +117,27 @@
                             <div class="col-md-12">
                                 <h3 class="bold">ITEM DETAILS</h3>
                             </div>
-                            <div class="col-md-6 mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Item Name</label>
-                                    <input type="text" class="form-control" placeholder="Item Name" name="item_name" wire:model.defer="item_name"> 
+                            <div class="col-md-12">
+                                <div class="form-group mb-2">
+                                    <input type="text" class="form-control" placeholder="Listing Title*" name="item_name" wire:model.blur="item_name"> 
                                 </div>
-                            </div>
-                            <div class="col-md-6 mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Model Number</label>
-                                    <input type="text" class="form-control" placeholder="Model Number" name="model_number" wire:model.defer="model_number"> 
+                                <div class="form-group mb-2">
+                                    <input type="text" class="form-control" placeholder="Model Number" name="model_number" wire:model.blur="model_number"> 
                                 </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Item Description</label>
-                                    <textarea class="form-control" placeholder="Item Description" name="item_description" wire:model.defer="item_description"></textarea>
+                                <div class="form-group mb-2">
+                                    <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.blur="item_description">
                                 </div>
-                            </div>
-                            <div class="@if(count($sub_sub) > 0) col-md-4 @else col-md-6 @endif mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Category</label>
+                                <div class="form-group mb-2">
                                     <select class="form-control" placeholder="Category" name="category_id" wire:model.live="category_id">
-                                        <option value="">Select Option</option>
+                                        <option value="">Category*</option>
                                         @foreach($cats AS $cat)
                                         <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                            <div class="@if(count($sub_sub) > 0) col-md-4 @else col-md-6 @endif mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Sub Category</label>
+                                <div class="form-group mb-2">
                                     <select class="form-control" placeholder="Sub category" name="sub_category_id" wire:model.live="sub_category_id">
-                                        <option value="">Select Option</option>
+                                        <option value="">Sub Category</option>
                                         @if($category)
                                             @foreach($category->sub_cats->whereNull('parent_id') AS $sub)
                                                 <option value="{{ $sub->id }}">{{ $sub->sub_category_name }}</option>
@@ -107,13 +145,10 @@
                                         @endif
                                     </select>
                                 </div>
-                            </div>
-                            @if(count($sub_sub) > 0)
-                            <div class="col-md-4 mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Sub Sub Category</label>
-                                    <select class="form-control" placeholder="Sub Sub category" name="sub_sub_category_id" wire:model.defer="sub_sub_category_id">
-                                        <option value="">Select Option</option>
+                                @if(count($sub_sub) > 0)
+                                <div class="form-group mb-2">
+                                    <select class="form-control" placeholder="Sub Sub category" name="sub_sub_category_id" wire:model.blur="sub_sub_category_id">
+                                        <option value="">Sub-Sub-Category</option>
                                         @if($sub_sub)
                                             @foreach($sub_sub AS $sub)
                                                 <option value="{{ $sub['id'] }}">{{ $sub['name'] }}</option>
@@ -121,153 +156,53 @@
                                         @endif
                                     </select>
                                 </div>
-                            </div>    
-                            @endif
-                            <div class="col-md-6 mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Brand</label>
-                                    <select class="form-control" placeholder="Brand" name="brand_id" wire:model.defer="brand_id">
-                                        <option value="">Select Option</option>
-                                        @foreach($brands AS $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Condition</label>
-                                    <select class="form-control" placeholder="Condition" name="condition" wire:model.defer="condition">
-                                        <option value="">Select Option</option>
-                                        @foreach($conditions AS $cond)
-                                        <option value="{{ $cond }}">{{ $cond }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="form-group">
-                                    <label class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" placeholder="Quantity" name="quantity" wire:model.live="quantity"> 
-                                </div>
-                            </div>
-                            @if($category)
-                                @if($category->measurement_type)
-                                <div class="col-md-12 mt-3">
-                                    <div class="form-group">
+                                @endif
+                                @if($category)
+                                    @if($category->measurement_type)
+                                    <div class="form-group mb-2">
                                         @if($category->measurement_type == "caliber")
-                                            <label class="form-label">Caliber</label>
-                                            <input type="text" class="form-control" name="size" wire:model.defer="size">
+                                            <input type="text" class="form-control" placeholder="Caliber" name="size" wire:model.defer="size">
                                         @elseif($category->measurement_type == "size")
-                                            <label class="form-label">Size</label>
-                                            <select class="form-control" name="size" wire:model.defer="size">
-                                                <option value="">Select Option</option>
+                                            <select class="form-control" placeholder="Size" name="size" wire:model.defer="size">
+                                                <option value="">Size</option>
                                                 @foreach($sizes AS $sz)
                                                 <option value="{{ $sz }}">{{ $sz }}</option>
                                                 @endforeach
                                             </select>
                                         @else
-                                            <label class="form-label">{{ ucwords($category->measurement_type) }}</label>
-                                            <input type="text" class="form-control" name="size" wire:model.defer="size">
+                                            <input type="text" class="form-control" placeholder="{{ ucwords($category->measurement_type) }}" name="size" wire:model.defer="size">
                                         @endif
                                     </div>
-                                </div>
-                                @endif
-                            @endif
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-12">
-                                <h3 class="bold">SHIPPING</h3>
-                                <p><small><b>Please Note:</b> To be managed outside of the platform by the Seller.</small></p>
-                            </div>
-                            <div class="row mt-4 mb-3">
-                                <div class="col-md-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="collection_check" wire:model.live="allow_collection">
-                                        <label class="form-check-label" for="collection_check">
-                                            Allow Collections
-                                        </label>
-                                    </div>
-                                    @if($allow_collection)
-                                    <div class="col-md-12 mt-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">Collection Address</label>
-                                            <textarea class="form-control" name="collection_address" wire:model.defer="collection_address"></textarea>
-                                        </div>
-                                    </div>
                                     @endif
-                                </div>
-                            </div>
-                            @if($category)
-                                @if($category->regulated)
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="deler_stock" wire:model.live="deler_stock">
-                                        <label class="form-check-label" for="deler_stock">
-                                            Dealer Stock
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="in_person_delivery" id="person_delivery" wire:model.live="in_person_delivery">
-                                        <label class="form-check-label" for="person_delivery">
-                                            In-Person Delivery
-                                        </label>
-                                        <div class="form-text"><b>Note:</b> This is when the seller delivers the product to the buyer in person.</div>
-                                    </div>
-                                </div>
                                 @endif
-                            @endif
-                            @if($category)
-                                @if(!$category->regulated)
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="courier_free_delivery" id="courier_free_delivery_courier" value="Courier" wire:model.live="delivery_type">
-                                                <label class="form-check-label" for="courier_free_delivery_courier">Courier</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="courier_free_delivery" id="courier_free_delivery_Free" value="Free Delivery" wire:model.live="delivery_type">
-                                                <label class="form-check-label" for="courier_free_delivery_Free">Free Delivery</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @if($delivery_type == "Courier")
-                                        @foreach($shipping_types AS $k => $shipping)
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Shipping Type / Courier Name</label>
-                                                        <input type="text" class="form-control" placeholder="Shipping Type / Courier Name" name="shipping_name" wire:model.defer="shipping_types.{{ $k }}.type">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Price</label>
-                                                        <input type="number" class="form-control" placeholder="Shipping Price" name="shipping_price" wire:model.defer="shipping_types.{{ $k }}.cost">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 d-flex align-items-end pb-3">
-                                                    <a href="#" class="text-danger" style="font-size: 30px;" wire:click.prevent="removeShipping({{ $k }})"><i class="fas fa-trash-alt"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="form-group mb-2">
+                                    <select class="form-control" placeholder="Brand" name="brand_id" wire:model.blur="brand_id">
+                                        <option value="">Brand</option>
+                                        @foreach($brands AS $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
                                         @endforeach
-                                        <div class="col-md-12 mb-3">
-                                            <a href="#" class="btn btn-secondary" wire:click.prevent="addShippingType">ADD MORE</a>
-                                        </div>
-                                    @endif
-                                @endif
-                            @endif
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <select class="form-control" placeholder="Condition" name="condition" wire:model.blur="condition">
+                                        <option value="">Condition</option>
+                                        @foreach($conditions AS $cond)
+                                        <option value="{{ $cond }}">{{ $cond }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <input type="number" class="form-control" placeholder="Quantity*" name="quantity" wire:model.live="quantity"> 
+                                </div>
+                            </div>    
                         </div>
-                        <div class="row mt-4">
+                        @if($listing_type == 'sale')
+                        <div class="row mt-3">
                             <div class="col-md-12">
                                 <h3 class="bold">PLATFROM FEES</h3>
-                                <p><small><b>Please Note:</b> Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on 50 - 50 basis.</small></p>
+                                <p><small><b>Note:</b> Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on 50 - 50 basis.</small></p>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="paid_by_buyer" name="service_fee" value="buyer" wire:model.defer="service_fee_payer">
                                     <label class="form-check-label" for="paid_by_buyer">
@@ -275,7 +210,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="paid_by_seller" name="service_fee" value="seller" wire:model.defer="service_fee_payer">
                                     <label class="form-check-label" for="paid_by_seller">
@@ -283,7 +218,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" id="b-5-5" name="service_fee" value="50-50" wire:model.defer="service_fee_payer">
                                     <label class="form-check-label" for="b-5-5">
@@ -292,47 +227,244 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <h3 class="bold">SHIPPING</h3>
+                                <p><small><b>Note:</b> To be managed outside of the platform by the Seller.</small></p>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="collection_delivery" wire:model.live="collection_delivery">
+                                    <label class="form-check-label" for="collection_delivery">
+                                        Collections / Delivery 
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Delivery / Collection</b><br /> 
+                                                    Buyer and seller coordinate pickup or delivery details through the platform's messaging system
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                @if($category)
+                                    @if(!$category->regulated)
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="courier" wire:model.live="courier">
+                                        <label class="form-check-label" for="courier">
+                                            Courier (Flat Fee of R 99.00)
+                                            <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Courier</b><br />
+                                                    R99 flat delivery fee (refunded to seller) - arrangements made via platform messaging between buyer and seller
+                                                </span> 
+                                            </span>
+                                        </span>
+                                        </label>
+                                    </div>
+                                    @endif
+                                @endif
+                                @if($category)
+                                    @if($category->regulated)
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="dealer_stock" wire:model.live="dealer_stock">
+                                        <label class="form-check-label" for="dealer_stock">
+                                            Dealer Stocking (Firearms only)
+                                            <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Dealer Stocking (Firearms Only)</b><br /> 
+                                                    Firearm transfers through licensed dealers - coordination handled via platform messaging between buyer and seller
+                                                </span> 
+                                            </span>
+                                        </label>
+                                    </div>
+                                    @endif
+                                @endif
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" value="" id="free_delivery" wire:model.defer="free_delivery">
+                                    <label class="form-check-label" for="free_delivery">
+                                        Free Delivery
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Free Delivery</b><br /> 
+                                                    No delivery charge - buyer and seller arrange delivery details through the platform messaging system
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
                             <div class="col-md-12">
                                 <h3 class="bold">ITEM PRICE</h3>
                             </div>
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-label">Item Price</label>
-                                    <input type="number" class="form-control" placeholder="Item Price" name="item_price" wire:model.defer="item_price"> 
+                                <div class="form-group mb-2">
+                                    <input type="number" class="form-control" placeholder="Item Price*" name="item_price" wire:model.blur="item_price"> 
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-check">
+                                <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" id="allow_offers" name="allow_offers" wire:model.defer="allow_offers">
                                     <label class="form-check-label" for="allow_offers">
-                                        Open to offers (limited to {{ $max_offer }}% lower than the listed price)
+                                        Open to offers
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Open to offers</b><br /> 
+                                                    Limited to 20% lower than the listed price)
+                                                </span> 
+                                            </span>
+                                        </span>
                                     </label>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-12">
-                                <div class="form-check">
+                                <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" id="acknowledgement" name="acknowledgement" wire:model.defer="acknowledgement">
                                     <label class="form-check-label" for="acknowledgement">
-                                        <p>I acknowledge that I have read and understood the Terms and Conditions. I confirm that I am legally authorized to use this platform and that I will comply with all applicable South African laws, including the Firearms Control Act (60), 2020. I understand that I am solely responsible for ensuring compliance with all relevant regulations and laws.</p>
+                                        <p>I have read and agree to the Platform <a href="docs/Terms%20of%20Use%20and%20User%20Agreement_AB_Courier%20amendments_v02_20250629.pdf" target="_blank">terms and conditions</a></p>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <div class="col-md-12 text-center">
+                        @endif
+                        <div class="row mt-3 mb-5">
+                            <div class="col-md-12 text-center mb-3">
+                                <a href="#" wire:click.prevent="togglePreview">@if(!$preview) Preview Listing @else Hide Preview @endif</a>
+                            </div>
+                            <div class="col-md-12 d-grid">
                                 <input type="submit" class="btn btn-primary" value="List Item">    
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
+                    </div>
+                    @if($preview)
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="bold">Preview Listing</h3>
+                            </div>
+                            <div class="col-md-12 mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="product-gallery">
+                                                    @php
+                                                    $img = null;
+                                                    $active = null;
+                                                    foreach($product_images AS $key => $value){
+                                                        if($value){
+                                                            if($value->temporaryUrl()){
+                                                                if(str_starts_with($value->getMimeType(), 'image/')){
+                                                                    $img = $value->temporaryUrl();
+                                                                }
+                                                            }
+                                                            else{
+                                                                $img = 'storage/'.$value;
+                                                            }
+                                                        }
+                                                        if($img){
+                                                            //$active = $loop->index;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if(!$img){
+                                                        $img = 'img/cat-placeholder-image.jpg';
+                                                        $active = 0;
+                                                    }
+                                                    @endphp
+                                                    <div class="main-image">
+                                                        <img id="currentImage" src="{{ asset($img) }}" alt="Glock 19">
+                                                    </div>
+                                                    <div class="thumbnails">
+                                                        @foreach($product_images AS $key => $value)
+                                                            @if($value)
+                                                                @if($value->temporaryUrl())
+                                                                    @if(str_starts_with($value->getMimeType(), 'image/'))
+                                                                        <img src="{{ $value->temporaryUrl() }}" alt="" class="thumb @if($loop->index == $active) active @endif">
+                                                                    @endif
+                                                                @endif
+                                                            @else
+                                                                <img src="{{ asset('img/cat-placeholder-image.jpg') }}" alt="" class="thumb @if($loop->index == $active) active @endif">
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 pt-4">
+                                                <p>{{ $item_name ?? 'Item name' }}</p>
+                                                <h4 class="bold">R {{ number_format($item_price,2) ?? '0.00' }}</h4>
+                                                <div class="cart-product-quantity">
+                                                    <div class="quantity">
+                                                        <input type="button" value="-" class="minus" wire:click.prevent="updatePreviewQty('minus')">
+                                                        <input type="text" name="quantity" title="Qty" class="qty" size="4" wire:model.defer="preview_quantity">
+                                                        <input type="button" value="+" class="plus" wire:click.prevent="updatePreviewQty('plus')">
+                                                    </div>
+                                                </div>
+                                                <p>Available quantity: <b>{{ $quantity ?? 0 }}</b></p>
+                                                <p>{{ $item_description }}</p>
+                                                <div class="row mt-3">
+                                                    <div class="col-md-12 d-flex gap-5">
+                                                        <div class="">
+                                                            <i class="fas fa-star"></i> 0
+                                                        </div>
+                                                        <div class="">
+                                                            <i class=" fas fa-map-marker"></i> {{ Auth::user()->vendor->city }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-md-12 d-flex">
+                                                        @if($category)
+                                                        <span class="badge badge-outine-dark-blue me-1">{{ $category->category_name }}</span>
+                                                        @endif
+                                                        @if($sub_name)
+                                                        <span class="badge badge-outine-dark-blue me-1">{{ $sub_name }}</span>
+                                                        @endif
+                                                        @if($sub_sub_name)
+                                                        <span class="badge badge-outine-dark-blue me-1">{{ $sub_sub_name }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-md-12 d-flex">
+                                                        @if($brand_name)
+                                                        <span class="badge badge-outine-dark-blue me-1">{{ $brand_name }}</span>
+                                                        @endif
+                                                        @if($condition)
+                                                        <span class="badge badge-outine-dark-blue me-1">{{ $condition }}</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    
+                </div>            
+            </form>
         </div>
     </div>
     @push('scripts')
     <script>
+        $(document).ready(function() {
+            $('.thumb').on('click', function() {
+                const newSrc = $(this).attr('src');
+                $('#currentImage').attr('src', newSrc);
+                $('.thumb').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
         function triggerFileInput(elem){
             const input = elem.querySelector('input[type="file"]');
             input.click();
