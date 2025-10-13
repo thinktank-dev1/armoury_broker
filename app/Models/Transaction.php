@@ -30,4 +30,8 @@ class Transaction extends Model
     public function item(){
         return $this->belongsTo(OrderItem::class, 'order_item_id');
     }
+
+    public function vendor(){
+        return $this->belongsTo(Vendor::class);
+    }
 }

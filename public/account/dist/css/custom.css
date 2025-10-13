@@ -517,3 +517,19 @@ label{
 	border-radius: 0px;
 	text-transform: uppercase;
 }
+.bordered{
+	border: 2px solid #293c47;
+}
+.bg-none{
+	background-color: transparent;
+}
+.promo-cont .nav-link, .promo-cont .nav-link:hover {
+	background-color: #FFF;
+	border: 2px solid #293c47;
+	color: #293c47;
+}
+.promo-cont .nav-link.active {
+	background-color: #293c47;
+	color: #FFF;
+	border: 2px solid #293c47;
+}

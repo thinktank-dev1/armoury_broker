@@ -1,6 +1,238 @@
 <div>
     <div class="container-fluid">
         <div class="row mt-3">
+            <div class="col-md-12">
+                <h3 class="page-title bold">MY VAULT</h3>
+            </div>
+        </div>
+        <div class="row align-items-stretch">
+            <div class="col-md-3 mb-3">
+                <div class="card bordered bg-dark h-100">
+                    <div class="card-body h-100">
+                        <div class="d-flex">
+                            <h5 class="text-white bold">Vault Balance</h5>
+                            <div class="ms-auto">
+                                <span class="mytooltip tooltip-effect-1">
+                                    <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                    <span class="tooltip-content clearfix">
+                                        <span class="tooltip-text px-2">
+                                            <b>Total Purchases</b>
+                                        </span> 
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-3 h-75 d-flex justify-content-center align-items-center">
+                            <h1 class="text-white bold">R 0.00</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bordered">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="bold">Armoury Broker Credit</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Armoury Broker Credit</b>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h2 class="bold">R 0.00</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bordered">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="bold">Gift Voucher Credit</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Gift Voucher Credit</b>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h2 class="bold">R 0.00</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bordered bg-dark">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="text-white bold">Total Purchases</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Total Purchases</b>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h2 class="text-white bold">R 0.00</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bordered">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="bold">Withdrawable Funds</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Withdrawable Funds</b>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h2 class="bold">R 0.00</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bordered">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="bold">Orders In Progress</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Orders In Progress</b>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h2 class="bold">R 0.00</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bordered bg-dark">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="text-white bold">Total Sales</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Total Sales</b>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h2 class="text-white bold">R 0.00</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#" class="btn @if($filter == 'all_transactions') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_transactions')">All Transactions</a>
+                <a href="#" class="btn @if($filter == 'orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('orders')">Orders</a>
+                <a href="#" class="btn @if($filter == 'purchases') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('purchases')">Purchases</a>
+                <a href="#" class="btn @if($filter == 'refunds') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('refunds')">Refunds</a>
+                <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
+                <a href="#" class="btn @if($filter == 'pending') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending')">Pending</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <h5 class="card-title">Transaction History</h5>
+                            <div class="ms-auto">
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control form-control-sm" placeholder="Start Date" name="date_from" wire:model.live="date_from">
+                                    <input type="date" class="form-control form-control-sm" placeholder="End Date" name="date_to" wire:model.live="date_to">
+                                    <a href="#" class="btn btn-sm btn-secondary px-3"><i class="fas fa-file-pdf"></i> Export PDF</a>
+                                    <a href="#" class="btn btn-sm btn-secondary px-3"><i class="far fa-file-excel"></i> Export CSV</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Reference</th>
+                                        <th>Vendor</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($trxs AS $trx)
+                                    <tr>
+                                        <td>{{ date('Y-m-d', strtotime($trx->created_at)) }}</td>
+                                        <td>{{ ucwords(str_replace('_', ' ',$trx->transaction_type)) }}</td>
+                                        <td>
+                                            @if($trx->order)
+                                            {{ $trx->order->g_payment_id }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($trx->vendor)
+                                                {{ $trx->vendor->name }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $trx->payment_status }}</td>
+                                        <td class="text-end">
+                                            R {{ number_format($trx->amount,2) }}
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{--
+        <div class="row mt-3">
             <div class="col-lg-3 col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -139,6 +371,7 @@
                 </div>
             </div>
         </div>
+        --}}
     </div>
     <div class="modal fade" tabindex="-1" id="withdrawal-modal" wire:ignore.self>
         <div class="modal-dialog">

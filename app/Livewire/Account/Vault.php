@@ -18,6 +18,8 @@ class Vault extends Component
 
     public $amount, $bank_name, $branch_name, $branch_code, $account_name, $account_number;
 
+    public $filter, $date_from, $date_to;
+
     public function requestWithdrawal(){
         $this->validate([
             'amount' => 'required|numeric', 
@@ -64,6 +66,10 @@ class Vault extends Component
         }
     }
 
+    public function changeFilter($f){
+        $this->filter = $f;
+    }
+
     public function render(){
         $items_sold = OrderItem::query()
         ->where('vendor_id', Auth::user()->vendor_id)
@@ -76,7 +82,38 @@ class Vault extends Component
 
         $tot_withdrawals = Transaction::where('transaction_type', 'withdrawal')->where('vendor_id', Auth::user()->vendor_id)->sum('amount');
 
-        $trxs = Transaction::where('vendor_id', Auth::user()->vendor_id)->orderBy('created_at', 'DESC')->paginate(12);
+        $filter = $this->filter; 
+        $date_from = $this->date_from;
+        $date_to = $this->date_to;
+
+        $trxs = Transaction::query()
+        ->where('user_id', Auth::user()->id)
+        ->where('vendor_id', Auth::user()->vendor_id)
+        ->when($date_from, function($q) use($date_from){
+            return $q->whereDate('created_at', '>', $date_from);
+        })
+        ->when($date_to, function($q) use($date_to){
+            return $q->whereDate('created_at', '<', $date_to);
+        })
+        ->when($filter, function($q) use($filter){
+            if($filter == "orders"){
+                return $q->where('vendor_id', Auth::user()->vendor_id);
+            }
+            if($filter == "purchases"){
+                return $q->where('user_id', Auth::user()->id);
+            }
+            if($filter == "refunds"){
+                return $q->where('transaction_type', 'refund');
+            }
+            if($filter == "complete"){
+                return $q->where('payment_status', 'COMPLETE');
+            }
+            if($filter == "pending"){
+                return $q->where('payment_status','<>', 'COMPLETE');
+            }
+        })
+        ->orderBy('created_at', 'DESC')
+        ->paginate(12);
 
         return view('livewire.account.vault', [
             'items_sold' => $items_sold,

@@ -22,6 +22,10 @@ class MyPromoCodes extends Component
         $this->payment_url = env('PAYFAST_SANDBOX_URL');
     }
 
+    public function changeType($t){
+        $this->code_type = $t;
+    }
+
     public function changeStatus($id,$status){
         $cd = VendorPromoCode::find($id);
         if($cd){
@@ -171,10 +175,13 @@ class MyPromoCodes extends Component
 
     public function render(){
         $codes = PromoCode::where('user_id', Auth::user()->id)->where('payment_status', 'COMPLETE')->orderBy('status', 'ASC')->orderBy('created_at', 'DESC')->get();
-        $v_codes = VendorPromoCode::where('vendor_id', Auth::user()->vendor_id)->where('deleted', 0)->get();
+        
+        $v_codes_active = VendorPromoCode::where('vendor_id', Auth::user()->vendor_id)->where('deleted', 0)->where('status', 1)->get();
+        $v_codes_inactive = VendorPromoCode::where('vendor_id', Auth::user()->vendor_id)->where('deleted', 0)->where('status', 0)->get();
+        
         return view('livewire.account.my-promo-codes', [
-            'codes' => $codes,
-            'v_codes' => $v_codes
+            'v_codes_active' => $v_codes_active,
+            'v_codes_inactive' => $v_codes_inactive
         ]);
     }
 }
