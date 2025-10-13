@@ -87,8 +87,10 @@ class Vault extends Component
         $date_to = $this->date_to;
 
         $trxs = Transaction::query()
-        ->where('user_id', Auth::user()->id)
-        ->where('vendor_id', Auth::user()->vendor_id)
+        where(function ($q) {
+            $q->where('user_id', Auth::user()->id)
+            ->orWhere('vendor_id', Auth::user()->vendor_id);
+        })
         ->when($date_from, function($q) use($date_from){
             return $q->whereDate('created_at', '>', $date_from);
         })
