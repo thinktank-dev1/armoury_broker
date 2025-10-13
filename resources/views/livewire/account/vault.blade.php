@@ -46,7 +46,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div class="mt-1">
                                     <h2 class="bold">R 0.00</h2>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div class="mt-1">
                                     <h2 class="bold">R 0.00</h2>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div class="mt-1">
                                     <h2 class="text-white bold">R 0.00</h2>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div class="mt-1">
                                     <h2 class="bold">R 0.00</h2>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div class="mt-1">
                                     <h2 class="bold">R 0.00</h2>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mt-3">
+                                <div class="mt-1">
                                     <h2 class="text-white bold">R 0.00</h2>
                                 </div>
                             </div>
