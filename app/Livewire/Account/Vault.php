@@ -87,7 +87,7 @@ class Vault extends Component
         $date_to = $this->date_to;
 
         $trxs = Transaction::query()
-        where(function ($q) {
+        ->where(function ($q) {
             $q->where('user_id', Auth::user()->id)
             ->orWhere('vendor_id', Auth::user()->vendor_id);
         })
