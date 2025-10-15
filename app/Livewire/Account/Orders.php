@@ -13,6 +13,7 @@ use App\Models\Transaction;
 use App\Models\ShippingService;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\MessageThread;
 
 class Orders extends Component
 {
@@ -44,6 +45,24 @@ class Orders extends Component
                 ];
                 $this->orders_items_arr[$itm->id] = $arr;
             }
+        }
+    }
+
+    public function messageBuyer($id){
+        $ord_itm = OrderItem::find($id);
+        if($ord_itm){
+            $tr = MessageThread::where('user_1', Auth::user()->id)->where('user_2', $ord_itm->user->id)->where('order_item_id', $id)->first();
+            if(!$tr){
+                $tr = new MessageThread();
+                $tr->user_1 = Auth::user()->id;
+                $tr->user_2 = $ord_itm->user->id;
+                if($ord_itm->order){
+                    $tr->order_id = $ord_itm->order->id;
+                }
+                $tr->order_item_id = $id;
+                $tr->save();
+            }
+            return redirect('messages/'.$tr->id);
         }
     }
 

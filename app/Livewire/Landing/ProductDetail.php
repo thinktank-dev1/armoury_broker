@@ -11,6 +11,9 @@ use App\Models\WishList;
 use App\Models\OrderItem;
 use App\Models\ProductOffer;
 
+use App\Models\Message;
+use App\Models\MessageThread;
+
 class ProductDetail extends Component
 {
     public $product;
@@ -54,6 +57,7 @@ class ProductDetail extends Component
         $this->validate([
             'offer_amount' => 'required'
         ]);
+        
         $cur_price = $this->product->item_price;
         $allowed = $cur_price - ((20/100) * $cur_price);
         if($this->offer_amount < $allowed){
@@ -63,13 +67,18 @@ class ProductDetail extends Component
             $this->addError('error', 'Please login to make an offer');
         }
         else{
-            ProductOffer::create([
-                'user_id' => Auth::user()->id,
-                'vendor_id' => $this->product->vendor->id,
-                'product_id' => $this->product->id,
-                'offer_amount' => $this->offer_amount,
-                'status' => 0,
-            ]);
+            $thread = new MessageThread();
+            $thread->user_1 = $this->product->vendor->user->id;
+            $thread->user_2 = Auth::user()->id;
+            $thread->product_id = $this->product->id;
+            $thread->save();
+
+            $msg = new Message();
+            $msg->message_thread_id = $thread->id;
+            $msg->user_id = Auth::user()->id;
+            $msg->message = "You have a new offer";
+            $msg->offer_amount = $this->offer_amount;
+            $msg->save();
             $this->dispatch('offer-saved');
         }
     }

@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Vendor;
 use App\Models\VendorLike;
 use App\Models\Message;
+use App\Models\MessageThread;
 
 class ShareBlock extends Component
 {
@@ -53,20 +54,26 @@ class ShareBlock extends Component
             ];
         }
         $this->validate($rules);
-        $msg = new Message();
-        if(!Auth::guest()){
-            $msg->user_id = Auth::user()->id;
-            $msg->from = Auth::user()->id;
-            $msg->to = $this->vendor->id;
+
+        $thread = new MessageThread();
+        $thread->user_1 = $this->vendor->user->id;
+        if(Auth::user()){
+            $thread->user_2 = Auth::user()->id;
         }
-        $msg->vendor_id = $this->vendor->id;
-        $msg->name = $this->name;
-        $msg->surname = $this->surname;
-        $msg->email = $this->email;
-        $msg->contact_number = $this->contact_number;
+        $thread->name = $this->name;
+        $thread->surname = $this->surname;
+        $thread->email = $this->email;
+        $thread->contact_number = $this->contact_number;
+        $thread->save();
+        
+        $msg = new Message();
+        $msg->message_thread_id = $thread->id;
+        if(Auth::user()){
+            $msg->user_id = Auth::user()->id;
+        }
         $msg->message = $this->message;
-        $msg->status = 0;
         $msg->save();
+        
         $this->dispatch('message-sent');
     }
 

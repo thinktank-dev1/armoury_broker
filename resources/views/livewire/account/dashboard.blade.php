@@ -4,7 +4,12 @@
     <link href="{{ asset('account/assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h3 class="page-title bold">DASHBOARD</h3>
+            <h3 class="page-title bold">
+                @if(url()->current() != URL::previous())
+                <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                @endif
+                DASHBOARD
+            </h3>
         </div>
     </div>
     <div class="row">
@@ -208,16 +213,16 @@
                         </div>
                     </div>
                     <div class="order-grid mt-2">
-                        <a href="" class="order-box">
-                            <div class="count">0</div>
+                        <a href="{{ url('my-orders') }}" class="order-box">
+                            <div class="count">{{ $new_orders }}</div>
                             <div class="label">New</div>
                         </a>
-                        <a href="#" class="order-box">
-                            <div class="count">0</div>
+                        <a href="{{ url('my-orders') }}" class="order-box">
+                            <div class="count">{{ $in_progress_orders }}</div>
                             <div class="label">In Progress</div>
                         </a>
-                        <a href="#" class="order-box">
-                            <div class="count">0</div>
+                        <a href="{{ url('my-orders') }}" class="order-box">
+                            <div class="count">{{ $completed_orders }}</div>
                             <div class="label">Completed</div>
                         </a>
                     </div>
@@ -248,12 +253,12 @@
                     <div class="row">
                         <div class="col-12 col-md-8 offset-md-2">
                             <div class="order-grid mt-2">
-                                <a href="" class="order-box">
-                                    <div class="count">0</div>
+                                <a href="{{ url('my-purchases') }}" class="order-box">
+                                    <div class="count">{{ $new_purchases }}</div>
                                     <div class="label">New</div>
                                 </a>
-                                <a href="" class="order-box">
-                                    <div class="count">0</div>
+                                <a href="{{ url('my-purchases') }}" class="order-box">
+                                    <div class="count">{{ $completed_purcahses }}</div>
                                     <div class="label">Completed</div>
                                 </a>
                             </div>
@@ -284,16 +289,16 @@
                         </div>
                     </div>
                     <div class="order-grid mt-2">
-                        <a href="" class="order-box">
-                            <div class="count">0</div>
+                        <a href="{{ url('messages') }}" class="order-box">
+                            <div class="count">{{ $new_offers }}</div>
                             <div class="label">New Offers</div>
                         </a>
                         <a href="" class="order-box">
-                            <div class="count">0</div>
+                            <div class="count">{{ $active_orders }}</div>
                             <div class="label">Active Orders</div>
                         </a>
                         <a href="" class="order-box">
-                            <div class="count">0</div>
+                            <div class="count">{{ $purchases_to_confirm }}</div>
                             <div class="label">Purchases To Confirm</div>
                         </a>
                     </div>
@@ -324,12 +329,12 @@
                         </div>
                     </div>
                     <div class="order-grid mt-2">
-                        <a href="" class="order-box">
-                            <div class="count">0</div>
+                        <a href="{{ url('my-armoury') }}" class="order-box">
+                            <div class="count">{{ $listing_count }}</div>
                             <div class="label">Active</div>
                         </a>
                         <a href="" class="order-box">
-                            <div class="count">0</div>
+                            <div class="count">{{ $sold_listings }}</div>
                             <div class="label">Sold</div>
                         </a>
                         <a href="#" class="order-box bg-dark-blue">

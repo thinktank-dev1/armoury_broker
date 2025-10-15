@@ -12,6 +12,7 @@ use App\Models\PromoCode;
 use App\Models\WithdrawalRequest;
 use App\Models\User;
 use App\Models\Vendor;
+use App\Models\Setting;
 
 class ProcessPayment extends Controller
 {
@@ -27,9 +28,99 @@ class ProcessPayment extends Controller
                 $tot = Request::input('amount_gross');
                 foreach($order->items AS $item){
                     $amount = $item->price * $item->quantity;
-                    $amount += $item->shipping_fee;
-                    $amount += $item->service_fee;
+                    
+                    $fee_rate = 5;
+                    $min_fee = 25;
+                    $stn_fee = Setting::where('name', 'service_fee')->first();
+                    $stn_min_fee = Setting::where('name', 'min_fee_amount')->first();
+                    if($stn_fee){
+                        $fee_rate = $stn_fee->value;
+                    }
+                    if($stn_min_fee){
+                        $min_fee = $stn_min_fee->value;
+                    }
+
+                    $prdt = $item->product;
+                    if($prdt->service_fee_payer == "buyer"){
+                        $fee = ($fee_rate / 100) * $amount;
+                        if($fee < $min_fee){
+                            $fee = $min_fee;
+                        }
+                        $usr = User::find($order->user_id);
+                        Transaction::create([
+                            'name' => 'service_fee',
+                            'transaction_type' => 'service_fee',
+                            'user_id' => $usr->id,
+                            'vendor_id' => $usr->vendor_id,
+                            'direction' => 'out',
+                            'amount' => $fee,
+                            'order_id' => $order->id,
+                            'order_item_id' => $item->id,
+                            'code' => '',
+                            'payment_status' => 'COMPLETE',
+                            'release' => null,
+                        ]);
+                    }
+                    elseif($prdt->service_fee_payer == "seller"){
+                        $fee = ($fee_rate / 100) * $amount;
+                        if($fee < $min_fee){
+                            $fee = $min_fee;
+                        }
+                        $amount -= $fee;
+                        $usr = User::where('vendor_id', $item->vendor_id)->first();
+                        Transaction::create([
+                            'name' => 'service_fee',
+                            'transaction_type' => 'service_fee',
+                            'user_id' => $usr->id,
+                            'vendor_id' => $usr->vendor_id,
+                            'direction' => 'out',
+                            'amount' => $fee,
+                            'order_id' => $order->id,
+                            'order_item_id' => $item->id,
+                            'code' => '',
+                            'payment_status' => 'COMPLETE',
+                            'release' => null,
+                        ]);
+                    }
+                    elseif($prdt->service_fee_payer == "50-50"){
+                        $fee = ($fee_rate / 100) * $amount;
+                        if($fee < $min_fee){
+                            $fee = $min_fee;
+                        }
+                        $fee = $fee / 2;
+                        $amount -= $fee;
+
+                        $vnd = User::where('vendor_id', $item->vendor_id)->first();
+                        Transaction::create([
+                            'name' => 'service_fee',
+                            'transaction_type' => 'service_fee',
+                            'user_id' => $vnd->id,
+                            'vendor_id' => $vnd->vendor_id,
+                            'direction' => 'out',
+                            'amount' => $fee,
+                            'order_id' => $order->id,
+                            'order_item_id' => $item->id,
+                            'code' => '',
+                            'payment_status' => 'COMPLETE',
+                            'release' => null,
+                        ]);
+                        $usr = User::find($order->user_id);
+                        Transaction::create([
+                            'name' => 'service_fee',
+                            'transaction_type' => 'service_fee',
+                            'user_id' => $usr->id,
+                            'vendor_id' => $usr->vendor_id,
+                            'direction' => 'out',
+                            'amount' => $fee,
+                            'order_id' => $order->id,
+                            'order_item_id' => $item->id,
+                            'code' => '',
+                            'payment_status' => 'COMPLETE',
+                            'release' => null,
+                        ]);
+                    }
                     Transaction::create([
+                        'name' => 'order_payment',
                         'transaction_type' => 'payfast_payment',
                         'user_id' => $order->user_id,
                         'vendor_id' => $item->vendor_id,
@@ -39,6 +130,7 @@ class ProcessPayment extends Controller
                         'order_item_id' => $item->id,
                         'payment_status' => Request::input('payment_status'),
                     ]);
+
                 }
 
                 $comm = new Communication();

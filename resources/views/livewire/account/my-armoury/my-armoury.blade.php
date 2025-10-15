@@ -2,7 +2,12 @@
     @if(Auth::user()->vendor)
     <div class="row">
         <div class="col-md-12 mt-3">
-            <h3 class="bold">MY ARMOURY</h3>
+            <h3 class="bold">
+                @if(url()->current() != URL::previous())
+                <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                @endif
+                MY ARMOURY
+            </h3>
         </div>
     </div>
     <div class="row mt-3">

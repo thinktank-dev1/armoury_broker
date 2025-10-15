@@ -11,19 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('messages');
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->integer('message_thread_id');
             $table->integer('user_id')->nullable();
-            $table->integer('vendor_id');
-            $table->integer('from')->nullable();
-            $table->integer('to')->nullable();
-            $table->string('name')->nullable();
-            $table->string('surname')->nullable();
-            $table->string('email')->nullable();
-            $table->string('contact_number')->nullable();
             $table->text('message');
-            $table->integer('parent_id')->nullable();
-            $table->integer('status')->default(0);
+            $table->float('offer_amount')->nullable();
+            $table->integer('read_status')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        //
     }
 };

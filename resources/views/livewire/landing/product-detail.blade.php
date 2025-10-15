@@ -3,9 +3,11 @@
         <div class="container">
             <div class="row align-items-center mb-4">
                 <div class="col-md-12 d-flex">
-                    <a class="text-dark-blue" href="{{ URL::previous() }}">
+                    @if(url()->current() != URL::previous())
+                    <a class="text-dark-blue" href="{{ URL::previous() }}" wire:ignore>
                         <i class="fas fa-chevron-left"></i> &nbsp;&nbsp;Back
                     </a>
+                    @endif
                     <div class="ms-auto d-flex gap-3">
                         <livewire:landing.partials.report-block :vendor_id="$product->vendor->id" />
                         @if(!Auth::guest())

@@ -33,7 +33,9 @@
             @include('livewire/account/partials/nav')
             <div class="page-wrapper">
                 {{ $slot }}
+                {{--
                 <a href="{{ url('add-product') }}" class="floating-btn btn btn-primary">+ ADD ITEM</a>
+                --}}
             </div>
             {{--
             <footer class="footer">

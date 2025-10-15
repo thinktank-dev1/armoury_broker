@@ -164,7 +164,8 @@ class Checkout extends Component
             $itm = OrderItem::find($ct['id']);
             if($itm){
                 $itm->order_id = $order->id;
-                $itm->collection_free_shipping = $ct['collection_free_shipping'];
+                $itm->shipping_method = $ct['shipping_method'];
+
                 $itm->save();
             }
         }
@@ -181,6 +182,7 @@ class Checkout extends Component
                     
                     $balance = $amount - $this->cart_total;
                     Transaction::create([
+                        'name' => 'gift_voucher_credit',
                         'transaction_type' => 'voucher_balance',
                         'user_id' => Auth::user()->id,
                         'vendor_id' => Auth::user()->vendor_id,
@@ -195,6 +197,7 @@ class Checkout extends Component
                         $amount += $item->shipping_fee;
                         $amount += $item->service_fee;
                         Transaction::create([
+                            'name' => 'order_payment',
                             'transaction_type' => 'voucher_payment',
                             'user_id' => $order->user_id,
                             'vendor_id' => $item->vendor_id,
@@ -389,6 +392,22 @@ class Checkout extends Component
             ];
             $this->cart[] = $arr;
         }
+
+        $fee_rate = 5;
+        $min_fee = 25;
+        $stn_fee = Setting::where('name', 'service_fee')->first();
+        $stn_min_fee = Setting::where('name', 'min_fee_amount')->first();
+        if($stn_fee){
+            $fee_rate = $stn_fee->value;
+        }
+        if($stn_min_fee){
+            $min_fee = $stn_min_fee->value;
+        }
+        if($this->service_fees < $min_fee){
+            $this->service_fees = $min_fee;
+        }
+
+
         $this->cart_total = $this->shipping_tot + $this->service_fees + $this->cart_sub_total;
         $this->total = $this->cart_total;
 

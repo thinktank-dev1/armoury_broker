@@ -3,9 +3,19 @@
         <div class="col-md-12">
             <form wire:submit.prevent="saveProduct">
                 @if($cur_id)
-                <h3 class="bold">EDIT ITEM</h3>
+                <h3 class="bold">
+                    @if(url()->current() != URL::previous())
+                    <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                    @endif
+                    EDIT ITEM
+                </h3>
                 @else
-                <h3 class="bold">LIST A NEW ITEM</h3>
+                <h3 class="bold">
+                    @if(url()->current() != URL::previous())
+                    <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                    @endif
+                    LIST A NEW ITEM
+                </h3>
                 @endif
                 <div class="row">
                     <div class="@if($preview) col-md-6 @else col-md-12 @endif">
