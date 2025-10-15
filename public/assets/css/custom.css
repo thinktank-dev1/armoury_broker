@@ -826,3 +826,25 @@ footer .widget_title {
 	margin: 13px 0 13px 3px;
 	border: none;
 }
+
+.nav-fixed .top-header, .nav-fixed .middle-header {
+     display: block !important; 
+}
+.header_wrap.nav-fixed {
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -o-animation: none !important;
+    animation: none !important;
+
+    -webkit-animation-fill-mode: none !important;
+    -moz-animation-fill-mode: none !important;
+    -o-animation-fill-mode: none !important;
+    animation-fill-mode: none !important;
+}
+.header_wrap {
+    transition: none;
+}
+.header_wrap.fixed-top {
+    position: fixed !important;
+    /*padding-right: 0 !important;*/
+}

@@ -134,7 +134,7 @@ PAGE JS
 			}
 		}
 	});
-	
+	/*
 	$(window).on('scroll', function() {
 		var scroll = $(window).scrollTop();
 
@@ -147,6 +147,7 @@ PAGE JS
 	    }
 
 	});
+	*/
 	
 	var setHeight = function() {
 		var height_header = $(".header_wrap").height();
