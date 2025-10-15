@@ -9,6 +9,8 @@ use Auth;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use App\Models\MessageThread;
+use App\Models\Vendor;
 
 class Purchases extends Component
 {
@@ -19,6 +21,25 @@ class Purchases extends Component
 
     public function mount(){
         $this->show_action_btn = false;
+    }
+
+    public function messageSeller($id){
+        $ord_itm = OrderItem::find($id);
+        if($ord_itm){
+            $vnd = $ord_itm->vendor->user;
+            $tr = MessageThread::where('user_1', $vnd->id)->where('user_2', Auth::user()->id)->where('order_item_id', $id)->first();
+            if(!$tr){
+                $tr = new MessageThread();
+                $tr->user_1 = $vnd->id;
+                $tr->user_2 = Auth::user()->id;
+                if($ord_itm->order){
+                    $tr->order_id = $ord_itm->order->id;
+                }
+                $tr->order_item_id = $id;
+                $tr->save();
+            }
+            return redirect('messages/'.$tr->id);
+        }
     }
 
     public function showReceiptConfirmation($id){
