@@ -23,6 +23,24 @@
             </ul>
             <ul class="navbar-nav my-lg-0">
                 <li class="nav-item">
+                    <a class="nav-link bold" href="{{ url('profile') }}" id="2">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bold" href="{{ url('wishlist') }}" id="2">Wishlist</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link bold" href="{{ url('cart') }}" id="2">Cart</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link bold" href="{{ url('messages') }}" id="2">
+                        <i class="ti-email" style="font-size: 15px;"></i>
+                        @if($msg_count)
+                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        @endif
+                    </a>
+                </li>
+                {{--
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('messages') }}" id="2"> 
                         Messages &nbsp;<i class="ti-email" style="font-size: 15px;"></i>
                         @if($msg_count)
@@ -45,6 +63,7 @@
                         @endif
                     </a>
                 </li>
+                --}}
             </ul>
         </div>
     </nav>
