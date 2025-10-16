@@ -24,6 +24,7 @@ class Dashboard extends Component
     public $new_purchases, $completed_purcahses;
     public $new_offers, $active_orders, $purchases_to_confirm;
     public $listing_count, $sold_listings;
+    public $withdrawable_balance, $orders_in_progress, $gift_voucher_balance, $spendable_amount, $ab_credit, $tot_credit;
 
     public function mount(){
         if(!Auth::user()->vendor_id && Auth::user()->role->name != "admin"){
@@ -37,6 +38,14 @@ class Dashboard extends Component
     }
 
     public function getData(){
+        $this->ab_credit = 0;
+        $this->withdrawable_balance = Auth::user()->vendor->withdrawableBalance();
+        $this->gift_voucher_balance = Auth::user()->vendor->giftVoucherBalance();
+        $this->spendable_amount = $this->withdrawable_balance + $this->gift_voucher_balance;
+        $this->orders_in_progress = Transaction::where('name', 'order_payment')->where('vendor_id', Auth::user()->vendor_id)->whereNull('release')->sum('amount');
+        $this->tot_credit = $this->ab_credit + $this->withdrawable_balance + $this->gift_voucher_balance + $this->orders_in_progress;
+
+
         $start_date = date('Y-m-1');
         $end_date = date("Y-m-t", strtotime($start_date));
         
@@ -172,18 +181,6 @@ class Dashboard extends Component
     }
 
     public function render(){
-        $ab_credit = 0;
-        $gf_voucher = 0;
-        $wd_funds = 0;
-        $ord_progress = 0;
-        $tot_balance = 0;
-
-        return view('livewire.account.dashboard', [
-            'ab_credit' => $ab_credit,
-            'gf_voucher' => $gf_voucher,
-            'wd_funds' => $wd_funds,
-            'ord_progress' => $ord_progress,
-            'tot_balance' => $tot_balance,
-        ]);
+        return view('livewire.account.dashboard');
     }
 }

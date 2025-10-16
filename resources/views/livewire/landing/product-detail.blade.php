@@ -74,17 +74,25 @@
                                     <i class="fas fa-map-marker-alt"></i> {{ $product->vendor->city }}
                                 </div>
                             </div>
-                            @if($availability)
-                            <div class="row mt-3">
-                                <div class="@if($product->allow_offers) col-md-6 @else col-md-12 @endif d-grid mb-2">
-                                    <a href="#" class="bnt btn-primary" wire:click.prevent="addToCart">Buy</a>
-                                </div>
-                                @if($product->allow_offers)
-                                <div class="col-md-6 d-grid mb-2">
-                                    <a href="#" class="btn btn-primary-outline" wire:click.prevent="showOfferModal">Make An Offer</a>
+                            @if($product->listing_type == "sale")
+                                @if($availability)
+                                <div class="row mt-3">
+                                    <div class="@if($product->allow_offers) col-md-6 @else col-md-12 @endif d-grid mb-2">
+                                        <a href="#" class="bnt btn-primary" wire:click.prevent="addToCart">Buy</a>
+                                    </div>
+                                    @if($product->allow_offers)
+                                    <div class="col-md-6 d-grid mb-2">
+                                        <a href="#" class="btn btn-primary-outline" wire:click.prevent="showOfferModal">Make An Offer</a>
+                                    </div>
+                                    @endif
                                 </div>
                                 @endif
-                            </div>
+                            @else
+                                <div class="row mt-3">
+                                    <div class="col-md-12 d-grid">
+                                        <a href="#" class="bnt btn-primary" wire:click.prevent="contactBuyer">Contact Buyer</a>
+                                    </div>
+                                </div>
                             @endif
                             <div class="mt-3">
                                 <span class="badge badge-outine-dark-blue">{{ $product->category->category_name }}</span>

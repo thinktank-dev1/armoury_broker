@@ -27,7 +27,10 @@ class ProductListItem extends Component
         })
         ->sum('quantity');
         
-        if($qty <= $itms_count){
+        if($this->product->listing_type == "wanted"){
+            $this->tag = "Wanted";
+        }
+        elseif($qty <= $itms_count){
             $this->tag = "Sold";
             $this->availability = false;
         }

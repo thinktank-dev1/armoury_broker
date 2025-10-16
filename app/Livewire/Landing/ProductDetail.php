@@ -48,6 +48,18 @@ class ProductDetail extends Component
         }
     }
 
+    public function contactBuyer(){
+        $tr = MessageThread::where('user_1', Auth::user()->id)->where('user_2', $this->product->user->id)->where('product_id', $this->product->id)->first();
+        if(!$tr){
+            $tr = new MessageThread();
+            $tr->user_1 = Auth::user()->id;
+            $tr->user_2 = $this->product->user->id;
+            $tr->product_id = $this->product->id;
+            $tr->save();
+        }
+        return redirect('messages/'.$tr->id);
+    }
+
     public function showOfferModal(){
         $this->offer_amount = $this->product->item_price;
         $this->dispatch('show-offer-modal');

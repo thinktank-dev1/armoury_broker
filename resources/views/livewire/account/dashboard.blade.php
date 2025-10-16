@@ -157,7 +157,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            <h3 class="mb-0" style="line-height: 10px;">R {{ number_format(Auth::user()->vendor->balance() , 2) }}</h3>
+                            <h3 class="mb-0" style="line-height: 10px;">R {{ number_format($spendable_amount , 2) }}</h3>
                             <small>Available for shopping</small>
                         </div>
                     </div>
@@ -168,19 +168,19 @@
                                 <td>Armoury Broker Credit</td>
                             </tr>
                             <tr>
-                                <td>R {{ number_format($gf_voucher, 2) }}</td>
+                                <td>R {{ number_format($gift_voucher_balance, 2) }}</td>
                                 <td>Gift Voucher Credit</td>
                             </tr>
                             <tr>
-                                <td>R {{ number_format($wd_funds, 2) }}</td>
+                                <td>R {{ number_format($withdrawable_balance, 2) }}</td>
                                 <td>Withdrawable Funds</td>
                             </tr>
                             <tr>
-                                <td>R {{ number_format($ord_progress, 2) }}</td>
+                                <td>R {{ number_format($orders_in_progress, 2) }}</td>
                                 <td>Orders In Progress</td>
                             </tr>
                             <tr>
-                                <td class="bold">R {{ number_format($tot_balance, 2) }}</td>
+                                <td class="bold">R {{ number_format($tot_credit, 2) }}</td>
                                 <td class="bold">Total Balance</td>
                             </tr>
                         </table>

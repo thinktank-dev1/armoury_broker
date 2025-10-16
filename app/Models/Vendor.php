@@ -45,39 +45,43 @@ class Vendor extends Model
         return $this->hasMany(Transaction::class, 'vendor_id');
     }
 
-    public function balance(){
-        $in = 0;
-        $fee = 0;
-        $stn = Setting::where('name', 'service_fee')->first();
-        $sv_per = $stn->value;
-
-        foreach($this->transactions->where('direction', 'in')->where('release', 1) AS $trx){
-            if($trx->transaction_type == "voucher_balance"){
-                $in += $trx->amount;
-            }
-            else{
-                $item = $trx->item;
-                if($item){
-                    $product = $item->product;
-                    if($product){
-                        $i_fee = 0;
-                        $amount = $item->price * $item->quantity;
-                        if($product->service_fee_payer == "seller"){
-                            $i_fee = ($sv_per / 100) * $amount;
-                        }
-                        if($product->service_fee_payer == "50-50"){
-                            $sub_fee = ($sv_per / 100) * $amount;
-                            $i_fee = (50/100) * $sub_fee;
-                        }
-                        $in += $amount;
-                        $fee += $i_fee;
-                    }
-                }
-            }
+    public function withdrawableBalance(){
+        $tot_in = 0;
+        $tot_out = 0;
+        foreach($this->transactions->where('name', 'order_payment')->where('direction', 'in')->where('release', 1) AS $trx){
+            $tot_in += $trx->amount;
         }
-        
-        $out = $this->transactions->where('direction', 'out')->sum('amount');
-        $balance = $in - ($fee + $out);
-        return $balance;
+        foreach($this->transactions->where(function($q){
+            return $q->where('transaction_type', 'wallet_payment')
+            ->orWhere('transaction_type', 'withdrawal');
+        })->where('user_id', $this->user->id)->where('release', 1) AS $trx){
+            $tot_out += $trx->amount;
+        }
+
+        $tot = $tot_in - $tot_out;
+        return $tot;
+    }
+
+    public function giftVoucherBalance(){
+        $tot_in = 0;
+        $tot_out = 0;
+        foreach($this->transactions->where(function($q){
+            return $q->where('transaction_type', 'voucher_balance')->orWhere('transaction_type', 'gift_voucher_payment');
+        })->where('direction', 'in')->where('release', 1) AS $trx){
+            $tot_in += $trx->amount;
+        }
+        foreach($this->transactions->where('transaction_type', 'gift_voucher_payment')->where('user_id', $this->user->id)->where('release', 1) AS $trx){
+            $tot_out += $trx->amount;
+        }
+        // dd($tot_in,$tot_out);
+
+        $tot = $tot_in - $tot_out;
+        return $tot;
+
+    }
+
+    public function balance(){
+        $tot = $this->withdrawableBalance() + $this->giftVoucherBalance();
+        return $tot;
     }
 }

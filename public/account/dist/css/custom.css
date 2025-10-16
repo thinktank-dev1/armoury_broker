@@ -643,3 +643,7 @@ label{
   	text-align: right;
   	margin-top: 3px;
 }
+.order-list .btm-border:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 25px;
+}

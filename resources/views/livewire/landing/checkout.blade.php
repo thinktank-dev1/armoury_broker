@@ -278,6 +278,44 @@
                         @endif
                     @endif
                 </div>
+                @if(Auth::user()->vendor->balance() > 0)
+                <div class="col-md-12 mt-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="pay_with_wallet" wire:model.live="pay_with_wallet">
+                        <label class="form-check-label" for="pay_with_wallet">
+                            Would you like to pay with your wallet
+                        </label>
+                    </div>
+                    @if($show_wallet_options)
+                    <div class="mt-3">
+                        @if(Auth::user()->vendor->withdrawableBalance() > 0)
+                            <div class="mb-3">
+                                <label class="form-label">Withdrawable Credit (<b>R {{ number_format(Auth::user()->vendor->withdrawableBalance(),2) }}</b>)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">R</span>
+                                    <input type="text" class="form-control" name="credit_payment" wire:model.blur="credit_payment">
+                                </div>
+                                @if($credit_error)
+                                <div id="emailHelp" class="form-text text-danger">{{ $credit_error }}</div>
+                                @endif
+                            </div>
+                        @endif
+                        @if(Auth::user()->vendor->giftVoucherBalance() > 0)
+                            <div class="mb-3">
+                                <label class="form-label">Gift Voucher Credit (<b>R {{ number_format(Auth::user()->vendor->giftVoucherBalance(),2) }}</b>)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">R</span>
+                                    <input type="text" class="form-control" name="gift_voucher_payment" wire:model.blur="gift_voucher_payment">
+                                </div>
+                                @if($gf_error)
+                                <div id="emailHelp" class="form-text text-danger">{{ $gf_error }}</div>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                    @endif
+                </div>
+                @endif
                 <div class="col-md-12 mt-4">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="terms_check" wire:model.defer="terms_and_conditions">

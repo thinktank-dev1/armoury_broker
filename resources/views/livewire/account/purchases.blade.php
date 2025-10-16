@@ -57,9 +57,9 @@
             </h2>
             <div id="collapse_{{ $order->id }}" class="accordion-collapse collapse {{ $show }}" aria-labelledby="heading_{{ $order->id }}" data-bs-parent="#accordionOrders" wire:ignore.self>
                 <div class="accordion-body">
-                    <div class="row">
+                    <div class="row order-list">
                         @foreach($order->items AS $item)
-                        <div class="col-md-12">
+                        <div class="col-md-12 btm-border">
                             <div class="row align-items-stretch">
                                 <div class="col-md-6 mt-3 d-flex flex-column be">
                                     <div class="row">

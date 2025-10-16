@@ -19,6 +19,7 @@ class SettingsTableSeeder extends Seeder
             "service_fee" => 5,
             "max_offer" => 20,
             "min_fee_amount" => 25,
+            "min_gateway_amount" => 10,
         ];
 
         foreach($settings AS $k => $v){
