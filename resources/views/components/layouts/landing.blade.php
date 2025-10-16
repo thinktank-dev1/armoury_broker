@@ -64,6 +64,19 @@
         <script src="{{ asset('assets/js/scripts.js') }}"></script>
         <script src="{{ asset('assets/js/notify.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+                resetTopPadding();
+                $(window).resize(function() {
+                    resetTopPadding();
+                });
+            });
+            function resetTopPadding(){
+                var headerHeight = $('.header_wrap').height();
+                $('.section').first().css('margin-top', headerHeight+'px');
+                $('.banner_section').css('margin-top', headerHeight+'px')
+            }
+        </script>
         @stack('scripts')
     </body>
 </html>

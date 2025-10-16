@@ -162,6 +162,7 @@ class Orders extends Component
                     });
                 }
             })
+            ->whereHas('items')
             ->orderBy('created_at', 'DESC')
             ->get();
         }

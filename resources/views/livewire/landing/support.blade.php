@@ -1,5 +1,5 @@
 <div>
-    <div class="breadcrumb_section bg_gray page-title-mini support-bg">
+    <div class="section breadcrumb_section bg_gray page-title-mini support-bg">
         <div class="head-back">
             <div class="container">
                 <div class="row align-items-center">
