@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-md-9 text-center ms-md-auto text-md-end g-4 d-none d-md-block">
                         @if(!Auth::guest())
-                        <a class="ms-3 bold" href="{{ url('dashboard') }}">Dashboard</a>
+                        <a class="ms-3 bold" href="{{ url('dashboard') }}">Profile</a>
                         <a class="ms-3 bold" href="{{ url('wishlist') }}">Wishlist</a>
                         @endif
                         <a class="ms-3 bold" href="{{ url('cart') }}">Cart @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif</a>
