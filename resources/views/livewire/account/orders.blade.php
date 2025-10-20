@@ -133,8 +133,7 @@
                                                 <th class="text-end">Shipping Status</th>
                                                 <td class="py-3">
                                                     <select class="form-control" name="vendor_status" wire:model.defer="orders_items_arr.{{ $item->id }}.vendor_status">
-                                                        <option value="">Select Option</option> 
-                                                        <option value="Pending Dispatch">Pending Dispatch</option>
+                                                        <option value="">Pending Dispatch</option> 
                                                         <option value="Order Dispatched">Order Dispatched</option>
                                                     </select>
                                                 </td>
