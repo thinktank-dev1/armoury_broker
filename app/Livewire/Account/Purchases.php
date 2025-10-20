@@ -20,7 +20,13 @@ class Purchases extends Component
     public $order_item;
 
     public function mount(){
+        $this->filter = "all_orders";
+
         $this->show_action_btn = false;
+    }
+
+    public function changeFilter($f){
+        $this->filter = $f;
     }
 
     public function messageSeller($id){
@@ -80,7 +86,33 @@ class Purchases extends Component
     }
 
     public function render(){
-        $orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
+        $filter = $this->filter;
+
+        $orders = Order::query()
+        ->where('user_id', Auth::user()->id)
+        ->when($filter, function($q) use($filter){
+            if($filter == "complete"){
+                return $q->whereHas('items', function($qq){
+                    return $qq->where('vendor_status', "Order Dispatched")->where('buyer_status', 'Received');
+                });
+            }
+            elseif($filter == "pending_payement"){
+                return $q->where('g_payment_id', null);
+            }
+            elseif($filter == "pending_dispatch"){
+                return $q->whereHas('items', function($qq){
+                    return $qq->whereNull('vendor_status');
+                });
+            }
+            elseif($filter == "dispatched"){
+                return $q->whereHas('items', function($qq){
+                    return $qq->where('vendor_status', 'Order Dispatched');
+                });
+            }
+        })
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
         return view('livewire.account.purchases', [
             'orders' => $orders
         ]);

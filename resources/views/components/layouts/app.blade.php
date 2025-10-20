@@ -48,6 +48,26 @@
             </footer>
             --}}
         </div>
+
+        <div class="modal fade" tabindex="-1" id="logout-warning">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="text-lg font-semibold mb-2">Session Expiring Soon</h2>
+                        <p>You will be logged out in <span id="countdown">30</span> seconds due to inactivity.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-primary" onclick="stayLoggedIn()">Stay logged in</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="{{ asset('account/assets/node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('account/dist/js/perfect-scrollbar.jquery.min.js') }}"></script>
@@ -59,5 +79,56 @@
         <script src="{{ asset('account/assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
         <script src="{{ asset('account/assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
         @stack('scripts')
+
+        <script>
+            let inactivityTime = 0;
+            const maxInactivity = 5 * 60;
+            const countdownStart = 30;
+            let countdownTimer;
+            let countdownRemaining = countdownStart;
+
+            function resetTimer() {
+                inactivityTime = 0;
+                clearInterval(countdownTimer);
+                document.getElementById('logout-warning')?.classList.add('hidden');
+            }
+            
+            window.onload = resetTimer;
+            document.onmousemove = resetTimer;
+            document.onkeypress = resetTimer;
+            document.onscroll = resetTimer;
+            document.onclick = resetTimer;
+
+            setInterval(() => {
+                inactivityTime++;
+                if(inactivityTime === maxInactivity - countdownStart) {
+                    showCountdown();
+                }
+                if (inactivityTime >= maxInactivity) {
+                    window.location.href = "{{ route('logout') }}";
+                }
+            }, 1000);
+
+            function showCountdown() {
+                $('#logout-warning').modal('show');
+                countdownRemaining = countdownStart;
+
+                countdownTimer = setInterval(() => {
+                    countdownRemaining--;
+                    document.getElementById('countdown').innerText = countdownRemaining;
+
+                    if (countdownRemaining <= 0) {
+                        clearInterval(countdownTimer);
+                    }
+                }, 1000);
+            }
+
+            function stayLoggedIn() {
+                $('#logout-warning').modal('hide');
+                fetch("{{ route('keep-alive') }}", { method: 'POST', headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'} })
+                .then(() => resetTimer());
+            }
+        </script>
+
     </body>
 </html>

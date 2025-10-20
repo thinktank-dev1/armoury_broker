@@ -70,10 +70,14 @@ Route::get('cart', CartList::class);
 Route::get('auth/login', Login::class)->name('login');
 Route::get('auth/social-login/{social}', [SocialAuthController::class, 'socialLogin'])->where('social','facebook|google');
 Route::get('auth/social-login/{social}/callback', [SocialAuthController::class, 'handleProviderCallback'])->where('social','facebook|google');
-Route::get('auth/logout', [SocialAuthController::class, 'logout']);
+Route::get('auth/logout', [SocialAuthController::class, 'logout'])->name('logout');
 Route::get('auth/register', Register::class);
 Route::get('auth/forgot-password', ForgotPassword::class);
 Route::get('password-reset', PasswordReset::class)->name('password.reset');
+
+Route::post('/keep-alive', function () {
+    return response()->json(['status' => 'alive']);
+})->name('keep-alive')->middleware('auth');
 
 Route::get('/email/verify', VerifyEmail::class)->middleware('auth')->name('verification.notice');
 
