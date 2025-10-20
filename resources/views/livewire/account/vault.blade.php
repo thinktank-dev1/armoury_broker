@@ -188,7 +188,9 @@
                             <h5 class="card-title">Transaction History</h5>
                             <div class="ms-auto">
                                 <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">From</span>
                                     <input type="date" class="form-control form-control-sm" placeholder="Start Date" name="date_from" wire:model.live="date_from">
+                                    <span class="input-group-text" id="basic-addon1">To</span>
                                     <input type="date" class="form-control form-control-sm" placeholder="End Date" name="date_to" wire:model.live="date_to">
                                     <a href="#" class="btn btn-sm btn-secondary px-3"><i class="fas fa-file-pdf"></i> Export PDF</a>
                                     <a href="#" class="btn btn-sm btn-secondary px-3"><i class="far fa-file-excel"></i> Export CSV</a>
