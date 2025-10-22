@@ -45,7 +45,7 @@ class CustomVerifyEmail
             'title' => "Verify your details",
             'message_body' => "Please click on the button below to verify your email address and gain access to South Africa's premier secure marketplace for armoury equipment.",
             'cta' => true,
-            'cta_text' => 'verify Email',
+            'cta_text' => 'Verify Email',
             'cta_url' => $verificationUrl,
             'after_cta_body' => $after,
         ];

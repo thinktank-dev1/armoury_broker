@@ -1,6 +1,6 @@
 <script>
     let inactivityTime = 0;
-    const maxInactivity = 5 * 60;
+    const maxInactivity = 15 * 60;
     const countdownStart = 30;
     let countdownTimer;
     let countdownRemaining = countdownStart;

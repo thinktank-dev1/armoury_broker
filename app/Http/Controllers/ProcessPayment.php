@@ -13,6 +13,7 @@ use App\Models\WithdrawalRequest;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Setting;
+use App\Models\Dealer;
 
 class ProcessPayment extends Controller
 {
@@ -58,7 +59,60 @@ class ProcessPayment extends Controller
                             'order_item_id' => $item->id,
                             'payment_status' => Request::input('payment_status'),
                         ]);
+                        if($item->shipping_method == "dealer_stock"){
+                            if($item->dealer_option == "ab dealer"){
+                                $dl = Dealer::find($item->ab_dealer_id);
+                                
+                                if($dl){
+                                    $order_data = "<table class='table-bodered' style='width: 100%'>";
+                                    $order_data .= "<thead><tr style='background-color: #e6e6e6;'><th colspan='2' style='text-align: center;'>AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</th></tr></thead>";
+                                    $order_data .= "<tbody>";
+                                    $order_data .= "<tr>";
+                                    if($item->product->images->count() > 0){
+                                        $order_data .= "<td><img style='height: 100px' src='".url('storage/'.$item->product->images->first()->image_url)."'></td>";
+                                    }
+                                    else{
+                                        $order_data .= "<td></td>";
+                                    }
+                                    $order_data .= "<td>";
+                                    $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
+                                    $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
+                                    $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
+                                    $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
+                                    $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
+                                    $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
+                                    $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
+                                    $order_data .= "<tr><td>Delivery Type:</td><td>".$item->shipping_method."</td></tr>";
+                                    $order_data .= "</table>";
+                                    $order_data .= "</td>";
+                                    $order_data .= "</tr>";
+                                    $order_data .= "</table>";
 
+                                    $dl_user = $dl->user;
+
+                                    $body = "RE: Dealer Stocking Request for <b>".$item->user->vendor->name."</b><br /><br />
+                                    A platform user has selected your business to stock a firearm while they apply for the relevant license under the Firearms Control Act 60 of 2000.<br /><br />
+                                    The details of the transaction are as follows:".$order_data;
+                                    $body .= "<br /><b>What Happens Next?</b><br />
+                                    The buyer and seller will contact you to arrange delivery of the item to your location.";
+
+                                    $data = [
+                                        'to' => $dl_user->email,
+                                        'name' => $dl_user->name,
+                                        'subject' => 'Dealer Stocking Confirmation',
+                                        'title' => "Dealer Stocking Confirmation",
+                                        'message_body' => $body,
+                                        'cta' => false,
+                                        'cta_text' => null,
+                                        'cta_url' => null,
+                                        'after_cta_body' => null,
+                                    ];
+                                    $comm = new Communication();
+                                    $comm->sendMail($data);
+
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -167,8 +221,8 @@ class ProcessPayment extends Controller
                     $data = [
                         'to' => $user->email,
                         'name' => $user->name,
-                        'subject' => 'Order Confirmation',
-                        'title' => "Order Confirmation (AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT).")",
+                        'subject' => 'Purchase Confirmation',
+                        'title' => "Congratulations on your purchase",
                         'message_body' => $body,
                         'cta' => true,
                         'cta_text' => 'View Purchase',
