@@ -165,22 +165,33 @@ class EditMyArmoury extends Component
     public function sendWelcomeMessage(){
         $comm = new Communication();    
         $user = Auth::user();
+
+        $body = "Thank you for joining South Africa's premier secure marketplace for armoury and related equipment. You're now part of a trusted community transforming how firearms owners buy, sell, and trade equipment in a safe and secure environment.<br /><br />
+        <b>Your Platform Benefits</b><br />
+        <ul>
+            <li>Personalized ecommerce store</li>
+            <li>Secure Escrow Payments</li>
+            <li>End-to-End Buyer and Seller Protection</li>
+            <li>Transparent Transaction History</li>
+        </ul>
+        <br />
+        <b>Ready to get started?</b><br /><br />
+        Browse quality equipment from verified sellers, list your unused gear, or explore competitive prices in a trusted environment";
+
+        $after = "You no longer need to hope that an item will be delivered or hope that you will get paid:<br /><br />
+        Every transaction is protected, tracked, and secure from start to finish.<br /><br />
+        It’s time for you to <b>LEVEL UP!</b>";
+
         $data = [
-            'name' => $user->name,
             'to' => $user->email,
+            'name' => $user->name,
             'subject' => 'Welcome to Armoury Broker',
-            'message_body' => "
-                Welcome to Armoury Broker – we’re glad to have you on board!<br />
-                Here’s a quick guide to help you get started:<br />
-                <ul>
-                    <li><a href='".url('how-it-works')."'>How It Works</a> – Learn the basics of buying and selling with Armoury Broker.</li>
-                    <li><a href='".url('support')."'>FAQs</a> – Find answers to the most common questions.</li>
-                    <li><a href='".url('support')."'>Support</a> – Need help? Our team is ready to assist.</li>
-                </ul>
-                <br />
-                We’re excited to help you find exactly what you’re looking for.<br />
-                Happy trading,<br /><br /> 
-            "
+            'title' => "Verify your details",
+            'message_body' => $body,
+            'cta' => true,
+            'cta_text' => 'Shop Now',
+            'cta_url' => url('/'),
+            'after_cta_body' => $after,
         ];
         $comm->sendMail($data);
     }
