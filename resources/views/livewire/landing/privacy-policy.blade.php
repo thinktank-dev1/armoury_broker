@@ -10,7 +10,7 @@
   	padding-left: 1.5rem
   }
 </style>
-    <div class="section pt-5">
+    <div class="section pt-5" wire:ignore.self>
         <div class="container">
             <div class="row align-items-center mb-4">
                 <div class="col-md-12 text-center">

@@ -1,5 +1,5 @@
 <div>
-    <div class="section head shop-bg">
+    <div class="section head shop-bg" wire:ignore.self>
         <div class="head-back">
             <div class="container">
                 <div class="row align-items-center">

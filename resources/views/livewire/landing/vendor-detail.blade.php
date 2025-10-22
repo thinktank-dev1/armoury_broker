@@ -1,5 +1,5 @@
 <div>
-    <div class="section py-5 bg-grey">
+    <div class="section py-5 bg-grey" wire:ignore.self>
         <div class="container">
             <div class="row align-items-center mb-4">
                 <div class="col-md-12 d-flex">

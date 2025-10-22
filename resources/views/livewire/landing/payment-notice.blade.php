@@ -1,5 +1,5 @@
 <div>
-    <div class="section">
+    <div class="section" wire:ignore.self>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">

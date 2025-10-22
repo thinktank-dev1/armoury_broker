@@ -1,5 +1,5 @@
 <div>
-    <div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap">
+    <div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap" wire:ignore.self> 
         <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active background_bg" data-img-src="{{ asset('img/banner1.png') }}">

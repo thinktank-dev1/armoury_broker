@@ -1,5 +1,5 @@
 <div>
-    <div class="section py-5">
+    <div class="section py-5" wire:ignore.self> 
         <div class="container">
             <div class="row">
                 @foreach($cart_items_model AS $k=>$item_group)

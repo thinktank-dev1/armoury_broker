@@ -1,5 +1,5 @@
 <div>
-    <div class="section how-it-works bg_grey pt-5 pb-4">
+    <div class="section how-it-works bg_grey pt-5 pb-4" wire:ignore.self>
         <div class="container">
             <div class="row align-items-center mb-5">
                 <div class="col-md-12 text-center">
