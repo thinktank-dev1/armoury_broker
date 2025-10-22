@@ -11,6 +11,7 @@ use Auth;
 use App\Models\Vendor;
 use App\Models\Dealer;
 use App\Models\Message;
+use App\Models\MessageThread;
 
 class EditMyArmoury extends Component
 {
@@ -84,16 +85,15 @@ class EditMyArmoury extends Component
         $vendor->instagram_handle = $this->instagram_handle;
         $vendor->save();
         if(!Auth::user()->vendor_id){
+            $tr = new MessageThread([
+                'user_1' => 1,
+                'user_2' => Auth::user()->id,
+            ]);
             Message::create([
-                'vendor_id' => $vendor->id,
-                'to' => Auth::user()->id,
-                'name'=> 'Armoury Broker',
-                'surname' => "",
-                'email' => "",
-                'contact_number' => "",
+                'message_thread_id' => $tr->id,
+                'user_id' => 1,
                 'message' => "Welcome to armory broker.",
-                'status' => 0,
-                ''
+                'read_status' => 0,
             ]);
         }
 
