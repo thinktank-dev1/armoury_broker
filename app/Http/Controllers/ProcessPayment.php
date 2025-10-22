@@ -28,7 +28,7 @@ class ProcessPayment extends Controller
             if(strtolower(Request::input('payment_status')) == "complete"){
                 $tot = Request::input('amount_gross');
                 
-                if(Request::has('custom_str1')){
+                if(Request::has('custom_str1') && Request::input('custom_str1') === "partial"){
                     $amount = $tot;
                     // $amount = $this->fee_payment($amount, $order, null, $order->cart_total);
                     Transaction::create([
