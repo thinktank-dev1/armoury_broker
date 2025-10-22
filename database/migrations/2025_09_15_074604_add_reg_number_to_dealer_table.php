@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('dealers', function (Blueprint $table) {
             $table->string('business_reg_number')->after('business_name')->nullable();
-            $table->string('billing_contact_number')->after('billing_email')->nullable();
+            // $table->string('billing_contact_number')->after('billing_email')->nullable();
         });
     }
 
