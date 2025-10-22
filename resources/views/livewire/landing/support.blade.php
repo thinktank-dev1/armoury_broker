@@ -105,7 +105,7 @@
             </div>
         </div>
     </div>
-    <div class="section">
+    <div class="section" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">

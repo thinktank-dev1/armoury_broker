@@ -16,6 +16,8 @@ use App\Livewire\Auth\VerifyEmail;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\PasswordReset;
 
+use App\Livewire\Landing\UnsubscribeUser;
+
 use App\Livewire\Landing\HomePage;
 use App\Livewire\Landing\Shop;
 use App\Livewire\Landing\PrivacyPolicy;
@@ -57,11 +59,27 @@ use App\Livewire\Account\MyPromoCodes;
 
 use App\Livewire\Landing\WishList;
 
+Route::get('test', function(){
+    $data = [
+        'name' => 'Wilson',
+        'subject' => 'Test Template',
+        'title' => "Test title",
+        'message_body' => 'Ex ex sunt velit consectetur ex commodo aliqua<br /> in enim irure cupidatat velit amet culpa. Adipisicing dolore cillum exercitation sint fugiat elit qui ut est in do.',
+        'cta' => false,
+        'cta_text' => 'Accept',
+        'cta_url' => url("/"),
+        'unsubscribe_link' => url('/'),
+        'after_cta_body' => null,
+    ];
+    return view('mail.comm', $data);
+});
+
 Route::get('/', HomePage::class);
 Route::get('support', Support::class);
 Route::get('how-it-works', HowItWorks::class);
 Route::get('privacy-policy', PrivacyPolicy::class);
 Route::get('terms-and-conditions', TermsConaditions::class);
+Route::get('unsubscribe/{token}', UnsubscribeUser::class);
 
 Route::get('shop', Shop::class)->name('shop');
 Route::get('shop/product/{id}', ProductDetail::class);
