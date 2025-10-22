@@ -213,7 +213,7 @@ class EditMyArmoury extends Component
             <li>If you are the seller of the firearm, you can waive the dealer stocking fee.</li>
             <li>While the firearm is in your care, we'll invoice you monthly for 5% of the dealer stocking fee (as agreed during registration). Payment is due within 7 days of invoice.</li>
         </ul>
-        <br /><br />
+        <br />
         <b>When it's complete</b><br />
         After the buyer collects the firearm with their license, they'll mark it as \"Collected\" on the platform. We'll then close the transaction and stop monthly invoicing.<br /><br />
         If you have any questions, contact us at <br />support@armourybroker.com";

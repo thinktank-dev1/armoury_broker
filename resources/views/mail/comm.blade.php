@@ -78,7 +78,12 @@
             }
         </style>
         <style type="text/css">
-            
+            .table-bodered {
+                border-collapse: collapse;
+            }
+            .table-bodered th, .table-bodered td {
+                border: 1px solid black;
+            }
         </style>
     </head>
     <body style="background-color:#f9f9f9;">

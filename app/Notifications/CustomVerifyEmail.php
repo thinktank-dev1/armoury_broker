@@ -49,8 +49,6 @@ class CustomVerifyEmail
             'cta_url' => $verificationUrl,
             'after_cta_body' => $after,
         ];
-        // $comm = new Communication();
-        // $comm->sendMail($data);
         return $data;
     }
 }

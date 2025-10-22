@@ -63,44 +63,117 @@ class ProcessPayment extends Controller
                 }
 
                 $comm = new Communication();
-                
-                $user = User::find($order->user_id);
-                if($user){
+
+                $vendor = Vendor::find($order->vendor_id);
+                if($vendor){
+                    $order_data = "<table class='table-bodered' style='width: 100%'>";
+                    $order_data .= "<thead><tr style='background-color: #e6e6e6;'><th colspan='2' style='text-align: center;'>AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</th></tr></thead>";
+                    $order_data .= "<tbody>";
+                    foreach($order->items AS $item){
+                        $order_data .= "<tr>";
+                        if($item->product->images->count() > 0){
+                            $order_data .= "<td><img style='height: 100px' src=\"{{ asset('storage/'.$item->product->images->first()->image_url) }}\"></td>";
+                        }
+                        else{
+                            $order_data .= "<td></td>";
+                        }
+                        $order_data .= "<td>";
+                        $order_data .= "<table style='width: 100%'>";
+                        $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
+                        $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
+                        $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
+                        $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
+                        $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
+                        $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
+                        $order_data .= "<tr><td>Delivery Type:</td><td>".$item->shipping_method."</td></tr>";
+                        $order_data .= "</table>";
+                        $order_data .= "</td>";
+                        $order_data .= "</tr>";
+                    }
+                    $order_data .= "<tr><td><b>Total Paid</b></td><td><b>R ".number_format(($order->cart_total + $order->total_shipping_fee),2)."</b></td></tr>";
+                    $order_data .= "</table>";
+
+                    $body = "Looks like you have just helped someone to <b>LEVEL UP!</b><br /><br />
+                    Great news! An order has been placed for an item currently listed in your Armoury.<br /><br />
+                    ".$order_data;
+                    $after = "<b>Next steps for your order:</b><br /><br />
+                    <b>Payment received</b><br />
+                    We've received full payment from the buyer and are holding the funds in escrow.<br /><br />
+                    <b>Check delivery details</b><br />
+                    Go to the \"My Orders\" tab on the Armoury Broker platform to view the buyer's delivery or collection requirements.<br /><br />
+                    <b>Arrange and confirm delivery</b><br />
+                    Once you've arranged delivery or collection, update the order status to:<br />
+                    <ul>
+                        <li>\"Order Dispatched\" for general items</li>
+                        <li>\"Dealer Stocked\" for firearms</li>
+                    </ul><br />
+                    <b>Funds release</b><br />
+                    Once the buyer confirms receipt (or the item is dealer stocked), we'll release the funds to your Armoury Broker Vault.";
+
                     $data = [
-                        'name' => $user->name,
-                        'to' => $user->email,
-                        'subject' => 'Armoury Broker Payment Received',
-                        'message_body' => "
-                            Your payment for order <b>#".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</b> was successfully completed.<br />
-                            Amount Paid: <b>R".number_format($order->amount_paid,2)."</b><br /><br />
-                            The Vendor will begin arranging collection / delivery of your product. 
-                        "
+                        'to' => $vendor->user->email,
+                        'name' => $vendor->user->name,
+                        'subject' => 'Order Confirmation',
+                        'title' => "Order Confirmation (AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT).")",
+                        'message_body' => $body,
+                        'cta' => true,
+                        'cta_text' => 'View Order',
+                        'cta_url' => url('my-orders'),
+                        'after_cta_body' => $after,
                     ];
                     $comm->sendMail($data);
                 }
+                $user = User::find($order->user_id);
+                if($user){
+                    $order_data = "<table class='table-bodered' style='width: 100%'>";
+                    $order_data .= "<thead><tr style='background-color: #e6e6e6;'><th colspan='2' style='text-align: center;'>AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</th></tr></thead>";
+                    $order_data .= "<tbody>";
+                    foreach($order->items AS $item){
+                        $order_data .= "<tr>";
+                        if($item->product->images->count() > 0){
+                            $order_data .= "<td><img style='height: 100px' src=\"{{ asset('storage/'.$item->product->images->first()->image_url) }}\"></td>";
+                        }
+                        else{
+                            $order_data .= "<td></td>";
+                        }
+                        $order_data .= "<td>";
+                        $order_data .= "<table style='width: 100%'>";
+                        $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
+                        $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
+                        $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
+                        $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
+                        $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
+                        $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
+                        $order_data .= "<tr><td>Delivery Type:</td><td>".$item->shipping_method."</td></tr>";
+                        $order_data .= "</table>";
+                        $order_data .= "</td>";
+                        $order_data .= "</tr>";
+                    }
+                    $order_data .= "<tr><td><b>Due to you</b></td><td><b>R ".number_format($tot,2)."</b></td></tr>";
+                    $order_data .= "</table>";
 
-                $vendor = Vendor::find($order->vendor_id);
-                $order_data = "<table class='table-bodered'>";
-                $order_data .= "<thead><tr><th style='text-align: left'>Item</th><th style='text-align: left'>Qty</th><th style='text-align: left'>Price</th></tr>";
-                foreach($order->items AS $item){
-                    $order_data .= "<tr>";
-                    $order_data .= "<td>".$item->product->item_name."</td>";
-                    $order_data .= "<td>".$item->quantity."</td>";
-                    $order_data .= "<td>R".number_format($item->price,2)."</td>";
-                    $order_data .= "</tr>";
-                }
-                $order_data .= "</table>";
+                    $body = "Looks like you have just <b>LEVELED UP!</b><br /><br />
+                    Great news! Your purchase has been confirmed, and your payment is now securely held in escrow. We've notified the seller to prepare your items for shipment.<br />
+                    ".$order_data;
 
-                if($vendor){
+                    $after = "<b>What Happens Next?</b><br /><br />
+                    <b>Seller prepares your order</b><br />
+                    The seller has been notified and will prepare your items for delivery.<br /><br />
+                    <b>Track your shipment</b><br />
+                    The seller can add the tracking number to the purchase. Alternatively, send them a message to confirm.<br /><br />
+                    <b>Confirm receipt</b><br />
+                    When your order arrives, go to the \"My Purchases\" tab in your account and confirm receipt. This releases payment to the seller.";
+
                     $data = [
-                        'name' => $vendor->user->name,
-                        'to' => $vendor->user->email,
-                        'subject' => 'Armoury Broker - New Order',
-                        'message_body' => "
-                            <b>You have a new order from armoury broker.</b><br />
-                            ".$order_data."<br /><br />
-                            Please <a href='".url('login')."'>login</a> to get order details and start the order delivery or collection process. 
-                        "
+                        'to' => $user->email,
+                        'name' => $user->name,
+                        'subject' => 'Order Confirmation',
+                        'title' => "Order Confirmation (AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT).")",
+                        'message_body' => $body,
+                        'cta' => true,
+                        'cta_text' => 'View Purchase',
+                        'cta_url' => url('my-purchases'),
+                        'after_cta_body' => $after,
                     ];
                     $comm->sendMail($data);
                 }
