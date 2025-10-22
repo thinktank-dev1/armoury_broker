@@ -72,13 +72,13 @@ class ProcessPayment extends Controller
                     foreach($order->items AS $item){
                         $order_data .= "<tr>";
                         if($item->product->images->count() > 0){
-                            $order_data .= "<td><img style='height: 100px' src=\"{{ asset('storage/'.$item->product->images->first()->image_url) }}\"></td>";
+                            $order_data .= "<td><img style='height: 100px' src='".url('storage/'.$item->product->images->first()->image_url)."'></td>";
                         }
                         else{
                             $order_data .= "<td></td>";
                         }
                         $order_data .= "<td>";
-                        $order_data .= "<table style='width: 100%'>";
+                        $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
                         $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
                         $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
                         $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
@@ -131,13 +131,13 @@ class ProcessPayment extends Controller
                     foreach($order->items AS $item){
                         $order_data .= "<tr>";
                         if($item->product->images->count() > 0){
-                            $order_data .= "<td><img style='height: 100px' src=\"{{ asset('storage/'.$item->product->images->first()->image_url) }}\"></td>";
+                            $order_data .= "<td><img style='height: 100px' src='".url('storage/'.$item->product->images->first()->image_url)."'></td>";
                         }
                         else{
                             $order_data .= "<td></td>";
                         }
                         $order_data .= "<td>";
-                        $order_data .= "<table style='width: 100%'>";
+                        $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
                         $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
                         $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
                         $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
