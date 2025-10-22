@@ -154,6 +154,7 @@ class EditMyArmoury extends Component
             session()->flash('status', 'Dealer successfully saved. The team will review your details and add you to the dealer network.');
             $this->dispatch('success-message', message: "Dealer successfully saved. The team will review your details and add you to the dealer network.");
             $this->sendWelcomeMessage();
+            $this->sendDealerWelcome();
             $this->redirect('/my-armoury');
         }
         else{
@@ -186,12 +187,47 @@ class EditMyArmoury extends Component
             'to' => $user->email,
             'name' => $user->name,
             'subject' => 'Welcome to Armoury Broker',
-            'title' => "Verify your details",
+            'title' => "Welcome to Armoury Broker",
             'message_body' => $body,
             'cta' => true,
             'cta_text' => 'Shop Now',
             'cta_url' => url('/'),
             'after_cta_body' => $after,
+        ];
+        $comm->sendMail($data);
+    }
+
+    public function sendDealerWelcome(){
+        $comm = new Communication();    
+        $user = Auth::user();
+
+        $body = "Welcome to the Armoury Broker Registered Dealer Network!<br ><br />
+        Your application has been verified, and you're now listed as a dealer on our platform. Users in your region can now select your business as their preferred dealer stocking location for firearms transactions.<br /><br />
+        <b>How it works</b><br /><br />
+        <b>When you're selected</b><br />
+        We'll email you with details of the items to be stocked and the buyer/seller information so you know who to expect in store.<br /><br />
+        <b>During stocking</b><br />
+        <ul>
+            <li>Once both parties confirm the item is with you, the order status changes to \"Dealer Stocked\" on our platform.</li> 
+            <li>The buyer will pay you for keeping the item in stock (this is done via your normal dealer process) and is aligned to the amount provided during your dealer registration.</li> 
+            <li>If you are the seller of the firearm, you can waive the dealer stocking fee.</li>
+            <li>While the firearm is in your care, we'll invoice you monthly for 5% of the dealer stocking fee (as agreed during registration). Payment is due within 7 days of invoice.</li>
+        </ul>
+        <br /><br />
+        <b>When it's complete</b><br />
+        After the buyer collects the firearm with their license, they'll mark it as \"Collected\" on the platform. We'll then close the transaction and stop monthly invoicing.<br /><br />
+        If you have any questions, contact us at <br />support@armourybroker.com";
+
+        $data = [
+            'to' => $user->email,
+            'name' => $user->name,
+            'subject' => 'Dealer Registration Confirmation',
+            'title' => "Dealer Registration Confirmation",
+            'message_body' => $body,
+            'cta' => false,
+            'cta_text' => null,
+            'cta_url' => null,
+            'after_cta_body' => null,
         ];
         $comm->sendMail($data);
     }
