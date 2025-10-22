@@ -85,7 +85,7 @@ class EditMyArmoury extends Component
         $vendor->instagram_handle = $this->instagram_handle;
         $vendor->save();
         if(!Auth::user()->vendor_id){
-            $tr = new MessageThread([
+            $tr = MessageThread::create([
                 'user_1' => 1,
                 'user_2' => Auth::user()->id,
             ]);
