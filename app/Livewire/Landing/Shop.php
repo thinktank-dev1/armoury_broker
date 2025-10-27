@@ -64,9 +64,6 @@ class Shop extends Component
                         $this->current_filters['category'][] = $sub->category->slug;
                     }
                 }
-                else{
-                    $this->current_filters['category'][] = $sub->category->slug;
-                }
             }
         }
         if (array_key_exists($type, $this->current_filters)){

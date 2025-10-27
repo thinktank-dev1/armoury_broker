@@ -96,7 +96,9 @@
                             @endif
                             <div class="mt-3">
                                 <span class="badge badge-outine-dark-blue">{{ $product->category->category_name }}</span>
+                                @if($product->subCategory)
                                 <span class="badge badge-outine-dark-blue">{{ $product->subCategory->sub_category_name }}</span>
+                                @endif
                                 @if($product->sub_sub)
                                 <span class="badge badge-outine-dark-blue">{{ $product->sub_sub->sub_category_name }}</span>
                                 @endif
@@ -212,7 +214,9 @@
                 $('.modal').modal('hide');
                 $.notify("Offer has been sent to vendor!", "success");
             });
-            
+            @this.on('quantity-error', () => {
+                $.notify("Please enter quantity equal or below available quantity!", "success");
+            });
         });
     </script>
     @endpush
