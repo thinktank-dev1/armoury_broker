@@ -51,6 +51,9 @@ class Shop extends Component
         foreach($brands AS $brand){
             $this->current_filters['brands'][] = $brand;    
         }
+        if(count($this->current_filters['brands']) == 0){
+            unset($this->current_filters['brands']);
+        }
     } 
 
     public function updatedMaxPrice(){}

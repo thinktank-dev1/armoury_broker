@@ -147,6 +147,7 @@ class ProductDetail extends Component
             $comm = new Communication();
             $comm->sendMail($data);
 
+            $this->addToWishList($this->product->id);
             $this->dispatch('offer-saved');
         }
     }
