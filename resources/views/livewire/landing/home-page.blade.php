@@ -53,7 +53,7 @@
             <div class="container">
                 <div class="row mt-3">
                     <div class="col-md-12 text-center">
-                        <a href="{{ url('dashboard') }}" class="btn btn-secondary fixed-button">Start Selling</a>
+                        <a href="{{ url('list-item') }}" class="btn btn-secondary fixed-button">Start Selling</a>
                     </div>
                 </div>
             </div>

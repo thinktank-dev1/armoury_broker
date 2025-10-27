@@ -5,7 +5,7 @@
                 @if(Auth::user()->role->name == "user")
                 <li>
                     <div class="mx-3">
-                        <button onclick="window.location.href='{{ url("add-product") }}'" class="btn btn-primary-outline btn-bg-white"><span class="hide-menu">Add Item</span>&nbsp;+</button>
+                        <button onclick="window.location.href='{{ url("list-item") }}'" class="btn btn-primary-outline btn-bg-white"><span class="hide-menu">Add Item</span>&nbsp;+</button>
                     </div>
                 </li>
                 @endif

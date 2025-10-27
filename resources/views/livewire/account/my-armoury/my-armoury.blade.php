@@ -103,7 +103,7 @@
                         <p class="m-b-0 mt-0" style="text-transform: uppercase;">{{ $product->item_name }}</p>
                     </div>
                     <div class="overlay-icons">
-                        <a href="{{ url('add-product/'.$product->id) }}"><i class=" icon-pencil"></i></a>
+                        <a href="{{ url('list-item/'.$product->id) }}"><i class=" icon-pencil"></i></a>
                         <a href="{{ url('shop/product/'.$product->id) }}">View</a>
                     </div>
                 </div>

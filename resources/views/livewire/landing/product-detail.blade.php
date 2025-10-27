@@ -58,7 +58,7 @@
                             <div class="cart-product-quantity">
                                 <div class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" title="Qty" class="qty" size="4" wire:model.defer="quantity">
+                                    <input type="text" name="quantity" title="Qty" class="qty" size="4" wire:model.blur="quantity">
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                 <span class="badge badge-outine-dark-blue">Brand: {{ $product->brand->brand_name }}</span>
                             </div>
                             <div class="mt-4 bg-grey text-dark-blue px-3 py-2">
-                                <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchase. <a href="{{ url('terms-and-conditions') }}"><b>Learn More</b></a></small>
+                                <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchase. <a href="#" data-bs-toggle="modal" data-bs-target="#learn-modal"><b>Learn More</b></a></small>
                             </div>
                             <div class="row mt-4 px-3">
                                 @if($product->vendor->avatar)
@@ -148,9 +148,9 @@
     <div class="modal fade" tabindex="-1" id="offer-modal" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Make an offer</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header bg-blue">
+                    <h5 class="modal-title text-white">MAKE AN OFFER</h5>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @if($errors->any())
@@ -162,6 +162,7 @@
                         </div>
                     </div>
                     @endif
+                    <p>Offers are limited to 20% below the listed price</p>
                     <form wire:submit.prevent="saveOffer">
                         <div class="row">
                             <div class="col-md-12">
@@ -177,8 +178,23 @@
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" wire:click.prevent="saveOffer">Send offer</button>
+                    <button type="button" class="btn btn-primary-outline" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="learn-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <b>Platform Fees</b><br />
+                    <p>Armoury Broker charges a platform fee to the buyer for facilitating transactions through our secure marketplace. This fee is calculated as the greater of R25 or 5% (five percent) of the transaction value (including item price and applicable payment gateway charges) and is payable by the buyer at the time of purchase unless the seller has chosen to split or absorb this fee.</p>
+                    <b>Delivery Fees</b>
+                    <p>Delivery Fees are Included in the total purchase price based on the selection(s) made by the seller during item listing and the buyer at the purchasing stage. The delivery fee is then refunded to the seller upon successful delivery (except for free delivery, collection, or dealer stocking)</p>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="saveOffer">Save offer</button>
                 </div>
             </div>
         </div>
@@ -196,6 +212,7 @@
                 $('.modal').modal('hide');
                 $.notify("Offer has been sent to vendor!", "success");
             });
+            
         });
     </script>
     @endpush

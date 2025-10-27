@@ -848,3 +848,8 @@ footer .widget_title {
     position: fixed !important;
     /*padding-right: 0 !important;*/
 }
+
+.bg-blue{
+	background-color: #293c47;
+	color: #FFF !important;
+}

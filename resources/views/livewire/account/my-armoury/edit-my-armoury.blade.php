@@ -120,15 +120,7 @@
                             </div>
                             <form class="form-material m-t-40" wire:submit.prevent="saveDealer">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="join_dealer_network" wire:model.live="join_dealer_network">
-                                                <label class="form-check-label" for="join_dealer_network">
-                                                    Would you like to join our dealer network?
-                                                </label>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-12">                                       
                                         <p><small>As part of our firearms sales process, dealer stocking may be required. We're building a network of certified dealers to facilitate this service.</small></p>
                                         <b>How it works</b>
                                         <p>
@@ -148,7 +140,16 @@
                                                 Sales are marked as complete when items are released to buyers.
                                             </p>
                                         </small>
+                                        <div class="my-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="join_dealer_network" wire:model.live="join_dealer_network">
+                                                <label class="form-check-label" for="join_dealer_network">
+                                                    Would you like to join our dealer network?
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     @if($join_dealer_network)
                                     <div class="col-md-6">
                                         <div class="mb-3">

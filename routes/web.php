@@ -112,8 +112,8 @@ Route::middleware(['auth', 'verified'])->group(function (){
 	Route::get('my-armoury/edit', EditMyArmoury::class);
     Route::middleware([EnsureHasVendor::class])->group(function (){
         Route::get('dashboard', Dashboard::class)->name('dashboard');
-        Route::get('add-product', ProductForm::class);
-        Route::get('add-product/{id}', ProductForm::class);
+        Route::get('list-item', ProductForm::class);
+        Route::get('list-item/{id}', ProductForm::class);
         Route::get('wishlist', WishList::class);
         
         Route::get('my-armoury', MyArmoury::class);

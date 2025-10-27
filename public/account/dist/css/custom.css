@@ -656,3 +656,16 @@ label{
 	border-radius: 0px;
 	color: #FFF;
 }
+.password-wrapper input {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    box-sizing: border-box;
+}
+.password-wrapper .toggle-icon {
+    position: absolute;
+    right: 10px;
+    /*top: 50px;*/
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}

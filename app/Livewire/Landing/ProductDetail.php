@@ -27,6 +27,7 @@ class ProductDetail extends Component
     public function mount($id){
         $this->product = Product::find($id);
         $qty = $this->product->quantity;
+        $this->qty = $qty;
 
         $itms_count = OrderItem::query()
         ->where('product_id', $id)
@@ -47,6 +48,12 @@ class ProductDetail extends Component
         }
         else{
             $this->availability = true;
+        }
+    }
+
+    public function updatedQuantity(){
+        if($this->quantity > $this->qty){
+            $this->quantity = $this->qty;
         }
     }
 
@@ -145,6 +152,9 @@ class ProductDetail extends Component
     }
 
     public function addToCart(){
+        if($this->quantity > $this->qty){
+            $this->dispatch('quantity-error');
+        }
         if(!Auth::guest()){
             $order_item = OrderItem::query()
             ->where('user_id', Auth::user()->id)
