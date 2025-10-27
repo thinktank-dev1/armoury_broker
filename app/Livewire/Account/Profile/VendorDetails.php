@@ -3,20 +3,25 @@
 namespace App\Livewire\Account\Profile;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 
 use App\Livewire\Account\Profile;
 use Auth;
 
 class VendorDetails extends Component
 {
+    use WithFileUploads;
+    
     public $provinces = [];
-    public $name, $decription, $instagram_handle, $suburb, $city, $province;
+    public $name, $description, $instagram_handle, $suburb, $city, $province;
     public $dealer_stock_service, $show_dealer_opt_in;
+    public $avatar; 
 
     public function mount(){
         $vnd = Auth::user()->vendor;
         $this->name = $vnd->name; 
-        $this->decription = $vnd->description;
+        $this->description = $vnd->description;
         $this->instagram_handle = $vnd->instagram_handle; 
         $this->suburb = $vnd->suburb;
         $this->city = $vnd->city; 
@@ -37,6 +42,32 @@ class VendorDetails extends Component
         $this->join_dealer_network = False;
     }
 
+    public function saveAvater(){
+        if($this->avatar){
+            $file = $this->avatar->storePublicly('vendor_avater', 'public');
+            $vnd = Auth::user()->vendor;
+            $vnd->avatar = $file;
+            $vnd->save();
+        }
+        $this->avatar = null;
+        $this->dispatch('close-modal');
+    }
+
+    public function activateDealerTab(){
+        $this->dispatch('activate-dealer-tab');
+    }
+
+    #[On('province-updated')]
+    public function handleProvinceUpdate($province){
+        $this->province = $province;
+        $this->saveVendor();
+    }
+
+    public function updateContent($field, $value){
+        $this->$field = $value;
+        $this->saveVendor();
+    }
+
     public function updatedDealerStockService(){
         if($this->dealer_stock_service){
             $this->show_dealer_opt_in = True;
@@ -49,11 +80,11 @@ class VendorDetails extends Component
     public function saveVendor(){
         $this->validate([
             'name' => 'required', 
-            'decription' => 'required', 
+            'description' => 'required', 
         ]);
         $vnd = Auth::user()->vendor;
         $vnd->name = $this->name; 
-        $vnd->description = $this->decription;
+        $vnd->description = $this->description;
         $vnd->instagram_handle = $this->instagram_handle;
         $vnd->suburb = $this->suburb; 
         $vnd->city = $this->city; 

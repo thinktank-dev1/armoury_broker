@@ -120,7 +120,7 @@
                         <div class="">
                             <i class="linearicons-envelope"></i>
                         </div>
-                        <b>support@armouryboker.co.za</b>
+                        <b>support@armourybroker.co.za</b>
                     </div>
                 </div>
                 <div class="col-md-9">

@@ -11,6 +11,7 @@ class Message extends Model
         'user_id',
         'message',
         'offer_amount',
+        'action',
         'read_status',
     ];
 

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mt-3">
             <div class="col-md-12">
-                <h3 class="page-title bold">
+                <h3 class="page-title bold" wire:ignore>
                     @if(url()->current() != URL::previous())
                     <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
                     @endif
@@ -109,16 +109,84 @@
                                                                 </div>
                                                                 <div class="col-md-7 text-center">
                                                                     @if($message->user_id != auth()->id())
-                                                                    <p>What would you like to do?</p>
-                                                                    <div class="text-center">
-                                                                        <a href="#" class="btn btn-secondary px-3 py-1">Accept</a>
-                                                                        <a href="#" class="btn btn-secondary px-3 py-1">Reject</a>
-                                                                        <a href="#" class="btn btn-secondary px-3 py-1">Counter</a>
-                                                                    </div>
+                                                                        @if($message->action == "countered")
+                                                                            You Counter offered.
+                                                                        @elseif($message->action == "reject")
+                                                                            You rejected the offer.
+                                                                        @elseif($message->action == "accept")
+                                                                            Youe accepted the offer.
+                                                                        @else
+                                                                            <p>What would you like to do?</p>
+                                                                            <div class="text-center">
+                                                                                <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="changeActionStatus({{ $message->id }}, 'accept')">Accept</a>
+                                                                                <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="changeActionStatus({{ $message->id }}, 'reject')">Reject</a>
+                                                                                <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="showCounterModal({{ $message->id }})">Counter</a>
+                                                                            </div>
+                                                                        @endif
                                                                     @else
                                                                     <p>You made an offer.</p>
                                                                     <div class="text-center">
-                                                                        <a href="#" class="btn btn-secondary px-3 py-1">Cancel Offer</a>
+                                                                        @if($message->action == "countered")
+                                                                            Offer was countered.
+                                                                        @elseif($message->action == "reject")
+                                                                            Offer was rejected.
+                                                                        @elseif($message->action == "accept")
+                                                                            Offer was accepted.
+                                                                        @else
+                                                                            <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="cancelOffer({{ $message->id }})">Cancel Offer</a>
+                                                                        @endif
+                                                                    </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @elseif($message->message == "You have a new counter offer")
+                                                    <span style="font-size: 12px"><b>{{ $message->user->vendor->name }}</b> has made a counter offer.</span>
+                                                    <div class="card bordered">
+                                                        <div class="card-header bg-dark">
+                                                            <h5 class="card-title bold text-white">OFFER</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                    @if($cur_msg->product->images->count() > 0)
+                                                                    <img src="{{ asset('storage/'.$cur_msg->product->images->first()->image_url) }}" class="offer-product-img">
+                                                                    @endif
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <h5 class="bold">{{ $cur_msg->product->item_name }}</h5>
+                                                                    <b class="bold"><s>R {{ number_format($cur_msg->product->item_price,2) }}</s></b><br />
+                                                                    <b class="bold">R {{ number_format($message->offer_amount,2) }}</b><br />
+                                                                </div>
+                                                                <div class="col-md-7 text-center">
+                                                                    @if($message->user_id != auth()->id())
+                                                                        @if($message->action == "countered")
+                                                                            You Counter offered.
+                                                                        @elseif($message->action == "reject")
+                                                                            You rejected the offer.
+                                                                        @elseif($message->action == "accept")
+                                                                            You accepted the offer.
+                                                                        @else
+                                                                            <p>What would you like to do?</p>
+                                                                            <div class="text-center">
+                                                                                <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="changeActionStatus({{ $message->id }}, 'accept')">Accept</a>
+                                                                                <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="changeActionStatus({{ $message->id }}, 'reject')">Reject</a>
+                                                                                <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="showCounterModal({{ $message->id }})">Counter</a>
+                                                                            </div>
+                                                                        @endif
+                                                                    @else
+                                                                    <p>You made an offer.</p>
+                                                                    <div class="text-center">
+                                                                        @if($message->action == "countered")
+                                                                            Offer was countered.
+                                                                        @elseif($message->action == "reject")
+                                                                            Offer was rejected.
+                                                                        @elseif($message->action == "accept")
+                                                                            Offer was accepted.
+                                                                        @else
+                                                                            <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="cancelOffer({{ $message->id }})">Cancel Offer</a>
+                                                                        @endif
                                                                     </div>
                                                                     @endif
                                                                 </div>
@@ -153,60 +221,55 @@
                 </div>
             </div>
         </div>
-
-        {{--
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="page-title bold">MESSAGES</h3>
-                        <div class="card b-all shadow-none">
-                            <div class="inbox-center table-responsive">
-                                <table class="table table-hover no-wrap">
-                                    <tbody>
-                                        @foreach($mesages AS $msg)
-                                        <tr @if($msg->status == 0) class="unread" @endif>
-                                            <td style="width:40px" class="hidden-xs-down">
-                                                <i class="far fa-star"></i>
-                                            </td>
-                                            <td class="hidden-xs-down">
-                                                @if($msg->user)
-                                                    {{ $msg->user->name.' '.$msg->user->surname }}
-                                                @else
-                                                    {{ $msg->name.' '.$msg->surname }}
-                                                @endif
-                                            </td>
-                                            <td class="max-texts"> 
-                                                <a href="{{ url('messages/'.$msg->id) }}">
-                                                    @if($msg->children->count() > 0)
-                                                    <span class="label label-info m-r-10">{{ $msg->children->count() }}</span>
-                                                    @endif 
-                                                    @php
-                                                    $string = $msg->message;
-                                                    $maxLen = 100;
-                                                    $str =  substr($string, 0, $maxLen); 
-                                                    if(strlen($string) > $maxLen){}  $str = $str.' ...';
-                                                    @endphp
-                                                    {{ $str }}
-                                                </a>
-                                            </td>
-                                            <td class="text-end"> {{ date('d M y H:i', strtotime($msg->created_at)) }} </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                @if($mesages->count() == 0)
-                                <div class="text-center mt-5">
-                                    <h1 class="text-muted">Get started</h1>
-                                    <p>Your messages will show here when buyers contact you.</p>
+        <div class="modal fade" tabindex="-1" id="counter-offer-modal" wire:ignore.self>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Counter Offer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if($errors->any())
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger">
+                                    {{ $errors->first() }}
                                 </div>
-                                @endif
                             </div>
                         </div>
+                        @endif
+                        <form wire:submit.prevent="saveCounterOffer">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Counter Offer Amount</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">R</span>
+                                            <input type="number" class="form-control" nae="counter_amount" wire:model.defer="counter_amount">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" wire:click.prevent="saveCounterOffer">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
-        --}}
+        @push('scripts')
+        <script>
+            document.addEventListener('livewire:initialized', () => {
+                @this.on('close-modal', () => {
+                    $('.modal').modal('hide');
+                });
+                @this.on('show-offer-modal', () => {
+                    $('#counter-offer-modal').modal('show');
+                });
+            });
+        </script>
+        @endpush
     </div>
 </div>

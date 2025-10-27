@@ -1,5 +1,56 @@
 <div>
     <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <h3 class="page-title bold">
+                    @if(url()->current() != URL::previous())
+                    <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                    @endif
+                    Settings
+                </h3>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <ul class="nav nav-tabs profile-tab settings-tabs" role="tablist" wire:ignore.self>
+                        <li class="nav-item" wire:ignore> <a class="nav-link active" data-bs-toggle="tab" href="#armoury" role="tab" aria-selected="true">My Armoury</a> </li>
+                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">My Profile</a> </li>
+                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#banking" role="tab" aria-selected="false">My Banking</a> </li>
+                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#dealer" id="dealer-link" role="tab" aria-selected="false">Dealer Network</a> </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="armoury" role="tabpanel" wire:ignore.self>
+                            <livewire:account.profile.vendor-details />
+                        </div>
+                        <div class="tab-pane" id="profile" role="tabpanel" wire:ignore.self>
+                            <livewire:account.profile.profile-form />
+                        </div>
+                        <div class="tab-pane" id="banking" role="tabpanel" wire:ignore.self>
+                            <livewire:account.profile.banking-details />
+                        </div>
+                        <div class="tab-pane" id="dealer" role="tabpanel" wire:ignore.self>
+                            <livewire:account.profile.dealer-form />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('close-modal', () => {
+                $('.modal').modal('hide');
+            });
+            @this.on('activate-dealer-tab', () => {
+                $('.nav-tabs a[href="#dealer"]').tab('show');
+            });
+        });
+    </script>
+    @endpush
+    {{--
+    <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card">
@@ -44,63 +95,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-xlg-9 col-md-7">
-                <div class="card">
-                    <ul class="nav nav-tabs profile-tab" role="tablist" wire:ignore.self>
-                        <li class="nav-item" wire:ignore> <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab" aria-selected="true">Profile</a> </li>
-                        @if(Auth::user()->vendor_id)
-                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">Vendor</a> </li>
-                        @endif
-                        @if(Auth::user()->vendor_id)
-                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#dealer" role="tab" aria-selected="false">Dealer</a> </li>
-                        @endif
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home" role="tabpanel" wire:ignore.self>
-                            <livewire:account.profile.profile-form />
-                        </div>
-                        <div class="tab-pane" id="profile" role="tabpanel" wire:ignore.self>
-                            <livewire:account.profile.vendor-details />
-                        </div>
-                        <div class="tab-pane" id="dealer" role="tabpanel" wire:ignore.self>
-                            <livewire:account.profile.dealer-form />
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <div class="modal fade" tabindex="-1" id="avatar-edit-modal" wire:ignore.self>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Avatar</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">Select Avatar</label>
-                                <input type="file" class="form-control" name="avatar" wire:model.defer="avatar">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="saveAvater">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @push('scripts')
-    <script>
-        document.addEventListener('livewire:initialized', () => {
-            @this.on('close-modal', () => {
-                $('.modal').modal('hide');
-            });
-        });
-    </script>
-    @endpush
+    --}}
 </div>

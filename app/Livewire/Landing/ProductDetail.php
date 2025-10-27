@@ -5,6 +5,8 @@ namespace App\Livewire\Landing;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
+use App\Lib\Communication;
+
 use Auth;
 use App\Models\Product;
 use App\Models\WishList;
@@ -91,6 +93,53 @@ class ProductDetail extends Component
             $msg->message = "You have a new offer";
             $msg->offer_amount = $this->offer_amount;
             $msg->save();
+
+            $order_data = "<table class='table-bodered' style='width: 100%'>";
+            $order_data .= "<thead><tr style='background-color: #e6e6e6;'><th colspan='2' style='text-align: center;'>Offer Details</th></tr></thead>";
+            $order_data .= "<tbody>";
+            $order_data .= "<tr>";
+
+            if($this->product->images->count() > 0){
+                $order_data .= "<td><img style='height: 100px' src='".url('storage/'.$this->product->images->first()->image_url)."'></td>";
+            }
+            else{
+                $order_data .= "<td></td>";
+            }
+            $order_data .= "<td>";
+            $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
+            $order_data .= "<tr><td>Item Name:</td><td>".$this->product->item_name."</td></tr>";
+            $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($this->product->item_price,2)."</td></tr>";
+            $order_data .= "<tr><td>Offered Price:</td><td>R ".number_format($this->offer_amount,2)."</td></tr>";
+            $order_data .= "</table>";
+            $order_data .= "</td>";
+
+            $order_data .= "</tr>";
+            $order_data .= "</tbody>";
+            $order_data .= "</table>";
+
+
+            $body = "Awesome news!<br /><br />
+            Someone has made an offer on one of the items that you have listed in your armoury.<br />".$order_data;
+
+            $after = "<b>Next step:</b><br />
+            Remember that you can Accept, Reject, or Counter the offer that has been made for an item.<br /><br > 
+            Click on the “View Offer” button above to view and respond in the message section.";
+
+            $user = $this->product->vendor->user;
+            $data = [
+                'to' => $user->email,
+                'name' => $user->name,
+                'subject' => 'New Offer',
+                'title' => "New Offer",
+                'message_body' => $body,
+                'cta' => true,
+                'cta_text' => 'View Offer',
+                'cta_url' => url('messages/'.$thread->id),
+                'after_cta_body' => $after,
+            ];
+            $comm = new Communication();
+            $comm->sendMail($data);
+
             $this->dispatch('offer-saved');
         }
     }

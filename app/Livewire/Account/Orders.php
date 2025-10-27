@@ -117,6 +117,18 @@ class Orders extends Component
             $ord->vendor_status = $itm['vendor_status'];
             $ord->save();
         }
+        $order = $ord->order;
+        $go = True;
+        foreach($order->items AS $itm){
+            if(!$itm->vendor_status){
+                $go = False;
+                break;
+            }
+        }
+        if($go){
+            $order->shipping_status = 1;
+            $order->save();
+        }
     }
 
     public function saveShipService(){

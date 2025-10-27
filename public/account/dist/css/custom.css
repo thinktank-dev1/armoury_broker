@@ -647,3 +647,12 @@ label{
   border-bottom: 1px solid #ccc;
   padding-bottom: 25px;
 }
+
+.settings-tabs{
+	background-color: #e6e6e6;
+}
+.settings-tabs .nav-item .nav-link.active{
+	background-color: #293c47;
+	border-radius: 0px;
+	color: #FFF;
+}
