@@ -81,6 +81,11 @@ class Shop extends Component
         else{
             $this->current_filters[$type][] = $value;
         }
+        if($type == "condition"){
+            if(count($this->current_filters['condition']) == 0){
+                unset($this->current_filters['condition']);
+            }
+        }
     }
 
     public function removeFilter($k, $sk){
