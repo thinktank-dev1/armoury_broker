@@ -7,9 +7,6 @@
                         <div class="page-title text-center">
                             <h3 class="text-white mt-3">SUPPORT</h3>
                         </div>
-                        <div class="text-center">
-                            <p class="text-white">Frequently asked questions and contact form</p>
-                        </div>
                     </div>
                 </div>
             </div>

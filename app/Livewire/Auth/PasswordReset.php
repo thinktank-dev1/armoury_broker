@@ -45,7 +45,7 @@ class PasswordReset extends Component
                 'password' => $this->password
             ];
             if(Auth::attempt($credentials)){
-                return redirect()->intended('dashboard');
+                return redirect()->intended('shop');
             }
         }
         else{

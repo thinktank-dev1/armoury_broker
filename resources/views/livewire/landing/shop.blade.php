@@ -13,9 +13,6 @@
                                 @endif
                             </h3>
                         </div>
-                        <div class="text-center">
-                            <p class="text-white">Lorem ipsum labore ad do minim irure ut ut sit dolore tempor duis dolor esse aliqua minim sunt eu officia.</p>
-                        </div>
                     </div>
                 </div>
             </div>
