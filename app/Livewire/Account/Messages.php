@@ -39,6 +39,15 @@ class Messages extends Component
         $this->getData();
     }
 
+    public function markAsViewed($id){
+        $msg = Message::find($id);
+        if($msg->user_id != Auth::user()->id){
+            if($msg->read_status == 0){
+                $msg->update(['read_status' => 1]);
+            }
+        }
+    }
+
     public function showCounterModal($id){
         $this->cur_action_msg = $id;
         $this->dispatch('show-offer-modal');

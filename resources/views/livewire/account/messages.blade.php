@@ -89,6 +89,7 @@
                                         <div class="chat-container" wire:poll.15s>
                                             <div class="chat-body" id="chat-body">
                                                 @foreach($cur_msg->messages as $message)
+                                                <div x-data x-intersect.once="$wire.markAsViewed({{ $message->id }})">
                                                     @if($message->message == "You have a new offer")
                                                     <span style="font-size: 12px"><b>{{ $message->user->vendor->name }}</b> has made an offer.</span>
                                                     <div class="card bordered">
@@ -203,6 +204,7 @@
                                                         </div>
                                                     </div>
                                                     @endif
+                                                </div>
                                                 @endforeach
                                             </div>
                                         </div>
