@@ -367,7 +367,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="ct-bar-chart" style="height: 140px;" wire:ignore></div>
+                    <canvas id="orderChart" height="45"></canvas>
                 </div>
             </div>
         </div>
@@ -429,6 +429,7 @@
     @push('scripts')
     <script src="{{ asset('account/assets/node_modules/chartist-js/dist/chartist.min.js') }}"></script>
     <script src="{{ asset('account/assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('livewire:initialized', () => {
             @this.on('close-modal', (event) => {
@@ -448,6 +449,47 @@
             });
         });
         $(document).ready(function(){
+            const ctx = document.getElementById('orderChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Orders',
+                        data: [8, 6, 5, 9, 7, 10, 67, 89, 34, 23, 15, 34],
+                        backgroundColor: '#293c47',
+                        yAxisID: 'y',
+                        barThickness: 20,
+                    },
+                    {
+                        label: 'Order Value',
+                        data: [5000, 5500, 7000, 8500, 6500, 10000, 10000, 10000, 10000, 10000, 10000, 10000],
+                        borderColor: '#ff7043',
+                        borderWidth: 2,
+                        type: 'line',
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    stacked: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            title: { display: true, text: 'No. of Orders' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            title: { display: true, text: 'Order Value (R)' },
+                            grid: { drawOnChartArea: false }
+                        }
+                    }
+                }
+            });
+            /*
             lg_labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             sm_labels = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
             
@@ -481,6 +523,7 @@
                     Chartist.plugins.tooltip()
                 ]
             }, options, responsiveOptions);
+            */
         })
 
         function showShareOptions(){
