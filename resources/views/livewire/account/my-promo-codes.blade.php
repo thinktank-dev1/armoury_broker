@@ -82,14 +82,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 promo-cont">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item"> 
-                        <a class="nav-link active" data-bs-toggle="tab" href="#active" role="tab">Active</a>
-                    </li>
-                    <li class="nav-item"> 
-                        <a class="nav-link" data-bs-toggle="tab" href="#inactive" role="tab">Inactive</a> 
-                    </li>
+            <div class="col-md-6">
+                <ul class="nav nav-tabs profile-tab settings-tabs" role="tablist" wire:ignore.self>
+                    <li class="nav-item" wire:ignore><a class="nav-link active" data-bs-toggle="tab" href="#active" role="tab">Active</a></li>
+                    <li class="nav-item" wire:ignore><a class="nav-link" data-bs-toggle="tab" href="#inactive" role="tab">Inactive</a></li>
                 </ul>
                 <div class="tab-content tabcontent-border">
                     <div class="tab-pane active bg-white" id="active" role="tabpanel">

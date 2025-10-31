@@ -545,6 +545,7 @@ class Checkout extends Component
                 "item_name" => $ct->product->item_name,
                 "item_image" => $img,
                 "qty" => $ct->quantity,
+                "tot_qty" => $ct->product->quantity,
                 "price" => $ct->price,
                 "total" => $tot,
 

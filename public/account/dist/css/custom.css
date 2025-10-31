@@ -669,3 +669,10 @@ label{
     cursor: pointer;
     user-select: none;
 }
+
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #FFF;
+    background-color: #293c47;
+    border-color: #293c47;
+    box-shadow: none;
+}

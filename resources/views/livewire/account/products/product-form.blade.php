@@ -483,6 +483,30 @@
             @this.on('go-to-top', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+            @this.on('item-saved', (e) => {
+                id = e.id;
+                Swal.fire({
+                    type: 'success',
+                    title: "Congrats, item added!",
+                    html: `<div class="row">
+                        <div class="col-md-12">
+                            <p>Your item is now live.</p>
+                        </div>
+                        <div class="col-md-12 d-grid mb-3">
+                            <a href="{{ url('shop/product/') }}/${id}" class="btn btn-primary">Go to item</a>
+                        </div>
+                        <div class="col-md-12 d-grid mb-3">
+                            <a href="{{ url('my-armoury') }}" class="btn btn-primary">Go to your armoury</a>
+                        </div>
+                        <div class="col-md-12 d-grid mb-3">
+                            <a href="{{ url('list-item') }}" class="btn btn-primary">Add new item</a>
+                        </div>
+                    </div>`,
+                    showConfirmButton: false,  // hides the OK button
+                    showCancelButton: false,   // hides the Cancel button
+                    allowOutsideClick: false,  // prevents closing when clicking outside
+                });
+            });
         });
     </script>
     @endpush

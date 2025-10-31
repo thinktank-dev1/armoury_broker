@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+                <div class="col-lg-4 col-md-4 mb-4 mb-md-0">
                     @if($product->images->count() > 0)
                     <div class="product-image">
                         <div class="product_img_box">
@@ -48,7 +48,7 @@
                     </div>
                     @endif
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-8 col-md-8">
                     <div class="pr_detail">
                         <div class="product_description">
                             <h4 class="product_title text-dark-blue">{{ ucwords($product->item_name) }}</h4>
@@ -58,7 +58,7 @@
                             <div class="cart-product-quantity">
                                 <div class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" title="Qty" class="qty" size="4" wire:model.blur="quantity">
+                                    <input type="text" name="quantity" id="quantity" title="Qty" class="qty" size="4" max="{{ $qty }}" wire:model.live="quantity">
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
@@ -217,6 +217,16 @@
             @this.on('quantity-error', () => {
                 $.notify("Please enter quantity equal or below available quantity!", "success");
             });
+            $('.minus').on('click', function(){
+                setQtyVal();
+            });
+            $('.plus').on('click', function(){
+                setQtyVal();
+            });
+            function setQtyVal(){
+                var qty = parseInt($('#quantity').val());
+                @this.set('quantity', qty);
+            }
         });
     </script>
     @endpush

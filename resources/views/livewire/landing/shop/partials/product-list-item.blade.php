@@ -1,4 +1,4 @@
-<div class="product col-6 col-md-3">
+<div class="product col-6 col-md-2">
     @if($tag)
     <span class="pr_flash @if($tag == 'Sold') bg-warning @elseif($tag == 'Wanted') bg-dark text-white @endif">{{ $tag }}</span>
     @endif
@@ -19,7 +19,7 @@
         $img = url('storage/'.$product->images->first()->image_url);
     }
     @endphp
-    <div class="product_img" style="background-image: url('{{ $img }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <div class="product_img" style="background-image: url('{{ $img }}'); height: 100px; background-size: cover; background-position: center; background-repeat: no-repeat;">
         <a href="{{ url('shop/product/'.$product->id) }}"></a>
         <div class="product_action_box">
             <ul class="list_none pr_action_btn">
@@ -45,6 +45,7 @@
         document.addEventListener('livewire:initialized', () => {
             @this.on('added-to-cart', () => {
                 $.notify("Product added to cart successfully!", "success");
+                @this.dispatch('new-cart-item');
             });
         });
     </script>

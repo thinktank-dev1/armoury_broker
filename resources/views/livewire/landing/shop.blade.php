@@ -100,29 +100,6 @@
                                 </h2>
                                 <div id="collapseBrand" class="accordion-collapse collapse" aria-labelledby="headingBrand" data-bs-parent="#filter_accodion" wire:ignore.self>
                                     <div class="accordion-body" wire:ignore.self>
-                                        {{--
-                                        <ul class="sub_cat_filter_list">
-                                            @foreach($brands AS $brand)
-                                            
-                                            @php
-                                            $brand_checked = "";
-                                            if(isset($current_filters['brands'])){
-                                                if(in_array($brand->slug, $current_filters['brands'])){
-                                                    $brand_checked = "checked";
-                                                }
-                                            }
-                                            @endphp
-                                            <li>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="brand_check_{{ $brand->id }}" wire:key="brand_fl_{{ $brand->id.now() }}" wire:click.prevent="updateFilters('brands', '{{ $brand->slug }}')" {{ $brand_checked }} />
-                                                    <label class="form-check-label" for="brand_check_{{ $brand->id }}">
-                                                        {{ $brand->brand_name }}
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                        --}}
                                         <div wire:ignore>
                                             <label>Select Brand</label>
                                             <select class="brands-select-multiple" name="states[]" multiple="multiple" style="width: 100%;" onchange="updatedBrands()" wire:ignore>
@@ -259,7 +236,6 @@
         max = $range.data('max'), 
         from, 
         to;
-        console.log(max);
 
         var updateValues = function () {
             $from.prop("value", from);

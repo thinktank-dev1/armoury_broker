@@ -393,11 +393,11 @@ footer .widget {
 .product_list .product, .product_list .product_wrap {
 	display: block;
 }
-.product_list .product_img {
+/*.product_list .product_img {
 	width: 100%;
 	max-width: 100%;
 	min-height: 200px;
-}
+}*/
 .product_img{
 	max-height: 150px;
 	min-height: 150px;
@@ -852,4 +852,12 @@ footer .widget_title {
 .bg-blue{
 	background-color: #293c47;
 	color: #FFF !important;
+}
+
+.header_wrap {
+  flex: 0 0 auto;
+}
+
+.section {
+  flex: 1 0 auto;
 }

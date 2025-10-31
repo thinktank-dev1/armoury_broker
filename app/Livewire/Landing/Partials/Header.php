@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use App\Models\Category;
 use App\Models\SubCategory;
+use Livewire\Attributes\On; 
 
 use Auth;
 use App\Models\Product;
@@ -21,6 +22,7 @@ class Header extends Component
     public $menu_col, $show_third_level_menu, $sub_row_count;
 
     public function mount(){
+        // session()->flush();
         $this->getSubCats(Category::orderBy('category_name', 'ASC')->first()->id);
         $this->getCartCount();
 
@@ -28,19 +30,25 @@ class Header extends Component
         $this->show_third_level_menu = false;
     }
 
+    #[On('new-cart-item')]
+    public function newCartItem(){
+        $this->getCartCount();
+    } 
+
     public function getCartCount(){
+        $this->cart_count;
         if(!Auth::guest()){
             $order_items_count = OrderItem::query()
             ->where('user_id', Auth::user()->id)
             ->whereNull('order_id')
             ->count();
 
-            $this->cart_count += $order_items_count;
+            $this->cart_count = $order_items_count;
         }
         $cart = session()->get('cart');
         if($cart){
             $count = count($cart);
-            $this->cart_count += $count;
+            $this->cart_count = $count;
         }
     }
 

@@ -137,7 +137,6 @@ class ProductForm extends Component
 
     public function saveProduct(){
         $this->dispatch('go-to-top');
-
         $rules = [
             'listing_type' => 'required',
             'item_name' => 'required',
@@ -216,8 +215,7 @@ class ProductForm extends Component
                 }
             }
         }
-        session()->flash('status', 'Product successfully listed.');
-        return redirect('my-armoury');
+        $this->dispatch('item-saved', id:$prdt->id);
     }
 
     public function updatedSubCategoryId(){

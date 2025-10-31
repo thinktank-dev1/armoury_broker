@@ -751,7 +751,11 @@ PAGE JS
 	function pluseminus() {
 		$('.plus').on('click', function() {
 			if ($(this).prev().val()) {
-				$(this).prev().val(+$(this).prev().val() + 1);
+				var max = $(this).prev().attr('max');
+				var val = $(this).prev().val();
+				if(val < max){
+					$(this).prev().val(+$(this).prev().val() + 1);
+				}
 			}
 		});
 		$('.minus').on('click', function() {

@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12 text-end mt-4">
-                                <input type="submit" class="btn btn-primary" value="Update Details">
+                                <input type="submit" class="btn btn-primary" value="Update Details" wire:click.prevent="saveBankDetails">
                             </div>
                         </div>
                     </form>

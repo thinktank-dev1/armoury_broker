@@ -5323,12 +5323,12 @@ footer .widget_title {
 	padding: 15px;
 	margin-bottom: 30px;
 }
-.product_list .product_img {
+/*.product_list .product_img {
 	max-width: 30%;
 	-ms-flex: 0 0 30%;
 	flex: 0 0 30%;
 	width: 100%;
-}
+}*/
 .product_list .product_info {
 	padding: 0px 0 0 15px;
 	text-align: left;
