@@ -15,8 +15,10 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-body">
+                <div class="card-header">
                     <h4 class="card-title">My Armoury</h4>
+                </div>
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
                             <center class="profile-pic m-t-30">
@@ -100,8 +102,10 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-body">
+                <div class="card-header">
                     <h4 class="card-title">My Profile</h4>
+                </div>
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="row mt-3">
@@ -132,9 +136,11 @@
         </div>
         <div class="col-md-4">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Vault</h4>
+                </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        <h4 class="card-title">My Vault</h4>
                         <div class="ms-auto">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -192,9 +198,11 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Orders - This Month</h4>
+                </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        <h4 class="card-title">My Orders - This Month</h4>
                         <div class="ms-auto">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -231,9 +239,11 @@
         </div>
         <div class="col-md-4">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Purchases - This Month</h4>
+                </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        <h4 class="card-title">My Purchases - This Month</h4>
                         <div class="ms-auto">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -269,9 +279,11 @@
         </div>
         <div class="col-md-4">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Actions</h4>
+                </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        <h4 class="card-title">My Actions</h4>
                         <div class="ms-auto">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -309,9 +321,11 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">My Listings</h4>
+                </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        <h4 class="card-title">My Listings</h4>
                         <div class="ms-auto">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -347,9 +361,11 @@
         </div>
         <div class="col-md-8">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Order Analytics</h4>
+                </div>
                 <div class="card-body">
                     <div class="d-flex">
-                        <h4 class="card-title">Order Analytics</h4>
                         <div class="ms-auto">
                             <span class="mytooltip tooltip-effect-1">
                                 <span class="tooltip-item"><i class=" icon-info"></i></span> 

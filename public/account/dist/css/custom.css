@@ -676,3 +676,10 @@ label{
     border-color: #293c47;
     box-shadow: none;
 }
+.card-header{
+	background-color: #293c47;
+	color: #fff;
+}
+.card-header .card-title{
+	color: #fff;
+}
