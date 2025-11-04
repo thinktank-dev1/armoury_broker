@@ -1,4 +1,4 @@
-<div class="section pb_50 small_pt bg-grey">
+<div class="section pb_50 small_pt bg-grey" id="brands">
     @if($brands->count() > 0)
     <div class="container">
         <div class="row">
@@ -33,7 +33,7 @@
         </div>
         <div class="row mt-3 mb-4">
             <div class="col-md-12 text-center">
-                <a href="javascript:void(0)" class="btn btn-secondary" id="brand-btn" onclick="showOtherBrands()">View All</a>
+                <a href="#brands" class="btn btn-secondary" id="brand-btn" onclick="showOtherBrands()">View All</a>
             </div>
         </div>
     </div>

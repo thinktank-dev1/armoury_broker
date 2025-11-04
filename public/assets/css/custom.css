@@ -650,7 +650,7 @@ footer .widget {
 }
 
 .faq.accordion-collapse.collapse.show{
-	background-color: #e6e6e6;
+	background-color: #FFF;
 }
 
 .bold-500{
@@ -860,4 +860,8 @@ footer .widget_title {
 
 .section {
   flex: 1 0 auto;
+}
+
+.section {
+  scroll-margin-top: 200px;
 }

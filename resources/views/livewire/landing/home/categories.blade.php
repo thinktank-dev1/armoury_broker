@@ -36,7 +36,7 @@
         </div>
         <div class="row mt-3">
             <div class="co-md-12 text-center">
-                <a href="javascript:void(0)" class="btn btn-primary-outline" id="cat-btn" onclick="showOtherCats()">View All</a>
+                <a href="#categories" class="btn btn-primary-outline" id="cat-btn" onclick="showOtherCats()">View All</a>
             </div>
         </div>
     </div>

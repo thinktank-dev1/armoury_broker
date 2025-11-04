@@ -164,7 +164,13 @@ class Shop extends Component
 
         if($key){
             $query->where('item_name', 'LIKE', '%'.$key.'%')
-            ->orWhere('item_description', 'LIKE', '%'.$key.'%');
+            ->orWhere('item_description', 'LIKE', '%'.$key.'%')
+            ->orWhereHas('category', function($qq) use($key){
+                return $qq->where('category_name', 'LIKE', '%'.$key.'%');
+            })
+            ->orWhereHas('subCategory', function($qq) use($key){
+                return $qq->where('sub_category_name', 'LIKE', '%'.$key.'%');
+            });
         }
 
         if($this->sort_by){
