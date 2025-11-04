@@ -45,4 +45,14 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('added-to-cart', () => {
+                $.notify("Product added to cart successfully!", "success");
+                @this.dispatch('new-cart-item');
+            });
+        });
+    </script>
+    @endpush
 </div>

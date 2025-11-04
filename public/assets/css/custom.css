@@ -865,3 +865,7 @@ footer .widget_title {
 .section {
   scroll-margin-top: 200px;
 }
+
+.bodered{
+	border: 1px solid #000;
+}

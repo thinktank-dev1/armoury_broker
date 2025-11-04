@@ -20,7 +20,7 @@
             <div class="col-6 col-md-2 mb-3">
                 <a href="{{ url('shop?brands='.$brand->slug) }}" class="hover_effect1" style="position: relative;">
                     @if($brand->brand_logo)
-                    <img src="{{ asset('storage/'.$brand->brand_logo) }}" class="img-fluid">
+                    <img src="{{ asset('storage/'.$brand->brand_logo) }}" class="img-fluid bodered">
                     @else
                     <div class="brand-container">
                         <h3 class="text-dark text">{{ $brand->brand_name }}</h3>
