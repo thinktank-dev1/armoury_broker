@@ -5,12 +5,14 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card auth-cont">
                         <div class="card-body px-4">
+                            {{--
                             <div class="d-grid mt-3">
                                 <div class="btn-group">
                                     <a href="{{ url('auth/login') }}" class="btn btn-auth">Login</a>
                                     <a href="{{ url('auth/register') }}" class="btn btn-auth">Register</a>
                                 </div>
                             </div>
+                            --}}
                             <div class="row">
                                 <div class="col-md-12 text-center mt-4">
                                     <h4 class="page-title">Forgot Password</h4>
@@ -45,7 +47,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <p><a href="{{ url('auth/login') }}">I remember my password?</a></p>
+                                        <p><a href="{{ url('auth/login') }}">I remember my password.</a></p>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
