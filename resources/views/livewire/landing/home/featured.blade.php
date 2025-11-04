@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="product_slider product_list carousel_slider owl-carousel owl-theme nav_style3 owl-loaded owl-drag" data-loop="true" data-dots="false" data-nav="true" data-margin="20" data-responsive="{&quot;0&quot;:{&quot;items&quot;: &quot;1&quot;}, &quot;767&quot;:{&quot;items&quot;: &quot;2&quot;}, &quot;991&quot;:{&quot;items&quot;: &quot;3&quot;}, &quot;1199&quot;:{&quot;items&quot;: &quot;4&quot;}}">
+                    <div class="product_slider product_list carousel_slider owl-carousel owl-theme nav_style3 owl-loaded owl-drag" data-loop="true" data-dots="false" data-nav="true" data-margin="20" data-responsive="{&quot;0&quot;:{&quot;items&quot;: &quot;1&quot;}, &quot;767&quot;:{&quot;items&quot;: &quot;2&quot;}, &quot;991&quot;:{&quot;items&quot;: &quot;3&quot;}, &quot;1199&quot;:{&quot;items&quot;: &quot;6&quot;}}">
                         <div class="owl-stage-outer">
                             <div class="owl-stage" style="transform: translate3d(-1514px, 0px, 0px); transition: 0.25s; width: 4166px;">
                                 @foreach($products AS $product)
