@@ -58,8 +58,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" id="terms_check_box" wire:model.defer="terms_and_condotions">
-                                                    <label class="form-check-label" for="terms_check_box">
-                                                        I accept the <a href="{{ url('docs/Terms of Use and User Agreement_AB_Courier amendments_v02_20250629.pdf') }}" target="_blank">Terms & Conditions</a>
+                                                    <label class="form-check-label" for="terms_check_box" style="color: #000">
+                                                        I accept the <a href="{{ url('docs/Terms of Use and User Agreement_AB_Courier amendments_v02_20250629.pdf') }}" style="font-weight: 600;" target="_blank">Terms & Conditions</a>
                                                     </label>
                                                 </div>
                                             </div>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12 text-center">
-                                        <p><a href="{{ url('auth/login') }}">Already have an account? Login</a></p>
+                                        <p style="color: #000; font-weight: 600"><a href="{{ url('auth/login') }}">Already have an account? Login</a></p>
                                     </div>
                                 </div>
                                 <div class="row mb-5">

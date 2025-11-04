@@ -1,4 +1,4 @@
-<div class="owl-item cloned" style="width: 258px !important; margin-right: 20px;">
+<div class="owl-item cloned" style="width: 258px !important; margin-right: 20px;" wire:ignore.self>
     <div class="item">
         <div class="product">
             @if($tag)

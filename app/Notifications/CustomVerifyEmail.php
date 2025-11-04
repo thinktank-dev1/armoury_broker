@@ -35,7 +35,7 @@ class CustomVerifyEmail
         $verificationUrl = $this->verificationUrl($notifiable);
 
         $after ="Should you not have created an account, or created an account error, you can discard this email.<br /><br />
-        If you're having trouble clicking the \"Verify Email Address\" button, copy and paste the URL below into your web browser: <br /><br />
+        If you're having trouble clicking the \"Verify Email\" button, copy and paste the URL below into your web browser: <br /><br />
         ".$verificationUrl;
 
         $data = [

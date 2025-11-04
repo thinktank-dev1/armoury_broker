@@ -683,3 +683,10 @@ label{
 .card-header .card-title{
 	color: #fff;
 }
+
+.modal-header{
+	background-color: #293c47;
+}
+.modal-header h5{
+	color: #FFF;
+}

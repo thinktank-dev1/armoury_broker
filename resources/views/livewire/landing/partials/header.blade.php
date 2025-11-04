@@ -11,12 +11,19 @@
                     </div>
                     <div class="col-md-9 text-center ms-md-auto text-md-end g-4 d-none d-md-block">
                         @if(!Auth::guest())
-                        <a class="ms-3 bold" href="{{ url('dashboard') }}">Profile</a>
+                        <a class="ms-3 bold" href="{{ url('dashboard') }}">Dashboard</a>
                         <a class="ms-3 bold" href="{{ url('wishlist') }}">Wishlist</a>
                         @endif
                         <a class="ms-3 bold" href="{{ url('cart') }}">Cart @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif</a>
                         @if(Auth::guest())
                         <a class="ms-3 btn btn-primary-outline" href="{{ url('auth/login') }}">Register / Login</a>
+                        @endif
+                        @if(!Auth::guest())
+                            @if($msg_count)
+                            <span class="ms-3">
+                                <a href="{{ url('messages') }}"><i class="linearicons-envelope"></i><span class="cart_count">{{ $msg_count }}</span></a>
+                            </span>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -129,11 +136,6 @@
                     </ul>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
-                    @if(!Auth::guest())
-                        @if($msg_count)
-                            <li><a href="{{ url('messages') }}" class="nav-link"><i class="linearicons-envelope"></i><span class="cart_count">{{ $msg_count }}</span></a></li>
-                        @endif
-                    @endif
                     <li class="d-none d-md-block nav-search">
                         <livewire:landing.partials.search />
                     </li>

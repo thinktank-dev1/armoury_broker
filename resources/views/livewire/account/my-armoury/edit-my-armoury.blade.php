@@ -316,7 +316,6 @@
         })
         document.addEventListener('livewire:initialized', () => {
             @this.on('success-message', (e) => {
-                console.log(e.message);
                 $.toast({
                     heading: 'Success',
                     text: e.message,
