@@ -23,25 +23,27 @@
                     @endif
                     <form class="form-horizontal form-material" wire:submit.prevent="saveDealer">
                         <div class="col-md-12">
-                            <p><small>As part of our firearms sales process, dealer stocking may be required. We're building a network of certified dealers to facilitate this service.</small></p>
-                            <b>How it works</b>
-                            <p>
-                                <small>
-                                    <ul>
-                                        <li>Seller nomination - When listing firearms, sellers can nominate you as their preferred dealer</li>
-                                        <li>Buyer connection - After purchase, buyers coordinate with sellers to arrange dealer stocking and receive your business details</li>
-                                        <li>Service arrangement - You can set a monthly fee on the platform and collect fees directly with buyers for this service</li>
-                                    </ul>
-                                </small>
-                            </p>
-                            <b>Fees</b>
-                            <small>
-                                <p>
-                                    Set your own monthly dealer stocking fee<br/>
-                                    Armoury Broker charges dealers 5% on successful referrals (monthly billing for "dealer stocked" sales)<br/>
-                                    Sales are marked as complete when items are released to buyers.
-                                </p>
-                            </small>
+                            <h3>Join Our Dealer Network</h4>
+                            <p>Under South African firearms legislation, all private firearm sales must be facilitated by a licensed firearms dealer, including the dealer stocking component of the transfer process.</p>
+                            <p>We're building a network of licensed firearms dealers to provide this essential service to buyers and sellers on our platform.</p>
+                            <h3>Why Register?</h3>
+                            <p>Once verified, you'll be added to our preferred dealer list and gain:</p>
+                            <ul>
+                                <li><b>Increased exposure:</b> Visible to buyers across the platform seeking dealer stocking services in your area</li>
+                                <li><b>Additional foot traffic:</b> Attract new clients who may become repeat customers</li>
+                                <li><b>Complete control:</b> Set your own monthly dealer stocking fees</li>
+                                <li><b>Direct payment:</b> Collect fees directly from buyers</li>
+                            </ul>
+                            <h3>How It Works</h3>
+                            <p>When a buyer purchases a firearm through our platform, they select a registered dealer from their local area to facilitate dealer stocking while acquiring the necessary licensing. If you're within their area, you'll appear as an available option.</p>
+                            <p>After purchase, both the buyer and seller receive your business details to coordinate the dealer stocking arrangements. You set your monthly rate on the platform and manage the service directly with clients.</p>
+                            <h3>Cost Structure</h3>
+                            <ul>
+                                <li><b>No registration fee:</b> Joining the network is completely free</li>
+                                <li><b>Platform fee:</b> We charge 5% of your monthly dealer stocking rate for transactions facilitated through Armoury Broker, invoiced monthly while the firearm remains in stock</li>
+                            </ul>
+                            <h3>Getting Started</h3>
+                            <p>Registration is simple. Our team will verify that your dealer license is current and valid, after which you'll be added to the network and can begin receiving referrals immediately.</p>
                         </div>
                         @if(!$join_dealer_network)
                         <div class="col-md-12 mb-5">
@@ -54,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="dealer_stock_service" value="" name="dealer_stock_service">
+                                <input class="form-check-input" type="checkbox" id="dealer_stock_service" value="" name="dealer_stock_service" data-bs-toggle="modal" data-bs-target="#no-opt-modal">
                                 <label class="form-check-label" for="dealer_stock_service">
                                     No thanks 
                                 </label>
@@ -191,6 +193,18 @@
                         </div>
                         @endif
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="no-opt-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>If you change your mind, please come back to this section of the platform and complete the registration process</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

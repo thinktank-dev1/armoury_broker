@@ -11,6 +11,12 @@
                 @endif
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('/') }}" aria-expanded="false">
+                        <i class="icon-home"></i>
+                        <span class="hide-menu">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ url('shop') }}" aria-expanded="false">
                         <i class="icon-grid"></i>
                         <span class="hide-menu">Shop Now</span>
                     </a>

@@ -711,3 +711,21 @@ label{
     margin-left: -5px;
     margin-right: -5px;
 }
+.card-header .card-title{
+	text-transform: uppercase;
+}
+.text-upper{
+	text-transform: uppercase;
+}
+.input-group-text.chat-file-link{
+	background-color: transparent;
+	border: none;
+	border-top: 1px solid #e9ecef;
+	border-bottom: 1px solid #e9ecef;
+}
+.chat-file-link i{
+	font-size: 20px;
+}
+.border-right-none{
+	border-right: none;
+}

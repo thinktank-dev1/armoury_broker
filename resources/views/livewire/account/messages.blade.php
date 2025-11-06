@@ -220,15 +220,47 @@
                                                         </div>
                                                     </div>
                                                     @endif
+                                                    @if($message->attachment)
+                                                        @php
+                                                        $file = storage_path('app/public/'.$message->attachment);
+                                                        $is_image = false;
+                                                        if (exif_imagetype($file)) {
+                                                            $is_image = true;
+                                                        } 
+                                                        else {
+                                                            $is_image = false;
+                                                        }
+                                                        @endphp
+                                                        @if($is_image)
+                                                        <img src="{{ asset('storage/'.$message->attachment) }}" style="width: 50%;">
+                                                        @else
+                                                        <a href="{{ url('storage/'.$message->attachment) }}" target="_blank">View attachment</a>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                                 @endforeach
                                             </div>
                                         </div>
                                         <div class="">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Reply..." name="message" wire:model.defer="message">
+                                                <input type="text" class="form-control border-right-none" placeholder="Reply..." name="message" wire:model.defer="message">
+                                                <label class="input-group-text chat-file-link" for="fileInput" style="cursor:pointer;">
+                                                    <i class="mdi mdi-paperclip"></i>
+                                                </label>
+                                                <input type="file" id="fileInput" hidden wire:model.live="message_attachment">
                                                 <button class="btn btn-primary" type="button" id="button-addon1" wire:click.prevent="sendMessage">Send</button>
                                             </div>
+                                            @if($message_attachment)
+                                            <div class="form-text">
+                                                @php
+                                                $is_temp_image = str_starts_with($message_attachment->getMimeType(), 'image/');
+                                                @endphp
+                                                @if($is_temp_image)
+                                                <a href="{{ $message_attachment->temporaryUrl() }}" target="_blank">View attachment</a>
+                                                @endif
+                                                <span class="ms-3"><a href="#" class="text-danger" wire:click.prevent="removeAttachment"><i class="ti-trash"></i></a></span>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

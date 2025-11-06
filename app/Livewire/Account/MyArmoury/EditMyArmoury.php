@@ -101,8 +101,9 @@ class EditMyArmoury extends Component
         Auth::user()->save();
         $this->getData();
 
-        if($this->dealer_stock_service){
-            $this->view = "dealer";
+        if($this->dealer_stock_service == "dealer"){
+            // $this->view = "dealer";
+            $this->dispatch('show-dealer-pop-up');
         }
         else{
             session()->flash('status', 'Vendor successfully saved.');

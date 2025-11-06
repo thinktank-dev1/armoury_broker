@@ -124,8 +124,11 @@
                             </div>
                         </div>
                         <div class="row mt-5">
-                            <div class="col-md-12">
+                            <div class="col-md-12 d-flex">
                                 <h3 class="bold">ITEM DETAILS</h3>
+                                <span class="ms-auto">
+                                    <a href="#" wire:click.prevent="togglePreview" class="text-upper font-bold">Listing Preview</a>
+                                </span>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-2">
@@ -345,9 +348,6 @@
                         </div>
                         @endif
                         <div class="row mt-3 mb-5">
-                            <div class="col-md-12 text-center mb-3">
-                                <a href="#" wire:click.prevent="togglePreview">@if(!$preview) Preview Listing @else Hide Preview @endif</a>
-                            </div>
                             <div class="col-md-12 d-grid">
                                 <input type="submit" class="btn btn-primary" value="List Item">    
                             </div>

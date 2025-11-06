@@ -30,7 +30,15 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Value</label>
-                                                <input type="number" class="form-control" name="vendor_promo_code_value" wire:model="vendor_promo_code_value">
+                                                <div class="input-group">
+                                                    @if($code_type == 'value')
+                                                    <span class="input-group-text" id="basic-addon1">R</span>
+                                                    @endif
+                                                    <input type="number" class="form-control" name="vendor_promo_code_value" wire:model="vendor_promo_code_value">
+                                                    @if($code_type == 'percentage')
+                                                    <span class="input-group-text" id="basic-addon1">%</span>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">

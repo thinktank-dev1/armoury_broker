@@ -17,7 +17,7 @@
                         <li class="nav-item" wire:ignore> <a class="nav-link active" data-bs-toggle="tab" href="#armoury" role="tab" aria-selected="true">My Armoury</a> </li>
                         <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">My Profile</a> </li>
                         <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#banking" role="tab" aria-selected="false">My Banking</a> </li>
-                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#dealer" id="dealer-link" role="tab" aria-selected="false">Dealer Network</a> </li>
+                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" data-bs-target="#dealer" href="#dealer" id="dealer-link" role="tab" aria-selected="false">Dealer Network</a> </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="armoury" role="tabpanel" wire:ignore.self>
@@ -39,6 +39,22 @@
     </div>
     @push('scripts')
     <script>
+        $(document).ready(function(){
+            var hash = window.location.hash;
+            if(hash) {
+                var tabTrigger = document.querySelector('[data-bs-target="' + hash + '"]');
+                if (tabTrigger) {
+                    var tab = new bootstrap.Tab(tabTrigger);
+                    tab.show();
+                }
+            }
+            const tabLinks = document.querySelectorAll('[data-bs-toggle="tab"]');
+            tabLinks.forEach(function (link) {
+                link.addEventListener('shown.bs.tab', function (event) {
+                    history.replaceState(null, null, event.target.getAttribute('data-bs-target'));
+                });
+            });
+        });
         document.addEventListener('livewire:initialized', () => {
             @this.on('close-modal', () => {
                 $('.modal').modal('hide');

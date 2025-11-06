@@ -3,6 +3,7 @@
 namespace App\Livewire\Account;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 use App\Lib\Communication;
 
@@ -14,11 +15,14 @@ use App\Models\User;
 
 class Messages extends Component
 {
+    use WithFileUploads;
+
     public $read_type;
     public $active_id;
     public $cur_msg;
     public $message;
     public $counter_amount, $cur_action_msg;
+    public $message_attachment;
 
     public function mount($id = null){
         if($id){
@@ -37,6 +41,10 @@ class Messages extends Component
             }
         }
         $this->getData();
+    }
+
+    public function removeAttachment(){
+        $this->message_attachment = null;
     }
 
     public function changeType($type){
@@ -172,13 +180,32 @@ class Messages extends Component
     }
 
     public function sendMessage(){
+        $file = null;
+        if($this->message_attachment){
+            $file = $this->message_attachment->storePublicly('message_attachments', 'public');
+        }
+
         if($this->message){
             $msg = new Message();
             $msg->message_thread_id = $this->active_id;
             $msg->user_id = Auth::user()->id;
             $msg->message = $this->message;
+            if($file){
+                $msg->attachment = $file;
+            }
             $msg->save();
             $this->message = null;
+            $this->message_attachment = null;
+        }
+        elseif($file){
+            $msg = new Message();
+            $msg->message_thread_id = $this->active_id;
+            $msg->user_id = Auth::user()->id;
+            $msg->message = "User sent a file";
+            $msg->attachment = $file;
+            $msg->save();
+            $this->message = null;
+            $this->message_attachment = null;
         }
     }
 

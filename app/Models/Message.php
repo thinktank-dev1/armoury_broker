@@ -12,6 +12,7 @@ class Message extends Model
         'message',
         'offer_amount',
         'action',
+        'attachment',
         'read_status',
     ];
 

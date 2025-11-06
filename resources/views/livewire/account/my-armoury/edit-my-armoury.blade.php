@@ -93,6 +93,25 @@
                                         <input type="file" class="form-control" placeholder="Armoury Logo / Avatar" name="avatar" wire:model.defer="avatar">
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <p>We're building a network of licensed firearms dealers to provide dealer stocking services to buyers and sellers on our platform.</p>
+                                    <p>Should you be a licensed firearms dealer and are interested in joining the network, please let us know below and we will send you some further information.</p>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" id="dealer_stock_service" value="dealer" name="dealer_stock_service" wire:model.live="dealer_stock_service">
+                                        <label class="form-check-label" for="dealer_stock_service">
+                                            I am a licensed firearms dealer and would like more info
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" id="no_dealer_stock_service" value="not-dealer" name="dealer_stock_service" wire:model.live="dealer_stock_service">
+                                        <label class="form-check-label" for="no_dealer_stock_service">
+                                            I am not a licensed firearms dealer
+                                        </label>
+                                    </div>
+                                </div>
+                                {{--
                                 <div class="col-md-12 mb-5">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="dealer_stock_service" value="" name="dealer_stock_service" wire:model.live="dealer_stock_service">
@@ -101,6 +120,7 @@
                                         </label>
                                     </div>
                                 </div>
+                                --}}
                                 <div class="col-md-12">
                                     <input type="submit" class="btn btn-primary" wire:click.prevent="saveArmoury" value="{{ $btn_text }}">
                                 </div>
@@ -293,9 +313,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="text-center">
-                        <h2>Welcome</h2>
-                        <p>Your account has been successfully created. Follow the steps to set up your armoury.</p>
+                    <div class="">
+                        <h2>Hi {{ Auth::user()->name }}</h2>
+                        <p>Thank you for joining our trusted community. You're now part of South Africa's leading secure marketplace transforming how firearms owners buy, sell, and trade equipment in a safe and secure environment.</p>
+                        <p>You're currently viewing your ecommerce store dashboard—your central hub for accessing all platform features. The Dashboard tab in the left-hand menu provides an overview of your store with convenient shortcut links to navigate the entire platform. Getting around is simple: use either the left-hand menu tabs or the dashboard shortcuts.</p>
+                        <p>Ready to start? Browse quality equipment from verified sellers, list your unused gear, or explore competitive prices with complete peace of mind.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -305,10 +327,27 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" id="dealer-welcome-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Thanks for showing an interest in joining our Dealer Network! Once you have completed your Armoury setup and have done some exploring around the platform, you can take a look at the Dealers section, which is found under the Settings tab on the left hand menu for more information and a registration form to join the Armoury Broker Dealer Network”</p> 
+                    <p>It is great to have you on the platform!</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ url('profile/#dealer') }}" type="button" class="btn btn-primary">Continue</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <script>
         $(document).ready(function(){
             var queryString = window.location.search;
+
             var urlParams = new URLSearchParams(queryString);
             if (urlParams.has('init')){
                 $('#init-modal').modal('show');
@@ -325,6 +364,9 @@
                     hideAfter: 3500, 
                     stack: 6
                 });
+            });
+            @this.on('show-dealer-pop-up', () => {
+                $('#dealer-welcome-modal').modal('show');
             });
             @this.on('go-to-top', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -159,14 +159,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <h3 class="mb-0" style="line-height: 10px;">R {{ number_format($spendable_amount , 2) }}</h3>
-                            <small>Available for shopping</small>
-                        </div>
-                    </div>
                     <div>
                         <table class="table table-sm table-borderless">
+                            <tr>
+                                <td>R {{ number_format($spendable_amount , 2) }}</td>
+                                <td>Available for shopping</td>
+                            </tr>
                             <tr>
                                 <td>R {{ number_format($ab_credit, 2) }}</td>
                                 <td>Armoury Broker Credit</td>
@@ -197,7 +195,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header d-flex">
-                    <h4 class="card-title">My Orders - This Month</h4>
+                    <h4 class="card-title">My Orders</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -236,7 +234,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header d-flex">
-                    <h4 class="card-title">My Purchases - This Month</h4>
+                    <h4 class="card-title">My Purchases</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -254,19 +252,19 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-8 offset-md-2">
-                            <div class="order-grid mt-2">
-                                <a href="{{ url('my-purchases') }}" class="order-box">
-                                    <div class="count">{{ $new_purchases }}</div>
-                                    <div class="label">New</div>
-                                </a>
-                                <a href="{{ url('my-purchases') }}" class="order-box">
-                                    <div class="count">{{ $completed_purcahses }}</div>
-                                    <div class="label">Completed</div>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="order-grid mt-2">
+                        <a href="{{ url('my-purchases') }}" class="order-box">
+                            <div class="count">{{ $new_purchases }}</div>
+                            <div class="label">New</div>
+                        </a>
+                        <a href="{{ url('my-purchases') }}" class="order-box">
+                            <div class="count">{{ $in_progress_orders }}</div>
+                            <div class="label">In Progress</div>
+                        </a>
+                        <a href="{{ url('my-purchases') }}" class="order-box">
+                            <div class="count">{{ $completed_purcahses }}</div>
+                            <div class="label">Completed</div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -303,7 +301,7 @@
                         </a>
                         <a href="" class="order-box">
                             <div class="count">{{ $purchases_to_confirm }}</div>
-                            <div class="label">Purchases To Confirm</div>
+                            <div class="label">Confirmations</div>
                         </a>
                     </div>
                 </div>

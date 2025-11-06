@@ -1,5 +1,5 @@
 <header class="topbar">
-    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark py-2">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <b class="">
