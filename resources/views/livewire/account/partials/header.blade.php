@@ -35,7 +35,7 @@
                     <a class="nav-link bold" href="{{ url('messages') }}" id="2">
                         <i class="ti-email" style="font-size: 15px;"></i>
                         @if($msg_count)
-                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        <span class="msg_count">{{ $msg_count }}</span>
                         @endif
                     </a>
                 </li>

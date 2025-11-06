@@ -136,31 +136,29 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h4 class="card-title">My Vault</h4>
+                    <div class="ms-auto">
+                        <span class="mytooltip tooltip-effect-1">
+                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                            <span class="tooltip-content tooltip-content-end tooltip-content-top clearfix">
+                                <span class="tooltip-text px-2">
+                                    <b>My vault info</b>
+                                    <p class="text-white">Fund Types:</p>
+                                    <ul>
+                                        <li><b>Available for shopping</b> - Money you can spend right now (withdrawable funds + gift voucher credit)</li>
+                                        <li><b>Armoury broker credit</b> - Platform credits for covering fees only (promotional credits, not cashable)</li>
+                                        <li><b>Gift voucher credit</b> - Unspent gift card balance (expires in 12 months, spend-only)</li>
+                                        <li><b>Withdrawable funds</b> - Your completed transaction earnings (can spend or cash out via EFT)</li>
+                                        <li><b>Orders in progress</b> - Money held in escrow until orders are confirmed received</li>
+                                        <li><b>Total balance</b> - Complete overview of all your funds across all categories</li>
+                                    </ul>
+                                </span> 
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <div class="ms-auto">
-                            <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                <span class="tooltip-content tooltip-content-end tooltip-content-top clearfix">
-                                    <span class="tooltip-text px-2">
-                                        <b>My vault info</b>
-                                        <p class="text-white">Fund Types:</p>
-                                        <ul>
-                                            <li><b>Available for shopping</b> - Money you can spend right now (withdrawable funds + gift voucher credit)</li>
-                                            <li><b>Armoury broker credit</b> - Platform credits for covering fees only (promotional credits, not cashable)</li>
-                                            <li><b>Gift voucher credit</b> - Unspent gift card balance (expires in 12 months, spend-only)</li>
-                                            <li><b>Withdrawable funds</b> - Your completed transaction earnings (can spend or cash out via EFT)</li>
-                                            <li><b>Orders in progress</b> - Money held in escrow until orders are confirmed received</li>
-                                            <li><b>Total balance</b> - Complete overview of all your funds across all categories</li>
-                                        </ul>
-                                    </span> 
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <h3 class="mb-0" style="line-height: 10px;">R {{ number_format($spendable_amount , 2) }}</h3>
@@ -198,28 +196,26 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h4 class="card-title">My Orders - This Month</h4>
+                    <div class="ms-auto">
+                        <span class="mytooltip tooltip-effect-1">
+                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                            <span class="tooltip-content clearfix">
+                                <span class="tooltip-text px-2">
+                                    <b>My Orders</b>
+                                    <p class="text-white">Data from last 30 days</p>
+                                    <ul>
+                                        <li><b>New:</b> Recently placed orders awaiting processing.</li>
+                                        <li><b>In Progress:</b> Orders shipped, awaiting delivery/collection, or pending dealer stocking and awaiting buyer confirmation.</li>
+                                        <li><b>Completed:</b> Fulfilled orders (completed or canceled).</li>
+                                    </ul>
+                                </span> 
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <div class="ms-auto">
-                            <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                <span class="tooltip-content clearfix">
-                                    <span class="tooltip-text px-2">
-                                        <b>My Orders</b>
-                                        <p class="text-white">Data from last 30 days</p>
-                                        <ul>
-                                            <li><b>New:</b> Recently placed orders awaiting processing.</li>
-                                            <li><b>In Progress:</b> Orders shipped, awaiting delivery/collection, or pending dealer stocking and awaiting buyer confirmation.</li>
-                                            <li><b>Completed:</b> Fulfilled orders (completed or canceled).</li>
-                                        </ul>
-                                    </span> 
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                     <div class="order-grid mt-2">
                         <a href="{{ url('my-orders') }}" class="order-box">
                             <div class="count">{{ $new_orders }}</div>
@@ -239,27 +235,25 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h4 class="card-title">My Purchases - This Month</h4>
+                    <div class="ms-auto">
+                        <span class="mytooltip tooltip-effect-1">
+                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                            <span class="tooltip-content clearfix">
+                                <span class="tooltip-text px-2">
+                                    <b>My Purchases</b>
+                                    <p class="text-white">Data from last 30 days</p>
+                                    <ul>
+                                        <li><b>In Progress:</b> Orders waiting for seller to fulfill and ship or currently in transit.</li>
+                                        <li><b>Completed:</b> Purchases that have been received or cancelled.</li>
+                                    </ul>
+                                </span> 
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <div class="ms-auto">
-                            <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                <span class="tooltip-content clearfix">
-                                    <span class="tooltip-text px-2">
-                                        <b>My Purchases</b>
-                                        <p class="text-white">Data from last 30 days</p>
-                                        <ul>
-                                            <li><b>In Progress:</b> Orders waiting for seller to fulfill and ship or currently in transit.</li>
-                                            <li><b>Completed:</b> Purchases that have been received or cancelled.</li>
-                                        </ul>
-                                    </span> 
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-12 col-md-8 offset-md-2">
                             <div class="order-grid mt-2">
@@ -279,27 +273,25 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h4 class="card-title">My Actions</h4>
+                    <div class="ms-auto">
+                        <span class="mytooltip tooltip-effect-1">
+                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                            <span class="tooltip-content tooltip-content-end clearfix">
+                                <span class="tooltip-text px-2">
+                                    <b>My Actions</b>
+                                    <ul>
+                                        <li><b>New offers:</b> Offers you have made and/or received that need confirmation, counter, or decline.</li>
+                                        <li><b>Active orders:</b> Combination of new and in-progress orders requiring your action, including shipping, arranging delivery/collection or dealer stocking.</li>
+                                        <li><b>Purchases to confirm:</b> Shipped items waiting for your delivery confirmation to release payment.</li>
+                                    </ul>
+                                </span> 
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <div class="ms-auto">
-                            <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                <span class="tooltip-content tooltip-content-end clearfix">
-                                    <span class="tooltip-text px-2">
-                                        <b>My Actions</b>
-                                        <ul>
-                                            <li><b>New offers:</b> Offers you have made and/or received that need confirmation, counter, or decline.</li>
-                                            <li><b>Active orders:</b> Combination of new and in-progress orders requiring your action, including shipping, arranging delivery/collection or dealer stocking.</li>
-                                            <li><b>Purchases to confirm:</b> Shipped items waiting for your delivery confirmation to release payment.</li>
-                                        </ul>
-                                    </span> 
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                     <div class="order-grid mt-2">
                         <a href="{{ url('messages') }}" class="order-box">
                             <div class="count">{{ $new_offers }}</div>
@@ -321,27 +313,25 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h4 class="card-title">My Listings</h4>
+                    <div class="ms-auto">
+                        <span class="mytooltip tooltip-effect-1">
+                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                            <span class="tooltip-content clearfix">
+                                <span class="tooltip-text px-2">
+                                    <b>My Listings</b>
+                                    <ul>
+                                        <li><b>Active:</b> Items currently listed and available in your Armoury.</li>
+                                        <li><b>Sold:</b> Total number of items you've sold.</li>
+                                        <li><b>Add new item:</b> Quick link to list a new item for sale.</li>
+                                    </ul>
+                                </span> 
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <div class="ms-auto">
-                            <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                <span class="tooltip-content clearfix">
-                                    <span class="tooltip-text px-2">
-                                        <b>My Listings</b>
-                                        <ul>
-                                            <li><b>Active:</b> Items currently listed and available in your Armoury.</li>
-                                            <li><b>Sold:</b> Total number of items you've sold.</li>
-                                            <li><b>Add new item:</b> Quick link to list a new item for sale.</li>
-                                        </ul>
-                                    </span> 
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                     <div class="order-grid mt-2">
                         <a href="{{ url('my-armoury') }}" class="order-box">
                             <div class="count">{{ $listing_count }}</div>
@@ -361,28 +351,26 @@
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h4 class="card-title">Order Analytics</h4>
+                    <div class="ms-auto">
+                        <span class="mytooltip tooltip-effect-1">
+                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                            <span class="tooltip-content tooltip-content-end clearfix">
+                                <span class="tooltip-text px-2">
+                                    <b>Order Analytics</b>
+                                    <p class="text-white">Monthly overview chart showing your sales performance over the past year:</p>
+                                    <ul>
+                                        <li><b>Left axis:</b> Number of orders sold</li>
+                                        <li><b>Right axis:</b> Total value in ZAR</li>
+                                        <li><b>Bottom axis:</b> Monthly timeline</li>
+                                    </ul>
+                                </span> 
+                            </span>
+                        </span>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex">
-                        <div class="ms-auto">
-                            <span class="mytooltip tooltip-effect-1">
-                                <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                <span class="tooltip-content tooltip-content-end clearfix">
-                                    <span class="tooltip-text px-2">
-                                        <b>Order Analytics</b>
-                                        <p class="text-white">Monthly overview chart showing your sales performance over the past year:</p>
-                                        <ul>
-                                            <li><b>Left axis:</b> Number of orders sold</li>
-                                            <li><b>Right axis:</b> Total value in ZAR</li>
-                                            <li><b>Bottom axis:</b> Monthly timeline</li>
-                                        </ul>
-                                    </span> 
-                                </span>
-                            </span>
-                        </div>
-                    </div>
                     <canvas id="orderChart" height="45"></canvas>
                 </div>
             </div>

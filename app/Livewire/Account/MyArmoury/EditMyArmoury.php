@@ -108,7 +108,7 @@ class EditMyArmoury extends Component
             session()->flash('status', 'Vendor successfully saved.');
             $this->dispatch('success-message', message: "Vendor successfully saved.");
             $this->sendWelcomeMessage();
-            $this->redirect('/my-armoury'); 
+            $this->redirect('/dashboard'); 
         }
     }
 
@@ -155,11 +155,11 @@ class EditMyArmoury extends Component
             $this->dispatch('success-message', message: "Dealer successfully saved. The team will review your details and add you to the dealer network.");
             $this->sendWelcomeMessage();
             $this->sendDealerWelcome();
-            $this->redirect('/my-armoury');
+            $this->redirect('/dashboard');
         }
         else{
             $this->sendWelcomeMessage();
-            $this->redirect('/my-armoury');
+            $this->redirect('/dashboard');
         }
     }
 

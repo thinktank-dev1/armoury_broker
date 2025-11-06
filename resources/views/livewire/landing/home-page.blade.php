@@ -11,7 +11,7 @@
                                         <h5 class="mb-3 staggered-animation text-26 text-bold font-weight-light text-white" data-animation="slideInLeft" data-animation-delay="0.5s">SECURE | VERIFIED | RELIABLE</h5>
                                         <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">The trading platform built specifically<br /> for South Africa's firearm and tactical <br />equipment community.</p>
                                         <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">Ready to <b>LEVEL UP?</b></p>
-                                        <a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ url('auth/login') }}" data-animation="slideInLeft" data-animation-delay="1.5s">Join Now</a>
+                                        <a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ url('auth/login') }}" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                                         </ul>
                                         <p class="staggered-animation text-white mt-3 text-21" data-animation="slideInLeft" data-animation-delay="1s">Our escrow system protects every transaction from start to finish.</p>
                                         <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">Ready to <b>LEVEL UP?</b></p>
-                                        <a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ url('auth/login') }}" data-animation="slideInLeft" data-animation-delay="1.5s">Join Now</a>
+                                        <a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ url('auth/login') }}" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -49,9 +49,9 @@
         <livewire:landing.home.brands />
         <livewire:landing.home.featured />
         <livewire:landing.home.recently-added />
-        <div class="section">
+        <div class="mb-0 pb-0">
             <div class="container">
-                <div class="row mt-3">
+                <div class="row">
                     <div class="col-md-12 text-center">
                         <a href="{{ url('list-item') }}" class="btn btn-secondary fixed-button">Start Selling</a>
                     </div>

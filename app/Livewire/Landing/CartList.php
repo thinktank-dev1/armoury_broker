@@ -16,7 +16,6 @@ class CartList extends Component
     public $cart_items_session = [];
 
     public function mount(){
-            
     }
 
     public function removeItem($id){

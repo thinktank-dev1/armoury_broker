@@ -21,7 +21,8 @@
                                     <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                     <span class="tooltip-content clearfix">
                                         <span class="tooltip-text px-2">
-                                            <b>Total Purchases</b>
+                                            <b>Available for shopping</b>
+                                            <p>Money you can spend right now (withdrawable funds + gift voucher credit)</p>
                                         </span> 
                                     </span>
                                 </span>
@@ -45,7 +46,7 @@
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
-                                                    <b>Armoury Broker Credit</b>
+                                                    Test
                                                 </span> 
                                             </span>
                                         </span>

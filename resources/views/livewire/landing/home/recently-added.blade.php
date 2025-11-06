@@ -1,4 +1,4 @@
-<div class="section pb_50 small_pt mt-3">
+<div class="section pb_50 small_pt mb-0 pb-0 pt-2">
     @if($products->count() > 0)
     <div class="container">
         <div class="row">

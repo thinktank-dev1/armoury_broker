@@ -1,13 +1,19 @@
 <div>
-    <div class="section py-5" wire:ignore.self>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <div class="text-center">
-                        <h2 class="page-title">My Wish-list</h2>
+    <div class="section head support-bg" wire:ignore.self>
+        <div class="head-back">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-title text-center">
+                            <h3 class="text-white mt-3">MY WISHLIST</h3>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="section py-5" wire:ignore.self>
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row product_list">

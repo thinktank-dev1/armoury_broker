@@ -21,7 +21,7 @@
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="#" class="btn @if($read_type == 'Unread') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('unread')">Unread</a>
+                                        <a href="#" class="btn @if($read_type == 'unread') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('unread')">Unread</a>
                                         <a href="#" class="btn @if($read_type == 'read') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('read')">Read</a>
                                     </div>
                                 </div>
@@ -32,10 +32,14 @@
                                             @foreach($mesages AS $msg)
                                             <div class="chat-item @if($active_id == $msg->id) active @endif" wire:click.prevent="changeCurMessage({{ $msg->id }})">
                                                 @if($msg->user)
-                                                    @if($msg->user->vendor->avatar)
-                                                        <img src="{{ asset('storage/'.$msg->user->vendor->avatar) }}" alt="user-img" class="avatar"> 
+                                                    @if($msg->user->vendor)
+                                                        @if($msg->user->vendor->avatar)
+                                                            <img src="{{ asset('storage/'.$msg->user->vendor->avatar) }}" alt="user-img" class="avatar"> 
+                                                        @else
+                                                            <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar"> 
+                                                        @endif
                                                     @else
-                                                        <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar"> 
+                                                        <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar">
                                                     @endif
                                                 @else
                                                     <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar">
@@ -44,7 +48,11 @@
                                                     <div class="chat-header">
                                                         <span class="chat-name">
                                                             @if($msg->user)
+                                                                @if($msg->user->vendor)
                                                                 {{ $msg->user->vendor->name }}
+                                                                @else
+                                                                {{ $msg->user->name.' '.$msg->user->surname }}
+                                                                @endif
                                                             @else
                                                                 {{ $msg->name.' '.$msg->surname }}
                                                             @endif
@@ -64,10 +72,14 @@
                                     <div class="card-header d-flex bg-dark p-0">
                                         <div class="chat-item bb-none">
                                             @if($cur_msg->user)
-                                                @if($cur_msg->user->vendor->avatar)
-                                                    <img src="{{ asset('storage/'.$cur_msg->user->vendor->avatar) }}" alt="user-img" class="avatar"> 
+                                                @if($cur_msg->user->vendor)
+                                                    @if($cur_msg->user->vendor->avatar)
+                                                        <img src="{{ asset('storage/'.$cur_msg->user->vendor->avatar) }}" alt="user-img" class="avatar"> 
+                                                    @else
+                                                        <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar"> 
+                                                    @endif
                                                 @else
-                                                    <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar"> 
+                                                    <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar">
                                                 @endif
                                             @else
                                                 <img src="{{ asset('img/PROFILE PIC.png') }}" alt="user-img" class="avatar">
@@ -76,7 +88,11 @@
                                                 <div class="chat-header">
                                                     <h4 class="card-title text-white">
                                                         @if($cur_msg->user)
-                                                            {{ $cur_msg->user->vendor->name }}
+                                                            @if($cur_msg->user->vendor)
+                                                                {{ $cur_msg->user->vendor->name }}
+                                                            @else
+                                                                {{ $cur_msg->user->name.' '.$cur_msg->user->surname }}
+                                                            @endif
                                                         @else
                                                             {{ $cur_msg->name.' '.$cur_msg->surname }}
                                                         @endif

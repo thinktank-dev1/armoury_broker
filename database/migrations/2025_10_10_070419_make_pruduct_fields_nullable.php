@@ -25,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        /*
         Schema::table('products', function (Blueprint $table) {
             $table->string('sub_category_id')->nullable(false)->change();
             $table->string('brand_id')->nullable(false)->change();
@@ -32,5 +33,6 @@ return new class extends Migration
             $table->string('service_fee_payer')->nullable(false)->change();
             $table->string('item_price')->nullable(false)->change();
         });
+        */
     }
 };

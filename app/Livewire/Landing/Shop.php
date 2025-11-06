@@ -43,6 +43,7 @@ class Shop extends Component
         $this->setStaticData();
 
         $this->items_count = 12;
+        $this->sort_by = 'Newest Listed';
     }
 
     #[On('brand-updated')]
@@ -163,13 +164,18 @@ class Shop extends Component
         }
 
         if($key){
-            $query->where('item_name', 'LIKE', '%'.$key.'%')
-            ->orWhere('item_description', 'LIKE', '%'.$key.'%')
-            ->orWhereHas('category', function($qq) use($key){
-                return $qq->where('category_name', 'LIKE', '%'.$key.'%');
-            })
-            ->orWhereHas('subCategory', function($qq) use($key){
-                return $qq->where('sub_category_name', 'LIKE', '%'.$key.'%');
+            $query->where(function($q) use($key){
+                return $q->where('item_name', 'LIKE', '%'.$key.'%')
+                ->orWhere('item_description', 'LIKE', '%'.$key.'%')
+                ->orWhereHas('category', function($qq) use($key){
+                    return $qq->where('category_name', 'LIKE', '%'.$key.'%');
+                })
+                ->orWhereHas('subCategory', function($qq) use($key){
+                    return $qq->where('sub_category_name', 'LIKE', '%'.$key.'%');
+                })
+                ->orwhereHas('brand', function($qq) use($key){
+                    return $qq->where('brand_name', 'LIKE', '%'.$key.'%');
+                });
             });
         }
 

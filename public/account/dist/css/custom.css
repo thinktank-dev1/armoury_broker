@@ -690,3 +690,24 @@ label{
 .modal-header h5{
 	color: #FFF;
 }
+.modal-header .btn-close{
+	filter: invert(1) hue-rotate(180deg);
+}
+.msg_count {
+    position: relative;
+    top: 10px;
+    left: -4px;
+    font-size: 11px;
+    background-color: #d65027;
+    border-radius: 50px;
+    height: 16px;
+    line-height: 16px;
+    color: #fff;
+    min-width: 16px;
+    text-align: center;
+    padding: 0 5px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -5px;
+    margin-right: -5px;
+}

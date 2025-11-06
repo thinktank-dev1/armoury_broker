@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <p><a href="{{ url('auth/forgot-password') }}">Forgot Password?</a></p>
+                                        <p><a href="{{ url('auth/forgot-password') }}" style="font-weight: 600">Forgot Password?</a></p>
                                     </div>
                                 </div>
                                 <div class="row mt-3">

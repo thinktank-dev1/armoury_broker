@@ -39,6 +39,10 @@ class Messages extends Component
         $this->getData();
     }
 
+    public function changeType($type){
+        $this->read_type = $type;
+    }
+
     public function markAsViewed($id){
         $msg = Message::find($id);
         if($msg->user_id != Auth::user()->id){
@@ -193,12 +197,23 @@ class Messages extends Component
     }
 
     public function render(){
+        $read_status = $this->read_type;
         $mesages = MessageThread::where(function($q){
             return $q->where('user_1', Auth::user()->id)->orWhere('user_2', Auth::user()->id);
         })
         ->whereHas('messages')
         ->withMax('messages', 'created_at')
         ->orderByDesc('messages_max_created_at') 
+        ->when($read_status, function($q) use($read_status) {
+            return $q->whereHas('messages', function($qq) use($read_status){
+                if($read_status == "unread"){
+                    return $qq->where('read_status', 0);
+                }
+                if($read_status == "read"){
+                    return $qq->where('read_status', 1);
+                }
+            });
+        })
         ->get();
 
         return view('livewire.account.messages', [

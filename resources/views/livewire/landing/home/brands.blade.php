@@ -33,7 +33,10 @@
         </div>
         <div class="row mt-3 mb-4">
             <div class="col-md-12 text-center">
+                {{--
                 <a href="#brands" class="btn btn-secondary" id="brand-btn" onclick="showOtherBrands()">View All</a>
+                --}}
+                <a href="{{ url('shop') }}" class="btn btn-secondary" id="brand-btn">View All</a>
             </div>
         </div>
     </div>

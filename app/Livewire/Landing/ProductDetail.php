@@ -153,7 +153,6 @@ class ProductDetail extends Component
     }
 
     public function addToCart(){
-        dd($this->quantity,$this->qty);
         if($this->quantity > $this->qty){
             $this->dispatch('quantity-error');
             return;

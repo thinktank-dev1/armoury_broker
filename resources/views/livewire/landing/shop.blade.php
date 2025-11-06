@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-12 col-md-3">
                     <b class="text-dark-blue text-upper text-14">Filter Options</b>
-                    <div class="shop-filters mt-4">
+                    <div class="shop-filters mt-4 w-100 sicky-filters">
                         <div class="accordion" id="filter_accodion" wire:ignore.self>
                             <div class="accordion-item mb-2">
                                 <h2 class="accordion-header" id="category_filter" wire:ignore>
@@ -195,10 +195,12 @@
                             <livewire:landing.shop.partials.product-list-item wire:key="{{ $product->id.now() }}" :id="$product->id" />
                         @endforeach
                     </div>
-                    <div class="row">
+                    <div class="row" x-data  x-intersect="$wire.call('loadMore')">
                         <div class="col-md-12 text-center">
                             @if($results_count > $items_count)
-                            <a href="#" class="btn btn-primary-outline" wire:click.prevent="loadMore">Load More</a>
+                                <div class="text-center" wire:loading>
+                                    <img src="{{ asset('img/loading.gif') }}" class="loading-gif">
+                                </div>
                             @endif
                         </div>
                     </div>

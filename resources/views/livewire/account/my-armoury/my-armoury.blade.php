@@ -36,7 +36,7 @@
                 </select>
             </div>
             <div class="mb-3 d-grid">
-                <a href="#" class="bnt btn-primary" wire:click.prevent="clearFilters">Clear</a>
+                <a href="#" class="bnt btn-primary text-center" wire:click.prevent="clearFilters">Clear</a>
             </div>
         </div>
         <div class="col-md-10">

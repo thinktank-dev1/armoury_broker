@@ -104,8 +104,12 @@
                                 @endif
                             </div>
                             <div class="mt-1">
+                                @if($product->condition)
                                 <span class="badge badge-outine-dark-blue">{{ $product->condition }}</span>
+                                @endif
+                                @if($product->brand)
                                 <span class="badge badge-outine-dark-blue">Brand: {{ $product->brand->brand_name }}</span>
+                                @endif
                             </div>
                             <div class="mt-4 bg-grey text-dark-blue px-3 py-2">
                                 <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchase. <a href="#" data-bs-toggle="modal" data-bs-target="#learn-modal"><b>Learn More</b></a></small>

@@ -869,3 +869,6 @@ footer .widget_title {
 .bodered{
 	border: 1px solid #000;
 }
+.loading-gif{
+	width: 50px;
+}
