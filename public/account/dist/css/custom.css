@@ -729,3 +729,7 @@ label{
 .border-right-none{
 	border-right: none;
 }
+.modal-header .modal-title{
+	text-transform: uppercase;
+	font-weight: 600;
+}
