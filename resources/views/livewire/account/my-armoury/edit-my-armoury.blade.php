@@ -331,9 +331,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <p>Thanks for showing an interest in joining our Dealer Network! Once you have completed your Armoury setup and have done some exploring around the platform, you can take a look at the Dealers section, which is found under the Settings tab on the left hand menu for more information and a registration form to join the Armoury Broker Dealer Network”</p> 
-                    <p>It is great to have you on the platform!</p>
-
+                    <h2>Welcome</h2>
+                    <p>Your account has been successfully created. Follow the steps to set up your armoury.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
