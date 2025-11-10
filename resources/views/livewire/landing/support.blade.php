@@ -115,7 +115,7 @@
                     </div>
                     <div class="">
                         <div class="">
-                            <i class="linearicons-envelope"></i>
+                            <i class="linearicons-envelope bold me-2"></i>
                             <b>support@armourybroker.co.za</b>
                         </div>
                     </div>
