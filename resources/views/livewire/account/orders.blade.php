@@ -36,13 +36,13 @@
                     <table class="table table-borderless mb-0 me-5">
                         <thead class="p-0 m-0">
                             <tr class="p-0 m-0">
-                                <th class="p-0 m-0">{{ 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT) }}<br/><small>Order Number</small></th>
-                                <th class="p-0 m-0">{{ $order->user->name.' '.$order->user->surname }}<br/><small>Buyer</small></th>
-                                <th class="p-0 m-0">{{ $order->g_payment_id }}<br/><small>Payment Ref</small></th>
-                                <th class="p-0 m-0">R {{ number_format($order->shiping_fee(),2) }}<br/><small>Shipping Fee</small></th>
-                                <th class="p-0 m-0">R {{ number_format($order->ab_fee(), 2) }}<br/><small>Platform Fee (Buyer)</small></th>
-                                <th class="p-0 m-0">R {{ number_format($order->amount_paid, 2) }}<br/><small>Amount Paid</small></th>
-                                <th class="p-0 m-0">
+                                <th class="p-0 m-0 w-14">{{ 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT) }}<br/><small>Order Number</small></th>
+                                <th class="p-0 m-0 w-14">{{ $order->user->name.' '.$order->user->surname }}<br/><small>Buyer</small></th>
+                                <th class="p-0 m-0 w-14">{{ $order->g_payment_id }}<br/><small>Payment Ref</small></th>
+                                <th class="p-0 m-0 w-14">R {{ number_format($order->shiping_fee(),2) }}<br/><small>Shipping Fee</small></th>
+                                <th class="p-0 m-0 w-14">R {{ number_format($order->ab_fee(), 2) }}<br/><small>Platform Fee (Buyer)</small></th>
+                                <th class="p-0 m-0 w-14">R {{ number_format($order->amount_paid, 2) }}<br/><small>Amount Paid</small></th>
+                                <th class="p-0 m-0 w-14">
                                     @if($order->status == "COMPLETE")
                                         Paid
                                     @else
