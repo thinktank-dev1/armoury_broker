@@ -38,7 +38,7 @@ class ProductForm extends Component
             $this->cur_id = $id;
             $this->getData();
         }
-        $this->preview = False;
+        $this->preview = True;
         $this->preview_quantity = 1;
     }
 

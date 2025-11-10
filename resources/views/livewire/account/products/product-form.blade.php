@@ -18,7 +18,7 @@
                 </h3>
                 @endif
                 <div class="row">
-                    <div class="@if($preview) col-md-6 @else col-md-12 @endif">
+                    <div class="col-md-12">
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <a href="#" class="btn @if($listing_type == 'sale') btn-dark-blue @else btn-dark-blue-outline @endif list-type" wire:click.prevent="setListingType('sale')">For Sale</a>
@@ -49,7 +49,7 @@
                                 <b class="bold">Image Upload</b>
                                 <p>Upload up to 6 images <span class="ms-5"><a href="{{ url('docs/Armoury Broker Guideline Website.pdf') }}" target="_blank" class="text-black"><b><u>View image upload guide</u></b></a></span></p>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="row">
                                     @if($cur_product)
                                         @php
@@ -124,242 +124,241 @@
                             </div>
                         </div>
                         <div class="row mt-5">
-                            <div class="col-md-12 d-flex">
-                                <h3 class="bold">ITEM DETAILS</h3>
-                                <span class="ms-auto">
-                                    <a href="#" wire:click.prevent="togglePreview" class="text-upper font-bold">Listing Preview</a>
-                                </span>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group mb-2">
-                                    <input type="text" class="form-control" placeholder="Listing Title*" name="item_name" wire:model.blur="item_name"> 
-                                </div>
-                                <div class="form-group mb-2">
-                                    <input type="text" class="form-control" placeholder="Model Number" name="model_number" wire:model.blur="model_number"> 
-                                </div>
-                                <div class="form-group mb-2">
-                                    <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.blur="item_description">
-                                </div>
-                                <div class="form-group mb-2">
-                                    <select class="form-control" placeholder="Category" name="category_id" wire:model.live="category_id">
-                                        <option value="">Category*</option>
-                                        @foreach($cats AS $cat)
-                                        <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <select class="form-control" placeholder="Sub category" name="sub_category_id" wire:model.live="sub_category_id">
-                                        <option value="">Sub Category</option>
-                                        @if($category)
-                                            @foreach($category->sub_cats->whereNull('parent_id') AS $sub)
-                                                <option value="{{ $sub->id }}">{{ $sub->sub_category_name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                @if(count($sub_sub) > 0)
-                                <div class="form-group mb-2">
-                                    <select class="form-control" placeholder="Sub Sub category" name="sub_sub_category_id" wire:model.blur="sub_sub_category_id">
-                                        <option value="">Sub-Sub-Category</option>
-                                        @if($sub_sub)
-                                            @foreach($sub_sub AS $sub)
-                                                <option value="{{ $sub['id'] }}">{{ $sub['name'] }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                @endif
-                                @if($category)
-                                    @if($category->measurement_type)
-                                    <div class="form-group mb-2">
-                                        @if($category->measurement_type == "caliber")
-                                            <input type="text" class="form-control" placeholder="Caliber" name="size" wire:model.defer="size">
-                                        @elseif($category->measurement_type == "size")
-                                            <select class="form-control" placeholder="Size" name="size" wire:model.defer="size">
-                                                <option value="">Size</option>
-                                                @foreach($sizes AS $sz)
-                                                <option value="{{ $sz }}">{{ $sz }}</option>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex">
+                                        <h3 class="bold">ITEM DETAILS</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" placeholder="Listing Title*" name="item_name" wire:model.blur="item_name"> 
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" placeholder="Model Number" name="model_number" wire:model.blur="model_number"> 
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.blur="item_description">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <select class="form-control" placeholder="Category" name="category_id" wire:model.live="category_id">
+                                                <option value="">Category*</option>
+                                                @foreach($cats AS $cat)
+                                                <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
                                                 @endforeach
                                             </select>
-                                        @else
-                                            <input type="text" class="form-control" placeholder="{{ ucwords($category->measurement_type) }}" name="size" wire:model.defer="size">
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <select class="form-control" placeholder="Sub category" name="sub_category_id" wire:model.live="sub_category_id">
+                                                <option value="">Sub Category</option>
+                                                @if($category)
+                                                    @foreach($category->sub_cats->whereNull('parent_id') AS $sub)
+                                                        <option value="{{ $sub->id }}">{{ $sub->sub_category_name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                        @if(count($sub_sub) > 0)
+                                        <div class="form-group mb-2">
+                                            <select class="form-control" placeholder="Sub Sub category" name="sub_sub_category_id" wire:model.blur="sub_sub_category_id">
+                                                <option value="">Sub-Sub-Category</option>
+                                                @if($sub_sub)
+                                                    @foreach($sub_sub AS $sub)
+                                                        <option value="{{ $sub['id'] }}">{{ $sub['name'] }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
                                         @endif
+                                        @if($category)
+                                            @if($category->measurement_type)
+                                            <div class="form-group mb-2">
+                                                @if($category->measurement_type == "caliber")
+                                                    <input type="text" class="form-control" placeholder="Caliber" name="size" wire:model.defer="size">
+                                                @elseif($category->measurement_type == "size")
+                                                    <select class="form-control" placeholder="Size" name="size" wire:model.defer="size">
+                                                        <option value="">Size</option>
+                                                        @foreach($sizes AS $sz)
+                                                        <option value="{{ $sz }}">{{ $sz }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @else
+                                                    <input type="text" class="form-control" placeholder="{{ ucwords($category->measurement_type) }}" name="size" wire:model.defer="size">
+                                                @endif
+                                            </div>
+                                            @endif
+                                        @endif
+                                        <div class="form-group mb-2">
+                                            <select class="form-control" placeholder="Brand" name="brand_id" wire:model.blur="brand_id">
+                                                <option value="">Brand</option>
+                                                @foreach($brands AS $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <select class="form-control" placeholder="Condition" name="condition" wire:model.blur="condition">
+                                                <option value="">Condition</option>
+                                                @foreach($conditions AS $cond)
+                                                <option value="{{ $cond }}">{{ $cond }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <input type="number" class="form-control" placeholder="Quantity*" name="quantity" wire:model.live="quantity"> 
+                                        </div>
+                                    </div>    
+                                </div>
+                                @if($listing_type == 'sale')
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h3 class="bold">PLATFROM FEES</h3>
+                                        <p><small><b>Note:</b> Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on 50 - 50 basis.</small></p>
                                     </div>
-                                    @endif
-                                @endif
-                                <div class="form-group mb-2">
-                                    <select class="form-control" placeholder="Brand" name="brand_id" wire:model.blur="brand_id">
-                                        <option value="">Brand</option>
-                                        @foreach($brands AS $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <select class="form-control" placeholder="Condition" name="condition" wire:model.blur="condition">
-                                        <option value="">Condition</option>
-                                        @foreach($conditions AS $cond)
-                                        <option value="{{ $cond }}">{{ $cond }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <input type="number" class="form-control" placeholder="Quantity*" name="quantity" wire:model.live="quantity"> 
-                                </div>
-                            </div>    
-                        </div>
-                        @if($listing_type == 'sale')
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <h3 class="bold">PLATFROM FEES</h3>
-                                <p><small><b>Note:</b> Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on 50 - 50 basis.</small></p>
-                            </div>
-                            <div class="col-md-12 mb-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="paid_by_buyer" name="service_fee" value="buyer" wire:model.defer="service_fee_payer">
-                                    <label class="form-check-label" for="paid_by_buyer">
-                                        Paid by buyer ({{ $fee }}% added to the purchase price)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="paid_by_seller" name="service_fee" value="seller" wire:model.defer="service_fee_payer">
-                                    <label class="form-check-label" for="paid_by_seller">
-                                        Paid by seller ({{ $fee }}% deducted from sales price prior to payout)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="b-5-5" name="service_fee" value="50-50" wire:model.defer="service_fee_payer">
-                                    <label class="form-check-label" for="b-5-5">
-                                        50- 50 (Each party pays half of the platform fee - {{ $fee/2 }}% each)
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <h3 class="bold">SHIPPING</h3>
-                                <p><small><b>Note:</b> To be managed outside of the platform by the Seller.</small></p>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="" id="collection_delivery" wire:model.live="collection_delivery">
-                                    <label class="form-check-label" for="collection_delivery">
-                                        Collections / Delivery 
-                                        <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
-                                                <span class="tooltip-text px-2">
-                                                    <b>Delivery / Collection</b><br /> 
-                                                    Buyer and seller coordinate pickup or delivery details through the platform's messaging system
-                                                </span> 
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                @if($category)
-                                    @if(!$category->regulated)
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="" id="courier" wire:model.live="courier">
-                                        <label class="form-check-label" for="courier">
-                                            Courier (Flat Fee of R 99.00)
-                                            <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
-                                                <span class="tooltip-text px-2">
-                                                    <b>Courier</b><br />
-                                                    R99 flat delivery fee (refunded to seller) - arrangements made via platform messaging between buyer and seller
-                                                </span> 
-                                            </span>
-                                        </span>
-                                        </label>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="paid_by_buyer" name="service_fee" value="buyer" wire:model.defer="service_fee_payer">
+                                            <label class="form-check-label" for="paid_by_buyer">
+                                                Paid by buyer ({{ $fee }}% added to the purchase price)
+                                            </label>
+                                        </div>
                                     </div>
-                                    @endif
-                                @endif
-                                @if($category)
-                                    @if($category->regulated)
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="" id="dealer_stock" wire:model.live="dealer_stock">
-                                        <label class="form-check-label" for="dealer_stock">
-                                            Dealer Stocking (Firearms only)
-                                            <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
-                                                <span class="tooltip-text px-2">
-                                                    <b>Dealer Stocking (Firearms Only)</b><br /> 
-                                                    Firearm transfers through licensed dealers - coordination handled via platform messaging between buyer and seller
-                                                </span> 
-                                            </span>
-                                        </label>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="paid_by_seller" name="service_fee" value="seller" wire:model.defer="service_fee_payer">
+                                            <label class="form-check-label" for="paid_by_seller">
+                                                Paid by seller ({{ $fee }}% deducted from sales price prior to payout)
+                                            </label>
+                                        </div>
                                     </div>
-                                    @endif
+                                    <div class="col-md-12 mb-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="b-5-5" name="service_fee" value="50-50" wire:model.defer="service_fee_payer">
+                                            <label class="form-check-label" for="b-5-5">
+                                                50- 50 (Each party pays half of the platform fee - {{ $fee/2 }}% each)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h3 class="bold">SHIPPING</h3>
+                                        <p><small><b>Note:</b> To be managed outside of the platform by the Seller.</small></p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" value="" id="collection_delivery" wire:model.live="collection_delivery">
+                                            <label class="form-check-label" for="collection_delivery">
+                                                Collections / Delivery 
+                                                <span class="mytooltip tooltip-effect-1">
+                                                    <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                                    <span class="tooltip-content clearfix">
+                                                        <span class="tooltip-text px-2">
+                                                            <b>Delivery / Collection</b><br /> 
+                                                            Buyer and seller coordinate pickup or delivery details through the platform's messaging system
+                                                        </span> 
+                                                    </span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        @if($category)
+                                            @if(!$category->regulated)
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" value="" id="courier" wire:model.live="courier">
+                                                <label class="form-check-label" for="courier">
+                                                    Courier (Flat Fee of R 99.00)
+                                                    <span class="mytooltip tooltip-effect-1">
+                                                    <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                                    <span class="tooltip-content clearfix">
+                                                        <span class="tooltip-text px-2">
+                                                            <b>Courier</b><br />
+                                                            R99 flat delivery fee (refunded to seller) - arrangements made via platform messaging between buyer and seller
+                                                        </span> 
+                                                    </span>
+                                                </span>
+                                                </label>
+                                            </div>
+                                            @endif
+                                        @endif
+                                        @if($category)
+                                            @if($category->regulated)
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" value="" id="dealer_stock" wire:model.live="dealer_stock">
+                                                <label class="form-check-label" for="dealer_stock">
+                                                    Dealer Stocking (Firearms only)
+                                                    <span class="mytooltip tooltip-effect-1">
+                                                    <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                                    <span class="tooltip-content clearfix">
+                                                        <span class="tooltip-text px-2">
+                                                            <b>Dealer Stocking (Firearms Only)</b><br /> 
+                                                            Firearm transfers through licensed dealers - coordination handled via platform messaging between buyer and seller
+                                                        </span> 
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            @endif
+                                        @endif
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" value="" id="free_delivery" wire:model.defer="free_delivery">
+                                            <label class="form-check-label" for="free_delivery">
+                                                Free Delivery
+                                                <span class="mytooltip tooltip-effect-1">
+                                                    <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                                    <span class="tooltip-content clearfix">
+                                                        <span class="tooltip-text px-2">
+                                                            <b>Free Delivery</b><br /> 
+                                                            No delivery charge - buyer and seller arrange delivery details through the platform messaging system
+                                                        </span> 
+                                                    </span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h3 class="bold">ITEM PRICE</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-2">
+                                            <input type="number" class="form-control" placeholder="Item Price*" name="item_price" wire:model.blur="item_price"> 
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" id="allow_offers" name="allow_offers" wire:model.defer="allow_offers">
+                                            <label class="form-check-label" for="allow_offers">
+                                                Open to offers
+                                                <span class="mytooltip tooltip-effect-1">
+                                                    <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                                    <span class="tooltip-content clearfix">
+                                                        <span class="tooltip-text px-2">
+                                                            <b>Open to offers</b><br /> 
+                                                            Limited to 20% lower than the listed price)
+                                                        </span> 
+                                                    </span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" id="acknowledgement" name="acknowledgement" wire:model.defer="acknowledgement">
+                                            <label class="form-check-label" for="acknowledgement">
+                                                <p>I have read and agree to the Platform <a href="docs/Terms%20of%20Use%20and%20User%20Agreement_AB_Courier%20amendments_v02_20250629.pdf" target="_blank">terms and conditions</a></p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endif
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" value="" id="free_delivery" wire:model.defer="free_delivery">
-                                    <label class="form-check-label" for="free_delivery">
-                                        Free Delivery
-                                        <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
-                                                <span class="tooltip-text px-2">
-                                                    <b>Free Delivery</b><br /> 
-                                                    No delivery charge - buyer and seller arrange delivery details through the platform messaging system
-                                                </span> 
-                                            </span>
-                                        </span>
-                                    </label>
+                                <div class="row mt-3 mb-5">
+                                    <div class="col-md-12 d-grid">
+                                        <input type="submit" class="btn btn-primary" value="List Item">    
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <h3 class="bold">ITEM PRICE</h3>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group mb-2">
-                                    <input type="number" class="form-control" placeholder="Item Price*" name="item_price" wire:model.blur="item_price"> 
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" id="allow_offers" name="allow_offers" wire:model.defer="allow_offers">
-                                    <label class="form-check-label" for="allow_offers">
-                                        Open to offers
-                                        <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
-                                                <span class="tooltip-text px-2">
-                                                    <b>Open to offers</b><br /> 
-                                                    Limited to 20% lower than the listed price)
-                                                </span> 
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" id="acknowledgement" name="acknowledgement" wire:model.defer="acknowledgement">
-                                    <label class="form-check-label" for="acknowledgement">
-                                        <p>I have read and agree to the Platform <a href="docs/Terms%20of%20Use%20and%20User%20Agreement_AB_Courier%20amendments_v02_20250629.pdf" target="_blank">terms and conditions</a></p>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                        <div class="row mt-3 mb-5">
-                            <div class="col-md-12 d-grid">
-                                <input type="submit" class="btn btn-primary" value="List Item">    
-                            </div>
-                        </div>
-                    </div>
-                    @if($preview)
+                            @if($preview)
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="bold">Preview Listing</h3>
+                                <h3 class="bold text-upper">Preview Listing</h3>
                             </div>
-                            <div class="col-md-12 mt-5">
+                            <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -460,7 +459,8 @@
                         </div>
                     </div>
                     @endif
-                    
+                        </div>
+                    </div>
                 </div>            
             </form>
         </div>

@@ -29,13 +29,13 @@
                             <h3>Why Register?</h3>
                             <p>Once verified, you'll be added to our preferred dealer list and gain:</p>
                             <ul>
-                                <li><b>Increased exposure:</b> Visible to buyers across the platform seeking dealer stocking services in your area</li>
+                                <li><b>Increased exposure:</b> Visible to users across the platform seeking dealer stocking services in your area</li>
                                 <li><b>Additional foot traffic:</b> Attract new clients who may become repeat customers</li>
                                 <li><b>Complete control:</b> Set your own monthly dealer stocking fees</li>
                                 <li><b>Direct payment:</b> Collect fees directly from buyers</li>
                             </ul>
                             <h3>How It Works</h3>
-                            <p>When a buyer purchases a firearm through our platform, they select a registered dealer from their local area to facilitate dealer stocking while acquiring the necessary licensing. If you're within their area, you'll appear as an available option.</p>
+                            <p>When a seller lists a firearm on our platform, they have the option to  select a registered dealer from their local area to facilitate dealer stocking while the buyer is acquiring the necessary licensing for the firearm. If you're within their area, you'll appear as an available option.</p>
                             <p>After purchase, both the buyer and seller receive your business details to coordinate the dealer stocking arrangements. You set your monthly rate on the platform and manage the service directly with clients.</p>
                             <h3>Cost Structure</h3>
                             <ul>
@@ -200,8 +200,12 @@
     <div class="modal fade" tabindex="-1" id="no-opt-modal">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">THE ARMOURY BROKER DEALER NETWORK</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
-                    <p>If you change your mind, please come back to this section of the platform and complete the registration process</p>
+                    <p>If you change your mind, please come back to this section of the platform and complete the registration process.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

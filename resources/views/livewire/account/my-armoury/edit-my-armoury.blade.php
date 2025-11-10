@@ -94,14 +94,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <p>We're building a network of licensed firearms dealers to provide dealer stocking services to buyers and sellers on our platform.</p>
-                                    <p>Should you be a licensed firearms dealer and are interested in joining the network, please let us know below and we will send you some further information.</p>
+                                    <b>The Armoury Broker Dealer Network</b>
+                                    <p>We’re building a network of licensed firearms dealers to provide dealer stocking services to buyers and sellers on our platform.</p>
+                                    <p>Should you be a licensed firearms dealer and are interested in joining the network, please make your selection below and you will be directed to the Dealer Network registration page.</p>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" id="dealer_stock_service" value="dealer" name="dealer_stock_service" wire:model.live="dealer_stock_service">
                                         <label class="form-check-label" for="dealer_stock_service">
-                                            I am a licensed firearms dealer and would like more info
+                                            I am a licensed firearms dealer and would like to sign up
                                         </label>
                                     </div>
                                     <div class="form-check mb-3">
@@ -315,9 +316,9 @@
                 <div class="modal-body">
                     <div class="">
                         <h2>Hi {{ Auth::user()->name }}</h2>
-                        <p>Thank you for joining our trusted community. You're now part of South Africa's leading secure marketplace transforming how firearms owners buy, sell, and trade equipment in a safe and secure environment.</p>
-                        <p>You're currently viewing your ecommerce store dashboard—your central hub for accessing all platform features. The Dashboard tab in the left-hand menu provides an overview of your store with convenient shortcut links to navigate the entire platform. Getting around is simple: use either the left-hand menu tabs or the dashboard shortcuts.</p>
-                        <p>Ready to start? Browse quality equipment from verified sellers, list your unused gear, or explore competitive prices with complete peace of mind.</p>
+                        <p>Thank you for joining our trusted community. You’re now part of South Africa’s leading, secure marketplace that is transforming how firearms owners buy, sell and trade equipment in a safe and secure environment.</p>
+                        <p>Lets’ get your Armoury setup up!</p>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -330,9 +331,13 @@
     <div class="modal fade" tabindex="-1" id="dealer-welcome-modal">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">THE ARMOURY BROKER DEALER NETWORK</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
-                    <p>Thanks for showing an interest in joining our Dealer Network! Once you have completed your Armoury setup and have done some exploring around the platform, you can take a look at the Dealers section, which is found under the Settings tab on the left hand menu for more information and a registration form to join the Armoury Broker Dealer Network”</p> 
-                    <p>It is great to have you on the platform!</p>
+                    <p>Thanks for showing an interest in joining our dealer network. With your Armoury all set up, you will be taken to the Dealer Network registration page.</p>
+                    <p>It’s great to have you on the platform!</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
