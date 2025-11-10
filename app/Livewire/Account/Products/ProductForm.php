@@ -42,6 +42,18 @@ class ProductForm extends Component
         $this->preview_quantity = 1;
     }
 
+    public function updatedCourier(){
+        if($this->courier){
+            $this->free_delivery = null;
+        }
+    }
+
+    public function updatedFreeDelivery(){
+        if($this->free_delivery){
+            $this->courier = null;
+        }
+    }
+
     public function updatedSubSubCategoryId(){
         $sb = SubCategory::find($this->sub_sub_category_id);
         if($sb){

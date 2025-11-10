@@ -298,7 +298,7 @@
                                             @endif
                                         @endif
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" value="" id="free_delivery" wire:model.defer="free_delivery">
+                                            <input class="form-check-input" type="checkbox" value="" id="free_delivery" wire:model.live="free_delivery">
                                             <label class="form-check-label" for="free_delivery">
                                                 Free Delivery
                                                 <span class="mytooltip tooltip-effect-1">
