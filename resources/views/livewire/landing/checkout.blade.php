@@ -2,7 +2,7 @@
     <div class="section py-5 bg-grey" wire:ignore.self>
         <div class="container">
             <div class="row">
-                <div class="col-md-10 offset-md-1">
+                <div class="col-md-8 offset-md-2">
                     <div class="row">
                         <div class="col-md-12">
                             <a class="text-dark-blue" href="{{ URL::previous() }}">

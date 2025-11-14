@@ -872,3 +872,20 @@ footer .widget_title {
 .loading-gif{
 	width: 50px;
 }
+.wishlist-btn{
+	height: 40px;
+	padding: 15px 20px;
+	line-height: 10px;
+}
+
+.cnt-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.shop-like-star{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
