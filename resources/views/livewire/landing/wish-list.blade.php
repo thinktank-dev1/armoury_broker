@@ -1,5 +1,5 @@
 <div>
-    <div class="section head support-bg" wire:ignore.self>
+    <div class="section head wishlist-bg" wire:ignore.self>
         <div class="head-back">
             <div class="container">
                 <div class="row align-items-center">

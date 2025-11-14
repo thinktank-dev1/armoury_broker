@@ -299,6 +299,9 @@ footer .widget {
 .suppor-section{
 	background-color: #e6e6e6;
 }
+.wishlist-bg{
+	background-image: url('../../../img/wishlist_banner.png');
+}
 
 .accordion-button:not(.collapsed) {
   	background-color: #0f1f24;
