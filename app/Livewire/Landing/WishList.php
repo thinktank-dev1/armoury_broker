@@ -14,7 +14,7 @@ class WishList extends Component
     public $cur_view;
 
     public function mount(){
-        $this->cur_view = "stores";
+        $this->cur_view = "shops";
     }
 
     public function changeView($view){
