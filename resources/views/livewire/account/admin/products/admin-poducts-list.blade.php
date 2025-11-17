@@ -67,7 +67,7 @@
                                 </td>
                                 <td>{{ $product->item_name }}</td>
                                 <td>
-                                    @if($product->brand->brand_name)
+                                    @if($product->brand)
                                     {{ $product->brand->brand_name }}
                                     @endif
                                 </td>
