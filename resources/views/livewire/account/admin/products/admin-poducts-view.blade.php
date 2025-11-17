@@ -110,7 +110,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <small>Category</small>
-                                    <p class="m-0">{{ $product->category->category_name }} - {{ $product->subCategory->sub_category_name }} @if($product->sub_sub) - {{ $product->sub_sub->sub_category_name }} @endif</p>
+                                    <p class="m-0">@if($product->category) {{ $product->category->category_name }} @endif @if($product->subCategory) - {{ $product->subCategory->sub_category_name }} @endif @if($product->sub_sub) - {{ $product->sub_sub->sub_category_name }} @endif</p>
                                 </li>
                                 <li class="list-group-item">
                                     <small>Condition</small>
