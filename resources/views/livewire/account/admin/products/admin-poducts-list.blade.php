@@ -66,7 +66,11 @@
                                     <a href="{{ url('admin/vendors/'.$product->vendor->id) }}">{{ $product->vendor->name }}</a>
                                 </td>
                                 <td>{{ $product->item_name }}</td>
-                                <td>{{ $product->brand->brand_name }}</td>
+                                <td>
+                                    @if($product->brand->brand_name)
+                                    {{ $product->brand->brand_name }}
+                                    @endif
+                                </td>
                                 <td>{{ $product->category->category_name }} - @if($product->subCategory) {{ $product->subCategory->sub_category_name }} @endif @if($product->sub_sub) - {{ $product->sub_sub->sub_category_name }} @endif</td>
                                 <td>{{ $product->listing_type }}</td>
                                 <td>{{ $product->model_number }}</td>
