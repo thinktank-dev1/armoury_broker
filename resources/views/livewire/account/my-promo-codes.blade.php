@@ -23,6 +23,15 @@
                                 <a href="#" class="btn @if($code_type == 'value') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('value')">Rand Value</a>
                             </div>
                         </div>
+                        @if($errors->any())
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger">
+                                    {{ $errors->first() }}
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <form wire:submit.prevent="createVendorPromoCode">

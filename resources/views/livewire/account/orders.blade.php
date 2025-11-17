@@ -69,14 +69,14 @@
                                         @if($item->product->images->count() > 0)
                                         <div class="col-md-6">
                                             <div class="mt-3">
-                                                <img src="{{ asset('storage/'.$item->product->images->first()->image_url) }}" class="img-responsive">
+                                                <img src="{{ asset('storage/'.$item->product->images->first()->image_url) }}" class="img-responsive" style="max-height: 150px;">
                                             </div>
                                         </div>
                                         @endif
                                         <div class="@if($item->product->images->count() > 0) col-md-6 @else col-md-12 @endif mt-3">
                                             <table class="table table-borderless">
                                                 <tbody>
-                                                    <tr><th class="p-0">Oder date:</th><td class="p-0">{{ date('d M Y', strtotime($order->created_at)) }}</td></tr>
+                                                    <tr><th class="p-0">Order date:</th><td class="p-0">{{ date('d M Y', strtotime($order->created_at)) }}</td></tr>
                                                     <tr><th class="p-0">Item Title:</th><td class="p-0">{{ $item->product->item_name }}</td></tr>
                                                     <tr><th class="p-0">Quantity:</th><td class="p-0">{{ $item->quantity }}</td></tr>
                                                     <tr><th class="p-0">Listed Price:</th><td class="p-0">R {{ number_format($item->product->item_price,2) }}</td></tr>
@@ -105,11 +105,11 @@
                                                 </td>
                                             </tr>
                                             @if($item->shipping_method == 'courier')
-                                            @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
                                             <tr class="mb-1">
                                                 <th class="text-end">Deliver Service (optional)</th>
                                                 <td class="">
                                                     <div class="input-group">
+                                                        @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
                                                         <select class="form-control" name="shiping_service" wire:model.defer="orders_items_arr.{{ $item->id }}.shiping_service">
                                                             <option value="">Select Option</option>
                                                             @foreach($services AS $sv)
@@ -117,28 +117,36 @@
                                                             @endforeach
                                                         </select>
                                                         <button class="btn btn-outline-secondary" type="button"  data-bs-toggle="modal" data-bs-target="#add-shipping-service">Add</button>
+                                                        @else
+                                                        {{ $item->shiping_service }}
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr class="mb-1">
                                                 <th class="text-end">Tracking Number (optional)</th>
                                                 <td class="">
+                                                    @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
                                                     <input type="text" class="form-control" name="tracking_number" wire:model.defer="orders_items_arr.{{ $item->id }}.tracking_number">
+                                                    @else
+                                                        {{ $item->tracking_number }}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endif
-                                            @endif
-                                            @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
                                             <tr>
                                                 <th class="text-end">Shipping Status</th>
                                                 <td class="py-3">
+                                                    @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
                                                     <select class="form-control" name="vendor_status" wire:model.defer="orders_items_arr.{{ $item->id }}.vendor_status">
                                                         <option value="">Pending Dispatch</option> 
                                                         <option value="Order Dispatched">Order Dispatched</option>
                                                     </select>
+                                                    @else
+                                                        {{ $item->vendor_status }}
+                                                    @endif
                                                 </td>
                                             </tr>
-                                            @endif
                                             <tr>
                                                 <th class="text-end">Order Status</th>
                                                 <td class="">
@@ -204,10 +212,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" id="confirmation-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You will still be liable for the full platform fee of 5% if this is done</p>
+                </div>
+                <div class="modal-footer d-grid">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Don't Cancel Order</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="confirmedReceipt">Yes, Cancel Order!</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {
             @this.on('show-cancel-confirmation', () => {
+                $('#confirmation-modal').modal('show');
+                /*
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You will still be liable for the full platform fee of 5% if this is done",
@@ -226,6 +253,7 @@
                         });
                     }
                 });
+                */
             });
             @this.on('show-item-details-modal', () => {
                 $('#show-item-details').modal('show');

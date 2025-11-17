@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <p><a href="{{ url('auth/login') }}">I remember my password.</a></p>
+                                        <p><a href="{{ url('auth/login') }}" style="font-weight: 600">I remember my password.</a></p>
                                     </div>
                                 </div>
                                 <div class="row mt-3">

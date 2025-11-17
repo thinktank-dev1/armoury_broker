@@ -18,7 +18,7 @@
                             <h5 class="text-white bold">Vault Balance</h5>
                             <div class="ms-auto">
                                 <span class="mytooltip tooltip-effect-1">
-                                    <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                    <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
                                     <span class="tooltip-content clearfix">
                                         <span class="tooltip-text px-2">
                                             <b>Available for shopping</b>
@@ -62,7 +62,7 @@
                         <div class="card bordered">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h5 class="bold">Gift Voucher Credit</h5>
+                                    <h5 class="bold text-muted">Gift Voucher Credit</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="bold">R 0.00</h2>
+                                    <h2 class="bold text-muted">Coming Soon</h2>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                     <h5 class="text-white bold">Total Purchases</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Purchases</b>
@@ -153,7 +153,7 @@
                                     <h5 class="text-white bold">Total Sales</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Sales</b>

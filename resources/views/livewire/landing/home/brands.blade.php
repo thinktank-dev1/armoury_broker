@@ -2,7 +2,7 @@
     @if($brands->count() > 0)
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center mb-3">
+            <div class="col-md-12 text-center mb-4">
                 <h2 class="page-title">Shop by brands</h2>
             </div>
         </div>

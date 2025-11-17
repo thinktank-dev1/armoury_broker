@@ -170,8 +170,8 @@
                                 <td>Armoury Broker Credit</td>
                             </tr>
                             <tr>
-                                <td>R {{ number_format($gift_voucher_balance, 2) }}</td>
-                                <td>Gift Voucher Credit</td>
+                                <td class="text-muted">R {{ number_format($gift_voucher_balance, 2) }}</td>
+                                <td class="text-muted">Gift Voucher Credit (Coming Soon)</td>
                             </tr>
                             <tr>
                                 <td>R {{ number_format($withdrawable_balance, 2) }}</td>

@@ -9,7 +9,7 @@ use App\Models\Product;
 class Featured extends Component
 {
     public function render(){
-        $products = Product::where('featured', 1)->inRandomOrder()->get();
+        $products = Product::where('featured', 1)->inRandomOrder()->take(6)->get();
         return view('livewire.landing.home.featured', [
             'products' => $products
         ]);

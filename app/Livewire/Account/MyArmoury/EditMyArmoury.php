@@ -64,11 +64,18 @@ class EditMyArmoury extends Component
 
         $base = $this->slugify($this->armoury_name);
         $newName = $base;
+        $exist = Vendor::where('url_name', $newName)->first();
+        if($exist){
+            $this->addError('error', 'Vendor name has been taken, please choose another name.');
+            return;
+        }
+        /*
         $i = 1;
         while(Vendor::where('url_name', $newName)->first()){
             $newName = $base . $i;
             $i++;
         }
+        */
 
         $vendor->name = $this->armoury_name;
         $vendor->url_name = $newName;

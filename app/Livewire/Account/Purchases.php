@@ -53,7 +53,6 @@ class Purchases extends Component
         $this->dispatch('show-confirm-receipt');
     }
 
-    #[On('confirmed-receipt')]
     public function confirmedReceipt(){
         $ord = OrderItem::find($this->order_item);
         if($ord){
@@ -66,6 +65,7 @@ class Purchases extends Component
             }
         }
         $this->order_item = null;
+        $this->dispatch('close-modal');
     }
 
     public function markOrderShipped($id){

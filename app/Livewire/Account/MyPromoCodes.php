@@ -20,10 +20,16 @@ class MyPromoCodes extends Component
 
     public function mount(){
         $this->payment_url = env('PAYFAST_SANDBOX_URL');
+        $this->code_type = 'percentage';
     }
 
     public function changeType($t){
         $this->code_type = $t;
+        if($this->code_type == 'percentage'){
+            if($this->vendor_promo_code_value > 99){
+                $this->vendor_promo_code_value = 0;
+            }
+        }
     }
 
     public function changeStatus($id,$status){
@@ -54,6 +60,12 @@ class MyPromoCodes extends Component
         if($fnd){
             $go = false;
             $this->addError('error', "Code has already been used, please try a different one");
+        }
+        if($this->code_type == 'percentage'){
+            if($this->vendor_promo_code_value > 99){
+                $this->addError('error', 'Value cannot be more than 99%');
+                $go = false;
+            }
         }
         if($go){
             VendorPromoCode::create([

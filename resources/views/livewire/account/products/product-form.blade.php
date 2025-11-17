@@ -211,7 +211,7 @@
                                 @if($listing_type == 'sale')
                                 <div class="row mt-3">
                                     <div class="col-md-12">
-                                        <h3 class="bold">PLATFROM FEES</h3>
+                                        <h3 class="bold">PLATFORM FEES</h3>
                                         <p><small><b>Note:</b> Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on 50 - 50 basis.</small></p>
                                     </div>
                                     <div class="col-md-12 mb-2">

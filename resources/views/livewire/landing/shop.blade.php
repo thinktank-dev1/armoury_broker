@@ -163,6 +163,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <b class="text-dark-blue text-14">{{ $results_count }} Results</b>
+                            @if($search_key)
+                            <span class="ms-3">
+                                <a href="{{ url('shop') }}"><u><b class="text-dark-blue text-14">Clear Search</b></u></a>
+                            </span>
+                            @endif
                         </div>
                     </div>
                     @endif

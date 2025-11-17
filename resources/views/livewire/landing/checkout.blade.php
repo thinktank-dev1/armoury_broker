@@ -182,7 +182,7 @@
                                                             </li>
                                                             @endif
                                                             <li class="list-group-item">
-                                                                <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee selected by Seller:</b> {{ $item['product']->service_fee_payer }}</small>
+                                                                <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee Selected By Seller:</b> {{ $item['product']->service_fee_payer }}</small>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -201,13 +201,13 @@
     <div class="section py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-10 offset-md-1">
+                <div class="col-md-8 offset-md-2">
                     <div class="row">
                         <div class="col-md-12 mt-4">
                             <h2 class="page-title pb-0 mb-0">Platform Fees</h2>
                             <p><small><b>Please Note: </b>Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on a 50-50 basis.</small></p>
                         </div>
-
+                        {{--
                         <div class="@if($has_vendor_promo_codes) col-md-6 @else col-md-12 @endif mt-4 mb-4">
                             <h2 class="page-title pb-0 mb-0">Apply Voucher Code</h2>
                             <div class="mb-3">
@@ -220,16 +220,19 @@
                                 </div>
                             </div>
                         </div>
+                        --}}
                         @if($has_vendor_promo_codes)
-                        <div class="col-md-6 mt-4 mb-4">
-                            <h2 class="page-title pb-0 mb-0">Apply Promo Code</h2>
-                            <div class="mb-3">
-                                <label class="form-label">Enter Promo Code</label>
-                                <input type="text" class="form-control" aria-describedby="promo_help_text" name="vendor_promo_code" wire:model.blur="vendor_promo_code">
-                                <div id="promo_help_text" class="form-text text-danger">
-                                    @if($vendor_promo_code_error)
-                                    {{ $vendor_promo_code_error }}
-                                    @endif
+                        <div class="row">
+                            <div class="col-md-6 mt-4 mb-4">
+                                <h2 class="page-title pb-0 mb-0">Apply Promo Code</h2>
+                                <div class="mb-3">
+                                    <label class="form-label">Enter Promo Code</label>
+                                    <input type="text" class="form-control" aria-describedby="promo_help_text" name="vendor_promo_code" wire:model.blur="vendor_promo_code">
+                                    <div id="promo_help_text" class="form-text text-danger">
+                                        @if($vendor_promo_code_error)
+                                        {{ $vendor_promo_code_error }}
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -263,13 +266,10 @@
                                 </li>
                                 @endif
                             </ul>
-                            <div class="row mt-3">
+                            <div class="row mt-3 ms-1 me-1 border-bottom">
                                 <div class="col-md-12 d-flex">
                                     <b>TOTAL</b>
                                     <b class="ms-auto">R {{ number_format($total, 2) }}</b>
-                                </div>
-                                <div class="col-md-12">
-                                    <hr />
                                 </div>
                             </div>
                             @if($voucher_discount_amount)

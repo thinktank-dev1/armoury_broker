@@ -10,7 +10,7 @@
                 @endif
             </div>
             <div>
-                <div class="">
+                <div class="mt-3">
                     <b>{{ $shop->name }}</b>
                 </div>
                 <div class="d-flex gap-3 mt-1">

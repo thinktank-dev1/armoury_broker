@@ -69,7 +69,7 @@
                                         @if($item->product->images->count() > 0)
                                         <div class="col-md-6">
                                             <div class="mt-3">
-                                                <img src="{{ asset('storage/'.$item->product->images->first()->image_url) }}" class="img-responsive">
+                                                <img src="{{ asset('storage/'.$item->product->images->first()->image_url) }}" class="img-responsive" style="max-height: 150px;">
                                             </div>
                                         </div>
                                         @endif
@@ -183,10 +183,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" id="confirmation-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please confirm that item has been received.</p>
+                </div>
+                <div class="modal-footer d-grid">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, item has not been received</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="confirmedReceipt">Yes, Item has been received!</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {
             @this.on('show-confirm-receipt', () => {
+                $('#confirmation-modal').modal('show');
+                /*
                 Swal.fire({
                     title: "Are you sure?",
                     text: "Please confirm that item has been received?",
@@ -205,6 +224,7 @@
                         });
                     }
                 });
+                */
             });
             @this.on('show-item-details-modal', () => {
                 $('#show-item-details').modal('show');
