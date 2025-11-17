@@ -102,7 +102,11 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <small>Brand</small>
-                                    <p class="m-0">{{ $product->brand->brand_name }}</p>
+                                    <p class="m-0">
+                                        @if($product->brand)
+                                        {{ $product->brand->brand_name }}
+                                        @endif
+                                    </p>
                                 </li>
                                 <li class="list-group-item">
                                     <small>Category</small>
