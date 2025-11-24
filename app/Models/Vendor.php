@@ -77,6 +77,7 @@ class Vendor extends Model
     public function giftVoucherBalance(){
         $tot_in = 0;
         $tot_out = 0;
+        /*
         foreach($this->transactions->where(function($q){
             return $q->where('transaction_type', 'voucher_balance')->orWhere('transaction_type', 'gift_voucher_payment');
         })->where('direction', 'in')->where('release', 1) AS $trx){
@@ -86,6 +87,7 @@ class Vendor extends Model
             $tot_out += $trx->amount;
         }
         // dd($tot_in,$tot_out);
+        */
 
         $tot = $tot_in - $tot_out;
         return $tot;
