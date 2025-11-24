@@ -892,3 +892,6 @@ footer .widget_title {
 	top: 20px;
 	right: 20px;
 }
+.modal-header .btn-close{
+	filter: invert(1) hue-rotate(180deg);
+}
