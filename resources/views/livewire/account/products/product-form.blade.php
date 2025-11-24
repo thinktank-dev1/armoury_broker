@@ -173,7 +173,15 @@
                                             @if($category->measurement_type)
                                             <div class="form-group mb-2">
                                                 @if($category->measurement_type == "caliber")
+                                                    {{--
                                                     <input type="text" class="form-control" placeholder="Caliber" name="size" wire:model.defer="size">
+                                                    --}}
+                                                    <select class="form-control" name="size" wire:model.defer="size">
+                                                        <option value="">Select Caliber</option>
+                                                        @foreach($calibers AS $cal)
+                                                        <option value="{{ $cal->caliber }}">{{ $cal->caliber }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 @elseif($category->measurement_type == "size")
                                                     <select class="form-control" placeholder="Size" name="size" wire:model.defer="size">
                                                         <option value="">Size</option>

@@ -140,6 +140,25 @@
                                 </div>
                             </div>
                             <div class="accordion-item mb-2" wire:ignore.self>
+                                <h2 class="accordion-header" id="headingCalibre">
+                                    <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCalibre" aria-expanded="false" aria-controls="collapseCalibre" wire:ignore>
+                                        By Caliber
+                                    </button>
+                                </h2>
+                                <div id="collapseCalibre" class="accordion-collapse collapse" aria-labelledby="headingCalibre" data-bs-parent="#filter_accodion" wire:ignore.self>
+                                    <div class="accordion-body" wire:ignore.self>
+                                        <div wire:ignore>
+                                            <label>Select Caliber</label>
+                                            <select class="form-control" name="caliber" wire:model.live="caliber">
+                                                @foreach($calibers AS $cal)
+                                                <option value="{{ $cal->caliber }}">{{ $cal->caliber }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mb-2" wire:ignore.self>
                                 <h2 class="accordion-header" id="headingPrice" wire:ignore.self>
                                     <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice" wire:ignore>
                                         By Price

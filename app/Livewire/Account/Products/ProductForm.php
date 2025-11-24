@@ -15,6 +15,7 @@ use App\Models\Setting;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\DeliverOption;
+use App\Models\Caliber;
 
 class ProductForm extends Component
 {
@@ -301,11 +302,15 @@ class ProductForm extends Component
         if($offer_limit){
             $max_offer = $offer_limit->value;
         }
+
+        $calibers = Caliber::orderBy('caliber', 'ASC')->get();
+
         return view('livewire.account.products.product-form', [
             "cats" => $cats,
             'brands' => $brands,
             'fee' => $fee,
             'max_offer' => $max_offer,
+            'calibers' => $calibers
         ]);
     }
 }

@@ -11,6 +11,8 @@ use Schema;
 use Hash;
 use App\Models\User;
 use App\Models\Role;
+use App\Imports\CaliberImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SystemInit extends Command
 {
@@ -33,8 +35,14 @@ class SystemInit extends Command
      */
     public function handle()
     {
-        $this->init();
-        $this->moveInitFilesToPublic();
+        //$this->init();
+        //$this->moveInitFilesToPublic();
+        $this->loadCalibers();
+    }
+
+    public function loadCalibers(){
+        $file = storage_path('call/Calibres.xlsx');
+        Excel::import(new CaliberImport, $file);
     }
 
     public function moveInitFilesToPublic(){

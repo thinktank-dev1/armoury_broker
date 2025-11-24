@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Caliber;
 
 class Shop extends Component
 {
@@ -23,6 +24,7 @@ class Shop extends Component
     public $sort_by;
     public $search_key;
     public $items_count;
+    public $caliber;
 
     public function mount(){
         if(isset($_GET['category'])){
@@ -121,6 +123,7 @@ class Shop extends Component
         $filters = $this->current_filters;
 
         $key = $this->search_key;
+        $caliber = $this->caliber;
 
         $query = Product::query();
         if(count($filters) > 0){
@@ -194,6 +197,11 @@ class Shop extends Component
             }
             // if($this->sort_by == 'Most Popular')
         }
+
+        if($caliber){
+            $query->where('size', $caliber);
+        }
+
         $products = $query->take($this->items_count)->get();
         $this->results_count = $query->count();
         
@@ -230,6 +238,8 @@ class Shop extends Component
         $this->static_min_price = $min_max->min_price;
         $this->static_max_price = $min_max->max_price;
 
+        $calibers = Caliber::orderBy('caliber', 'ASC')->get();
+
 
 
         $cats = Category::orderBy('category_name', 'ASC')->get();
@@ -237,7 +247,8 @@ class Shop extends Component
         return view('livewire.landing.shop', [
             'cats' => $cats,
             'brands' => $brands,
-            'products' => $products
+            'products' => $products,
+            'calibers' => $calibers
         ]);
     }
 }
