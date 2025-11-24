@@ -106,7 +106,7 @@
                                             </tr>
                                             @if($item->shipping_method == 'courier')
                                             <tr class="mb-1">
-                                                <th class="text-end">Deliver Service (optional)</th>
+                                                <th class="text-end">Deliver Service</th>
                                                 <td class="">
                                                     <div class="input-group">
                                                         @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
