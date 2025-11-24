@@ -216,6 +216,7 @@ class Shop extends Component
         $products = $query->take($this->items_count)->get();
         $this->results_count = $query->count();
         
+        /*
         $min_max_query = Product::query();
         if(count($filters) > 0){
             foreach($filters AS $k => $v){
@@ -248,6 +249,11 @@ class Shop extends Component
         $min_max = $min_max_query->selectRaw('MIN(item_price) as min_price, MAX(item_price) as max_price')->first();
         $this->static_min_price = $min_max->min_price;
         $this->static_max_price = $min_max->max_price;
+        */
+        $static_min_price = Product::orderBy('item_price', 'ASC')->first();
+        $this->static_min_price = $static_min_price->item_price;
+        $static_max_price = Product::orderBy('item_price', 'DESC')->first();
+        $this->static_max_price = $static_max_price->item_price;
 
         $calibers = Caliber::orderBy('caliber', 'ASC')->get();
 
