@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Setting;
+use App\Models\Transaction;
 
 class Vendor extends Model
 {
@@ -48,6 +49,7 @@ class Vendor extends Model
     public function withdrawableBalance(){
         $tot_in = 0;
         $tot_out = 0;
+        /*
         foreach($this->transactions->where('name', 'order_payment')->where('direction', 'in')->where('release', 1) AS $trx){
             $tot_in += $trx->amount;
         }
@@ -55,6 +57,16 @@ class Vendor extends Model
             return $q->where('transaction_type', 'wallet_payment')
             ->orWhere('transaction_type', 'withdrawal');
         })->where('user_id', $this->user->id)->where('release', 1) AS $trx){
+            $tot_out += $trx->amount;
+        }
+        */
+
+        $trx_in = Transaction::where('vendor_id', $this->id)->where('name', 'order_payment')->where('release', 1)->get();
+        foreach($trx_in AS $trx){
+            $tot_in += $trx->amount;
+        }
+        $trx_out = Transaction::where('user_id', $this->user->id)->where('name', 'withdrawal')->get();
+        foreach($trx_out AS $trx){
             $tot_out += $trx->amount;
         }
 
