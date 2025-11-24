@@ -3,14 +3,14 @@
         <div class="col-md-12">
             <form wire:submit.prevent="saveProduct">
                 @if($cur_id)
-                <h3 class="bold">
+                <h3 class="page-title bold">
                     @if(url()->current() != URL::previous())
                     <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
                     @endif
                     EDIT ITEM
                 </h3>
                 @else
-                <h3 class="bold">
+                <h3 class="page-title bold">
                     @if(url()->current() != URL::previous())
                     <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
                     @endif
