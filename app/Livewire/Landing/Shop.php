@@ -48,6 +48,17 @@ class Shop extends Component
         $this->sort_by = 'Newest Listed';
     }
 
+    #[On('caliber-updated')]
+    public function caliberUpdated($caliber){
+        $this->current_filters['caliber'] = [];
+        foreach($caliber AS $cal){
+            $this->current_filters['caliber'][] = $cal;    
+        }
+        if(count($this->current_filters['caliber']) == 0){
+            unset($this->current_filters['caliber']);
+        }
+    }
+
     #[On('brand-updated')]
     public function brandUpdated($brands){
         $this->current_filters['brands'] = [];
@@ -157,6 +168,10 @@ class Shop extends Component
                 if($k == 'condition'){
                     $query->whereIn('condition', $v);
                 }
+
+                if($k == "caliber"){
+                    $query->whereIn('size', $v);
+                }
             }
         }
         if($this->min_price){
@@ -196,10 +211,6 @@ class Shop extends Component
                 $query->orderBy('created_at', 'ASC');
             }
             // if($this->sort_by == 'Most Popular')
-        }
-
-        if($caliber){
-            $query->where('size', $caliber);
         }
 
         $products = $query->take($this->items_count)->get();
