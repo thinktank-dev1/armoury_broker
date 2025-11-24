@@ -143,7 +143,7 @@
                                             @endif
                                             @if($item->vendor_status == "Order Dispatched" && $item->buyer_status != 'Received')
                                             <b>Other Actions</b>
-                                            <a href="" class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#dispute-modal">I have an issue with this order</a>
+                                            <a href="" class="btn btn-outline-danger" wire:click.prevent="showDisputeModal({{ $item->id }}, {{ $item->vendor_id }})">I have an issue with this order</a>
                                             @endif
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
         </div>
         @endforeach
     </div>
-    <div class="modal fade" id="dispute-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="dispute-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -178,7 +178,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="seveDispute">Save changes</button>
                 </div>
             </div>
         </div>
@@ -226,12 +226,23 @@
                 });
                 */
             });
+            @this.on('dispute-saved', () => {
+                Swal.fire({
+                    title: "Disputed Logged",
+                    text: "Your dispute has been logged, one of our agent will contact you as soon as possible.",
+                    icon: "success",
+                    confirmButtonColor: "#293c47",
+                });
+            })
             @this.on('show-item-details-modal', () => {
                 $('#show-item-details').modal('show');
             });
             @this.on('close-modal', () => {
                 $('.modal').modal('hide');
             });
+            @this.on('show-dispute-modal', () => {
+                $('#dispute-modal').modal('show');
+            })
         });
     </script>
     @endpush

@@ -11,6 +11,7 @@ use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Models\MessageThread;
 use App\Models\Vendor;
+use App\Models\Dispute;
 
 class Purchases extends Component
 {
@@ -18,6 +19,8 @@ class Purchases extends Component
 
     public $filter;
     public $order_item;
+
+    public $item_id, $vendor_id, $grievance;
 
     public function mount(){
         $this->filter = "all_orders";
@@ -27,6 +30,24 @@ class Purchases extends Component
 
     public function changeFilter($f){
         $this->filter = $f;
+    }
+
+    public function showDisputeModal($item_id, $vendor_id){
+        $this->item_id = $item_id;
+        $this->vendor_id = $vendor_id;
+        $this->dispatch('show-dispute-modal');
+    }
+
+    public function seveDispute(){
+        Dispute::create([
+            'user_id' => Auth::user()->id,
+            'vendor_id' => $this->vendor_id,
+            'order_id' => $this->item_id,
+            'message' => $this->grievance,
+            'status' => 0,
+        ]);
+        $this->dispatch('close-modal');
+        $this->dispatch('dispute-saved');
     }
 
     public function messageSeller($id){
