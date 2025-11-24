@@ -22,7 +22,7 @@ class ProductDetail extends Component
     public $quantity;
     public $offer_amount;
     public $availability;
-    public $qty;
+    public $qty, $vailable_qty;
 
     public function mount($id){
         $this->product = Product::find($id);
@@ -35,6 +35,8 @@ class ProductDetail extends Component
             return $q->whereNotNull('g_payment_id');
         })
         ->sum('quantity');
+
+        $this->vailable_qty = $qty - $itms_count;
 
         if($itms_count > 0){
             $this->quantity = $itms_count;

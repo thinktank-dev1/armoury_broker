@@ -63,8 +63,9 @@
                                 </div>
                             </div>
                             <div class="pr_desc">
-                                <p class="text-dark-blue">Available Quantity: {{ $product->quantity }}</p>
+                                <p class="text-dark-blue">Available Quantity: {{ $vailable_qty }}</p>
                                 <p class="text-dark-blue">{{ $product->item_description }}</p>
+                                
                             </div>
                             <div class="d-flex gap-5 mt-3">
                                 <div class="text-dark-blue">
