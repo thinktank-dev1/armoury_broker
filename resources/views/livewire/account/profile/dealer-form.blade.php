@@ -23,10 +23,10 @@
                     @endif
                     <form class="form-horizontal form-material" wire:submit.prevent="saveDealer">
                         <div class="col-md-12">
-                            <h3>Join Our Dealer Network</h4>
+                            <h3 class="bold">Join Our Dealer Network</h4>
                             <p>Under South African firearms legislation, all private firearm sales must be facilitated by a licensed firearms dealer, including the dealer stocking component of the transfer process.</p>
                             <p>We're building a network of licensed firearms dealers to provide this essential service to buyers and sellers on our platform.</p>
-                            <h3>Why Register?</h3>
+                            <h3 class="bold">Why Register?</h3>
                             <p>Once verified, you'll be added to our preferred dealer list and gain:</p>
                             <ul>
                                 <li><b>Increased exposure:</b> Visible to users across the platform seeking dealer stocking services in your area</li>
@@ -34,15 +34,15 @@
                                 <li><b>Complete control:</b> Set your own monthly dealer stocking fees</li>
                                 <li><b>Direct payment:</b> Collect fees directly from buyers</li>
                             </ul>
-                            <h3>How It Works</h3>
+                            <h3 class="bold">How It Works</h3>
                             <p>When a seller lists a firearm on our platform, they have the option to  select a registered dealer from their local area to facilitate dealer stocking while the buyer is acquiring the necessary licensing for the firearm. If you're within their area, you'll appear as an available option.</p>
                             <p>After purchase, both the buyer and seller receive your business details to coordinate the dealer stocking arrangements. You set your <b><u>monthly rate</u></b> on the platform and manage the service directly with clients.</p>
-                            <h3>Cost Structure</h3>
+                            <h3 class="bold">Cost Structure</h3>
                             <ul>
                                 <li><b>No registration fee:</b> Joining the network is completely free</li>
                                 <li><b>Platform fee:</b> We charge 5% of your monthly dealer stocking rate for transactions facilitated through Armoury Broker, invoiced monthly while the firearm remains in stock</li>
                             </ul>
-                            <h3>Getting Started</h3>
+                            <h3 class="bold">Getting Started</h3>
                             <p>Registration is simple. Our team will verify that your dealer license is current and valid, after which you'll be added to the network and can begin receiving referrals immediately.</p>
                         </div>
                         @if(!$join_dealer_network)
