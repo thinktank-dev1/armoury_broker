@@ -96,9 +96,11 @@ class ProductForm extends Component
         foreach($this->product_images AS $key => $img){
             if($img){
                 $tp = $img->getMimeType();
-                if(!str_starts_with($tp, 'image/')){
+                $allowed = ['image/png', 'image/jpg', 'image/jpeg'];
+                if(!in_array($tp, $allowed)){
+                // if(!str_starts_with($tp, 'image/')){
                     unset($this->product_images[$key]);
-                    $this->addError('error', 'Please upload images only');
+                    $this->addError('error', 'Please upload images only. (PNG, JPEG, JPG)');
                 }
             }
         }

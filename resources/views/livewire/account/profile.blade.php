@@ -6,7 +6,7 @@
                     @if(url()->current() != URL::previous())
                     <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
                     @endif
-                    Settings
+                    SETTINGS
                 </h3>
             </div>
         </div>

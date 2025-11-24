@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="mt-3 h-75 d-flex justify-content-center align-items-center">
-                            <h1 class="text-white bold">R 0.00</h1>
+                            <h1 class="text-white bold">R {{ number_format($tot_credit,2) }}</h1>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="bold">R 0.00</h2>
+                                    <h2 class="bold">R {{ number_format($ab_credit,2) }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="text-white bold">R 0.00</h2>
+                                    <h2 class="text-white bold">R {{ number_format($tot_purchases,2) }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,8 @@
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="bold">R 0.00</h2>
+                                    <h2 class="bold">R {{ number_format($withdrawable_balance,2) }}</h2>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawal-modal"><u>Request Withdrawal</u></a>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="bold">R 0.00</h2>
+                                    <h2 class="bold">R {{ $in_progress_orders,2 }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +164,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="text-white bold">R 0.00</h2>
+                                    <h2 class="text-white bold">R {{ number_format($tot_sales,2) }}</h2>
                                 </div>
                             </div>
                         </div>

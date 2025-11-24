@@ -11,6 +11,7 @@ use Auth;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Models\WithdrawalRequest;
+use App\Models\BankDetail;
 
 class Vault extends Component
 {
@@ -19,6 +20,59 @@ class Vault extends Component
     public $amount, $bank_name, $branch_name, $branch_code, $account_name, $account_number;
 
     public $filter, $date_from, $date_to;
+
+    public $withdrawable_balance, $orders_in_progress, $gift_voucher_balance, $spendable_amount, $ab_credit, $tot_credit;
+    public $tot_purchases, $tot_sales,$in_progress_orders;
+
+    public function mount(){
+        $this->getData();
+
+        $bnk = BankDetail::where('user_id', Auth::user()->id)->first();
+        if($bnk){
+            $this->bank_name = $bnk->bank_name;
+            $this->branch_name = $bnk->branch_name;
+            $this->branch_code = $bnk->branch_code;
+            $this->account_name = $bnk->account_name;
+            $this->account_number = $bnk->account_number;
+        }
+    }
+
+    public function getData(){
+        $this->ab_credit = 0;
+        $this->withdrawable_balance = Auth::user()->vendor->withdrawableBalance();
+        $this->gift_voucher_balance = Auth::user()->vendor->giftVoucherBalance();
+        $this->spendable_amount = $this->withdrawable_balance + $this->gift_voucher_balance;
+        $this->orders_in_progress = Transaction::where('name', 'order_payment')->where('vendor_id', Auth::user()->vendor_id)->whereNull('release')->sum('amount');
+        $this->tot_credit = $this->ab_credit + $this->withdrawable_balance + $this->gift_voucher_balance + $this->orders_in_progress;
+
+        $this->tot_purchases = OrderItem::where('user_id', Auth::user()->id)->wherehas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        ->sum('price');
+
+        $this->tot_sales = OrderItem::where('vendor_id', Auth::user()->vendor_id)->wherehas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        ->sum('price');
+
+        $this->in_progress_orders = OrderItem::query()
+        ->where('vendor_id', Auth::user()->vendor_id)
+        ->whereNotNull('order_id')
+        ->whereHas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        ->where(function($q){
+            return $q->where(function($qq){
+                return $qq->whereNull('vendor_status')
+                ->whereNotNull('buyer_status');
+            })
+            ->orWhere(function($qq){
+                return $qq->whereNotNull('vendor_status')
+                ->whereNull('buyer_status');
+            });
+        })
+        ->sum('price');
+    }
 
     public function requestWithdrawal(){
         $this->validate([
@@ -32,7 +86,7 @@ class Vault extends Component
             'amount.numeric'=>"Amount must be a number"
         ]);
 
-        $balance = Auth::user()->vendor->balance();
+        $balance = Auth::user()->vendor->withdrawableBalance();
 
         if($this->amount > $balance){
             $this->addError('error', "Insufficient balance");
