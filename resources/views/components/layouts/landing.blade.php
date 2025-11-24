@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Armoury Broker</title>
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/FAVICON.png') }}">
 
         <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">	
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/FAVICON.png') }}">
         <title>Armoury Broker</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
