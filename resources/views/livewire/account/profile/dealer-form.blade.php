@@ -91,7 +91,7 @@
                             </div>                           
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-label">Fire Arms Dealer License Number</label>
+                                    <label class="form-label">Firearms Dealer License Number</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="license_number" wire:model.defer="license_number">
                                     </div>
@@ -144,7 +144,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-label">Billing contact Name</label>
+                                    <label class="form-label">Billing Contact Name</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="billing_contact" wire:model.defer="billing_contact">
                                     </div>
@@ -160,7 +160,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="col-md-12">Billing Email</label>
+                                    <label class="form-label">Billing Email</label>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control form-control-line" name="billing_email" wire:model.defer="billing_email">
                                     </div>
@@ -168,7 +168,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-label">Dealer Stocking Fee ()</label>
+                                    <label class="form-label">Dealer Stocking Fee</label>
                                     <div class="col-md-12 input-group">
                                         <span class="input-group-text">R</span>
                                         <input type="text" style="padding-left: 10px" class="form-control form-control-line" name="dealer_stocking_fee" wire:model.defer="dealer_stocking_fee">
