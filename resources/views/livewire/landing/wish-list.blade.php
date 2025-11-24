@@ -17,8 +17,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="#" class="btn wishlist-btn @if($cur_view == 'items') btn-secondary @else btn-primary-outline @endif" wire:click.prevent="changeView('items')">Liked Items</a>
-                    <a href="#" class="btn wishlist-btn @if($cur_view == 'stores') btn-secondary @else btn-primary-outline @endif" wire:click.prevent="changeView('stores')">Liked Stores</a>
+                    <a href="#" class="btn @if($cur_view == 'items') btn-secondary @else btn-primary-outline @endif" wire:click.prevent="changeView('items')">Liked Items</a>
+                    <a href="#" class="btn @if($cur_view == 'stores') btn-secondary @else btn-primary-outline @endif" wire:click.prevent="changeView('stores')">Liked Stores</a>
                 </div>
             </div>
         </div>
