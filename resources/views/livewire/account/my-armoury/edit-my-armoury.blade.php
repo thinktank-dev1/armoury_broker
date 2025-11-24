@@ -317,7 +317,7 @@
                     <div class="">
                         <h2>Hi {{ Auth::user()->name }}</h2>
                         <p>Thank you for joining our trusted community. You’re now part of South Africa’s leading, secure marketplace that is transforming how firearms owners buy, sell and trade equipment in a safe and secure environment.</p>
-                        <p>Lets’ get your Armoury setup up!</p>
+                        <p>Lets’ get your Armoury setup!</p>
 
                     </div>
                 </div>

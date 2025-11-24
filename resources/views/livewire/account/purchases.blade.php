@@ -76,7 +76,7 @@
                                         <div class="@if($item->product->images->count() > 0) col-md-6 @else col-md-12 @endif mt-3">
                                             <table class="table table-borderless">
                                                 <tbody>
-                                                    <tr><th class="p-0">Oder date:</th><td class="p-0">{{ date('d M Y', strtotime($order->created_at)) }}</td></tr>
+                                                    <tr><th class="p-0">Order date:</th><td class="p-0">{{ date('d M Y', strtotime($order->created_at)) }}</td></tr>
                                                     <tr><th class="p-0">Item Title:</th><td class="p-0">{{ $item->product->item_name }}</td></tr>
                                                     <tr><th class="p-0">Quantity:</th><td class="p-0">{{ $item->quantity }}</td></tr>
                                                     <tr><th class="p-0">Listed Price:</th><td class="p-0">R {{ number_format($item->product->item_price,2) }}</td></tr>

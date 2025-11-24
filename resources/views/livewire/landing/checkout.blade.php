@@ -182,7 +182,7 @@
                                                             </li>
                                                             @endif
                                                             <li class="list-group-item">
-                                                                <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee Selected By Seller:</b> {{ $item['product']->service_fee_payer }}</small>
+                                                                <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee Selected By Seller:</b> {{ ucwords($item['product']->service_fee_payer) }}</small>
                                                             </li>
                                                         </ul>
                                                     </div>
