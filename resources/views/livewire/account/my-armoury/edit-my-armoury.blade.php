@@ -41,14 +41,14 @@
             <div class="card">
                 <div class="card-body">
                     <div class="">
-                        <h4 class="card-title">My Armoury Details</h4>
+                        <h4 class="card-title">My Armoury Details (Required)</h4>
                     </div>
                     <div class="mt-3">
                         <form class="form-material m-t-40" wire:submit.prevent="saveArmoury">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Armoury Name</label>
+                                        <label class="form-label">Armoury Name*</label>
                                         <input type="text" class="form-control" placeholder="Armoury Name" name="armoury_name" wire:model.defer="armoury_name">
                                     </div>
                                 </div>
@@ -66,19 +66,19 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Suburb</label>
+                                        <label class="form-label">Suburb*</label>
                                         <input type="text" class="form-control" placeholder="Suburb" name="suburb" wire:model.defer="suburb">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label">City</label>
+                                        <label class="form-label">City*</label>
                                         <input type="text" class="form-control" placeholder="City" name="city" wire:model.defer="city">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Province</label>
+                                        <label class="form-label">Province*</label>
                                         <select class="form-control" placeholder="Province" name="province" wire:model.defer="province">
                                             <option value="">Select Option</option>
                                             @foreach($provinces AS $province)
