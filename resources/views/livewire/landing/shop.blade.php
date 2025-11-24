@@ -84,6 +84,11 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
+                                                <div class="mt-2">
+                                                    <a href="{{ url('shop?wanted') }}" class="ms-3" style="font-weight: 400">
+                                                        Wanted
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +187,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <b class="text-dark-blue text-14">{{ $results_count }} Results</b>
-                            @if($search_key)
+                            @if($search_key || $wanted)
                             <span class="ms-3">
                                 <a href="{{ url('shop') }}"><u><b class="text-dark-blue text-14">Clear Search</b></u></a>
                             </span>

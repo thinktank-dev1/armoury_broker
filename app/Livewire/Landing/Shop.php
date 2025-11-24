@@ -25,6 +25,7 @@ class Shop extends Component
     public $search_key;
     public $items_count;
     public $caliber;
+    public $wanted = false;
 
     public function mount(){
         if(isset($_GET['category'])){
@@ -42,6 +43,11 @@ class Shop extends Component
         if(isset($_GET['search'])){
             $this->search_key = $_GET['search'];
         }
+
+        if(isset($_GET['wanted'])){
+            $this->wanted = true;
+        }
+
         $this->setStaticData();
 
         $this->items_count = 12;
@@ -179,6 +185,10 @@ class Shop extends Component
         }
         if($this->max_price){
             $query->where('item_price', '<=', $this->max_price);
+        }
+
+        if($this->wanted){
+            $query->where('listing_type', 'wanted');
         }
 
         if($key){
