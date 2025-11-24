@@ -250,9 +250,9 @@ class Shop extends Component
         $this->static_min_price = $min_max->min_price;
         $this->static_max_price = $min_max->max_price;
         */
-        $static_min_price = Product::orderBy('item_price', 'ASC')->first();
+        $static_min_price = Product::whereNotNull('item_price')->orderBy('item_price', 'ASC')->first();
         $this->static_min_price = $static_min_price->item_price;
-        $static_max_price = Product::orderBy('item_price', 'DESC')->first();
+        $static_max_price = Product::whereNotNull('item_price')->orderBy('item_price', 'DESC')->first();
         $this->static_max_price = $static_max_price->item_price;
 
         $calibers = Caliber::orderBy('caliber', 'ASC')->get();
