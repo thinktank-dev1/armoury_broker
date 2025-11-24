@@ -36,7 +36,7 @@
                             </ul>
                             <h3>How It Works</h3>
                             <p>When a seller lists a firearm on our platform, they have the option to  select a registered dealer from their local area to facilitate dealer stocking while the buyer is acquiring the necessary licensing for the firearm. If you're within their area, you'll appear as an available option.</p>
-                            <p>After purchase, both the buyer and seller receive your business details to coordinate the dealer stocking arrangements. You set your monthly rate on the platform and manage the service directly with clients.</p>
+                            <p>After purchase, both the buyer and seller receive your business details to coordinate the dealer stocking arrangements. You set your <b><u>monthly rate</u></b> on the platform and manage the service directly with clients.</p>
                             <h3>Cost Structure</h3>
                             <ul>
                                 <li><b>No registration fee:</b> Joining the network is completely free</li>
@@ -168,7 +168,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="form-label">Dealer Stocking Fee</label>
+                                    <label class="form-label">Dealer Stocking Fee ()</label>
                                     <div class="col-md-12 input-group">
                                         <span class="input-group-text">R</span>
                                         <input type="text" style="padding-left: 10px" class="form-control form-control-line" name="dealer_stocking_fee" wire:model.defer="dealer_stocking_fee">
