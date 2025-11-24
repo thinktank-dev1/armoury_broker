@@ -2,7 +2,7 @@
     @if(Auth::user()->vendor)
     <div class="row">
         <div class="col-md-12 mt-3">
-            <h3 class="bold">
+            <h3 class="page-title bold">
                 @if(url()->current() != URL::previous())
                 <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
                 @endif
