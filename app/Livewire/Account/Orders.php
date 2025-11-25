@@ -115,6 +115,9 @@ class Orders extends Component
             $ord->shiping_service = $itm['shiping_service'];
             $ord->tracking_number = $itm['tracking_number'];
             $ord->vendor_status = $itm['vendor_status'];
+            if($itm['vendor_status'] == "Order Dispatched"){
+                $ord->dispatch_date = date('Y-m-d');
+            }
             $ord->save();
         }
         $order = $ord->order;

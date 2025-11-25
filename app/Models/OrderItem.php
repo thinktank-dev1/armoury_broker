@@ -30,7 +30,10 @@ class OrderItem extends Model
         'custom_dealer_details',
 
         'vendor_status',
+        'dispatch_date',
+
         'buyer_status',
+        'receipt_date',
     ];
 
     public function vendor(){

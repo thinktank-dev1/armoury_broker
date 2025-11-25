@@ -78,6 +78,7 @@ class Purchases extends Component
         $ord = OrderItem::find($this->order_item);
         if($ord){
             $ord->buyer_status = "Received";
+            $ord->receipt_date = date('Y-m-d');
             $ord->save();
             $trx = Transaction::where('order_item_id', $ord->id)->where('name', 'order_payment')->first();
             if($trx){
