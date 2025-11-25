@@ -465,6 +465,19 @@ class Checkout extends Component
                     $ord->ab_dealer_id = null;
                     $ord->custom_dealer_details = null;
                 }
+                else{
+                    $prdt = $itm['product'];
+                    if($prdt->dealer_stocking_type == 'custom_dealer'){
+                        $ord->dealer_option = 'custom dealer';
+                        $ord->custom_dealer_details = $prdt->private_dealer_details;
+                        $ord->ab_dealer_id = null;
+                    }
+                    else{
+                        $ord->dealer_option = 'ab dealer';
+                        $ord->ab_dealer_id = $prdt->dealer_id;  
+                        $ord->custom_dealer_details = null; 
+                    }
+                }
             }
             if($arr[1] == "dealer_option"){
                 $ord->dealer_option = $v;
@@ -538,6 +551,11 @@ class Checkout extends Component
             $this->service_fees += $ct->service_fee;
             $this->cart_sub_total += $tot;
 
+            $dealer = null;
+            if($ct->ab_dealer_id){
+                $dealer = Dealer::find($ct->ab_dealer_id);
+            }
+
             $arr = [
                 "id" => $ct->id,
                 "oder_no" => str_pad($ct->id, 4, '0', STR_PAD_LEFT),
@@ -562,6 +580,7 @@ class Checkout extends Component
                 "dealer_option" => $ct->dealer_option,
                 "ab_dealer_id" => $ct->ab_dealer_id,
                 "custom_dealer_details" => $ct->custom_dealer_details,
+                "dealer" => $dealer,
             ];
             $this->cart[] = $arr;
         }

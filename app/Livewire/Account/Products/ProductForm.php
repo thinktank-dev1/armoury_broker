@@ -16,6 +16,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\DeliverOption;
 use App\Models\Caliber;
+use App\Models\Dealer;
 
 class ProductForm extends Component
 {
@@ -28,6 +29,7 @@ class ProductForm extends Component
     public $cur_images = [];
     public $collection_delivery, $courier, $dealer_stock, $free_delivery;
     public $preview, $preview_quantity, $sub_name, $brand_name, $sub_sub_name;
+    public $dealer_stock_type, $ab_dealer_id, $private_dealer_details;
 
     public function mount($id = null){
         if(!Auth::user()->vendor_id){
@@ -41,6 +43,18 @@ class ProductForm extends Component
         }
         $this->preview = True;
         $this->preview_quantity = 1;
+    }
+
+    public function removeItem(){
+        if($this->cur_id){
+            $prdt = Product::find($this->cur_id);
+            if($prdt){
+                $prdt->status = 0;
+                $prdt->save();
+
+                return redirect('my-armoury');
+            }
+        }
     }
 
     public function updatedCourier(){
@@ -138,6 +152,11 @@ class ProductForm extends Component
             if($prdt->allow_offers){
                 $this->allow_offers = true;
             }
+
+            $this->dealer_stock_type = $prdt->dealer_stocking_type;
+            $this->ab_dealer_id = $prdt->dealer_id;
+            $this->private_dealer_details = $prdt->private_dealer_details;
+
             $this->acknowledgement = true;
             if($prdt->allow_collection){
                 $this->allow_collection = true;
@@ -170,6 +189,16 @@ class ProductForm extends Component
             $messages['acknowledgement.required'] = 'You did not accept the terms and conditions';
         }
 
+        if($this->dealer_stock){
+            $rules['dealer_stock_type'] = 'required';
+            if($this->dealer_stock_type == 'ab_dealer'){
+                $rules['ab_dealer_id'] = 'required';
+            }
+            elseif($this->dealer_stock_type == 'custom_dealer'){
+                $rules['private_dealer_details'] = 'required';
+            }
+        }
+
         $this->validate($rules, $messages);
         if($this->cur_id){
             $prdt = Product::find($this->cur_id);
@@ -194,6 +223,11 @@ class ProductForm extends Component
         $prdt->service_fee_payer = $this->service_fee_payer;
         $prdt->item_price = $this->item_price;
         $prdt->allow_offers = $this->allow_offers;
+
+        $prdt->dealer_stocking_type = $this->dealer_stock_type;
+        $prdt->dealer_id = $this->ab_dealer_id;
+        $prdt->private_dealer_details = $this->private_dealer_details;
+
         $prdt->acknowledgement = $this->acknowledgement;
         $prdt->status = 1;
         $prdt->save();
@@ -305,12 +339,15 @@ class ProductForm extends Component
 
         $calibers = Caliber::orderBy('caliber', 'ASC')->get();
 
+        $dealers = Dealer::where('province', Auth::user()->vendor->province)->get();
+
         return view('livewire.account.products.product-form', [
             "cats" => $cats,
             'brands' => $brands,
             'fee' => $fee,
             'max_offer' => $max_offer,
-            'calibers' => $calibers
+            'calibers' => $calibers,
+            'dealers' => $dealers
         ]);
     }
 }

@@ -95,7 +95,8 @@ class MyArmoury extends Component
         ->when($sold, function($q){
             return $q->whereHas('orders');
         })
-        ->paginate(20);
+        ->where('status', 1)
+        ->get();
 
         $cats = Category::orderBy('category_name', 'ASC')->get();
         $brands = Brand::orderBy('brand_name', 'ASC')->get();

@@ -222,6 +222,7 @@ class Shop extends Component
             }
             // if($this->sort_by == 'Most Popular')
         }
+        $query->where('status', 1);
 
         $products = $query->take($this->items_count)->get();
         $this->results_count = $query->count();

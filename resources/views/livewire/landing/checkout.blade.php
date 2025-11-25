@@ -103,7 +103,23 @@
                                                                         @endforeach
                                                                     </div>
                                                                 </div>
+
                                                             </li>
+                                                            @if($item['shipping_method'] == "dealer_stock")
+                                                            <li class="list-group-item d-flex">
+                                                                <small class="">Dealers</small>
+                                                                <span class="ms-auto">
+                                                                    @if($item['dealer_option'] == "ab dealer")
+                                                                        {{ $item['dealer']->business_name."<br />" }}
+                                                                        {{ $item['dealer']->province."<br />" }}
+                                                                        R {{ $item['dealer']->dealer_stocking_fee."<br />" }}
+                                                                    @elseif($item['dealer_option'] == "custom dealer")
+                                                                        {{ $item['custom_dealer_details'] }}
+                                                                    @endif
+                                                                </span>
+                                                            </li>
+                                                            @endif
+                                                            {{--
                                                             @if($item['shipping_method'] == "dealer_stock")
                                                             <li class="list-group-item d-flex">
                                                                 <small class="">Dealers</small>
@@ -149,6 +165,7 @@
                                                                 </span>
                                                             </li>
                                                             @endif
+                                                            --}}
 
                                                             @if($item['deliver_collection'] == "Courier")
                                                             <li class="list-group-item d-flex">

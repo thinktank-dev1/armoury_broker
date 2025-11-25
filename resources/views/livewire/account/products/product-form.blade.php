@@ -320,6 +320,37 @@
                                                 </span>
                                             </label>
                                         </div>
+                                        @if($dealer_stock)
+                                            <div class="mb-3">
+                                                <label class="form-label">Please select a dealer type</label>
+                                                <select class="form-control" name="dealer_stock_type" wire:model.live="dealer_stock_type">
+                                                    <option value="">Select Option</option>
+                                                    <option value="ab_dealer">Armoury Broker Dealer</option>
+                                                    <option value="custom_dealer">Private Dealer</option>
+                                                </select>
+                                            </div>
+                                            @if($dealer_stock_type == 'ab_dealer')
+                                                @if($dealers->count() > 0)
+                                                <div class="mb-3">
+                                                    <label class="form-label">Select Armoury Broker Dealer</label>
+                                                    <select class="form-control" name="ab_dealer_id" wire:model.defer="ab_dealer_id">
+                                                        <option value="">Select Option</option>
+                                                        @foreach($dealers AS $dl)
+                                                        <option value="{{ $dl->id }}">{{ $dl->business_name.' (R'.number_format($dl->dealer_stocking_fee,2).')' }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @else
+                                                <div class="alert alert-warning" role="alert">
+                                                    There are currently no Armoury Broker dealers within your area, please select private dealer.
+                                                </div>
+                                                @endif
+                                            @elseif($dealer_stock_type == 'custom_dealer')
+                                            <div class="mb-3">
+                                                <textarea class="form-control" name="private_dealer_details" placeholder="Enter private dealer details*" wire:model.defer="private_dealer_details"></textarea>
+                                            </div>
+                                            @endif
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -354,11 +385,19 @@
                                     </div>
                                 </div>
                                 @endif
-                                <div class="row mt-3 mb-5">
+                                <div class="row mt-3 mb-3">
                                     <div class="col-md-12 d-grid">
                                         <input type="submit" class="btn btn-primary" value="List Item">    
                                     </div>
                                 </div>
+
+                                @if($cur_id)
+                                <div class="row mt-3 mb-5">
+                                    <div class="col-md-12 d-grid">
+                                        <a href="#" class="btn btn-outline-danger" wire:click.prevent="removeItem">Remove Item</a>    
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                             @if($preview)
                     <div class="col-md-6">

@@ -29,6 +29,11 @@ class Product extends Model
         'collection_address',
         'delivery_type',
         'deler_stock',
+
+        'dealer_stocking_type',
+        'dealer_id',
+        'private_dealer_details',
+
         'status',
     ];
 
