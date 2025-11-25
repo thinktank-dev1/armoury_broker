@@ -122,7 +122,7 @@ class Vault extends Component
                 'cta' => true,
                 'cta_text' => 'Click here to approve',
                 'cta_url' => url('approve-withdrawal/'.$wd->id),
-                'after_cta_body' => 'If this was not you, no further action is required, we do however encourage you to change your password on <a href='".url('login')."'>Armoury Broker</a>',
+                'after_cta_body' => "If this was not you, no further action is required, we do however encourage you to change your password on <a href='".url('login')."'>Armoury Broker</a>",
             ];
 
             $comm->sendMail($data);
