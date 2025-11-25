@@ -106,7 +106,7 @@ class Vault extends Component
             $data = [
                 'name' => Auth::user()->name,
                 'to' => Auth::user()->email,
-                'subject' => 'Armoury Broker Withdrawal Request',
+                'title' => 'Armoury Broker Withdrawal Request',
                 'message_body' => "
                     You requested a withdrawal<br /><br />
                     Amount: R".number_format($this->amount)."<br /><br />
