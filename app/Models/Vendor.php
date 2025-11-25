@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Setting;
 use App\Models\Transaction;
+use App\Models\OrderItem;
 
 class Vendor extends Model
 {
@@ -97,5 +98,27 @@ class Vendor extends Model
     public function balance(){
         $tot = $this->withdrawableBalance() + $this->giftVoucherBalance();
         return $tot;
+    }
+
+    public function average_delivery_time(){
+        $avg = 0;
+        $avg_items = OrderItem::query()
+        ->where('vendor_id', $this->id)
+        ->whereNotNull('receipt_date')
+        ->selectRaw("
+            DATEDIFF(receipt_date, created_at) AS days_between
+            ")->get();
+
+        $count = $avg_items->count();
+        foreach($avg_items AS $itm){
+            $avg += $itm->days_between;
+        }
+        if($count > 0 && $avg > 0){
+            $dv = $avg/$count;
+            return (int)$dv;
+        }
+        else{
+            return 0;
+        }
     }
 }

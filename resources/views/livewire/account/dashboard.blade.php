@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="text-start mt-3">
-                                <div class="mb-2"><i class="ti-truck"></i> Usually ships in <font class="font-medium">0 days</font></div>
+                                <div class="mb-2"><i class="ti-truck"></i> Usually ships in <font class="font-medium">{{ Auth::user()->vendor->average_delivery_time() }} days</font></div>
                                 <i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}
                             </div>
                             @endif
