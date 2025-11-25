@@ -58,7 +58,7 @@
                                     <h4 class="card-title m-t-10">{{ Auth::user()->vendor->name }} </h4>
                                     <h6 class="card-subtitle mt-2">{{ url(Auth::user()->vendor->url_name) }}</h6>
                                     <div>
-                                        <a href="javascript:void(0)" class="link me-5"><i class="icon-like"></i> <font class="font-medium">{{ Auth::user()->vendor->likes->count() }}</font> Likes</a>
+                                        <a href="javascript:void(0)" class="link me-5"><i class="fas fa-star"></i> <font class="font-medium">{{ Auth::user()->vendor->likes->count() }}</font> Likes</a>
                                         <a href="javascript:void(0)" class="link"><i class="icon-grid"></i> <font class="font-medium">{{ $sold_count }}</font> Items Sold</a>
                                     </div>
                                     <div class="mt-3">
@@ -66,8 +66,8 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-6 col-md-6 text-start">
-                                            <div class="mb-2"><a href="javascript:void(0)" class="link"><i class="ti-truck"></i> Usually ships in <font class="font-medium">{{ Auth::user()->vendor->average_delivery_time() }} days</font></a></div>
-                                            <a href="javascript:void(0)" class="link"><i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}</a>
+                                            <div class="mb-2"><i class="ti-truck"></i> Usually ships in <font class="font-medium">{{ Auth::user()->vendor->average_delivery_time() }} days</font></div>
+                                            <i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}
                                         </div>
                                         <div class="col-6 col-md-6 text-end">
                                             <div class="mb-2"><a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">Share <i class="icon-share"></i></a></div>

@@ -471,7 +471,7 @@
                                                             <i class="fas fa-star"></i> 0
                                                         </div>
                                                         <div class="">
-                                                            <i class=" fas fa-map-marker"></i> {{ Auth::user()->vendor->city }}
+                                                            <i class="icon-location-pin"></i> {{ Auth::user()->vendor->city }}
                                                         </div>
                                                     </div>
                                                 </div>

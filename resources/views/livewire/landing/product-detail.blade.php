@@ -72,7 +72,7 @@
                                     <i class="fas fa-star"></i> {{ $product->wishlists->count() }}
                                 </div>
                                 <div class="text-dark-blue">
-                                    <i class="fas fa-map-marker-alt"></i> {{ $product->vendor->city }}
+                                    <i class="icon-location-pin"></i> {{ $product->vendor->city }}
                                 </div>
                             </div>
                             @if($product->listing_type == "sale")
