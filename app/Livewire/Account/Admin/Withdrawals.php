@@ -39,6 +39,7 @@ class Withdrawals extends Component
                     Amount: R".number_format($req->amount)."<br /><br />
                 ",
                 "cta" => false,
+                "after_cta_body" => null,
             ];
             $comm->sendMail($data);
         }
