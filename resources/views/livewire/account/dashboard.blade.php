@@ -451,6 +451,7 @@
             });
         });
         $(document).ready(function(){
+
             const ctx = document.getElementById('orderChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
@@ -458,14 +459,14 @@
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Orders',
-                        data: [8, 6, 5, 9, 7, 10, 67, 89, 34, 23, 15, 34],
+                        data: @js($orders_arr),
                         backgroundColor: '#293c47',
                         yAxisID: 'y',
                         barThickness: 20,
                     },
                     {
                         label: 'Order Value',
-                        data: [5000, 5500, 7000, 8500, 6500, 10000, 10000, 10000, 10000, 10000, 10000, 10000],
+                        data: @js($order_vals),
                         borderColor: '#ff7043',
                         borderWidth: 2,
                         type: 'line',

@@ -25,6 +25,7 @@ class Dashboard extends Component
     public $new_offers, $active_orders, $purchases_to_confirm;
     public $listing_count, $sold_listings;
     public $withdrawable_balance, $orders_in_progress, $gift_voucher_balance, $spendable_amount, $ab_credit, $tot_credit;
+    public $orders_arr = [], $order_vals = [];
 
     public function mount(){
         if(!Auth::user()->vendor_id && Auth::user()->role->name != "admin"){
@@ -159,6 +160,34 @@ class Dashboard extends Component
             ->whereNotNull('vendor_status');
         })
         ->count();
+
+        $year = date("Y");
+        $start = new \DateTime("$year-01-01");
+        $end   = new \DateTime("$year-12-31");
+
+        $interval = new \DateInterval('P1M');
+        $period   = new \DatePeriod($start, $interval, $end);
+        foreach ($period as $date) {
+            $month = $date->format("m");
+            $orders_count = OrderItem::query()
+            ->where('vendor_id', Auth::user()->vendor_id)
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->where('vendor_status', 'Order Dispatched')
+            ->where('buyer_status', 'Received')
+            ->count();
+
+            $orders_val = OrderItem::query()
+            ->where('vendor_id', Auth::user()->vendor_id)
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->where('vendor_status', 'Order Dispatched')
+            ->where('buyer_status', 'Received')
+            ->sum('price');
+
+            $this->orders_arr[] = $orders_count;
+            $this->order_vals[] = $orders_val;
+        }
     }
 
     public function copyLink(){
