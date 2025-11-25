@@ -35,8 +35,8 @@ class SystemInit extends Command
      */
     public function handle()
     {
-        //$this->init();
-        //$this->moveInitFilesToPublic();
+        $this->init();
+        $this->moveInitFilesToPublic();
         $this->loadCalibers();
     }
 
