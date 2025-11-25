@@ -104,15 +104,25 @@ class Vault extends Component
 
             $comm = new Communication();
             $data = [
+                
+                
+                
+                
+                
+                
+
                 'name' => Auth::user()->name,
                 'to' => Auth::user()->email,
                 'title' => 'Armoury Broker Withdrawal Request',
+                'subject' => 'Armoury Broker Withdrawal Request',
                 'message_body' => "
                     You requested a withdrawal<br /><br />
                     Amount: R".number_format($this->amount)."<br /><br />
-                    <a href='".url('approve-withdrawal/'.$wd->id)."'>Click here to approve</a><br /><br />
-                    If this was not you, no further action is required, we do however encourage you to change your password on <a href='".url('login')."'>Armoury Broker</a>
-                "
+                ",
+                'cta' => true,
+                'cta_text' => 'Click here to approve',
+                'cta_url' => url('approve-withdrawal/'.$wd->id),
+                'after_cta_body' => 'If this was not you, no further action is required, we do however encourage you to change your password on <a href='".url('login')."'>Armoury Broker</a>',
             ];
 
             $comm->sendMail($data);
