@@ -110,9 +110,9 @@
                                                                 <small class="">Dealers</small>
                                                                 <span class="ms-auto">
                                                                     @if($item['dealer_option'] == "ab dealer")
-                                                                        {{ $item['dealer']->business_name."<br />" }}
-                                                                        {{ $item['dealer']->province."<br />" }}
-                                                                        R {{ $item['dealer']->dealer_stocking_fee."<br />" }}
+                                                                        {{ $item['dealer']->business_name }}<br />
+                                                                        {{ $item['dealer']->province }}<br />
+                                                                        R {{ $item['dealer']->dealer_stocking_fee }}<br />
                                                                     @elseif($item['dealer_option'] == "custom dealer")
                                                                         {{ $item['custom_dealer_details'] }}
                                                                     @endif
