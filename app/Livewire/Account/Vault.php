@@ -32,7 +32,7 @@ class Vault extends Component
             $this->bank_name = $bnk->bank_name;
             $this->branch_name = $bnk->branch_name;
             $this->branch_code = $bnk->branch_code;
-            $this->account_name = $bnk->account_name;
+            $this->account_name = $bnk->account_holder;
             $this->account_number = $bnk->account_number;
         }
     }
