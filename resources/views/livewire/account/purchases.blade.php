@@ -101,7 +101,7 @@
                                             <tr>
                                                 <th class="text-end">Delivery Type</th>
                                                 <td class="">
-                                                    {{ ucwords(str_replace('_', ' ',$item->shipping_method)) }}
+                                                    {{ ucwords(str_replace('_', ' / ',$item->shipping_method)) }}
                                                 </td>
                                             </tr>
                                             @if($item->shipping_method == 'courier')
