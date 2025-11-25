@@ -18,12 +18,14 @@ class Withdrawals extends Component
             $req->save();
 
             $trx = Transaction::create([
+                'name' => 'withdrawal',
                 'transaction_type' => 'withdrawal',
                 'user_id' => $req->vendor->user->id,
                 'vendor_id' => $req->vendor_id,
                 'direction' => 'out',
                 'amount' => $req->amount,
                 'payment_status' => 'COMPLETE',
+                'release' => 1,
             ]);
 
             $comm = new Communication();
