@@ -183,7 +183,6 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-9">
-                    @if($results_count)
                     <div class="row">
                         <div class="col-md-12">
                             <b class="text-dark-blue text-14">{{ $results_count }} Results</b>
@@ -194,7 +193,6 @@
                             @endif
                         </div>
                     </div>
-                    @endif
                     <div class="row">
                         <div class="col-12 col-md-7">
                             @if(count($current_filters) > 0)

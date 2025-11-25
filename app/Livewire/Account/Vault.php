@@ -104,13 +104,6 @@ class Vault extends Component
 
             $comm = new Communication();
             $data = [
-                
-                
-                
-                
-                
-                
-
                 'name' => Auth::user()->name,
                 'to' => Auth::user()->email,
                 'title' => 'Armoury Broker Withdrawal Request',
