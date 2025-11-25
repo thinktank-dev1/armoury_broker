@@ -242,7 +242,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" id="b-5-5" name="service_fee" value="50-50" wire:model.defer="service_fee_payer">
                                             <label class="form-check-label" for="b-5-5">
-                                                50- 50 (Each party pays half of the platform fee - {{ $fee/2 }}% each)
+                                                50 - 50 (Each party pays half of the platform fee - {{ $fee/2 }}% each)
                                             </label>
                                         </div>
                                     </div>
@@ -339,7 +339,7 @@
                                                     <span class="tooltip-content clearfix">
                                                         <span class="tooltip-text px-2">
                                                             <b>Open to offers</b><br /> 
-                                                            Limited to 20% lower than the listed price)
+                                                            Limited to 20% lower than the listed price
                                                         </span> 
                                                     </span>
                                                 </span>
