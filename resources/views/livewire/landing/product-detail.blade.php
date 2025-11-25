@@ -194,6 +194,10 @@
     <div class="modal fade" tabindex="-1" id="learn-modal">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header bg-blue">
+                    <h5 class="modal-title text-white">FEES</h5>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <b>Platform Fees</b><br />
                     <p>Armoury Broker charges a platform fee to the buyer for facilitating transactions through our secure marketplace. This fee is calculated as the greater of R25 or 5% (five percent) of the transaction value (including item price and applicable payment gateway charges) and is payable by the buyer at the time of purchase unless the seller has chosen to split or absorb this fee.</p>
@@ -201,7 +205,7 @@
                     <p>Delivery Fees are Included in the total purchase price based on the selection(s) made by the seller during item listing and the buyer at the purchasing stage. The delivery fee is then refunded to the seller upon successful delivery (except for free delivery, collection, or dealer stocking)</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary-outline" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
