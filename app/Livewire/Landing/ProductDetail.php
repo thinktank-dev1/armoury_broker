@@ -43,7 +43,7 @@ class ProductDetail extends Component
         }
 
         $qty = $this->product->quantity;
-        $this->qty = $qty;
+        $this->qty = 1;
 
         $itms_count = OrderItem::query()
         ->where('product_id', $id)
@@ -63,6 +63,7 @@ class ProductDetail extends Component
         
         if($qty <= $itms_count){
             $this->availability = false;
+            $this->quantity = 0;
         }
         else{
             $this->availability = true;
