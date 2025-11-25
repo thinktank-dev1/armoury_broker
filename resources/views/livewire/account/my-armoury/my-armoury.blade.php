@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-6 col-md-6 text-start">
-                                            <div class="mb-2"><a href="javascript:void(0)" class="link"><i class="ti-truck"></i> Usually ships in <font class="font-medium">0 days</font></a></div>
+                                            <div class="mb-2"><a href="javascript:void(0)" class="link"><i class="ti-truck"></i> Usually ships in <font class="font-medium">{{ Auth::user()->vendor->average_delivery_time() }} days</font></a></div>
                                             <a href="javascript:void(0)" class="link"><i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}</a>
                                         </div>
                                         <div class="col-6 col-md-6 text-end">
