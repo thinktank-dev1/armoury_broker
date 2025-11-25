@@ -62,22 +62,42 @@
                                                         <div class="accordion-body">
                                                             <ul class="sub_cat_filter_list">
                                                                 @foreach($cat->sub_cats->whereNull('parent_id') AS $sub)
-                                                                <li>
-                                                                    @php
-                                                                    $checked = "";
-                                                                    if(isset($current_filters['sub-category'])){
-                                                                        if(in_array($sub->slug, $current_filters['sub-category'])){
-                                                                            $checked = "checked";
+                                                                    <li>
+                                                                        @php
+                                                                        $checked = "";
+                                                                        if(isset($current_filters['sub-category'])){
+                                                                            if(in_array($sub->slug, $current_filters['sub-category'])){
+                                                                                $checked = "checked";
+                                                                            }
                                                                         }
-                                                                    }
-                                                                    @endphp
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="checkbox" wire:key="{{ $sub->id.now() }}" id="sub_check_{{ $sub->id }}" wire:key="sub_cat_{{ $sub->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $sub->slug }}')" {{ $checked }}>
-                                                                        <label class="form-check-label" for="sub_check_{{ $sub->id }}">
-                                                                            {{ $sub->sub_category_name }}
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
+                                                                        @endphp
+                                                                        <div class="form-check">
+                                                                            <input class="form-check-input" type="checkbox" wire:key="{{ $sub->id.now() }}" id="sub_check_{{ $sub->id }}" wire:key="sub_cat_{{ $sub->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $sub->slug }}')" {{ $checked }}>
+                                                                            <label class="form-check-label" for="sub_check_{{ $sub->id }}">
+                                                                                {{ $sub->sub_category_name }}
+                                                                            </label>
+                                                                        </div>
+                                                                        @if($sub->sub_sub->count() > 0)
+                                                                            <ul style="margin-left: 20px;">
+                                                                                @foreach($sub->sub_sub AS $ss)
+                                                                                    @php
+                                                                                    $checked_2 = "";
+                                                                                    if(isset($current_filters['sub-category'])){
+                                                                                        if(in_array($ss->slug, $current_filters['sub-category'])){
+                                                                                            $checked_2 = "checked";
+                                                                                        }
+                                                                                    }
+                                                                                    @endphp
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="checkbox" wire:key="{{ $ss->id.now() }}" id="sub_check_{{ $ss->id }}" wire:key="sub_cat_{{ $ss->id.now() }}" wire:click.prevent="updateFilters('sub-category', '{{ $ss->slug }}')" {{ $checked_2 }}>
+                                                                                        <label class="form-check-label" for="sub_check_{{ $ss->id }}">
+                                                                                            {{ $ss->sub_category_name }}
+                                                                                        </label>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        @endif
+                                                                    </li>
                                                                 @endforeach
                                                             </ul>
                                                         </div>

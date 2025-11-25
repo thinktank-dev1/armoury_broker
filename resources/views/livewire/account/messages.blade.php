@@ -56,6 +56,9 @@
                                                             @else
                                                                 {{ $msg->name.' '.$msg->surname }}
                                                             @endif
+                                                            @if($msg->product)
+                                                                - {{ $msg->product->item_name }}
+                                                            @endif
                                                         </span>
                                                         <span class="chat-time">{{ date('Y-m-d', strtotime($msg->created_at)) }}</span>
                                                     </div>

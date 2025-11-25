@@ -27,6 +27,7 @@ class ProductDetail extends Component
     public $availability;
     public $qty, $vailable_qty;
     public $offer_price = null;
+    public $tag;
 
     public function mount($id){
         $this->product = Product::find($id);
@@ -67,6 +68,17 @@ class ProductDetail extends Component
         }
         else{
             $this->availability = true;
+        }
+
+        if($this->product->listing_type == "wanted"){
+            $this->tag = "Wanted";
+        }
+        elseif($qty <= $itms_count){
+            $this->tag = "Sold";
+            $this->availability = false;
+        }
+        elseif ($this->product->created_at->gte(now()->subDays(30))) {
+            $this->tag = "New";
         }
     }
 

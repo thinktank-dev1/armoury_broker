@@ -426,6 +426,13 @@ footer .widget {
     font-size: 13px;
     z-index: 1;
 }
+.pr_flash2 {
+    background-color: #e6e6e6;
+    text-transform: uppercase;
+    color: #0f1f24;
+    padding: 2px 8px;
+    font-size: 13px;
+}
 .lr_flash {
     background-color: transparent;
     position: absolute;
