@@ -107,10 +107,12 @@
                                                         {{ ucwords(str_replace('_', ' ',$item->shipping_method)) }}
                                                     @endif
                                                     @if($item->dealer)
+                                                        <br />
                                                         {{ $item->dealer->business_name }}<br />
                                                         {{ $item->dealer->province }}<br />
                                                         R {{ number_format($item->dealer->dealer_stocking_fee,2) }} pm<br />
                                                     @elseif($item->custom_dealer_details)
+                                                        <br />
                                                         {{ $item->custom_dealer_details }}
                                                     @endif
                                                 </td>
