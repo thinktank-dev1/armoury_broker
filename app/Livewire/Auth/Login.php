@@ -7,6 +7,7 @@ use Livewire\Attributes\Layout;
 
 use Auth;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class Login extends Component
 {
@@ -36,6 +37,10 @@ class Login extends Component
             if($usr->status != 1){
                 Auth::logout();
                 $this->addError('user', 'Your account is inactive.');
+            }
+            $intended = session()->get('url.intended');
+            if ($intended && Str::is('*cart/*', $intended)){
+                return redirect('cart');
             }
             return redirect()->intended(route('shop'));
         }

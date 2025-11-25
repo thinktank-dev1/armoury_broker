@@ -190,7 +190,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="bnt btn-primary" wire:click.prevent="saveOffer">Send offer</button>
+                    <button type="button" class="btn btn-secondary" wire:click.prevent="saveOffer">Send offer</button>
                     <button type="button" class="btn btn-primary-outline" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
