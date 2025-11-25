@@ -15,6 +15,9 @@ use App\Models\ProductOffer;
 
 use App\Models\Message;
 use App\Models\MessageThread;
+use App\Models\OfferPrice;
+
+use Carbon\Carbon;
 
 class ProductDetail extends Component
 {
@@ -23,9 +26,22 @@ class ProductDetail extends Component
     public $offer_amount;
     public $availability;
     public $qty, $vailable_qty;
+    public $offer_price = null;
 
     public function mount($id){
         $this->product = Product::find($id);
+        if(!Auth::guest()){
+            $offer = OfferPrice::query()
+            ->where('user_id', Auth::user()->id)
+            ->where('product_id', $id)
+            ->where('created_at', '>=', Carbon::now()->subDay())
+            ->first();
+
+            if($offer){
+                $this->offer_price = $offer;
+            }
+        }
+
         $qty = $this->product->quantity;
         $this->qty = $qty;
 
@@ -176,7 +192,12 @@ class ProductDetail extends Component
             $order_item->user_id = Auth::user()->id;
             $order_item->vendor_id = $this->product->vendor->id;
             $order_item->product_id = $this->product->id;
-            $order_item->price = $this->product->item_price;
+            if($this->offer_price){
+                $order_item->price = $this->offer_price->amount;
+            }
+            else{
+                $order_item->price = $this->product->item_price;
+            }
             if($exist){
                 $qty = $order_item->quantity;
                 $qty += $this->quantity;

@@ -273,13 +273,13 @@
                                 @if($voucher_discount_amount)
                                 <li class="list-group-item d-flex">
                                     <span><b>Voucher Discount</b></span>
-                                    <span class="ms-auto"><b>R {{ number_format($voucher_discount_amount, 2) }}</b></span>
+                                    <span class="ms-auto"><b>-R {{ number_format($voucher_discount_amount, 2) }}</b></span>
                                 </li>
                                 @endif
                                 @if($vendor_promo_amount)
                                 <li class="list-group-item d-flex">
                                     <span><b>Promo Discount</b></span>
-                                    <span class="ms-auto"><b>R {{ number_format($vendor_promo_amount, 2) }}</b></span>
+                                    <span class="ms-auto"><b>-R {{ number_format($vendor_promo_amount, 2) }}</b></span>
                                 </li>
                                 @endif
                             </ul>

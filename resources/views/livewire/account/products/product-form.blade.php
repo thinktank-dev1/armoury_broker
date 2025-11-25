@@ -379,7 +379,7 @@
                                         <div class="form-check mb-2">
                                             <input class="form-check-input" type="checkbox" id="acknowledgement" name="acknowledgement" wire:model.defer="acknowledgement">
                                             <label class="form-check-label" for="acknowledgement">
-                                                <p>I have read and agree to the platform <a href="docs/Terms%20of%20Use%20and%20User%20Agreement_AB_Courier%20amendments_v02_20250629.pdf" target="_blank">terms and conditions</a></p>
+                                                <p>I have read and agree to the platform <a href="docs/Terms%20of%20Use%20and%20User%20Agreement_AB_Courier%20amendments_v02_20250629.pdf" target="_blank" class="bold">terms and conditions</a></p>
                                             </label>
                                         </div>
                                     </div>
