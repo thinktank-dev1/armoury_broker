@@ -164,6 +164,9 @@ class Shop extends Component
                 if($k == "sub-category"){
                     $query->whereHas('subCategory', function($q) use($v){
                         return $q->whereIn('slug', $v);
+                    })
+                    ->orWhereHas('sub_sub', function($q) use($v){
+                        return $q->whereIn('slug', $v);
                     });
                 }
                 if($k == "brands"){
