@@ -33,10 +33,12 @@ class Withdrawals extends Component
                 'name' => $req->vendor->user->name,
                 'to' => $req->vendor->user->email,
                 'subject' => 'Armoury Broker Withdrawal Complete',
+                'title' => 'Armoury Broker Withdrawal Complete',
                 'message_body' => "
                     <b>Your withdrawal request has been completed</b><br />
                     Amount: R".number_format($req->amount)."<br /><br />
-                "
+                ",
+                "cta" => false,
             ];
             $comm->sendMail($data);
         }
