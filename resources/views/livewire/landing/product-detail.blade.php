@@ -130,7 +130,7 @@
                                             <b>{{ $product->vendor->likes->count() }}</b> Likes
                                         </div>
                                         <div class="text-dark-blue">
-                                            <b>0</b> Items Sold
+                                            <b>{{ $product->vendor->sold() }}</b> Items Sold
                                         </div>
                                     </div>
                                 </div>
