@@ -131,7 +131,9 @@
                 <a href="{{ url('support') }}" class="btn btn-primary-outline">Support</a>
             </div>
             <div class="mt-3 text-center hide-menu ms-3 ms-md-0">
-                <a class="text-white" href="{{ url('support') }}">FAQ</a><br />
+                <div class="mb-2 text-center">
+                    <a class="text-white" href="{{ url('support') }}">FAQ</a>
+                </div>
                 <a class="text-white" href="{{ url('how-it-works') }}">How Armoury Broker Works</a>
             </div>
             <div class="hide-menu">
