@@ -112,7 +112,7 @@
                                                                     @if($item['dealer_option'] == "ab dealer")
                                                                         {{ $item['dealer']->business_name }}<br />
                                                                         {{ $item['dealer']->province }}<br />
-                                                                        R {{ $item['dealer']->dealer_stocking_fee }}<br />
+                                                                        R {{ number_format($item['dealer']->dealer_stocking_fee,2) }} pm<br />
                                                                     @elseif($item['dealer_option'] == "custom dealer")
                                                                         {{ $item['custom_dealer_details'] }}
                                                                     @endif
