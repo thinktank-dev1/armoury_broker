@@ -66,7 +66,6 @@ class Orders extends Component
         }
     }
 
-    #[On('cancel-confirmed')]
     public function cancelOrder(){
         $ord = OrderItem::find($this->cancel_id);
         if($ord){
@@ -77,6 +76,7 @@ class Orders extends Component
 
             $amount = ($stn->value / 100) * $ord->price;
             Transaction::create([
+                'name' => 'canceled_order',
                 'transaction_type' => 'canceled_order',
                 'user_id' => Auth::user()->id,
                 'vendor_id' => Auth::user()->vendor_id,
@@ -89,6 +89,7 @@ class Orders extends Component
             ]);
             $usr = User::find($ord->user_id);
             Transaction::create([
+                'name' => 'refund',
                 'transaction_type' => 'refund',
                 'user_id' => $usr->id,
                 'vendor_id' => $usr->vendor_id,
@@ -99,6 +100,7 @@ class Orders extends Component
                 'payment_status' => 'COMPLETE',
                 'release' => 1,
             ]);
+            $this->dispatch('close-modal');
         }
     } 
 

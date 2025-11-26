@@ -291,15 +291,15 @@
                 </div>
                 <div class="card-body">
                     <div class="order-grid mt-2">
-                        <a href="{{ url('messages') }}" class="order-box">
+                        <a href="{{ url('my-orders') }}" class="order-box">
                             <div class="count">{{ $new_offers }}</div>
                             <div class="label">New Offers</div>
                         </a>
-                        <a href="" class="order-box">
+                        <a href="{{ url('my-orders') }}" class="order-box">
                             <div class="count">{{ $active_orders }}</div>
                             <div class="label">Active Orders</div>
                         </a>
-                        <a href="" class="order-box">
+                        <a href="{{ url('my-purchases') }}" class="order-box">
                             <div class="count">{{ $purchases_to_confirm }}</div>
                             <div class="label">Confirmations</div>
                         </a>

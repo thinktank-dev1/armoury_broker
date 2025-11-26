@@ -54,13 +54,8 @@ class ProductDetail extends Component
         ->sum('quantity');
 
         $this->vailable_qty = $qty - $itms_count;
-
-        if($itms_count > 0){
-            $this->quantity = $itms_count;
-        }
-        else{
-            $this->quantity = 1;
-        }
+        
+        $this->quantity = 1;
         
         if($qty <= $itms_count){
             $this->availability = false;

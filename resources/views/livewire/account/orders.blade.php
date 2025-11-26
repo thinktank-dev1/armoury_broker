@@ -233,11 +233,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>You will still be liable for the full platform fee of 5% if this is done</p>
+                    <p>You will still remain liable for the full platform fee of 5% should this be implemented.</p>
                 </div>
                 <div class="modal-footer d-grid">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Don't Cancel Order</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="confirmedReceipt">Yes, Cancel Order!</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="cancelOrder">Yes, Cancel Order!</button>
                 </div>
             </div>
         </div>

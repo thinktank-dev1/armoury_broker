@@ -739,3 +739,15 @@ label{
 .page-title{
 	margin-top: 20px;
 }
+
+select.form-control{
+  	appearance: none;
+  	-webkit-appearance: none; /* Safari */
+  	-moz-appearance: none;    /* Firefox */
+  	
+  	background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="12" viewBox="0 0 20 20" width="12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 20,0 10,10"/></svg>');
+  	background-repeat: no-repeat;
+  	background-position: right 10px center;
+
+  	padding-right: 30px; /* space for arrow */
+}
