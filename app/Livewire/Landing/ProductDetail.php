@@ -51,6 +51,7 @@ class ProductDetail extends Component
         ->whereHas('order', function($q){
             return $q->whereNotNull('g_payment_id');
         })
+        ->where('vendor_status', '<>', 'Canceled')
         ->sum('quantity');
 
         $this->vailable_qty = $qty - $itms_count;
