@@ -132,6 +132,7 @@ class Dashboard extends Component
             return $q->whereNull('vendor_status')
             ->orWhereNull('buyer_status');
         })
+        ->where('vendor_status', '<>', 'Canceled')
         ->count();
 
         $this->purchases_to_confirm = OrderItem::query()
