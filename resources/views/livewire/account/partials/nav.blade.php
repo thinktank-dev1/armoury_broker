@@ -132,9 +132,9 @@
             </div>
             <div class="mt-3 text-center hide-menu ms-3 ms-md-0">
                 <div class="mb-2 text-center">
-                    <a class="text-white" href="{{ url('support') }}">FAQ</a>
+                    <a class="text-white y-hover" href="{{ url('support') }}">FAQ</a>
                 </div>
-                <a class="text-white" href="{{ url('how-it-works') }}">How Armoury Broker Works</a>
+                <a class="text-white y-hover" href="{{ url('how-it-works') }}">How Armoury Broker Works</a>
             </div>
             <div class="hide-menu">
                 <div class="mt-3 mx-3 d-flex justify-content-around">

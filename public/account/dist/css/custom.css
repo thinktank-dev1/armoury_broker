@@ -751,3 +751,7 @@ select.form-control{
 
   	padding-right: 30px; /* space for arrow */
 }
+
+.y-hover:hover{
+	color: #ea734e !important;
+}
