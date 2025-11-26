@@ -22,7 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $table->dropColumn('dispatch_date');
-        $table->dropColumn('receipt_date');
+        Schema::table('order_items', function (Blueprint $table) {
+            $table->dropColumn('dispatch_date');
+            $table->dropColumn('receipt_date');
+        });
     }
 };
