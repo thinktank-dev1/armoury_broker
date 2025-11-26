@@ -72,6 +72,12 @@ class Orders extends Component
             $ord->vendor_status = "Canceled";
             $ord->save();
 
+            $trx = Transaction::where('order_item_id', $ord->id)->where('name', 'order_payment')->first();
+            if($trx){
+                $trx->canceled = 1;
+                $trx->save();
+            }
+
             $stn = Setting::where('name', 'service_fee')->first();
 
             $amount = ($stn->value / 100) * $ord->price;

@@ -43,7 +43,9 @@ class Dashboard extends Component
         $this->withdrawable_balance = Auth::user()->vendor->withdrawableBalance();
         $this->gift_voucher_balance = Auth::user()->vendor->giftVoucherBalance();
         $this->spendable_amount = $this->withdrawable_balance + $this->gift_voucher_balance;
-        $this->orders_in_progress = Transaction::where('name', 'order_payment')->where('vendor_id', Auth::user()->vendor_id)->whereNull('release')->sum('amount');
+        
+        $this->orders_in_progress = Transaction::where('name', 'order_payment')->where('vendor_id', Auth::user()->vendor_id)->whereNull('release')->whereNull('canceled')->sum('amount');
+        
         $this->tot_credit = $this->ab_credit + $this->withdrawable_balance + $this->gift_voucher_balance + $this->orders_in_progress;
 
 

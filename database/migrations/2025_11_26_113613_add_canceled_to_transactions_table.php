@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('order_items', function (Blueprint $table) {
-            $table->date('dispatch_date')->nullable()->after('vendor_status');
-            $table->date('receipt_date')->nullable()->after('buyer_status');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->integer('canceled')->nullable()->after('release');
         });
     }
 
@@ -22,7 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $table->dropColumn('dispatch_date');
-        $table->dropColumn('receipt_date');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->dropColumn('canceled');
+        });
     }
 };

@@ -18,6 +18,7 @@ class Transaction extends Model
         'code',
         'payment_status',
         'release',
+        'canceled',
     ];
 
     public function user(){
