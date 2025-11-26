@@ -179,7 +179,7 @@ class ProductDetail extends Component
     }
 
     public function addToCart(){
-        if($this->quantity > $this->qty){
+        if($this->quantity > $this->vailable_qty){
             $this->dispatch('quantity-error');
             return;
         }
@@ -209,6 +209,9 @@ class ProductDetail extends Component
             if($exist){
                 $qty = $order_item->quantity;
                 $qty += $this->quantity;
+                if($qty > $this->vailable_qty){
+                    $qty = $this->vailable_qty;
+                }
             }
             else{
                 $qty = $this->quantity;
