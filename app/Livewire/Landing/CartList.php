@@ -68,7 +68,7 @@ class CartList extends Component
                         $qty += 1;
                     }
                     else{
-                        $qty = 1;
+                        $qty = $ct['quantity'];
                     }
                     $order_item->quantity = $qty;
                     $order_item->save();
