@@ -595,9 +595,11 @@ class Checkout extends Component
         if($stn_min_fee){
             $min_fee = $stn_min_fee->value;
         }
+        /*
         if($this->service_fees < $min_fee){
             $this->service_fees = $min_fee;
         }
+        */
 
 
         $this->cart_total = $this->shipping_tot + $this->service_fees + $this->cart_sub_total;
