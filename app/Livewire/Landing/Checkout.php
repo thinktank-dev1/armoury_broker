@@ -380,20 +380,24 @@ class Checkout extends Component
         $partial = False;
         if($this->pay_with_wallet){
             if($this->credit_payment){
-                Transaction::create([
-                    'name' => 'order_payment',
-                    'transaction_type' => 'wallet_payment',
-                    'user_id' => Auth::user()->id,
-                    'vendor_id' => $order->vendor_id,
-                    'direction' => 'in',
-                    'amount' => $this->credit_payment,
-                    'order_id' => $order->id,
-                    'payment_status' => 'COMPLETE',
-                ]);
-                $this->cart_total -= $this->credit_payment;
-                $order->g_payment_idc = rand(100000,999999);
-                $order->status = 'COMPLETE';
-                $order->save();
+                foreach($order->items AS $item){
+                    Transaction::create([
+                        'name' => 'order_payment',
+                        'transaction_type' => 'wallet_payment',
+                        'user_id' => Auth::user()->id,
+                        'vendor_id' => $order->vendor_id,
+                        'direction' => 'in',
+                        'amount' => $this->credit_payment,
+                        'order_id' => $order->id,
+                        'order_item_id' => $item->id,
+                        'payment_status' => 'COMPLETE',
+                    ]);
+                    $this->cart_total -= $this->credit_payment;
+                    $order->g_payment_idc = rand(100000,999999);
+                    $order->status = 'COMPLETE';
+                    $order->amount_paid = $this->credit_payment;
+                    $order->save();
+                }
             }
             if($this->cart_total > 0){
                 if($this->gift_voucher_payment && $this->cart_total >= $this->gift_voucher_payment){

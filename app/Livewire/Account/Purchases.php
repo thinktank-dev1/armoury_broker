@@ -85,9 +85,6 @@ class Purchases extends Component
                 $trx->release = 1;
                 $trx->save();
             }
-            else{
-                dd("None");
-            }
         }
         $this->order_item = null;
         $this->dispatch('close-modal');
