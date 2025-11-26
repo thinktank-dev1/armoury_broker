@@ -49,11 +49,13 @@ class Vault extends Component
         $this->tot_purchases = OrderItem::where('user_id', Auth::user()->id)->wherehas('order', function($q){
             return $q->whereNotNull('g_payment_id');
         })
+        ->where('vendor_status', '<>', 'Canceled')
         ->sum('price');
 
         $this->tot_sales = OrderItem::where('vendor_id', Auth::user()->vendor_id)->wherehas('order', function($q){
             return $q->whereNotNull('g_payment_id');
         })
+        ->where('vendor_status', '<>', 'Canceled')
         ->sum('price');
 
         $this->in_progress_orders = OrderItem::query()
