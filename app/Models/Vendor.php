@@ -75,7 +75,8 @@ class Vendor extends Model
         ->where('user_id', $this->user->id)
         ->where(function($q){
             return $q->where('name', 'withdrawal')
-            ->orWhere('name', 'canceled_order');
+            ->orWhere('name', 'canceled_order')
+            ->orWhere('transaction_type', 'wallet_payment');
         })
         ->where('release', 1)
         ->get();

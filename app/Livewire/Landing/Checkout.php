@@ -388,10 +388,12 @@ class Checkout extends Component
                     'direction' => 'in',
                     'amount' => $this->credit_payment,
                     'order_id' => $order->id,
-                    'payment_status' => 'Partial Payment',
+                    'payment_status' => 'COMPLETE',
                 ]);
                 $this->cart_total -= $this->credit_payment;
-                $partial = True;
+                $order->g_payment_idc = rand(100000,999999);
+                $order->status = 'COMPLETE';
+                $order->save();
             }
             if($this->cart_total > 0){
                 if($this->gift_voucher_payment && $this->cart_total >= $this->gift_voucher_payment){
