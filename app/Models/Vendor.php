@@ -62,11 +62,27 @@ class Vendor extends Model
         }
         */
 
-        $trx_in = Transaction::where('vendor_id', $this->id)->where('name', 'order_payment')->where('release', 1)->get();
+        $trx_in = Transaction::query()
+        ->where('vendor_id', $this->id)
+        ->where(function($q){
+            return $q->where('name', 'order_payment')
+            ->orWhere('name', 'refund');
+        })
+        ->where('release', 1)
+        ->get();
+
         foreach($trx_in AS $trx){
             $tot_in += $trx->amount;
         }
-        $trx_out = Transaction::where('user_id', $this->user->id)->where('name', 'withdrawal')->get();
+        $trx_out = Transaction::query()
+        ->where('user_id', $this->user->id)
+        ->where(function($q){
+            return $q->where('name', 'withdrawal')
+            ->orWhere('name', 'canceled_order');
+        })
+        ->where('release', 1)
+        ->get();
+
         foreach($trx_out AS $trx){
             $tot_out += $trx->amount;
         }
