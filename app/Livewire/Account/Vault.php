@@ -79,6 +79,7 @@ class Vault extends Component
             })
             ->orWhere(function($qq){
                 return $qq->whereNotNull('vendor_status')
+                ->where('vendor_status', '<>', 'Canceled')
                 ->whereNull('buyer_status');
             });
         })

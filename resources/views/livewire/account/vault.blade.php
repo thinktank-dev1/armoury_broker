@@ -46,7 +46,7 @@
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
-                                                    Test
+                                                    Armoury Broker Credit
                                                 </span> 
                                             </span>
                                         </span>
