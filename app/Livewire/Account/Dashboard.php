@@ -75,6 +75,7 @@ class Dashboard extends Component
             })
             ->orWhere(function($qq){
                 return $qq->whereNotNull('vendor_status')
+                ->where('vendor_status', '<>', 'Canceled');
                 ->whereNull('buyer_status');
             });
         })
@@ -141,6 +142,7 @@ class Dashboard extends Component
         })
         ->where(function($q){
             return $q->whereNotNull('vendor_status')
+            ->where('vendor_status', '<>', 'Canceled');
             ->whereNull('buyer_status');
         })
         ->count();
