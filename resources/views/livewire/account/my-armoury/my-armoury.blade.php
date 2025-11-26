@@ -59,7 +59,7 @@
                                     <h6 class="card-subtitle mt-2">{{ url(Auth::user()->vendor->url_name) }}</h6>
                                     <div>
                                         <a href="javascript:void(0)" class="link me-5"><i class="fas fa-star"></i> <font class="font-medium">{{ Auth::user()->vendor->likes->count() }}</font> Likes</a>
-                                        <a href="javascript:void(0)" class="link"><i class="icon-grid"></i> <font class="font-medium">{{ $sold_count }}</font> Items Sold</a>
+                                        <a href="javascript:void(0)" class="link"><i class="icon-grid"></i> <font class="font-medium">{{ Auth::user()->vendor->sold() }}</font> Items Sold</a>
                                     </div>
                                     <div class="mt-3">
                                         {{ Auth::user()->vendor->description }}
