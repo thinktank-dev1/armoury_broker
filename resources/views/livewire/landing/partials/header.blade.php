@@ -21,7 +21,7 @@
                         @if(!Auth::guest())
                             @if($msg_count)
                             <span class="ms-3">
-                                <a href="{{ url('messages') }}"><i class="linearicons-envelope"></i><span class="cart_count">{{ $msg_count }}</span></a>
+                                <a href="{{ url('messages') }}"><i class="ti-email"></i><span class="cart_count">{{ $msg_count }}</span></a>
                             </span>
                             @endif
                         @endif

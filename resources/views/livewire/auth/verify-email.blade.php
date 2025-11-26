@@ -43,7 +43,7 @@
                                     <b>We have sent a verification link to your email address.<br /><br /> Please check your inbox (and spam folder, just in case) and click the link to verify your account to log in.</b>
                                 </div>
                                 <div class="col-md-12 mb-4 text-center">
-                                    <a href="" class="bnt btn-primary" wire:click.prevent="ResendEmail">Resend Email</a>
+                                    <a href="" class="bnt btn-primary" style="font-weight: 600" wire:click.prevent="ResendEmail">Resend Email</a>
                                 </div>
                                 @if(!Auth::guest())
                                 <div class="col-md-12 mb-5 text-center">
