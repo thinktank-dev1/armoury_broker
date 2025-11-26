@@ -39,8 +39,16 @@ class Vendor extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function order_items(){
+        return $this->hasMany(OrderItem::class);
+    }
+
     public function sold(){
-        return $this->orders->whereNotNull('g_payment_id')->count();
+        return $this->order_items
+        ->where('vendor_status', 'Order Dispatched')
+        ->where('buyer_status', 'Received')
+        ->count();
+        // return $this->orders->whereNotNull('g_payment_id')->count();
     }
 
     public function transactions(){
