@@ -50,18 +50,7 @@ class Vendor extends Model
     public function withdrawableBalance(){
         $tot_in = 0;
         $tot_out = 0;
-        /*
-        foreach($this->transactions->where('name', 'order_payment')->where('direction', 'in')->where('release', 1) AS $trx){
-            $tot_in += $trx->amount;
-        }
-        foreach($this->transactions->where(function($q){
-            return $q->where('transaction_type', 'wallet_payment')
-            ->orWhere('transaction_type', 'withdrawal');
-        })->where('user_id', $this->user->id)->where('release', 1) AS $trx){
-            $tot_out += $trx->amount;
-        }
-        */
-
+        
         $trx_in = Transaction::query()
         ->where('vendor_id', $this->id)
         ->where(function($q){
