@@ -110,6 +110,9 @@ class Shop extends Component
 
     public function removeFilter($k, $sk){
         unset($this->current_filters[$k][$sk]);
+        if(count($this->current_filters[$k]) == 0){
+            unset($this->current_filters[$k]);
+        }
     }
 
     public function setStaticData(){
