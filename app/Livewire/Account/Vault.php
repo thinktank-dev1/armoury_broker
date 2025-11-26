@@ -46,11 +46,15 @@ class Vault extends Component
         
         $this->tot_credit = $this->ab_credit + $this->withdrawable_balance + $this->gift_voucher_balance + $this->orders_in_progress;
 
-        $this->tot_purchases = OrderItem::where('user_id', Auth::user()->id)->wherehas('order', function($q){
+        $this->tot_purchases = 0;
+        $prs = OrderItem::where('user_id', Auth::user()->id)->wherehas('order', function($q){
             return $q->whereNotNull('g_payment_id');
         })
         ->where('vendor_status', '<>', 'Canceled')
-        ->sum('price');
+        ->get();
+        foreach($prs AS $pr){
+            $this->tot_purchases += ($pr->price * $pr->quantity);
+        }
 
         $this->tot_sales = OrderItem::where('vendor_id', Auth::user()->vendor_id)->wherehas('order', function($q){
             return $q->whereNotNull('g_payment_id');
