@@ -56,11 +56,15 @@ class Vault extends Component
             $this->tot_purchases += ($pr->price * $pr->quantity);
         }
 
-        $this->tot_sales = OrderItem::where('vendor_id', Auth::user()->vendor_id)->wherehas('order', function($q){
+        $this->tot_sales = 0;
+        $ords = OrderItem::where('vendor_id', Auth::user()->vendor_id)->wherehas('order', function($q){
             return $q->whereNotNull('g_payment_id');
         })
         ->where('vendor_status', '<>', 'Canceled')
-        ->sum('price');
+        ->get();
+        foreach($ords AS $ord){
+            $this->tot_sales += ($ord->price * $ord->quantity);
+        }
 
         $this->in_progress_orders = OrderItem::query()
         ->where('vendor_id', Auth::user()->vendor_id)
