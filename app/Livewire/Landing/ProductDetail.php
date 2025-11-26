@@ -44,7 +44,7 @@ class ProductDetail extends Component
         }
 
         $qty = $this->product->quantity;
-        $this->qty = 1;
+        $this->qty = $qty;
 
         $itms_count = OrderItem::query()
         ->where('product_id', $id)
@@ -78,8 +78,8 @@ class ProductDetail extends Component
     }
 
     public function updatedQuantity(){
-        if($this->quantity > $this->qty){
-            $this->quantity = $this->qty;
+        if($this->quantity > $this->vailable_qty){
+            $this->quantity = $this->vailable_qty;
         }
     }
 
