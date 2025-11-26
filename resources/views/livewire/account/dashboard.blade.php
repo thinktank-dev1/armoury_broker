@@ -291,7 +291,7 @@
                 </div>
                 <div class="card-body">
                     <div class="order-grid mt-2">
-                        <a href="{{ url('my-orders') }}" class="order-box">
+                        <a href="{{ url('messages') }}" class="order-box">
                             <div class="count">{{ $new_offers }}</div>
                             <div class="label">New Offers</div>
                         </a>
