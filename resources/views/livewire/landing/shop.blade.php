@@ -268,6 +268,11 @@
                 $('.brands-select-multiple').select2();
                 $('.caliber-select-multiple').select2();
             });
+
+            @this.on('added-to-cart', () => {
+                $.notify("Product added to cart successfully!", "success");
+                @this.dispatch('new-cart-item');
+            });
         })
 
         function updatedCaliber(){
