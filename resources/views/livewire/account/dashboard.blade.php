@@ -335,11 +335,11 @@
                             <div class="count">{{ $listing_count }}</div>
                             <div class="label">Active</div>
                         </a>
-                        <a href="" class="order-box">
+                        <a href="{{ url('my-armoury') }}" class="order-box">
                             <div class="count">{{ $sold_listings }}</div>
                             <div class="label">Sold</div>
                         </a>
-                        <a href="#" class="order-box bg-dark-blue">
+                        <a href="{{ url('list-item') }}" class="order-box bg-dark-blue">
                             <div class="count text-white">+</div>
                             <div class="label text-white">Add New Item</div>
                         </a>
