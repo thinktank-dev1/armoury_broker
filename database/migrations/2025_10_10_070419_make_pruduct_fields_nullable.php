@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('brand_id')->nullable()->change();
             $table->string('condition')->nullable()->change();
             $table->string('service_fee_payer')->nullable()->change();
-            $table->string('item_price')->nullable()->change();
+            // $table->string('item_price')->nullable()->change();
         });
     }
 

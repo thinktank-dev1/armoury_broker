@@ -902,3 +902,46 @@ footer .widget_title {
 .modal-header .btn-close{
 	filter: invert(1) hue-rotate(180deg);
 }
+
+.hiw-card {
+	width: 70%;
+	background: #FFF;
+	border-radius: 5px;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+	overflow: hidden;
+}
+
+
+.hiw-card-header {
+	background: #1f303d;
+	color: white;
+}
+.hiw-card-header .icon {
+	/*width: 35px;*/
+}
+.hiw-card-header .number {
+	font-size: 32px;
+	color: #e55a2b;
+	font-weight: bold;
+	background-color: #FFF;
+	padding: 0px 15px;
+}
+.hiw-card-body {
+	padding: 20px;
+}
+.hiw-card-body h4 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+}
+.hiw-separator {
+	width: 100%;
+	height: 1px;
+	background: #ccc;
+	margin: 10px 0;
+}
+.hiw-card-body p {
+	font-size: 14px;
+	color: #555;
+}

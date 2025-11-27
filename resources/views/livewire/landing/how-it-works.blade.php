@@ -12,21 +12,17 @@
                 $i = $loop->index;
                 $img = $i + 1;
                 @endphp
-                <div class="col-12 col-md-5 mb-4 mb-md-3 h-100">
-                    <div class="bloc h-100">
-                        <div class="esarfa">
-                            <span class="bloc-icon"><img src="{{ asset('img/hiw/ICON S'.$img.'.png') }}" style="width: 35px"></span>
-                            <span class="bloc-num">{{ str_pad($k, 2, '0', STR_PAD_LEFT) }}</span>
+                <div class="col-12 col-md-5 mb-4 mb-md-3 h-100 d-flex justify-content-center">
+                    <div class="hiw-card">
+                        <div class="hiw-card-header d-flex justify-content-end align-items-center">
+                            <div class="icon my-0 me-2"><img src="{{ asset('img/hiw/ICON S'.$img.'.png') }}" style="width: 35px"></div>
+                            <div class="number me-4">{{ str_pad($k, 2, '0', STR_PAD_LEFT) }}</div>
                         </div>
-                        <div class="bloc-content h-100">
-                            <div>
-                                {{ $dt['step'] }}
-                                <h5 class="text-21 bold">{{ $dt['title'] }}</h5>
-                            </div>
-                            <hr />
-                            <div>
-                                {{ $dt['description'] }}
-                            </div>
+                        <div class="hiw-card-body">
+                            <p class="m-0">{{ $dt['step'] }}</p>
+                            <h4>{{ $dt['title'] }}</h4>
+                            <div class="hiw-separator"></div>
+                            <p>{{ $dt['description'] }}</p>
                         </div>
                     </div>
                 </div>
@@ -37,7 +33,7 @@
                 @endif
                 @if($i % 2 == 1 && $i != (count($data) - 1))
                 <div class="d-none d-md-flex col-md-12 text-center d-flex align-items-center justify-content-center mb-3">
-                    <img src="{{ asset('img/hiw-btm-arrow.png') }}">
+                    <img src="{{ asset('img/hiw-btm-arrow.png') }}" style="width: 50%;">
                 </div>
                 @endif
                 @if($i != (count($data) - 1))
