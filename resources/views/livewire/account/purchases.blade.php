@@ -213,39 +213,41 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" id="dispute-confirmation-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Disputed Logged</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Your dispute has been logged, one of our agents will contact you as soon as possible</p>
+                </div>
+                <div class="modal-footer d-grid">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary" wire:click.prevent="confirmedReceipt">Yes, Item has been received!</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {
             @this.on('show-confirm-receipt', () => {
                 $('#confirmation-modal').modal('show');
-                /*
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "Please confirm that item has been received?",
-                    showCancelButton: true,
-                    confirmButtonColor: "#293c47",
-                    cancelButtonColor: "#CCC",
-                    confirmButtonText: "Yes, Item has been received!",
-                    cancelButtonText: "No, item has not been received",
-                }).then((result) => {
-                    if(result.value == true){
-                        @this.dispatch('confirmed-receipt');
-                        Swal.fire({
-                            title: "Received!",
-                            text: "Order has been received.",
-                            confirmButtonColor: '#293c47',
-                        });
-                    }
-                });
-                */
             });
             @this.on('dispute-saved', () => {
+                $('#dispute-confirmation-modal').modal('show');
+                /*
                 Swal.fire({
                     title: "Disputed Logged",
                     text: "Your dispute has been logged, one of our agent will contact you as soon as possible.",
                     icon: "success",
                     confirmButtonColor: "#293c47",
                 });
+                */
             })
             @this.on('show-item-details-modal', () => {
                 $('#show-item-details').modal('show');

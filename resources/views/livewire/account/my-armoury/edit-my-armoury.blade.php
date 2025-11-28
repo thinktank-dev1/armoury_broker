@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label">City*</label>
+                                        <label class="form-label">Nearest Town*</label>
                                         <input type="text" class="form-control" placeholder="City" name="city" wire:model.defer="city">
                                     </div>
                                 </div>

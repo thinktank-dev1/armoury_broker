@@ -62,13 +62,19 @@
                                 </div>
                             </div>                            
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Suburb</label>
+                                    <input type="text" class="form-control" name="suburb" wire:model.defer="suburb">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label">Nearest Town</label>
                                     <input type="text" class="form-control" name="city" wire:model.defer="city">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label">Province</label>
                                     <select class="form-control" name="province" wire:model.defer="province">

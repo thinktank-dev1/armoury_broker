@@ -20,9 +20,24 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row mb-3">
-                            <div class="col-md-12">
+                            <div class="col-md-12 d-flex">
                                 <a href="#" class="btn @if($listing_type == 'sale') btn-dark-blue @else btn-dark-blue-outline @endif list-type" wire:click.prevent="setListingType('sale')">For Sale</a>
                                 <a href="#" class="btn @if($listing_type == 'wanted') btn-dark-blue @else btn-dark-blue-outline @endif list-type" wire:click.prevent="setListingType('wanted')">Wanted</a>
+                                <div class="mt-2">
+                                    <span class="mytooltip tooltip-effect-1">
+                                        <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                        <span class="tooltip-content clearfix" style="bottom: -260px;">
+                                            <span class="tooltip-text px-2">
+                                                <b>My vault info</b>
+                                                <p class="text-white">Fund Types:</p>
+                                                <ul>
+                                                    <li><b>For Sale:</b> Seller listing an item for sale to a buyer.</li>
+                                                    <li><b>Wanted:</b> Buyers list what they need, and sellers who have the item can contact the buyer through the platform.</li>
+                                                </ul>
+                                            </span> 
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
                         </div> 
                         @if($errors->any())
@@ -177,7 +192,7 @@
                                                     <input type="text" class="form-control" placeholder="Caliber" name="size" wire:model.defer="size">
                                                     --}}
                                                     <select class="form-control" name="size" wire:model.defer="size">
-                                                        <option value="">Select Caliber</option>
+                                                        <option value="">Select Calibre</option>
                                                         @foreach($calibers AS $cal)
                                                         <option value="{{ $cal->caliber }}">{{ $cal->caliber }}</option>
                                                         @endforeach
