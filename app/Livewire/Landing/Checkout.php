@@ -65,7 +65,7 @@ class Checkout extends Component
     }
 
     public function updateCreditPayment(){
-        $this->updateCreditPayment = str_replace(' ', '', str_replace(',', '', $this->updateCreditPayment));
+        $this->credit_payment = str_replace(' ', '', str_replace(',', '', $this->credit_payment));
     }
 
     public function updatedGiftVoucherPayment(){
