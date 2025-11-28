@@ -64,6 +64,10 @@ class Checkout extends Component
         }
     }
 
+    public function updateCreditPayment(){
+        $this->updateCreditPayment = str_replace(' ', '', str_replace(',', '', $this->updateCreditPayment));
+    }
+
     public function updatedGiftVoucherPayment(){
         $gf = Auth::user()->vendor->giftVoucherBalance();
         if($this->gift_voucher_payment > $gf){
