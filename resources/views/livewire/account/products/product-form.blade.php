@@ -28,7 +28,7 @@
                                         <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                         <span class="tooltip-content clearfix" style="bottom: -260px;">
                                             <span class="tooltip-text px-2">
-                                                <b class="bold">Item listing types</b><br />
+                                                <b class="bold">Item Listing Types</b><br />
                                                 <ul>
                                                     <li><b>For Sale:</b> Seller listing an item for sale to a buyer.</li>
                                                     <li><b>Wanted:</b> Buyers list what they need, and sellers who have the item can contact the buyer through the platform.</li>
