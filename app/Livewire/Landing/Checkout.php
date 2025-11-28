@@ -393,7 +393,7 @@ class Checkout extends Component
                         'payment_status' => 'COMPLETE',
                     ]);
                     $this->cart_total -= $this->credit_payment;
-                    $order->g_payment_idc = rand(100000,999999);
+                    $order->g_payment_id = rand(100000,999999);
                     $order->status = 'COMPLETE';
                     $order->amount_paid = $this->credit_payment;
                     $order->save();
