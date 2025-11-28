@@ -167,13 +167,13 @@
                             <div class="accordion-item mb-2" wire:ignore.self>
                                 <h2 class="accordion-header" id="headingCalibre">
                                     <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCalibre" aria-expanded="false" aria-controls="collapseCalibre" wire:ignore>
-                                        By Caliber
+                                        By Calibre
                                     </button>
                                 </h2>
                                 <div id="collapseCalibre" class="accordion-collapse collapse" aria-labelledby="headingCalibre" data-bs-parent="#filter_accodion" wire:ignore.self>
                                     <div class="accordion-body" wire:ignore.self>
                                         <div wire:ignore>
-                                            <label>Select Caliber</label>
+                                            <label>Select Calibre</label>
                                             <select class="caliber-select-multiple" name="caliber[]" multiple="multiple" style="width: 100%;" onchange="updatedCaliber()" wire:ignore>
                                                 @foreach($calibers AS $cal)
                                                 <option value="{{ $cal->caliber }}">{{ $cal->caliber }}</option>
