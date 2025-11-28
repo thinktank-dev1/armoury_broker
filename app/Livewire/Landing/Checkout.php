@@ -398,6 +398,7 @@ class Checkout extends Component
                     $order->amount_paid = $this->credit_payment;
                     $order->save();
                 }
+                return redirect('pf-payment/11/pending');
             }
             if($this->cart_total > 0){
                 if($this->gift_voucher_payment && $this->cart_total >= $this->gift_voucher_payment){
