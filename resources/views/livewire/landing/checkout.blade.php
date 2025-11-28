@@ -320,7 +320,7 @@
                                         <label class="form-label">Withdrawable Credit (<b>R {{ number_format(Auth::user()->vendor->withdrawableBalance(),2) }}</b>)</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1">R</span>
-                                            <input type="text" class="form-control" name="credit_payment" wire:model.blur="credit_payment">
+                                            <input type="text" class="form-control" name="credit_payment" wire:model.live="credit_payment">
                                         </div>
                                         @if($credit_error)
                                         <div id="emailHelp" class="form-text text-danger">{{ $credit_error }}</div>
