@@ -32,7 +32,12 @@
     </div>
     <div class="product_info mt-2">
         <h6 class="product_title mb-1 bold">
-            R {{ number_format($product->item_price, 2) }}
+            @if($offer_price)
+                <s>R {{ number_format($product->item_price, 2) }}</s><br />
+                R {{ number_format($offer_price->amount,2) }}<br />
+            @else
+                R {{ number_format($product->item_price, 2) }}
+            @endif
         </h6>
         <div class="product-name">
             <a href="{{ url('shop/product/'.$product->id) }}">

@@ -151,7 +151,7 @@
                                                                         @elseif($message->action == "reject")
                                                                             Offer was rejected.
                                                                         @elseif($message->action == "accept")
-                                                                            Offer was accepted.
+                                                                            Offer was accepted. <a href="{{ url('shop/product/'.$cur_msg->product->id) }}">Click here to go to product</a>
                                                                         @else
                                                                             <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="cancelOffer({{ $message->id }})">Cancel Offer</a>
                                                                         @endif
@@ -203,7 +203,7 @@
                                                                         @elseif($message->action == "reject")
                                                                             Offer was rejected.
                                                                         @elseif($message->action == "accept")
-                                                                            Offer was accepted.
+                                                                            Offer was accepted. <a href="{{ url('shop/product/'.$cur_msg->product->id) }}">Click here to go to product</a>
                                                                         @else
                                                                             <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="cancelOffer({{ $message->id }})">Cancel Offer</a>
                                                                         @endif

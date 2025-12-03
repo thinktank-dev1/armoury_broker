@@ -55,7 +55,16 @@ class Vendor extends Model
         return $this->hasMany(Transaction::class, 'vendor_id');
     }
 
+    public function withdrawal_requests(){
+        return $this->hasMany(WithdrawalRequest::class);
+    }
+
+    public function pending_withdrawal_balance(){
+        return $this->withdrawal_requests->where('verified', 1)->where('status', 0)->sum('amount');
+    }
+
     public function withdrawableBalance(){
+        $pnd = $this->pending_withdrawal_balance();
         $tot_in = 0;
         $tot_out = 0;
         
@@ -85,7 +94,7 @@ class Vendor extends Model
             $tot_out += $trx->amount;
         }
 
-        $tot = $tot_in - $tot_out;
+        $tot = $tot_in - ($tot_out + $pnd);
         return $tot;
     }
 

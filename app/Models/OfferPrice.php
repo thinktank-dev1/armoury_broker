@@ -10,5 +10,6 @@ class OfferPrice extends Model
         'user_id',
         'product_id',
         'amount',
+        'status',
     ];
 }

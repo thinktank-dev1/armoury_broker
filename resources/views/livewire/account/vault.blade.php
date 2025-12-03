@@ -11,33 +11,33 @@
             </div>
         </div>
         <div class="row align-items-stretch">
-            <div class="col-md-3 mb-3">
-                <div class="card bordered bg-dark h-100">
-                    <div class="card-body h-100">
-                        <div class="d-flex">
-                            <h5 class="text-white bold">Vault Balance</h5>
-                            <div class="ms-auto">
-                                <span class="mytooltip tooltip-effect-1">
-                                    <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
-                                    <span class="tooltip-content clearfix">
-                                        <span class="tooltip-text px-2">
-                                            <b>Available for shopping</b>
-                                            <p>Money you can spend right now (withdrawable funds + gift voucher credit)</p>
-                                        </span> 
-                                    </span>
-                                </span>
+            <div class="col-md-12">
+                <div class="row align-items-stretch">
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered bg-dark h-100 pb-0 mb-2">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="text-white bold">Vault Balance</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>Available for shopping</b>
+                                                    <p class="text-white">Money you can spend right now (withdrawable funds + gift voucher credit)</p>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-1">
+                                    <h2 class="text-white bold">R {{ number_format($tot_credit,2) }}</h2>
+                                </div>
                             </div>
                         </div>
-                        <div class="mt-3 h-75 d-flex justify-content-center align-items-center">
-                            <h1 class="text-white bold">R {{ number_format($tot_credit,2) }}</h1>
-                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card bordered">
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered h-100 pb-0 mb-2">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <h5 class="bold">Armoury Broker Credit</h5>
@@ -58,8 +58,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bordered">
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered h-100 pb-0 mb-2">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <h5 class="bold text-muted">Gift Voucher Credit</h5>
@@ -80,8 +80,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bordered bg-dark">
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered bg-dark h-100 pb-0 mb-2">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <h5 class="text-white bold">Total Purchases</h5>
@@ -102,31 +102,54 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bordered">
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered bg-dark h-100 pb-0 mb-2">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    <h5 class="bold">Withdrawable Funds</h5>
+                                    <h5 class="text-white bold">Withdrawable Funds</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
-                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Withdrawable Funds</b>
+                                                    <p class="text-white">Your completed transaction earnings (can spend or cash out via EFT)</p>
                                                 </span> 
                                             </span>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="bold">R {{ number_format($withdrawable_balance,2) }}</h2>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawal-modal"><u>Request Withdrawal</u></a>
+                                    <h2 class="text-white bold">R {{ number_format($withdrawable_balance,2) }}</h2>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#withdrawal-modal" class="text-white"><u>Request Withdrawal</u></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bordered">
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered h-100 pb-0 mb-2">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h5 class="bold">Pending Withdrawal</h5>
+                                    <div class="ms-auto">
+                                        <span class="mytooltip tooltip-effect-1">
+                                            <span class="tooltip-item"><i class=" icon-info"></i></span> 
+                                            <span class="tooltip-content clearfix">
+                                                <span class="tooltip-text px-2">
+                                                    <b>pending Withdrawal</b>
+                                                </span> 
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mt-1">
+                                    <h2 class="bold">R {{ number_format($pending_withdrawal,2) }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered h-100 pb-0 mb-2">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <h5 class="bold">Orders In Progress</h5>
@@ -147,8 +170,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bordered bg-dark">
+                    <div class="col-md-3 pb-0 mb-2">
+                        <div class="card bordered bg-dark h-100 pb-0 mb-2">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <h5 class="text-white bold">Total Sales</h5>
@@ -228,6 +251,9 @@
                                         </td>
                                         <td>{{ $trx->payment_status }}</td>
                                         <td class="text-end">
+                                            @if($trx->direction == "out" || $trx->vendor_id != Auth::user()->vendor_id)
+                                            -
+                                            @endif
                                             R {{ number_format($trx->amount,2) }}
                                         </td>
                                     </tr>

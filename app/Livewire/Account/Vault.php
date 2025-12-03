@@ -22,7 +22,7 @@ class Vault extends Component
     public $filter, $date_from, $date_to;
 
     public $withdrawable_balance, $orders_in_progress, $gift_voucher_balance, $spendable_amount, $ab_credit, $tot_credit;
-    public $tot_purchases, $tot_sales,$in_progress_orders;
+    public $tot_purchases, $tot_sales,$in_progress_orders, $pending_withdrawal;
 
     public function mount(){
         $this->getData();
@@ -84,6 +84,8 @@ class Vault extends Component
             });
         })
         ->sum('price');
+
+        $this->pending_withdrawal = Auth::user()->vendor->pending_withdrawal_balance();
     }
 
     public function requestWithdrawal(){

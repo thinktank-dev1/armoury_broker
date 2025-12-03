@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('quantity')->nullable();
             $table->string('size')->nullable();
             $table->string('service_fee_payer');
-            $table->double('item_price');
+            $table->double('item_price')->nullable();
             $table->integer('allow_offers')->nullable();
             $table->integer('acknowledgement')->nullable();
             $table->integer('status')->default(1);

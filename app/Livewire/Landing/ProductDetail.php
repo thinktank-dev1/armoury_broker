@@ -36,6 +36,7 @@ class ProductDetail extends Component
             ->where('user_id', Auth::user()->id)
             ->where('product_id', $id)
             ->where('created_at', '>=', Carbon::now()->subDay())
+            ->whereNull('status')
             ->first();
 
             if($offer){

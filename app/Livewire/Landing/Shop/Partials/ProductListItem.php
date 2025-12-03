@@ -8,12 +8,16 @@ use Auth;
 use App\Models\Product;
 use App\Models\WishList;
 use App\Models\OrderItem;
+use App\Models\OfferPrice;
+
+use Carbon\Carbon;
 
 class ProductListItem extends Component
 {
     public $product;
     public $tag;
     public $availability;
+    public $offer_price = null;
 
     public function mount($id){
         $this->product = Product::find($id);
@@ -38,6 +42,19 @@ class ProductListItem extends Component
         elseif ($this->product->created_at->gte(now()->subDays(30))) {
             $this->tag = "New";
         }
+
+        if(!Auth::guest()){
+            $offer = OfferPrice::query()
+            ->where('user_id', Auth::user()->id)
+            ->where('product_id', $id)
+            ->where('created_at', '>=', Carbon::now()->subDay())
+            ->whereNull('status')
+            ->first();
+
+            if($offer){
+                $this->offer_price = $offer;
+            }
+        }
     }
 
     public function addToCart(){
@@ -58,7 +75,12 @@ class ProductListItem extends Component
             $order_item->user_id = Auth::user()->id;
             $order_item->vendor_id = $this->product->vendor->id;
             $order_item->product_id = $this->product->id;
-            $order_item->price = $this->product->item_price;
+            if($this->offer_price){
+                $order_item->price = $this->offer_price->amount;
+            }
+            else{
+                $order_item->price = $this->product->item_price;
+            }
             if($exist){
                 $qty = $order_item->quantity;
                 $qty += 1;

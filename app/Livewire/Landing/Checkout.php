@@ -21,6 +21,7 @@ use App\Models\PromoCode;
 use App\Models\Transaction;
 use App\Models\Vendor;
 use App\Models\VendorPromoCode;
+use App\Models\OfferPrice;
 
 class Checkout extends Component
 {
@@ -336,6 +337,12 @@ class Checkout extends Component
                             'order_item_id' => $item->id,
                             'payment_status' => 'COMPLETE',
                         ]);
+
+                        $offer = OfferPrice::where('user_id', $order->user_id)->where('product_id', $item->product_id)->whereNull('status')->first();
+                        if($offer){
+                            $offer->status = 1;
+                            $offer->save();
+                        }
                     }
                     $this->sendComm($order->id);
 

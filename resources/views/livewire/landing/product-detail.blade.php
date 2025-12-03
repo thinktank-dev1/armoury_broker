@@ -52,10 +52,12 @@
                     <div class="pr_detail">
                         <div class="product_description">
                             <h4 class="product_title text-dark-blue">{{ ucwords($product->item_name) }}</h4>
-                            <div class="product_price d-flex">
+                            <div class="product_price d-flex mb-2">
                                 @if($offer_price)
-                                <span class="price"><s>R {{ number_format($product->item_price, 2) }}</s></span><br />
-                                <span class="price">R {{ number_format($offer_price->amount,2) }}</span> (Accepted Offer)    
+                                <div class="">
+                                    <span class="price"><s>R {{ number_format($product->item_price, 2) }}</s></span><br />
+                                    <span class="price">R {{ number_format($offer_price->amount,2) }}</span> (Accepted Offer)
+                                </div>    
                                 @else
                                 <span class="price">R {{ number_format($product->item_price, 2) }}</span>
                                 @endif

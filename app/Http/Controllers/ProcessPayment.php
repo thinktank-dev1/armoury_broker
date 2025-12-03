@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Setting;
 use App\Models\Dealer;
+use App\Models\OfferPrice;
 
 class ProcessPayment extends Controller
 {
@@ -59,6 +60,12 @@ class ProcessPayment extends Controller
                             'order_item_id' => $item->id,
                             'payment_status' => Request::input('payment_status'),
                         ]);
+                        $offer = OfferPrice::where('user_id', $order->user_id)->where('product_id', $item->product_id)->whereNull('status')->first();
+                        if($offer){
+                            $offer->status = 1;
+                            $offer->save();
+                        }
+
                         if($item->shipping_method == "dealer_stock"){
                             if($item->dealer_option == "ab dealer"){
                                 $dl = Dealer::find($item->ab_dealer_id);
