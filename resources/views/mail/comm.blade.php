@@ -84,7 +84,7 @@
             .table-bodered th, .table-bodered td {
                 border: 1px solid black;
             }
-            .table-bodered table{
+            .table-bodered table td{
                 border: none;
                 border-collapse: separate;
                 border: 0;
