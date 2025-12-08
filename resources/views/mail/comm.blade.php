@@ -79,10 +79,14 @@
         </style>
         <style type="text/css">
             .table-bodered {
-                border-collapse: collapse;
+                /*border-collapse: collapse;*/
+                border-collapse: separate;
+                border: none;
+                border: 0;
+                border-style: none;
             }
             .table-bodered th, .table-bodered td {
-                border: 1px solid black;
+                /*border: 1px solid black;*/
             }
         </style>
     </head>

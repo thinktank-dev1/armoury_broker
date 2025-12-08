@@ -373,7 +373,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-2">
-                                            <input type="number" class="form-control" placeholder="Item Price*" name="item_price" wire:model.blur="item_price"> 
+                                            <input type="number" step="any" class="form-control" placeholder="Item Price*" name="item_price" wire:model.blur="item_price"> 
                                         </div>
                                         <div class="form-check mb-2">
                                             <input class="form-check-input" type="checkbox" id="allow_offers" name="allow_offers" wire:model.defer="allow_offers">

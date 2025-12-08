@@ -89,7 +89,7 @@
                                     <div class="mt-auto">
                                         <div class="row">
                                             <div class="col-md-12 mt-3 d-grid">
-                                                <a href="#" class="btn btn-secondary" wire:click.prevent="messageSeller({{ $item->id }})">Message Buyer</a>
+                                                <a href="#" class="btn btn-secondary" wire:click.prevent="messageSeller({{ $item->id }})">Message Seller</a>
                                             </div>
                                         </div>
                                     </div>

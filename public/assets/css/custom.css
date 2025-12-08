@@ -945,3 +945,10 @@ footer .widget_title {
 	font-size: 14px;
 	color: #555;
 }
+
+.btn-outline-secondary {
+    border-radius: 2px;
+    border: 1px solid #0f1f24;
+    padding: 8px 12px;
+    height: 40px;
+}

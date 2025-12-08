@@ -114,7 +114,8 @@ class ProductForm extends Component
                 $allowed = ['image/png', 'image/jpg', 'image/jpeg'];
                 if(!in_array($tp, $allowed)){
                 // if(!str_starts_with($tp, 'image/')){
-                    unset($this->product_images[$key]);
+                    // unset($this->product_images[$key]);
+                    $this->product_images[$key] = null;
                     $this->addError('error', 'Please upload images only. (PNG, JPEG, JPG)');
                 }
             }
@@ -180,6 +181,7 @@ class ProductForm extends Component
         ];
         $messages = [
             'item_name.required' => 'Listing title field is required',
+            'category_id.required' => 'Please select a category',
         ];
         if($this->listing_type == "sale"){
             $rules['service_fee_payer'] = 'required';
@@ -198,6 +200,20 @@ class ProductForm extends Component
                 $rules['private_dealer_details'] = 'required';
             }
         }
+
+        $has_images = false;
+        foreach($this->product_images AS $img){
+            if($img){
+                $has_images = true;
+                break;
+            }
+        }
+        if(!$this->cur_id){
+            if(!$has_images){
+                $this->addError('error', 'Please upload at least 1 image ');
+                return;
+            }
+        }        
 
         $this->validate($rules, $messages);
         if($this->cur_id){

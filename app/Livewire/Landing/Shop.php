@@ -226,7 +226,9 @@ class Shop extends Component
             if($this->sort_by == 'Oldest Listed'){
                 $query->orderBy('created_at', 'ASC');
             }
-            // if($this->sort_by == 'Most Popular')
+            if($this->sort_by == 'Most Popular'){
+                $query->withCount('wishlists')->orderBy('wishlists_count', 'desc');
+            }
         }
         $query->where('status', 1);
 

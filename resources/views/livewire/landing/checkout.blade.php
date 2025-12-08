@@ -248,7 +248,10 @@
                                 <h2 class="page-title pb-0 mb-0">Apply Promo Code</h2>
                                 <div class="mb-3">
                                     <label class="form-label">Enter Promo Code</label>
-                                    <input type="text" class="form-control" aria-describedby="promo_help_text" name="vendor_promo_code" wire:model.blur="vendor_promo_code">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" aria-describedby="promo_help_text" name="vendor_promo_code" wire:model.blur="vendor_promo_code">
+                                        <button class="btn btn-outline-secondary" type="button">Apply</button>
+                                    </div>
                                     <div id="promo_help_text" class="form-text text-danger">
                                         @if($vendor_promo_code_error)
                                         {{ $vendor_promo_code_error }}
