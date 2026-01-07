@@ -66,62 +66,6 @@ use App\Models\User;
 use App\Http\Controllers\FbController;
 use App\Livewire\Auth\FbConfirmation;
 
-Route::get('test', function(){
-    $item = OrderItem::find(3);
-    $order = Order::find(1);
-    $user = user::find(2);
-    $unsubscribe_link = '';
-
-    $order_data = "<table class='table-bodered' style='width: 100%'>";
-    $order_data .= "<thead><tr style='background-color: #e6e6e6;'><th colspan='2' style='text-align: center;'>AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</th></tr></thead>";
-    $order_data .= "<tbody>";
-    $order_data .= "<tr>";
-    if($item->product->images->count() > 0){
-        $order_data .= "<td><img style='height: 100px' src='".url('storage/'.$item->product->images->first()->image_url)."'></td>";
-    }
-    else{
-        $order_data .= "<td></td>";
-    }
-    $order_data .= "<td>";
-    $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
-    $order_data .= "<tr><td style='border:none;'>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
-    $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
-    $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
-    $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
-    $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
-    $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
-    $order_data .= "<tr><td>Delivery Type:</td><td>".$item->shipping_method."</td></tr>";
-    $order_data .= "</table>";
-    $order_data .= "</td>";
-    $order_data .= "</tr>";
-    $order_data .= "</table>";
-    $body = "Looks like you have just <b>LEVELED UP!</b><br /><br />
-    Great news! Your purchase has been confirmed, and your payment is now securely held in escrow. We've notified the seller to prepare your items for shipment.<br />
-    ".$order_data;
-
-    $after = "<b>What Happens Next?</b><br /><br />
-    <b>Seller prepares your order</b><br />
-    The seller has been notified and will prepare your items for delivery.<br /><br />
-    <b>Track your shipment</b><br />
-    The seller can add the tracking number to the purchase. Alternatively, send them a message to confirm.<br /><br />
-    <b>Confirm receipt</b><br />
-    When your order arrives, go to the \"My Purchases\" tab in your account and confirm receipt. This releases payment to the seller.";
-
-    $data = [
-        'to' => $user->email,
-        'name' => $user->name,
-        'subject' => 'Purchase Confirmation',
-        'title' => "Congratulations on your purchase",
-        'message_body' => $body,
-        'cta' => true,
-        'cta_text' => 'View Purchase',
-        'cta_url' => url('my-purchases'),
-        'after_cta_body' => $after,
-        'unsubscribe_link' => '',
-    ];
-    return view('mail.comm', $data);
-});
-
 Route::get('/', HomePage::class);
 Route::get('support', Support::class);
 Route::get('how-it-works', HowItWorks::class);
@@ -157,6 +101,7 @@ Route::post('pf-notify-payment-promo/{id}', [ProcessPayment::class, 'pfPromoPaym
 Route::get('approve-withdrawal/{id}', [ProcessPayment::class, 'approveWithDrawal']);
 
 Route::post('fb/delete', [FbController::class, 'delete']);
+Route::get('fb/delete', [FbController::class, 'delete']);
 Route::get('fb-status/{token}', FbConfirmation::class);
 
 Route::middleware(['auth', 'verified'])->group(function (){
