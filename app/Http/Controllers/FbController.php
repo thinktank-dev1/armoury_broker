@@ -11,26 +11,28 @@ use Illuminate\Support\Str;
 class FbController extends Controller
 {
     public function delete(){
-        $signed_request = Request::input('signed_request');
-        $data = $this->parse_signed_request($signed_request);
-        $user_id = $data['user_id'];
+        if(Request::has('signed_request')){
+            $signed_request = Request::input('signed_request');
+            $data = $this->parse_signed_request($signed_request);
+            $user_id = $data['user_id'];
 
-        $usr = User::where('facebook_id', $user_id)->first();
-        if($usr){
-            $token = Str::random(5).'-'.$usr->id.'-'.date('Ymd');
-            $del = DeleteConfirmation::create([
-                'token' => $token,
-                'user_id' => $usr->id,
-            ]);
-            $usr->delete();
+            $usr = User::where('facebook_id', $user_id)->first();
+            if($usr){
+                $token = Str::random(5).'-'.$usr->id.'-'.date('Ymd');
+                $del = DeleteConfirmation::create([
+                    'token' => $token,
+                    'user_id' => $usr->id,
+                ]);
+                $usr->delete();
 
-            $status_url = url('/fb-status/'.$token);
+                $status_url = url('/fb-status/'.$token);
 
-            $data = [
-                'url' => $status_url,
-                'confirmation_code' => $token
-            ];
-            echo json_encode($data);
+                $data = [
+                    'url' => $status_url,
+                    'confirmation_code' => $token
+                ];
+                echo json_encode($data);
+            }
         }
     }
 
