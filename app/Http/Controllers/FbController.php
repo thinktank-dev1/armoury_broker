@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class FbController extends Controller
 {
-    public function delete($id){
+    public function delete(){
         $signed_request = Request::input('signed_request');
         $data = $this->parse_signed_request($signed_request);
         $user_id = $data['user_id'];
