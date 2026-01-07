@@ -63,6 +63,9 @@ use App\Models\OrderItem;
 use App\Models\Order;
 use App\Models\User;
 
+use App\Http\Controllers\FbController;
+use App\Livewire\Auth\FbConfirmation;
+
 Route::get('test', function(){
     $item = OrderItem::find(3);
     $order = Order::find(1);
@@ -152,6 +155,9 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::post('pf-notify-payment/{id}', [ProcessPayment::class, 'pfPayment']);
 Route::post('pf-notify-payment-promo/{id}', [ProcessPayment::class, 'pfPromoPayment']);
 Route::get('approve-withdrawal/{id}', [ProcessPayment::class, 'approveWithDrawal']);
+
+Route::post('fb/delete', [FbController::class, 'delete']);
+Route::get('fb-status/{token}', FbConfirmation::class);
 
 Route::middleware(['auth', 'verified'])->group(function (){
 	Route::get('my-armoury/edit', EditMyArmoury::class);
