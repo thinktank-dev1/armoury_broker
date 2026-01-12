@@ -176,7 +176,7 @@ class Messages extends Component
         $msg = Message::find($id);
         if($msg){
             // $msg->delete();
-            $msg->action 'canceled';
+            $msg->action  = 'canceled';
             $msg->save();
         }
     }
