@@ -152,4 +152,13 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('close-modal', () => {
+                $('.modal').modal('hide');
+            });
+        });
+    </script>
+    @endpush
 </div>

@@ -46,13 +46,15 @@
                         <div class="card-body px-5">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <center class="mt-3">
-                                        @if(Auth::user()->vendor->avatar) 
-                                        <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle img-fluid">
-                                        @else
-                                        <img src="{{ asset('img/logo-placeholder.webp') }}" class="img-circle img-fluid">
-                                        @endif
-                                    </center>
+                                    <a href="{{ url('profile') }}">
+                                        <center class="mt-3">
+                                            @if(Auth::user()->vendor->avatar) 
+                                            <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle img-fluid">
+                                            @else
+                                            <img src="{{ asset('img/logo-placeholder.webp') }}" class="img-circle img-fluid">
+                                            @endif
+                                        </center>
+                                    </a>
                                 </div>
                                 <div class="col-md-10 text-center text-md-start">
                                     <h4 class="card-title m-t-10">{{ Auth::user()->vendor->name }} </h4>
