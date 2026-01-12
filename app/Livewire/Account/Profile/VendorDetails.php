@@ -44,6 +44,15 @@ class VendorDetails extends Component
 
     public function saveAvater(){
         if($this->avatar){
+            $allowed = ['image/png', 'image/jpg', 'image/jpeg'];
+            $tp = $this->avatar->getMimeType();
+
+            if(!in_array($tp, $allowed)){
+                $this->avatar = null;
+                $this->addError('error', 'Please upload images only. (PNG, JPEG, JPG)');
+                return;
+            }
+
             $file = $this->avatar->storePublicly('vendor_avater', 'public');
             $vnd = Auth::user()->vendor;
             $vnd->avatar = $file;

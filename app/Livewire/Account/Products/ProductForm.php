@@ -185,7 +185,7 @@ class ProductForm extends Component
         ];
         if($this->listing_type == "sale"){
             $rules['service_fee_payer'] = 'required';
-            $rules['item_price'] = 'required';
+            $rules['item_price'] = 'required|numeric|min:1';
             $rules['acknowledgement'] = 'required';
 
             $messages['acknowledgement.required'] = 'You did not accept the terms and conditions';
