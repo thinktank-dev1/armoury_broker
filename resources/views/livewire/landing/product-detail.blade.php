@@ -225,6 +225,12 @@
     @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {
+            @this.on('close-modal', () => {
+                $('.modal').modal('hide');
+            });
+            @this.on('offer-above-price', () => {
+                $.notify("Offer amount is above price. Please use the buy button!", "success");
+            });
             @this.on('added-to-cart', () => {
                 $.notify("Product added to cart successfully!", "success");
             });

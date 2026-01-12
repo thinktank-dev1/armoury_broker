@@ -181,6 +181,11 @@ class Checkout extends Component
             }
         }
 
+        if($this->credit_payment > $this->total){
+            $this->addError('error', 'The amount you entered is above cart total');
+            return;
+        }
+
         if($this->order_id){
             $order = Order::find($this->order_id);    
         }

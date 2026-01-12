@@ -106,6 +106,12 @@ class ProductDetail extends Component
         $this->validate([
             'offer_amount' => 'required'
         ]);
+
+        if($this->offer_amount > $this->product->item_price){
+            $this->dispatch('close-modal');
+            $this->dispatch('offer-above-price');
+            return;
+        }
         
         $cur_price = $this->product->item_price;
         $allowed = $cur_price - ((20/100) * $cur_price);

@@ -37,7 +37,7 @@
                         <thead class="p-0 m-0">
                             <tr class="p-0 m-0">
                                 <th class="p-0 m-0 w-14">{{ 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT) }}<br/><small>Order Number</small></th>
-                                <th class="p-0 m-0 w-14">{{ $order->user->name.' '.$order->user->surname }}<br/><small>Buyer</small></th>
+                                <th class="p-0 m-0 w-14">{{ $order->user->vendor->name }}<br/><small>Buyer</small></th>
                                 <th class="p-0 m-0 w-14">{{ $order->g_payment_id }}<br/><small>Payment Ref</small></th>
                                 <th class="p-0 m-0 w-14">R {{ number_format($order->shiping_fee(),2) }}<br/><small>Shipping Fee</small></th>
                                 <th class="p-0 m-0 w-14">R {{ number_format($order->ab_fee(), 2) }}<br/><small>Platform Fee (Buyer)</small></th>
@@ -123,7 +123,7 @@
                                                 <th class="text-end">Deliver Service</th>
                                                 <td class="">
                                                     <div class="input-group">
-                                                        @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
+                                                        @if($item->vendor_status != "Canceled")
                                                         <select class="form-control" name="shiping_service" wire:model.defer="orders_items_arr.{{ $item->id }}.shiping_service">
                                                             <option value="">Select Option</option>
                                                             @foreach($services AS $sv)
