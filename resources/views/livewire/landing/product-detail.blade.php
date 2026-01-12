@@ -125,7 +125,7 @@
                                 @endif
                             </div>
                             <div class="mt-4 bg-grey text-dark-blue px-3 py-2">
-                                <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchase. <a href="#" data-bs-toggle="modal" data-bs-target="#learn-modal"><b>Learn More</b></a></small>
+                                <small><b>Platform</b> and <b>Delivery</b> fees are applied to all purchases. <a href="#" data-bs-toggle="modal" data-bs-target="#learn-modal"><b>Learn More</b></a></small>
                             </div>
                             <div class="row mt-4 px-3">
                                 @if($product->vendor->avatar)

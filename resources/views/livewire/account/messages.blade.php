@@ -135,8 +135,8 @@
                                                                             You rejected the offer.
                                                                         @elseif($message->action == "accept")
                                                                             You've accepted the offer.
-                                                                        @elseif($message->action == "canceled")
-                                                                            Offer was canceled.
+                                                                        @elseif($message->action == "cancelled")
+                                                                            Offer was cancelled.
                                                                         @else
                                                                             <p>What would you like to do?</p>
                                                                             <div class="text-center">
@@ -154,8 +154,8 @@
                                                                             Offer was rejected.
                                                                         @elseif($message->action == "accept")
                                                                             Offer was accepted. <a href="{{ url('shop/product/'.$cur_msg->product->id) }}">Click here to go to product</a>
-                                                                        @elseif($message->action == "canceled")
-                                                                            Offer was canceled.
+                                                                        @elseif($message->action == "cancelled")
+                                                                            Offer was cancelled.
                                                                         @else
                                                                             <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="cancelOffer({{ $message->id }})">Cancel Offer</a>
                                                                         @endif

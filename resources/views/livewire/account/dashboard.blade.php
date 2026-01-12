@@ -143,7 +143,7 @@
                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
                             <span class="tooltip-content tooltip-content-end tooltip-content-top clearfix">
                                 <span class="tooltip-text px-2">
-                                    <b>My vault info</b>
+                                    <b>My Vault</b>
                                     <p class="text-white">Fund Types:</p>
                                     <ul>
                                         <li><b>Available for shopping</b> - Money you can spend right now (withdrawable funds + gift voucher credit)</li>
@@ -162,8 +162,8 @@
                     <div>
                         <table class="table table-sm table-borderless">
                             <tr>
-                                <td>R {{ number_format($spendable_amount , 2) }}</td>
-                                <td>Available for shopping</td>
+                                <td class="bold">R {{ number_format($spendable_amount , 2) }}</td>
+                                <td class="bold">Available for shopping</td>
                             </tr>
                             <tr>
                                 <td>R {{ number_format($ab_credit, 2) }}</td>

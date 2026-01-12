@@ -24,7 +24,7 @@
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Available for shopping</b>
-                                                    <p class="text-white">Money you can spend right now (withdrawable funds + gift voucher credit)</p>
+                                                    <p class="text-white">Total of all funds across all catagories</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -46,7 +46,8 @@
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
-                                                    Armoury Broker Credit
+                                                    <b>Armoury Broker Credit</b>
+                                                    <p class="text-white">Platfrom credits for covering fees only (Not cashable)</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -69,6 +70,7 @@
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Gift Voucher Credit</b>
+                                                    <p class="text-white">Unspent gift voucher credit (Expires in 12 months - Not cashable)</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -91,6 +93,7 @@
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Purchases</b>
+                                                    <p class="text-white">Moneies spent on in platform purchases</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -113,7 +116,7 @@
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Withdrawable Funds</b>
-                                                    <p class="text-white">Your completed transaction earnings (can spend or cash out via EFT)</p>
+                                                    <p class="text-white">You completed transaction earnings.(Can spend in the platfrom or cashout via EFT)</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -159,6 +162,7 @@
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Orders In Progress</b>
+                                                    <p class="text-white">Money held in Escrow until orders are completed</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -181,6 +185,7 @@
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Sales</b>
+                                                    <p class="text-white">Monies generated from in platfrom sales</p>
                                                 </span> 
                                             </span>
                                         </span>

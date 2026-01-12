@@ -206,11 +206,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <b class="text-dark-blue text-14">{{ $results_count }} Results</b>
-                            @if($search_key || $wanted)
                             <span class="ms-3">
                                 <a href="{{ url('shop') }}"><u><b class="text-dark-blue text-14">Clear Search</b></u></a>
                             </span>
-                            @endif
                         </div>
                     </div>
                     <div class="row">
@@ -255,6 +253,17 @@
             </div>    
         </div>
     </div>
+
+    <div class="mb-0 pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="{{ url('list-item') }}" class="btn btn-secondary fixed-button">Start Selling</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
