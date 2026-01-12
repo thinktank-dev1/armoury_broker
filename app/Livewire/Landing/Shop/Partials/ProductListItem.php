@@ -29,7 +29,7 @@ class ProductListItem extends Component
         ->whereHas('order', function($q){
             return $q->whereNotNull('g_payment_id');
         })
-        ->where('vendor_status', '<>', 'Canceled')
+        // ->where('vendor_status', '<>', 'Canceled')
         ->sum('quantity');
         
         if($this->product->listing_type == "wanted"){

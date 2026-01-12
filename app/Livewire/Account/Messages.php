@@ -175,7 +175,9 @@ class Messages extends Component
     public function cancelOffer($id){
         $msg = Message::find($id);
         if($msg){
-            $msg->delete();
+            // $msg->delete();
+            $msg->action 'canceled';
+            $msg->save();
         }
     }
 

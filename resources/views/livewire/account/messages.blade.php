@@ -135,6 +135,8 @@
                                                                             You rejected the offer.
                                                                         @elseif($message->action == "accept")
                                                                             You've accepted the offer.
+                                                                        @elseif($message->action == "canceled")
+                                                                            Offer was canceled.
                                                                         @else
                                                                             <p>What would you like to do?</p>
                                                                             <div class="text-center">
