@@ -95,7 +95,7 @@
                                                                     <div class="">
                                                                         @foreach($product->shippingOptions AS $ship)
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" id="shipping_method_{{ $ship->id }}" value="{{ $ship->type }}" name="shipping_method" wire:model.live="cart.{{ $k }}.shipping_method">
+                                                                            <input class="form-check-input" type="radio" id="shipping_method_{{ $ship->id }}" value="{{ $ship->type }}" name="shipping_method_{{ $ship->id }}" wire:model.live="cart.{{ $k }}.shipping_method">
                                                                             <label class="form-check-label" for="shipping_method_{{ $ship->id }}">
                                                                                 @if($ship->type == "collection_delivery")
                                                                                     {{ ucwords(str_replace('_', ' / ',$ship->type)) }}
