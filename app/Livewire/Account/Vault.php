@@ -13,6 +13,10 @@ use App\Models\Transaction;
 use App\Models\WithdrawalRequest;
 use App\Models\BankDetail;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\TransactionsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class Vault extends Component
 {
     use WithPagination;
@@ -34,6 +38,65 @@ class Vault extends Component
             $this->branch_code = $bnk->branch_code;
             $this->account_name = $bnk->account_holder;
             $this->account_number = $bnk->account_number;
+        }
+    }
+
+    public function exportData($type){
+        $filter = $this->filter; 
+        $date_from = $this->date_from;
+        $date_to = $this->date_to;
+
+        $trxs = Transaction::query()
+        ->where(function ($q) {
+            $q->where('user_id', Auth::user()->id)
+            ->orWhere('vendor_id', Auth::user()->vendor_id);
+        })
+        ->when($date_from, function($q) use($date_from){
+            return $q->whereDate('created_at', '>', $date_from);
+        })
+        ->when($date_to, function($q) use($date_to){
+            return $q->whereDate('created_at', '<', $date_to);
+        })
+        ->when($filter, function($q) use($filter){
+            if($filter == "orders"){
+                return $q->where('vendor_id', Auth::user()->vendor_id);
+            }
+            if($filter == "purchases"){
+                return $q->where('user_id', Auth::user()->id);
+            }
+            if($filter == "refunds"){
+                return $q->where('transaction_type', 'refund');
+            }
+            if($filter == "complete"){
+                return $q->where('payment_status', 'COMPLETE');
+            }
+            if($filter == "pending"){
+                return $q->where('payment_status','<>', 'COMPLETE');
+            }
+        })
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        $data_trxs = [];
+        foreach($trxs AS $trx){
+            $arr = [
+                'date' => $trx->created_at,
+                'name' => $trx->name,
+                'direction' => $trx->direction,
+                'amount' => $trx->amount,
+                'status' => $trx->status,
+            ];
+            $data_trxs[] = $arr;
+        }
+
+        if($type == 'pdf'){
+            $pdf = Pdf::loadView('pdf.transactions', ['data' => $data_trxs]);
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->stream();
+            }, 'transactions.pdf');
+        }
+        if($type == "csv"){
+            return Excel::download(new TransactionsExport($data_trxs), 'transactions.xlsx');
         }
     }
 
@@ -93,9 +156,9 @@ class Vault extends Component
             'amount' => 'required|numeric', 
             'bank_name' => 'required', 
             'branch_name' => 'required', 
-            'branch_code' => 'required', 
+            'branch_code' => 'required|numeric', 
             'account_name' => 'required', 
-            'account_number' => 'required'
+            'account_number' => 'required|numeric'
         ],[
             'amount.numeric'=>"Amount must be a number"
         ]);

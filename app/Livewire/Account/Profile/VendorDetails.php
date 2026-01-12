@@ -44,12 +44,12 @@ class VendorDetails extends Component
 
     public function saveAvater(){
         if($this->avatar){
-            $allowed = ['image/png', 'image/jpg', 'image/jpeg'];
+            $allowed = ['image/png', 'image/jpg', 'image/jpeg', 'image/svg'];
             $tp = $this->avatar->getMimeType();
 
             if(!in_array($tp, $allowed)){
                 $this->avatar = null;
-                $this->addError('error', 'Please upload images only. (PNG, JPEG, JPG)');
+                $this->addError('error', 'Please upload images only. (PNG, JPG, SVG)');
                 return;
             }
 
@@ -88,9 +88,10 @@ class VendorDetails extends Component
 
     public function saveVendor(){
         $this->validate([
-            'name' => 'required', 
+            'name' => 'required|unique:vendors,name,'.Auth::user()->vendor_id, 
             'description' => 'required', 
         ]);
+
         $vnd = Auth::user()->vendor;
         $vnd->name = $this->name; 
         $vnd->description = $this->description;

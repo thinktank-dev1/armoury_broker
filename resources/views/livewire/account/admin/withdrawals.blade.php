@@ -8,7 +8,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Withdrawal Requests</h4>
+                    <div class="d-flex">
+                        <h4 class="card-title">Withdrawal Requests</h4>
+                        <span class="ms-auto">
+                            <a href="#" class="btn btn-primary btn-sm" wire:click.prevent="exportWithdrawals">Export</a>
+                        </span>
+                    </div>
+
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <table class="table table-sm">

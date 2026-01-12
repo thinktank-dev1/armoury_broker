@@ -210,7 +210,7 @@ class Dashboard extends Component
 
             if(!in_array($tp, $allowed)){
                 $this->avatar = null;
-                $this->addError('error', 'Please upload images only. (PNG, JPEG, JPG)');
+                $this->addError('error', 'Please upload images only. (PNG, JPG, SVG)');
                 return;
             }
             

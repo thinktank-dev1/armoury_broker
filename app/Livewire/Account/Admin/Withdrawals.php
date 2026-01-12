@@ -9,8 +9,15 @@ use App\Lib\Communication;
 use App\Models\WithdrawalRequest;
 use App\Models\Transaction;
 
+use App\Exports\PaymentExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class Withdrawals extends Component
 {
+    public function exportWithdrawals(){
+        return Excel::download(new PaymentExport, 'withdrawals.xlsx');
+    }
+
     public function setPaid($id){
         $req = WithdrawalRequest::find($id);
         if($req){

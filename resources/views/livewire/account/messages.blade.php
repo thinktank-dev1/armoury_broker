@@ -220,7 +220,23 @@
                                                     @else
                                                     <div class="chat-message {{ $message->user_id === auth()->id() ? 'sent' : 'received' }}">
                                                         <div class="message-bubble">
-                                                            {{ $message->message }}
+                                                            @php
+                                                            $masked = preg_replace_callback(
+                                                                '/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/',
+                                                                function ($m) {
+                                                                    [$user, $domain] = explode('@', $m[0]);
+                                                                    return strlen($user) <= 2
+                                                                    ? str_repeat('*', strlen($user)) . '@' . $domain
+                                                                    : $user[0] . str_repeat('*', strlen($user) - 2) . $user[-1] . '@' . $domain;
+                                                                },
+                                                                $message->message
+                                                            );
+                                                            $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
+                                                            $masked = preg_replace($regex, '*', $masked);
+                                                            $masked = preg_replace('/\b((https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i', ' ', $masked);
+
+                                                            @endphp
+                                                            {{ $masked }}
                                                         </div>
                                                         <div class="message-time">
                                                             {{ $message->created_at->format('H:i') }}

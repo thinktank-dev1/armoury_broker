@@ -27,8 +27,8 @@ class BankingDetails extends Component
     public function saveBankDetails(){
         $this->validate([
             'bank_name' => 'required', 
-            'branch_code' => 'required', 
-            'account_number' => 'required', 
+            'branch_code' => 'required|numeric', 
+            'account_number' => 'required|numeric', 
             'branch_name' => 'required', 
             'account_holder' => 'required'
         ]);
