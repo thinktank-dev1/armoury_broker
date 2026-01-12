@@ -361,7 +361,7 @@
                                                 @endif
                                             @elseif($dealer_stock_type == 'custom_dealer')
                                             <div class="mb-3">
-                                                <textarea class="form-control" name="private_dealer_details" placeholder="Enter private dealer details*" wire:model.defer="private_dealer_details"></textarea>
+                                                <textarea class="form-control" name="private_dealer_details" placeholder="Enter private dealer's physical address*" wire:model.defer="private_dealer_details"></textarea>
                                             </div>
                                             @endif
                                         @endif
