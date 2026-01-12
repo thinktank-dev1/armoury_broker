@@ -31,10 +31,10 @@
                                                 @if(Auth::user()->vendor->avatar)
                                                     <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle img-fluid" width="150">
                                                 @else
-                                                    <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle img-fluid" width="150">
+                                                    <img src="{{ asset('img/PROFILE PIC.png') }}" class="circle img-fluid" width="150">
                                                 @endif
                                             @else
-                                                <img src="{{ asset('img/avatar_placeholder_large.png') }}" class="circle img-fluid" width="150">
+                                                <img src="{{ asset('img/PROFILE PIC.png') }}" class="circle img-fluid" width="150">
                                             @endif
                                             <span class="edit-btn">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>

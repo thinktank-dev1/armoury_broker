@@ -51,7 +51,7 @@
                                             @if(Auth::user()->vendor->avatar) 
                                             <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle img-fluid">
                                             @else
-                                            <img src="{{ asset('img/logo-placeholder.webp') }}" class="img-circle img-fluid">
+                                            <img src="{{ asset('img/PROFILE PIC.png') }}" class="img-circle img-fluid">
                                             @endif
                                         </center>
                                     </a>
