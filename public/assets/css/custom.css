@@ -952,3 +952,6 @@ footer .widget_title {
     padding: 8px 12px;
     height: 40px;
 }
+.btn-primary{
+	font-weight: 600;
+}
