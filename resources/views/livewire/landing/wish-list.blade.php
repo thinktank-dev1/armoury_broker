@@ -33,7 +33,9 @@
                         @php
                         $product = $list->product;
                         @endphp
+                        @if($product->status == 1)
                         <livewire:landing.shop.partials.product-list-item wire:key="{{ $product->id }}" :id="$product->id" />
+                            @endif
                         @endforeach
                     </div>
                 </div>

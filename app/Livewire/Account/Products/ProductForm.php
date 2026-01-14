@@ -191,6 +191,24 @@ class ProductForm extends Component
             $messages['acknowledgement.required'] = 'You did not accept the terms and conditions';
         }
 
+        if($this->category_id){
+            $subs = SubCategory::where('category_id', $this->category_id)->get();
+            if($subs->count() > 0){
+                $rules['sub_category_id'] = 'required';
+
+                $messages['sub_category_id.required'] = "Please select a sub category";
+            }
+        }
+
+        if($this->sub_category_id){
+            $sub = SubCategory::where('id', $this->sub_category_id)->first();
+            if($sub->sub_sub->count() > 0){
+                $rules['sub_sub_category_id'] = 'required';
+
+                $messages['sub_sub_category_id.required'] = "Please select a sub-sub category";
+            }
+        }
+
         if($this->dealer_stock){
             $rules['dealer_stock_type'] = 'required';
             if($this->dealer_stock_type == 'ab_dealer'){

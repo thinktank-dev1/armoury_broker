@@ -51,6 +51,15 @@
                             </center>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12 d-grid">
+                            @if($product->status == 1)
+                            <a href="#" class="btn btn-danger" wire:click.prevent="disableProduct({{ $product->id }})">Disable Product</a>
+                            @else
+                            <a href="#" class="btn btn-success" wire:click.prevent="activateProduct({{ $product->id }})">Activate Product</a>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <hr> 

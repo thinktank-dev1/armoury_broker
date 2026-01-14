@@ -37,6 +37,7 @@ class Login extends Component
             if($usr->status != 1){
                 Auth::logout();
                 $this->addError('user', 'Your account is inactive.');
+                return;
             }
             $intended = session()->get('url.intended');
             if ($intended && Str::is('*cart/*', $intended)){
