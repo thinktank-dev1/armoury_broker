@@ -149,11 +149,12 @@
                                                 <td class="py-3">
                                                     @if($item->vendor_status != "Canceled" && ($item->vendor_status != "Order Dispatched" || $item->vendor_status == 'Dealer stocked - Confirmed'))
                                                     <select class="form-control" name="vendor_status" wire:model.defer="orders_items_arr.{{ $item->id }}.vendor_status">
-                                                        <option value="">Pending Dispatch</option>
                                                         @if($item->dealer || $item->custom_dealer_details)
-                                                        <option value="Firearm dealer stocked">Firearm dealer stocked</option> 
-                                                        <option value="Dealer stocked - Confirmed">Dealer stocked - Confirmed</option>   
+                                                        <option value="">Pending Dealer Stocking</option>
+                                                        <option value="Firearm dealer stocked">Firearm Dealer Stocked</option> 
+                                                        <option value="Dealer stocked - Confirmed">Dealer Stocked - Confirmed</option>   
                                                         @else 
+                                                        <option value="">Pending Dispatch</option>
                                                         <option value="Order Dispatched">Order Dispatched</option>
                                                         @endif
                                                     </select>
