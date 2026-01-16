@@ -93,7 +93,7 @@
                                             <span class="tooltip-content clearfix" style="bottom: -119px;">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Purchases</b>
-                                                    <p class="text-white">Moneies spent on in platform purchases</p>
+                                                    <p class="text-white">Monies spent on in platform purchases</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-1">
-                                    <h2 class="bold">R {{ $in_progress_orders,2 }}</h2>
+                                    <h2 class="bold">R {{ number_format($in_progress_orders,2) }}</h2>
                                 </div>
                             </div>
                         </div>
