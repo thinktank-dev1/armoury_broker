@@ -32,13 +32,13 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Branch Code</label>
-                                    <input type="text" class="form-control" name="branch_code" wire:model.defer="branch_code">
+                                    <input type="number" class="form-control" name="branch_code" wire:model.defer="branch_code">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Account Number</label>
-                                    <input type="text" class="form-control" name="account_number" wire:model.defer="account_number">
+                                    <input type="number" class="form-control" name="account_number" wire:model.defer="account_number">
                                 </div>
                             </div>
                             <div class="col-md-6">

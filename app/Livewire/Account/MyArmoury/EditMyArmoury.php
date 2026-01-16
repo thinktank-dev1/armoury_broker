@@ -48,6 +48,8 @@ class EditMyArmoury extends Component
             'city' => 'required',
             'province' => 'required',
             'avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg,webp',
+        ],[
+            'avatar.mimes' => 'Please upload images only. (PNG, JPG, SVG)'
         ]);
 
         if(Auth::user()->vendor_id && Vendor::find(Auth::user()->vendor_id)){

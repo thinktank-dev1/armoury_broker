@@ -116,7 +116,7 @@ class ProductForm extends Component
                 // if(!str_starts_with($tp, 'image/')){
                     // unset($this->product_images[$key]);
                     $this->product_images[$key] = null;
-                    $this->addError('error', 'Please upload images only. (PNG, JPEG, JPG)');
+                    $this->addError('error', 'Please upload images only. (PNG, JPG, SVG)');
                 }
             }
         }
