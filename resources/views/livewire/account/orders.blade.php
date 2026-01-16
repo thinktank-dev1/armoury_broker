@@ -285,7 +285,7 @@
             @this.on('order-item-edited', () => {
                 Swal.fire({
                     title: "Order Item Edited",
-                    text: "Order item has been successfully edited.",
+                    text: "Order item has been successfully submitted.",
                     icon: "success",
                     confirmButtonColor: "#293c47",
                 });
