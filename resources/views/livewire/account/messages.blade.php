@@ -221,7 +221,6 @@
                                                     <div class="chat-message {{ $message->user_id === auth()->id() ? 'sent' : 'received' }}">
                                                         <div class="message-bubble">
                                                             @php
-                                                            /*
                                                             $masked = preg_replace_callback(
                                                                 '/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/',
                                                                 function ($m) {
@@ -235,8 +234,7 @@
                                                             $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
                                                             $masked = preg_replace($regex, '*', $masked);
                                                             $masked = preg_replace('/\b((https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i', ' ', $masked);
-                                                            */
-                                                            $masked = $message->message;
+
                                                             @endphp
                                                             {!! $masked !!}
                                                         </div>
