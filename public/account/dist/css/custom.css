@@ -755,3 +755,18 @@ select.form-control{
 .y-hover:hover{
 	color: #ea734e !important;
 }
+
+.material-input-icon{
+	background-color: #FFF;
+	border: none;
+	border-bottom: 1px solid #e9ecef;
+}
+
+.form-outline i {
+  	position: relative;
+  	top: 50%;
+  	right: -94%;
+  	transform: translateY(-175%);
+  	pointer-events: none;
+  	cursor: pointer;
+}

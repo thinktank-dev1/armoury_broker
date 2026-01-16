@@ -59,7 +59,12 @@
                                 <div class="form-group">
                                     <label class="form-label">Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line" name="password" wire:model.defer="password">
+                                        <div class="input-group">
+                                            <input @if($show_password) type="text" @else type="password" @endif class="form-control form-control-line" name="password" wire:model.defer="password">
+                                            <a href="#" class="input-group-text material-input-icon" role="button" wire:click.prevent="togglePassword">
+                                                <i class="fas fa-eye ms-3"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -229,7 +229,7 @@
                 $('.modal').modal('hide');
             });
             @this.on('offer-above-price', () => {
-                $.notify("Offer amount is above price. Please use the buy button!", "success");
+                $.notify("Offer amount is above price. Please use the buy button!", "error");
             });
             @this.on('added-to-cart', () => {
                 $.notify("Product added to cart successfully!", "success");
