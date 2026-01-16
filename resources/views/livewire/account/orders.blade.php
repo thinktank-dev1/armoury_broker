@@ -282,6 +282,14 @@
             @this.on('close-modal', () => {
                 $('.modal').modal('hide');
             });
+            @this.on('order-item-edited', () => {
+                Swal.fire({
+                    title: "Order Item Edited",
+                    text: "Order item has been successfully edited.",
+                    icon: "success",
+                    confirmButtonColor: "#293c47",
+                });
+            });
         });
     </script>
     @endpush

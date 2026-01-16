@@ -140,6 +140,7 @@ class Orders extends Component
             $order->shipping_status = 1;
             $order->save();
         }
+        $this->dispatch('order-item-edited');
     }
 
     public function saveShipService(){
