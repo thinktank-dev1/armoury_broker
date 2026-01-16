@@ -102,8 +102,8 @@ class EditMyArmoury extends Component
                 'message_thread_id' => $tr->id,
                 'user_id' => 1,
                 'message' => "Hi ".Auth::user()->name."\n,
-                Thank you for joining our trusted community. You're now part of South Africa's leading secure marketplace transforming how firearms owners buy, sell, and trade equipment in a safe and secure environment.\n
-                You're currently viewing your ecommerce store dashboard—your central hub for accessing all platform features. The Dashboard tab in the left-hand menu provides an overview of your store with convenient shortcut links to navigate the entire platform. Getting around is simple: use either the left-hand menu tabs or the dashboard shortcuts.\n
+                Thank you for joining our trusted community. You're now part of South Africa's leading secure marketplace transforming how firearms owners buy, sell, and trade equipment in a safe and secure environment.\n\n
+                You're currently viewing your ecommerce store dashboard—your central hub for accessing all platform features. The Dashboard tab in the left-hand menu provides an overview of your store with convenient shortcut links to navigate the entire platform. Getting around is simple: use either the left-hand menu tabs or the dashboard shortcuts.\n\n
                 Ready to start? Browse quality equipment from verified sellers, list your unused gear, or explore competitive prices with complete peace of mind.
                 ",
                 'read_status' => 0,
