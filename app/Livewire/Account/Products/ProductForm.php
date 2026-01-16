@@ -45,6 +45,10 @@ class ProductForm extends Component
         $this->preview_quantity = 1;
     }
 
+    public function updatedItemPrice(){
+        $this->item_price = str_replace(' ', '', $this->item_price);
+    }
+
     public function removeItem(){
         if($this->cur_id){
             $prdt = Product::find($this->cur_id);
