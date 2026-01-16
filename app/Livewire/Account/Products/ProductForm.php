@@ -46,7 +46,8 @@ class ProductForm extends Component
     }
 
     public function updatedItemPrice(){
-        $this->item_price = str_replace(' ', '', $this->item_price);
+        $this->item_price = preg_replace('/,([^,]*)$/', ',$1', str_replace(',', '', $this->item_price));
+        $this->item_price = str_replace(',','.',str_replace(' ', '', $this->item_price));
     }
 
     public function removeItem(){

@@ -21,7 +21,7 @@
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
                                             <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
+                                            <span class="tooltip-content clearfix" style="bottom: -119px;">
                                                 <span class="tooltip-text px-2">
                                                     <b>Available for shopping</b>
                                                     <p class="text-white">Total of all funds across all catagories</p>
@@ -44,7 +44,7 @@
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
+                                            <span class="tooltip-content clearfix" style="bottom: -119px;">
                                                 <span class="tooltip-text px-2">
                                                     <b>Armoury Broker Credit</b>
                                                     <p class="text-white">Platfrom credits for covering fees only (Not cashable)</p>
@@ -67,7 +67,7 @@
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
+                                            <span class="tooltip-content clearfix" style="bottom: -119px;">
                                                 <span class="tooltip-text px-2">
                                                     <b>Gift Voucher Credit</b>
                                                     <p class="text-white">Unspent gift voucher credit (Expires in 12 months - Not cashable)</p>
@@ -90,7 +90,7 @@
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
                                             <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
+                                            <span class="tooltip-content clearfix" style="bottom: -119px;">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Purchases</b>
                                                     <p class="text-white">Moneies spent on in platform purchases</p>
@@ -139,7 +139,7 @@
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
-                                                    <b>pending Withdrawal</b>
+                                                    <b>Pending Withdrawal</b>
                                                 </span> 
                                             </span>
                                         </span>
