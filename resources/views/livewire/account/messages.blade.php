@@ -236,7 +236,7 @@
                                                             $masked = preg_replace('/\b((https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i', ' ', $masked);
 
                                                             @endphp
-                                                            {{ $masked }}
+                                                            {!! $masked !!}
                                                         </div>
                                                         <div class="message-time">
                                                             {{ $message->created_at->format('H:i') }}
