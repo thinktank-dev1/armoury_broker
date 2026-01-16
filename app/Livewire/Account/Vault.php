@@ -61,10 +61,10 @@ class Vault extends Component
             ->orWhere('vendor_id', Auth::user()->vendor_id);
         })
         ->when($date_from, function($q) use($date_from){
-            return $q->whereDate('created_at', '>', $date_from);
+            return $q->whereDate('created_at', '>=', $date_from);
         })
         ->when($date_to, function($q) use($date_to){
-            return $q->whereDate('created_at', '<', $date_to);
+            return $q->whereDate('created_at', '<=', $date_to);
         })
         ->when($filter, function($q) use($filter){
             if($filter == "orders"){
