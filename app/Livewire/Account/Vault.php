@@ -84,7 +84,7 @@ class Vault extends Component
                 'name' => $trx->name,
                 'direction' => $trx->direction,
                 'amount' => $trx->amount,
-                'status' => $trx->status,
+                'status' => $trx->payment_status,
             ];
             $data_trxs[] = $arr;
         }
