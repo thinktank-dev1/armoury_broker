@@ -89,7 +89,7 @@ class ProcessPayment extends Controller
                                     $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
                                     $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
                                     $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
-                                    $order_data .= "<tr><td>Delivery Type:</td><td>".$item->shipping_method."</td></tr>";
+                                    $order_data .= "<tr><td>Delivery Type:</td><td>".ucwords(str_replace('_', ' ',$item->shipping_method))."</td></tr>";
                                     $order_data .= "</table>";
                                     $order_data .= "</td>";
                                     $order_data .= "</tr>";
@@ -146,12 +146,12 @@ class ProcessPayment extends Controller
                         $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
                         $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
                         $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
-                        $order_data .= "<tr><td>Delivery Type:</td><td>".$item->shipping_method."</td></tr>";
+                        $order_data .= "<tr><td>Delivery Type:</td><td>".ucwords(str_replace('_', ' ',$item->shipping_method))."</td></tr>";
                         $order_data .= "</table>";
                         $order_data .= "</td>";
                         $order_data .= "</tr>";
                     }
-                    $order_data .= "<tr><td><b>Total Paid</b></td><td><b>R ".number_format(($order->cart_total + $order->total_shipping_fee),2)."</b></td></tr>";
+                    $order_data .= "<tr><td><b>Due to you</b></td><td><b>R ".number_format(($order->cart_total + $order->total_shipping_fee),2)."</b></td></tr>";
                     $order_data .= "</table>";
 
                     $body = "Looks like you have just helped someone to <b>LEVEL UP!</b><br /><br />
@@ -210,7 +210,7 @@ class ProcessPayment extends Controller
                         $order_data .= "</td>";
                         $order_data .= "</tr>";
                     }
-                    $order_data .= "<tr><td><b>Due to you</b></td><td><b>R ".number_format($tot,2)."</b></td></tr>";
+                    $order_data .= "<tr><td><b>Total paid</b></td><td><b>R ".number_format($tot,2)."</b></td></tr>";
                     $order_data .= "</table>";
 
                     $body = "Looks like you have just <b>LEVELED UP!</b><br /><br />

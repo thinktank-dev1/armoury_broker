@@ -12,9 +12,9 @@
             </h3>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-4">
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-header">
                     <h4 class="card-title">My Armoury</h4>
                 </div>
@@ -101,7 +101,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-header">
                     <h4 class="card-title">My Profile</h4>
                 </div>
@@ -134,8 +134,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-md-4 d-fl">
+            <div class="card h-100">
                 <div class="card-header d-flex">
                     <h4 class="card-title">My Vault</h4>
                     <div class="ms-auto">
@@ -162,8 +162,8 @@
                     <div>
                         <table class="table table-sm table-borderless">
                             <tr>
-                                <td class="bold">R {{ number_format($spendable_amount , 2) }}</td>
-                                <td class="bold">Available for shopping</td>
+                                <td class="bold pb-4">R {{ number_format($spendable_amount , 2) }}</td>
+                                <td class="bold pb-4">Available for shopping</td>
                             </tr>
                             <tr>
                                 <td>R {{ number_format($ab_credit, 2) }}</td>
@@ -182,8 +182,8 @@
                                 <td>Orders In Progress</td>
                             </tr>
                             <tr>
-                                <td class="bold">R {{ number_format($tot_credit, 2) }}</td>
-                                <td class="bold">Total Balance</td>
+                                <td class="bold pt-4">R {{ number_format($tot_credit, 2) }}</td>
+                                <td class="bold pt-4">Total Balance</td>
                             </tr>
                         </table>
                     </div>

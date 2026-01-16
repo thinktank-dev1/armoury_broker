@@ -178,10 +178,14 @@ class ProductForm extends Component
             'item_description' => 'required',
             'category_id' => 'required',
             'quantity' => 'required',
+            'brand_id' => 'required',
+            'condition' => 'required',
         ];
         $messages = [
             'item_name.required' => 'Listing title field is required',
             'category_id.required' => 'Please select a category',
+            'brand_id.required' => 'Please select a brand',
+            'condition.required' => 'Please select a condition',
         ];
         if($this->listing_type == "sale"){
             $rules['service_fee_payer'] = 'required';
