@@ -163,7 +163,7 @@
                                         </div>
                                         <div class="form-group mb-2">
                                             <select class="form-control" placeholder="Sub category" name="sub_category_id*" wire:model.live="sub_category_id">
-                                                <option value="">Sub Category</option>
+                                                <option value="">Sub Category*</option>
                                                 @if($category)
                                                     @foreach($category->sub_cats->whereNull('parent_id') AS $sub)
                                                         <option value="{{ $sub->id }}">{{ $sub->sub_category_name }}</option>
@@ -174,7 +174,7 @@
                                         @if(count($sub_sub) > 0)
                                         <div class="form-group mb-2">
                                             <select class="form-control" placeholder="Sub Sub category" name="sub_sub_category_id*" wire:model.blur="sub_sub_category_id">
-                                                <option value="">Sub-Sub-Category</option>
+                                                <option value="">Sub-Sub-Category*</option>
                                                 @if($sub_sub)
                                                     @foreach($sub_sub AS $sub)
                                                         <option value="{{ $sub['id'] }}">{{ $sub['name'] }}</option>
@@ -208,7 +208,7 @@
                                         @endif
                                         <div class="form-group mb-2">
                                             <select class="form-control" placeholder="Brand*" name="brand_id" wire:model.blur="brand_id">
-                                                <option value="">Brand</option>
+                                                <option value="">Brand*</option>
                                                 @foreach($brands AS $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
                                                 @endforeach
@@ -216,7 +216,7 @@
                                         </div>
                                         <div class="form-group mb-2">
                                             <select class="form-control" placeholder="Condition*" name="condition" wire:model.blur="condition">
-                                                <option value="">Condition</option>
+                                                <option value="">Condition*</option>
                                                 @foreach($conditions AS $cond)
                                                 <option value="{{ $cond }}">{{ $cond }}</option>
                                                 @endforeach
