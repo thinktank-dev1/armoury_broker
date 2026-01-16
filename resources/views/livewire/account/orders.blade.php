@@ -173,10 +173,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    
                                     <div class="mt-auto">
                                         <div class="d-grid gap-2">
                                             <a href="" class="btn btn-primary" wire:click.prevent="updateOrderStatus({{ $item->id }})">Update</a>
+                                            @if($item->vendor_status != "Order Dispatched" && $item->vendor_status != "Canceled")
                                             <a href="" class="btn btn-outline-danger" wire:click.prevent="showCancelConfirmation({{ $item->id }})">Cancel Order</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
