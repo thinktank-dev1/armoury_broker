@@ -51,7 +51,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="join_dealer_network" wire:model.live="join_dealer_network">
                                     <label class="form-check-label" for="join_dealer_network">
-                                        I Would like to join the Armoury Broker Dealer Network?
+                                        I would like to join the Armoury Broker Dealer Network
                                     </label>
                                 </div>
                             </div>
