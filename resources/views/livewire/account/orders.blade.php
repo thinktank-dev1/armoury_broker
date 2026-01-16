@@ -144,6 +144,7 @@
                                                 </td>
                                             </tr>
                                             @endif
+                                            @if($item->buyer_status != "Received")
                                             <tr>
                                                 <th class="text-end">Shipping Status</th>
                                                 <td class="py-3">
@@ -163,6 +164,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                            @endif
                                             <tr>
                                                 <th class="text-end">Order Status</th>
                                                 <td class="">
