@@ -7,6 +7,8 @@ use Livewire\WithPagination;
 
 use App\Lib\Communication;
 
+use Carbon\Carbon;
+
 use Auth;
 use App\Models\OrderItem;
 use App\Models\Transaction;
@@ -45,6 +47,13 @@ class Vault extends Component
         $filter = $this->filter; 
         $date_from = $this->date_from;
         $date_to = $this->date_to;
+
+        if($date_from){
+            $date_from = date('Y-m-d 00:00:00',strtotime($date_from));
+        }
+        if($date_to){
+            $date_to = date('Y-m-d 23:59:59',strtotime($date_to));
+        }
 
         $trxs = Transaction::query()
         ->where(function ($q) {
@@ -219,6 +228,12 @@ class Vault extends Component
         $filter = $this->filter; 
         $date_from = $this->date_from;
         $date_to = $this->date_to;
+        if($date_from){
+            $date_from = date('Y-m-d 00:00:00',strtotime($date_from));
+        }
+        if($date_to){
+            $date_to = date('Y-m-d 23:59:59',strtotime($date_from));
+        }
 
         $trxs = Transaction::query()
         ->where(function ($q) {
@@ -226,10 +241,10 @@ class Vault extends Component
             ->orWhere('vendor_id', Auth::user()->vendor_id);
         })
         ->when($date_from, function($q) use($date_from){
-            return $q->whereDate('created_at', '>', $date_from);
+            return $q->whereDate('created_at', '>=', $date_from);
         })
         ->when($date_to, function($q) use($date_to){
-            return $q->whereDate('created_at', '<', $date_to);
+            return $q->whereDate('created_at', '<=', $date_to);
         })
         ->when($filter, function($q) use($filter){
             if($filter == "orders"){
