@@ -140,11 +140,7 @@
                                             <tr class="mb-1">
                                                 <th class="text-end">Tracking Number (optional)</th>
                                                 <td class="">
-                                                    @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
                                                     <input type="text" class="form-control" name="tracking_number" wire:model.defer="orders_items_arr.{{ $item->id }}.tracking_number">
-                                                    @else
-                                                        {{ $item->tracking_number }}
-                                                    @endif
                                                 </td>
                                             </tr>
                                             @endif
@@ -177,14 +173,12 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    @if($item->vendor_status != "Order Dispatched" && $item->vendor_status != "Canceled")
                                     <div class="mt-auto">
                                         <div class="d-grid gap-2">
                                             <a href="" class="btn btn-primary" wire:click.prevent="updateOrderStatus({{ $item->id }})">Update</a>
                                             <a href="" class="btn btn-outline-danger" wire:click.prevent="showCancelConfirmation({{ $item->id }})">Cancel Order</a>
                                         </div>
                                     </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
