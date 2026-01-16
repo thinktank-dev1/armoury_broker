@@ -66,6 +66,28 @@ use App\Models\User;
 use App\Http\Controllers\FbController;
 use App\Livewire\Auth\FbConfirmation;
 
+use App\Models\Transaction;
+
+Route::get('test', function(){
+    $trxs = Transaction::all();
+
+    $data_trxs = [];
+    foreach($trxs AS $trx){
+        $arr = [
+            'date' => $trx->created_at,
+            'name' => $trx->name,
+            'direction' => $trx->direction,
+            'amount' => $trx->amount,
+            'status' => $trx->status,
+        ];
+        $data_trxs[] = $arr;
+    }
+    
+    return view('pdf.transactions', [
+        'data' => $data_trxs
+    ]);
+});
+
 Route::get('/', HomePage::class);
 Route::get('support', Support::class);
 Route::get('how-it-works', HowItWorks::class);
