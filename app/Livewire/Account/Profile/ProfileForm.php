@@ -37,7 +37,7 @@ class ProfileForm extends Component
         $this->validate([
             'name' => 'required', 
             'surname' => 'required', 
-            'mobile_number' => 'required', 
+            'mobile_number' => 'required|phone:ZA|unique:users,mobile_number', 
             'email' => 'required|email|unique:users,email,'.Auth::user()->id, 
         ]);
 

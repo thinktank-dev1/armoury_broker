@@ -147,10 +147,15 @@
                                             <tr>
                                                 <th class="text-end">Shipping Status</th>
                                                 <td class="py-3">
-                                                    @if($item->vendor_status != "Canceled" && $item->vendor_status != "Order Dispatched")
+                                                    @if($item->vendor_status != "Canceled" && ($item->vendor_status != "Order Dispatched" || $item->vendor_status == 'Dealer stocked - Confirmed'))
                                                     <select class="form-control" name="vendor_status" wire:model.defer="orders_items_arr.{{ $item->id }}.vendor_status">
-                                                        <option value="">Pending Dispatch</option> 
+                                                        <option value="">Pending Dispatch</option>
+                                                        @if($item->dealer || $item->custom_dealer_details)
+                                                        <option value="Firearm dealer stocked">Firearm dealer stocked</option> 
+                                                        <option value="Dealer stocked - Confirmed">Dealer stocked - Confirmed</option>   
+                                                        @else 
                                                         <option value="Order Dispatched">Order Dispatched</option>
+                                                        @endif
                                                     </select>
                                                     @else
                                                         {{ $item->vendor_status }}
@@ -164,7 +169,7 @@
                                                         Canceled
                                                     @elseif($item->vendor_status == null && $item->buyer_status == null)
                                                         Pending
-                                                    @elseif($item->vendor_status == "Order Dispatched" && $item->buyer_status == null)
+                                                    @elseif(($item->vendor_status == "Order Dispatched" || $item->vendor_status == 'Dealer stocked - Confirmed') && $item->buyer_status == null)
                                                         Awaiting buyer confirmation
                                                     @else
                                                         Complete
@@ -177,7 +182,7 @@
                                     <div class="mt-auto">
                                         <div class="d-grid gap-2">
                                             <a href="" class="btn btn-primary" wire:click.prevent="updateOrderStatus({{ $item->id }})">Update</a>
-                                            @if($item->vendor_status != "Order Dispatched" && $item->vendor_status != "Canceled")
+                                            @if(($item->vendor_status != "Order Dispatched" || $item->vendor_status == 'Dealer stocked - Confirmed') && $item->vendor_status != "Canceled")
                                             <a href="" class="btn btn-outline-danger" wire:click.prevent="showCancelConfirmation({{ $item->id }})">Cancel Order</a>
                                             @endif
                                         </div>

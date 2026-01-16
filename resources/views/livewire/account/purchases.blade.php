@@ -141,10 +141,14 @@
                                                         Canceled
                                                     @elseif($item->vendor_status == null && $item->buyer_staus == null)
                                                         Pending
-                                                    @elseif($item->vendor_status == "Order Dispatched" && $item->buyer_status == null)
+                                                    @elseif(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed") && $item->buyer_status == null)
                                                         Awaiting buyer confirmation
                                                     @else
-                                                        Complete
+                                                        @if($item->dealer || $item->custom_dealer_details)
+                                                            Complete - Dealer stocked
+                                                        @else
+                                                            Complete
+                                                        @endif
                                                     @endif
                                                 </td>
                                             </tr>
@@ -152,7 +156,7 @@
                                     </table>
                                     <div class="mt-auto">
                                         <div class="d-grid gap-2">
-                                            @if($item->vendor_status == "Order Dispatched" && $item->buyer_status == null)
+                                            @if(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed") && $item->buyer_status == null)
                                             <a href="" class="btn btn-primary" wire:click.prevent="showReceiptConfirmation({{ $item->id }})">Item received</a>
                                             @endif
                                             @if($item->vendor_status == "Order Dispatched" && $item->buyer_status != 'Received')
