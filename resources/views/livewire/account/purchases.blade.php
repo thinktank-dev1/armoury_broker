@@ -141,6 +141,8 @@
                                                         Canceled
                                                     @elseif($item->vendor_status == null && $item->buyer_staus == null)
                                                         Pending
+                                                    @elseif($item->status == "Firearm dealer stocked")
+                                                        Firearm dealer stocked
                                                     @elseif(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed") && $item->buyer_status == null)
                                                         Awaiting buyer confirmation
                                                     @else
