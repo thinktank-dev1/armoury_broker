@@ -5,6 +5,8 @@ namespace App\Livewire\Account;
 use Livewire\Component;
 use Livewire\Attributes\On; 
 
+use App\Lib\Communication;
+
 use Auth;
 use App\Models\Vendor;
 use App\Models\Order;
@@ -14,6 +16,7 @@ use App\Models\ShippingService;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\MessageThread;
+use App\Models\Dispute;
 
 class Orders extends Component
 {
@@ -27,6 +30,8 @@ class Orders extends Component
     public $shipping_service_name;
 
     public $cancel_id;
+    public $item_id, $vendor_id;
+    public $grievance;
 
     public function mount(){
         $this->filter = "all_orders";
@@ -46,6 +51,78 @@ class Orders extends Component
                 $this->orders_items_arr[$itm->id] = $arr;
             }
         }
+    }
+
+    public function showDisputeModal($item_id, $vendor_id){
+        $this->item_id = $item_id;
+        $this->vendor_id = $vendor_id;
+        $this->dispatch('show-dispute-modal');
+    }
+
+    public function seveDispute(){
+        Dispute::create([
+            'user_id' => Auth::user()->id,
+            'vendor_id' => $this->vendor_id,
+            'order_id' => $this->item_id,
+            'message' => $this->grievance,
+            'status' => 0,
+        ]);
+
+        $item = OrderItem::find($this->item_id);
+        $order = $item->order;
+
+        $to = env('ADMIN_EMAIL', 'wilson@thinktank.co.za');
+        $comm = new Communication();
+
+        $order_data = "<table class='table-bodered' style='width: 100%'>";
+        $order_data .= "<thead><tr style='background-color: #e6e6e6;'><th colspan='2' style='text-align: center;'>AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</th></tr></thead>";
+        $order_data .= "<tbody>";
+        
+        $order_data .= "<tr>";
+        if($item->product->images->count() > 0){
+            $order_data .= "<td><img style='height: 100px' src='".url('storage/'.$item->product->images->first()->image_url)."'></td>";
+        }
+        else{
+            $order_data .= "<td></td>";
+        }
+        $order_data .= "<td>";
+        $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
+        $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
+        $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
+        $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
+        $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
+        $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
+        $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
+        $order_data .= "<tr><td>Delivery Type:</td><td>".ucwords(str_replace('_', ' ',$item->shipping_method))."</td></tr>";
+        $order_data .= "</table>";
+        $order_data .= "</td>";
+        $order_data .= "</tr>";
+        
+        $order_data .= "</table>";
+
+        $body = Auth::user()->vendor->name." has filed a dispute <b>(Seller)</b>.<br /><br />
+        <b>Dispute Message:</b><br />
+        ".$this->grievance."<br /><br />
+        <b>Product Details:</b>
+        ".$order_data;
+
+        $data = [
+            'to' => $to,
+            'name' => 'Armoury Broker',
+            'subject' => 'Armoury Broker Order dispute',
+            'title' => "Order dispute",
+            'message_body' => $body,
+            'cta' => false,
+            'cta_text' => null,
+            'cta_url' => null,
+            'after_cta_body' => null,
+        ];
+        
+        $comm = new Communication();
+        $comm->sendMail($data);
+
+        $this->dispatch('close-modal');
+        $this->dispatch('dispute-saved');
     }
 
     public function messageBuyer($id){

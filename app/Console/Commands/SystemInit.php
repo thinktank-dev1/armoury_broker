@@ -78,41 +78,7 @@ class SystemInit extends Command
             $this->line("Seeding Roles table");
             $this->call('db:seed');
         }
-
-        $this->line("Creating Admin User");
-
-        $name = $this->ask("Enter your First Name");
-        $surname = $this->ask("Enter your Last Name");
-        $mobile_number = $this->ask("Enter your Cellphone Number");
-        $email = $this->ask("Enter your Email Address");
-        $pass = $this->ask("Enter your Password");
-
-        if(!$name || !$surname || !$email || !$pass){
-            $this->error("You did not enter all required data. Re-run the command and enter all required information");
-        }
-        else{
-            $exists = User::where('email', $email)->first();
-            if($exists){
-                $this->error("The email address has already been taken.");
-            }
-            else{
-                $role = Role::where('name', 'admin')->first();
-                if($role){
-                    $user = User::create([
-                        'role_id' => $role->id,
-                        'name' => $name,
-                        'surname' => $surname,
-                        'mobile_number' => $mobile_number,
-                        'email' => $email,
-                        'password' => Hash::make($pass),
-                        'status' => 1,
-                        'email_verified_at' => now(),
-                    ]);
-                    event(new Registered($user));
-                    $this->info("Admin User has been created");
-                }
-            }
-        }
+        $this->call('storage:link');
         $this->info("ALL DONE");
     }
 }

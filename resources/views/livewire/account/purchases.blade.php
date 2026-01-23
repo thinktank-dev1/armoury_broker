@@ -161,10 +161,9 @@
                                             @if(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed") && $item->buyer_status == null)
                                             <a href="" class="btn btn-primary" wire:click.prevent="showReceiptConfirmation({{ $item->id }})">Item received</a>
                                             @endif
-                                            @if($item->vendor_status == "Order Dispatched" && $item->buyer_status != 'Received')
-                                            <b>Other Actions</b>
+                                            
+                                            {{-- <b>Other Actions</b> --}}
                                             <a href="" class="btn btn-outline-danger" wire:click.prevent="showDisputeModal({{ $item->id }}, {{ $item->vendor_id }})">I have an issue with this order</a>
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -247,14 +246,6 @@
             });
             @this.on('dispute-saved', () => {
                 $('#dispute-confirmation-modal').modal('show');
-                /*
-                Swal.fire({
-                    title: "Disputed Logged",
-                    text: "Your dispute has been logged, one of our agent will contact you as soon as possible.",
-                    icon: "success",
-                    confirmButtonColor: "#293c47",
-                });
-                */
             })
             @this.on('show-item-details-modal', () => {
                 $('#show-item-details').modal('show');

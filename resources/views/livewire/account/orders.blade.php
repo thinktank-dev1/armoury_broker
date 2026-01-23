@@ -190,6 +190,7 @@
                                             @if(($item->vendor_status != "Order Dispatched" || $item->vendor_status == 'Dealer stocked - Confirmed') && $item->vendor_status != "Canceled")
                                             <a href="" class="btn btn-outline-danger" wire:click.prevent="showCancelConfirmation({{ $item->id }})">Cancel Order</a>
                                             @endif
+                                            <a href="" class="btn btn-outline-danger" wire:click.prevent="showDisputeModal({{ $item->id }}, {{ $item->vendor_id }})">I have an issue with this order</a>
                                         </div>
                                     </div>
                                 </div>
@@ -250,31 +251,62 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="dispute-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dispute Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent="seveDispute">
+                        <div class="row">
+                            <div cass="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Please Enter Your Grievance Note</label>
+                                    <textarea class="form-control" name="grievance" wire:model.defer="grievance"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="seveDispute">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="dispute-confirmation-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Disputed Logged</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Your dispute has been logged, one of our agents will contact you as soon as possible</p>
+                </div>
+                <div class="modal-footer d-grid">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary" wire:click.prevent="confirmedReceipt">Yes, Item has been received!</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {
+            @this.on('dispute-saved', () => {
+                $('#dispute-confirmation-modal').modal('show');
+            });
+            @this.on('show-dispute-modal', () => {
+                $('#dispute-modal').modal('show');
+            })
             @this.on('show-cancel-confirmation', () => {
                 $('#confirmation-modal').modal('show');
-                /*
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You will still be liable for the full platform fee of 5% if this is done",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#293c47",
-                    confirmButtonText: "Yes, Cancel Order!",
-                    cancelButtonText: "No, Don't Cancel Order",
-                }).then((result) => {
-                    if(result.value == true){
-                        @this.dispatch('cancel-confirmed');
-                        Swal.fire({
-                            title: "Canceled!",
-                            text: "Order has been cancelled.",
-                            confirmButtonColor: '#293c47',
-                        });
-                    }
-                });
-                */
             });
             @this.on('show-item-details-modal', () => {
                 $('#show-item-details').modal('show');

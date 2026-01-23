@@ -17,6 +17,7 @@ use App\Models\ProductImage;
 use App\Models\DeliverOption;
 use App\Models\Caliber;
 use App\Models\Dealer;
+use App\Models\OfferPrice;
 
 class ProductForm extends Component
 {
@@ -249,6 +250,15 @@ class ProductForm extends Component
         else{
             $prdt = new Product();
         }
+
+        if($this->cur_id){
+            $offers = OfferPrice::where('product_id', $prdt->id)->whereNull('status')->get();
+            foreach($offers AS $offer){
+                if($offer->amount > $this->item_price){
+                    $offer->delete();
+                }
+            }
+        }
         
         $prdt->vendor_id = Auth::user()->vendor_id;
         $prdt->user_id = Auth::user()->id;
@@ -382,7 +392,7 @@ class ProductForm extends Component
 
         $calibers = Caliber::orderBy('caliber', 'ASC')->get();
 
-        $dealers = Dealer::where('province', Auth::user()->vendor->province)->get();
+        $dealers = Dealer::where('province', Auth::user()->vendor->province)->where('status', 1)->get();
 
         return view('livewire.account.products.product-form', [
             "cats" => $cats,

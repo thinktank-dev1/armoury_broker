@@ -67,6 +67,7 @@
                                 </span>
                                 @endif
                             </div>
+                            @if($tag != "Sold")
                             <div class="cart-product-quantity">
                                 <div class="quantity">
                                     <input type="button" value="-" class="minus">
@@ -74,8 +75,9 @@
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
+                            @endif
                             <div class="pr_desc">
-                                <p class="text-dark-blue">Available Quantity: {{ $vailable_qty }}</p>
+                                <p class="text-dark-blue">Available Quantity: @if($tag == "Sold") Sold @else {{ $vailable_qty }} @endif</p>
                                 <p class="text-dark-blue">{{ $product->item_description }}</p>
                                 
                             </div>

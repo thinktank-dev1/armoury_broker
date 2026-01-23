@@ -16,6 +16,14 @@ class ViewDealer extends Component
         $this->cur_id = $id;
     }
 
+    public function changeStatus($status){
+        $dl = Dealer::find($this->cur_id);
+        if($dl){
+            $dl->status = $status;
+            $dl->save();
+        }
+    }
+
     public function render(){
         $dealer = Dealer::find($this->cur_id);
         $vendor = null;

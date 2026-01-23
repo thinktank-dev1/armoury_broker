@@ -770,3 +770,30 @@ select.form-control{
   	pointer-events: none;
   	cursor: pointer;
 }
+.swal2-popup {
+	padding: 0px !important;
+	margin: 0px !important;
+	text-align: left !important;
+}
+.swal2-header{
+	padding: 0px;
+	margin: 0px;
+	background-color: #293c47;
+	color: #FFF !important;
+	text-align: left !important;
+	align-items: start !important;
+}
+.swal2-popup .swal2-header{
+	text-align: left !important;
+}
+.swal2-title{
+	color: #FFF !important;
+	text-align: left !important;
+	padding: 8px 10px !important; 
+}
+.swal2-popup #swal2-content{
+	text-align: left !important;
+	align-items: left !important;
+	padding: 10px;
+	margin-top: 20px;
+}
