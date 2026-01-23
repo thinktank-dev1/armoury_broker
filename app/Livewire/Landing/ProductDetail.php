@@ -55,18 +55,22 @@ class ProductDetail extends Component
         ->where('vendor_status', '<>', 'Canceled')
         ->sum('quantity');
 
+        /*************/
+        $this->quantity = 1;
+
+        $qty = $this->product->quantity;
+        $this->availability = true;
+        
+        $itms_count = OrderItem::query()
+        ->where('product_id', $id)
+        ->whereHas('order', function($q){
+            return $q->whereNotNull('g_payment_id');
+        })
+        // ->where('vendor_status', '<>', 'Canceled')
+        ->sum('quantity');
+
         $this->vailable_qty = $qty - $itms_count;
         
-        $this->quantity = 1;
-        
-        if($qty <= $itms_count){
-            $this->availability = false;
-            $this->quantity = 0;
-        }
-        else{
-            $this->availability = true;
-        }
-
         if($this->product->listing_type == "wanted"){
             $this->tag = "Wanted";
         }
