@@ -245,7 +245,7 @@ class Orders extends Component
                 $order_data .= "</table>";
             }
 
-            $dl_user = $dl->user;
+            $dl_user = $item->user;
 
             $body = "Hi ".$item->user->vendor->name."</b><br /><br />
             Great news!<br />
