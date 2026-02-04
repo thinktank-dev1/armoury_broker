@@ -121,12 +121,12 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <ul>
-                                                        <li><strong>Always use the "Buy" button</strong> when making purchases</li>
-                                                        <li><strong>Payments outside Armoury Broker</strong> violate our Terms and Conditions and are not protected</li>
-                                                        <li><strong>Never open external links or scan QR codes</strong> sent through platform messaging. Keep all communication on the platform</li>
-                                                        <li><strong>Armoury Broker will never ask you to change</strong> your login information, banking details, or social media account information</li>
-                                                        <li>All firearm transactions <strong>must comply with the Firearms Control Act of South Africa 60 of 2000</strong></li>
-                                                        <li>Legal liability for correct firearm transfer procedures <strong>rests with the license holder</strong> and not Armoury Broker (Pty) Ltd or any of its members</li>
+                                                        <li><strong>Always use the "Buy" button</strong> when making purchases.</li>
+                                                        <li><strong>Payments outside Armoury Broker</strong> violate our Terms and Conditions and are not protected.</li>
+                                                        <li><strong>Never open external links or scan QR codes</strong> sent through platform messaging. Keep all communication on the platform.</li>
+                                                        <li><strong>Armoury Broker will never ask you to change</strong> your login information, banking details, or social media account information.</li>
+                                                        <li>All firearm transactions <strong>must comply with the Firearms Control Act of South Africa 60 of 2000.</strong></li>
+                                                        <li>Legal liability for correct firearm transfer procedures <strong>rests with the license holder</strong> and not Armoury Broker (Pty) Ltd or any of its members.</li>
                                                     </ul>
                                                 </div>
                                                 <div class="modal-footer">
