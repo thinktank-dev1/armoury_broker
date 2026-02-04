@@ -247,8 +247,7 @@ class Orders extends Component
 
             $dl_user = $item->user;
 
-            $body = "Hi ".$item->user->vendor->name."</b><br /><br />
-            Great news!<br />
+            $body = "Great news!<br />
             Your order ".str_pad($order->id, 4, '0', STR_PAD_LEFT)." has been shipped by ".$order->vendor->name.".".$order_data;
             $body .= "<strong>Next step:<strong><br />
             <p>Once the item has been received, please ensure that you update the status on the platform to “Item Received” and confirm that all is in order. </p>
