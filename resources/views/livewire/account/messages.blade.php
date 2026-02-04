@@ -105,7 +105,7 @@
                                         </div>
                                         <span class="ms-auto chat-item">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#terms-modal">
-                                                <h4 class="card-title text-white underline">
+                                                <h4 class="card-title text-white underline" style="font-size: 14px;">
                                                     Terms Of Use <i class=" icon-info"></i>
                                                 </h4>
                                             </a>
