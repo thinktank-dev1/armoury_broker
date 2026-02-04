@@ -56,7 +56,7 @@ class ProductForm extends Component
         if($count > 50){
             $this->item_description = substr($this->item_description, 0, 50);
         }
-        $this->description_word_count = 50 - strlen($this->item_description);
+        $this->description_word_count = 100 - strlen($this->item_description);
     }
 
     public function updatedItemName(){
@@ -64,7 +64,7 @@ class ProductForm extends Component
         if($count > 50){
             $this->item_name = substr($this->item_name, 0, 50);
         }
-        $this->item_name_word_count = 100 - strlen($this->item_name);
+        $this->item_name_word_count = 50 - strlen($this->item_name);
     }
 
     public function updatedItemPrice(){
