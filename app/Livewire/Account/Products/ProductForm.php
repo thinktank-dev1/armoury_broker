@@ -32,6 +32,7 @@ class ProductForm extends Component
     public $collection_delivery, $courier, $dealer_stock, $free_delivery;
     public $preview, $preview_quantity, $sub_name, $brand_name, $sub_sub_name;
     public $dealer_stock_type, $ab_dealer_id, $private_dealer_details;
+    public $item_name_word_count, $description_word_count;
 
     public function mount($id = null){
         if(!Auth::user()->vendor_id){
@@ -45,6 +46,25 @@ class ProductForm extends Component
         }
         $this->preview = True;
         $this->preview_quantity = 1;
+
+        $this->item_name_word_count = 50;
+        $this->description_word_count = 100;
+    }
+
+    public function updatedItemDescription(){
+        $count = strlen($this->item_description);
+        if($count > 50){
+            $this->item_description = substr($this->item_description, 0, 50);
+        }
+        $this->description_word_count = 50 - strlen($this->item_description);
+    }
+
+    public function updatedItemName(){
+        $count = strlen($this->item_name);
+        if($count > 50){
+            $this->item_name = substr($this->item_name, 0, 50);
+        }
+        $this->item_name_word_count = 100 - strlen($this->item_name);
     }
 
     public function updatedItemPrice(){

@@ -103,21 +103,40 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <span class="ms-auto chat-item">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#terms-modal">
+                                                <h4 class="card-title text-white underline">
+                                                    Terms Of Use <i class=" icon-info"></i>
+                                                </h4>
+                                            </a>
+                                        </span>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <small>
-                                                <strong>Safety Reminder</strong>
-                                                <ul>
-                                                    <li>Always use the "Buy" button when making purchases</li>
-                                                    <li>Payments outside Armoury Broker violate our Terms and Conditions and are not protected</li>
-                                                    <li>Never open external links or scan QR codes sent through platform messaging. Keep all communication on the platform</li>
-                                                    <li>Armoury Broker will never ask you to change your login information, banking details, or social media account information</li>
-                                                    <li>All firearm transactions must comply with the Firearms Control Act of South Africa 60 of 2000</li>
-                                                    <li>Legal liability for correct firearm transfer procedures rests with the license holder and not Armoury Broker (Pty) Ltd or any of its members</li>
-                                                </ul>
-                                            </small>
+
+                                    <div class="modal fade" tabindex="-1" id="terms-modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Safety Reminder</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul>
+                                                        <li><strong>Always use the "Buy" button</strong> when making purchases</li>
+                                                        <li><strong>Payments outside Armoury Broker</strong> violate our Terms and Conditions and are not protected</li>
+                                                        <li><strong>Never open external links or scan QR codes</strong> sent through platform messaging. Keep all communication on the platform</li>
+                                                        <li><strong>Armoury Broker will never ask you to change</strong> your login information, banking details, or social media account information</li>
+                                                        <li>All firearm transactions <strong>must comply with the Firearms Control Act of South Africa 60 of 2000</strong></li>
+                                                        <li>Legal liability for correct firearm transfer procedures <strong>rests with the license holder</strong> and not Armoury Broker (Pty) Ltd or any of its members</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+
+                                    <div class="card-body">
                                         <div class="chat-container" wire:poll.15s>
                                             <div class="chat-body" id="chat-body">
                                                 @foreach($cur_msg->messages as $message)

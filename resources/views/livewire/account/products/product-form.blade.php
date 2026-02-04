@@ -145,13 +145,19 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-2">
-                                            <input type="text" class="form-control" placeholder="Listing Title*" name="item_name" wire:model.blur="item_name" maxlength="160"> 
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Listing Title*" name="item_name" wire:model.live="item_name" maxlength="50">
+                                                <span class="input-group-text" id="basic-addon1">{{ $item_name_word_count }}</span> 
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
                                             <input type="text" class="form-control" placeholder="Model Number" name="model_number" wire:model.blur="model_number"> 
                                         </div>
                                         <div class="form-group mb-2">
-                                            <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.blur="item_description" maxlength="160">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.live="item_description" maxlength="100">
+                                                <span class="input-group-text" id="basic-addon1">{{ $description_word_count }}</span> 
+                                            </div>
                                         </div>
                                         <div class="form-group mb-2">
                                             <select class="form-control" placeholder="Category" name="category_id*" wire:model.live="category_id">
