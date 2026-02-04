@@ -137,6 +137,8 @@
                                                                             You've accepted the offer.
                                                                         @elseif($message->action == "cancelled")
                                                                             Offer was cancelled.
+                                                                        @elseif($message->action == "product changed")
+                                                                            Product Changed
                                                                         @else
                                                                             <p>What would you like to do?</p>
                                                                             <div class="text-center">
@@ -156,6 +158,8 @@
                                                                             Offer was accepted. <a href="{{ url('shop/product/'.$cur_msg->product->id) }}">Click here to go to product</a>
                                                                         @elseif($message->action == "cancelled")
                                                                             Offer was cancelled.
+                                                                        @elseif($message->action == "product changed")
+                                                                            Product Changed
                                                                         @else
                                                                             <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="cancelOffer({{ $message->id }})">Cancel Offer</a>
                                                                         @endif
@@ -191,6 +195,8 @@
                                                                             You rejected the offer.
                                                                         @elseif($message->action == "accept")
                                                                             You accepted the offer.
+                                                                        @elseif($message->action == "product changed")
+                                                                            Product Changed
                                                                         @else
                                                                             <p>What would you like to do?</p>
                                                                             <div class="text-center">
@@ -208,6 +214,8 @@
                                                                             Offer was rejected.
                                                                         @elseif($message->action == "accept")
                                                                             Offer was accepted. <a href="{{ url('shop/product/'.$cur_msg->product->id) }}">Click here to go to product</a>
+                                                                        @elseif($message->action == "product changed")
+                                                                            Product Changed
                                                                         @else
                                                                             <a href="#" class="btn btn-secondary px-3 py-1" wire:click.prevent="cancelOffer({{ $message->id }})">Cancel Offer</a>
                                                                         @endif
@@ -264,6 +272,7 @@
                                                 @endforeach
                                             </div>
                                         </div>
+                                        @if($cur_msg->user->vendor->id != 1)
                                         <div class="">
                                             <div class="input-group">
                                                 <input type="text" class="form-control border-right-none" placeholder="Reply..." name="message" wire:model.defer="message">
@@ -285,6 +294,7 @@
                                             </div>
                                             @endif
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                                 @endif

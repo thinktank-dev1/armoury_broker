@@ -82,9 +82,21 @@
                                                                 </div>
                                                             </li>
                                                             <li class="list-group-item d-flex">
-                                                                <small class="">Price</small>
+                                                                <small class="">Item Price</small>
                                                                 <span class="ms-auto"><b>R {{ number_format($item['price'], 2) }}</b></span>
                                                             </li>
+                                                            @if($item['shipping_price'])
+                                                            <li class="list-group-item d-flex">
+                                                                <small class="">Shipping Price</small>
+                                                                <span class="ms-auto"><b>R {{ number_format($item['shipping_price'], 2) }}</b></span>
+                                                            </li>
+                                                            @endif
+                                                            @if($item['service_fee'])
+                                                            <li class="list-group-item d-flex">
+                                                                <small class="">Service Fee</small>
+                                                                <span class="ms-auto"><b>R {{ number_format($item['service_fee'], 2) }}</b></span>
+                                                            </li>
+                                                            @endif
                                                             <li class="list-group-item d-flex">
                                                                 <small class="">Total</small>
                                                                 <span class="ms-auto"><b>R {{ number_format($item['total'], 2) }}</b></span>
@@ -123,53 +135,6 @@
                                                                 </span>
                                                             </li>
                                                             @endif
-                                                            {{--
-                                                            @if($item['shipping_method'] == "dealer_stock")
-                                                            <li class="list-group-item d-flex">
-                                                                <small class="">Dealers</small>
-                                                                <span class="ms-auto">
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="dealers" id="{{ $product->id }}_ab_dealers" value="ab dealer" wire:model.live="cart.{{ $k }}.dealer_option"> 
-                                                                        <label class="form-check-label" for="{{ $product->id }}_ab_dealers">
-                                                                            Use AB dealers
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="dealers" id="{{ $product->id }}_custom_dealers" value="custom dealer" wire:model.live="cart.{{ $k }}.dealer_option"> 
-                                                                        <label class="form-check-label" for="{{ $product->id }}_custom_dealers">
-                                                                            Use my dealers
-                                                                        </label>
-                                                                    </div>
-                                                                </span>
-                                                            </li>
-                                                            @endif
-
-                                                            @if($item['dealer_option'] == "ab dealer")
-                                                            <li class="list-group-item d-flex">
-                                                                <small class="">Select AB dealer</small>
-                                                                <span class="ms-auto">
-                                                                    <div class="">
-                                                                        <select class="form-control" name="courier_shipping" wire:model.live="cart.{{ $k }}.ab_dealer_id">
-                                                                            <option value="">Select Option</option>
-                                                                            @foreach($dealers AS $dl)
-                                                                            <option value="{{ $dl->id }}">{{ $dl->business_name.' (R '.$dl->dealer_stocking_fee.' pm)' }}</option>
-                                                                            @endforeach
-                                                                        </select>
-                                                                    </div>
-                                                                </span>
-                                                            </li>
-                                                            @endif
-                                                            @if($item['dealer_option'] == "custom dealer")
-                                                            <li class="list-group-item d-flex">
-                                                                <small class="">Dealer Details</small>
-                                                                <span class="ms-auto">
-                                                                    <div class="">
-                                                                        <textarea name="dealer_details" wire:model.blur="cart.{{ $k }}.custom_dealer_details"></textarea>
-                                                                    </div>
-                                                                </span>
-                                                            </li>
-                                                            @endif
-                                                            --}}
 
                                                             @if($item['deliver_collection'] == "Courier")
                                                             <li class="list-group-item d-flex">
@@ -228,20 +193,7 @@
                             <h2 class="page-title pb-0 mb-0">Platform Fees</h2>
                             <p><small><b>Please Note: </b>Armoury Broker allows the fee to be covered by either the buyer or the seller or split between the parties on a 50-50 basis.</small></p>
                         </div>
-                        {{--
-                        <div class="@if($has_vendor_promo_codes) col-md-6 @else col-md-12 @endif mt-4 mb-4">
-                            <h2 class="page-title pb-0 mb-0">Apply Voucher Code</h2>
-                            <div class="mb-3">
-                                <label class="form-label">Enter Voucher Code</label>
-                                <input type="text" class="form-control" aria-describedby="voucher_help_text" name="voucher_code" wire:model.blur="voucher_code">
-                                <div id="voucher_help_text" class="form-text text-danger">
-                                    @if($voucher_error)
-                                    {{ $voucher_error }}
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        --}}
+                        
                         @if($has_vendor_promo_codes)
                         <div class="row">
                             <div class="col-md-6 mt-4 mb-4">

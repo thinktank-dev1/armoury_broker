@@ -241,10 +241,10 @@
                             <span class="tooltip-content clearfix">
                                 <span class="tooltip-text px-2">
                                     <b>My Purchases</b>
-                                    <p class="text-white">Data from last 30 days</p>
                                     <ul>
-                                        <li><b>In Progress:</b> Orders waiting for seller to fulfill and ship or currently in transit.</li>
-                                        <li><b>Completed:</b> Purchases that have been received or cancelled.</li>
+                                        <li><strong>New:</strong> Recently made purchases awaiting processing</li>
+                                        <li><strong>In Progress:</strong> Purchases waiting for Seller to fulfill and ship or currently in transit</li>
+                                        <li><strong>Completed:</strong> Purchases that have been completed or cancelled</li>
                                     </ul>
                                 </span> 
                             </span>

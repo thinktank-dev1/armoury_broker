@@ -48,7 +48,7 @@ class ProcessPayment extends Controller
                     foreach($order->items AS $item){
                         $amount = $item->price * $item->quantity;
                         
-                        $amount = $this->fee_payment($amount,$order,$item);
+                        $amount = $item->amount_paid;
                         Transaction::create([
                             'name' => 'order_payment',
                             'transaction_type' => 'payfast_payment',
@@ -81,13 +81,16 @@ class ProcessPayment extends Controller
                                     else{
                                         $order_data .= "<td></td>";
                                     }
+                                    
+                                    $sold_price = ($item->total_paid - $item->shipping_price - $item->service_fee) / $item->quantity;
+                                                    
                                     $order_data .= "<td>";
                                     $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
                                     $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
                                     $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
                                     $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
                                     $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
-                                    $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
+                                    $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($sold_price,2)."</td></tr>";
                                     $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
                                     $order_data .= "<tr><td>Delivery Type:</td><td>".ucwords(str_replace('_', ' ',$item->shipping_method))."</td></tr>";
                                     $order_data .= "</table>";
@@ -138,13 +141,16 @@ class ProcessPayment extends Controller
                         else{
                             $order_data .= "<td></td>";
                         }
+
+                        $sold_price = ($item->total_paid - $item->shipping_price - $item->service_fee) / $item->quantity;
+
                         $order_data .= "<td>";
                         $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
                         $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
                         $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
                         $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
                         $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
-                        $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
+                        $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($sold_price,2)."</td></tr>";
                         $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
                         $order_data .= "<tr><td>Delivery Type:</td><td>".ucwords(str_replace('_', ' ',$item->shipping_method))."</td></tr>";
                         $order_data .= "</table>";
@@ -197,13 +203,16 @@ class ProcessPayment extends Controller
                         else{
                             $order_data .= "<td></td>";
                         }
+
+                        $sold_price = ($item->total_paid - $item->shipping_price - $item->service_fee) / $item->quantity;
+
                         $order_data .= "<td>";
                         $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
                         $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
                         $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
                         $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
                         $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
-                        $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($item->price,2)."</td></tr>";
+                        $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($sold_price,2)."</td></tr>";
                         $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
                         $order_data .= "<tr><td>Delivery Type:</td><td>".$item->shipping_method."</td></tr>";
                         $order_data .= "</table>";

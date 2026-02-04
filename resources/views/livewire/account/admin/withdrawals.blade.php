@@ -41,7 +41,7 @@
                                         <td>{{ $req->account_number }}</td>
                                         <td>R {{ number_format($req->amount,2) }}</td>
                                         <td class="text-end">
-                                            <a href="#" wire:click.prevent="setPaid({{ $req->id }})">Paid</a>
+                                            <a href="#" class="btn btn-primary" wire:click.prevent="setPaid({{ $req->id }})">Paid</a>
                                         </td>
                                     </tr>
                                     @endforeach

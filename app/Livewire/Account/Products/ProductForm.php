@@ -18,6 +18,7 @@ use App\Models\DeliverOption;
 use App\Models\Caliber;
 use App\Models\Dealer;
 use App\Models\OfferPrice;
+use App\Models\MessageThread;
 
 class ProductForm extends Component
 {
@@ -258,6 +259,17 @@ class ProductForm extends Component
                     $offer->delete();
                 }
             }
+            $threads = MessageThread::where('product_id', $prdt->id)->get();
+            foreach($threads AS $thread){
+                foreach($thread->messages AS $msg){
+                    if($msg->message == "You have a new offer" || $msg->message == "You have a new counter offer"){
+                        if(!$msg->action){
+                            $msg->action  = "product changed";
+                            $msg->save();
+                        }
+                    }
+                }
+            }
         }
         
         $prdt->vendor_id = Auth::user()->vendor_id;
@@ -284,6 +296,8 @@ class ProductForm extends Component
         $prdt->acknowledgement = $this->acknowledgement;
         $prdt->status = 1;
         $prdt->save();
+
+        $this->cur_id = $prdt->id;
 
         foreach($this->product_images AS $image){
             if($image){

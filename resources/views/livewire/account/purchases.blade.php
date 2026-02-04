@@ -81,7 +81,10 @@
                                                     <tr><th class="p-0">Item Title:</th><td class="p-0">{{ $item->product->item_name }}</td></tr>
                                                     <tr><th class="p-0">Quantity:</th><td class="p-0">{{ $item->quantity }}</td></tr>
                                                     <tr><th class="p-0">Listed Price:</th><td class="p-0">R {{ number_format($item->product->item_price,2) }}</td></tr>
-                                                    <tr><th class="p-0">Sold Price:</th><td class="p-0">R {{ number_format($item->price,2) }}</td></tr>
+                                                    @php
+                                                    $sold_price = ($item->total_paid - $item->shipping_price - $item->service_fee) / $item->quantity;
+                                                    @endphp
+                                                    <tr><th class="p-0">Sold Price:</th><td class="p-0">R {{ number_format($sold_price,2) }}</td></tr>
                                                     <tr><th class="p-0">Discount Applied:</th><td class="p-0">{{ $item->discount ?? 0 }} %</td></tr>
                                                 </tbody>
                                             </table>
@@ -210,11 +213,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Please confirm that item has been received.</p>
+                    <p>By confirming, you acknowledge that:</p>
+                    <ul>
+                        <li>You have received all items in good condition</li>
+                        <li>Items match the listing description</li>
+                        <li>You authorize payment release to the seller</li>
+                    </ul>
+                    <strong>Important</strong><br />
+                    <p>This action cannot be undone. If there are any issues, contact the seller before confirming.</p>
                 </div>
-                <div class="modal-footer d-grid">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, item has not been received</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="confirmedReceipt">Yes, Item has been received!</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="confirmedReceipt">Confirm</button>
                 </div>
             </div>
         </div>

@@ -145,13 +145,13 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group mb-2">
-                                            <input type="text" class="form-control" placeholder="Listing Title*" name="item_name" wire:model.blur="item_name"> 
+                                            <input type="text" class="form-control" placeholder="Listing Title*" name="item_name" wire:model.blur="item_name" maxlength="160"> 
                                         </div>
                                         <div class="form-group mb-2">
                                             <input type="text" class="form-control" placeholder="Model Number" name="model_number" wire:model.blur="model_number"> 
                                         </div>
                                         <div class="form-group mb-2">
-                                            <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.blur="item_description">
+                                            <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.blur="item_description" maxlength="160">
                                         </div>
                                         <div class="form-group mb-2">
                                             <select class="form-control" placeholder="Category" name="category_id*" wire:model.live="category_id">
@@ -523,6 +523,26 @@
             </form>
         </div>
     </div>
+    
+    <div class="modal fade" tabindex="-1" id="item-added-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Congrats, item added!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Your item is now live.</p>
+                    <div class="mt-3 d-grid gap-2">
+                        <a href="{{ url('shop/product/'.$cur_id) }}" class="btn btn-primary">Go to item</a>
+                        <a href="{{ url('my-armoury') }}" class="btn btn-primary">Go to your armoury</a>
+                        <a href="{{ url('list-item') }}" class="btn btn-primary">Add new item</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <script>
         $(document).ready(function() {
@@ -542,6 +562,8 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
             @this.on('item-saved', (e) => {
+                $('#item-added-modal').modal('show');
+                /*
                 id = e.id;
                 Swal.fire({
                     type: 'success',
@@ -564,6 +586,7 @@
                     showCancelButton: false,   // hides the Cancel button
                     allowOutsideClick: false,  // prevents closing when clicking outside
                 });
+                */
             });
         });
     </script>

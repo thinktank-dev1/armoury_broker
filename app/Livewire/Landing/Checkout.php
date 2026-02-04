@@ -131,9 +131,14 @@ class Checkout extends Component
         if($this->voucher_code){
             $code = PromoCode::where('code', $this->voucher_code)->where('status', 0)->first();
             if($code){
-                $this->voucher_code_id = $code->id;
-                $this->voucher_discount_amount = $code->amount;
-                $this->getCart();
+                if($code->status == 1){
+                    $this->voucher_code_id = $code->id;
+                    $this->voucher_discount_amount = $code->amount;
+                    $this->getCart();
+                }
+                else{
+                    $this->voucher_error = "Invalid voucher code";
+                }
             }
             else{
                 $this->voucher_error = "Invalid voucher code";
@@ -194,7 +199,7 @@ class Checkout extends Component
         }
         $order->user_id = Auth::user()->id;
         $order->vendor_id = $this->vendor_id;
-        $order->cart_total = $this->cart_total;
+        $order->cart_total = $this->total;
         $order->fee = $this->service_fees;
         $order->total_shipping_fee = $this->shipping_tot;
         $order->save();
@@ -442,7 +447,7 @@ class Checkout extends Component
                 'user_email' => Auth::user()->email,
                 'user_cell_number' => Auth::user()->mobile_number,
                 'payment_id' => $order->id,
-                'amount' => $this->cart_total,
+                'amount' => $this->total,
             ];
             if($partial){
                 $data['custom_str1'] = 'partial';
@@ -525,6 +530,7 @@ class Checkout extends Component
         $this->service_fees = 0;
         $this->cart_sub_total = 0;
         $this->cart_total = 0;
+        $this->total = 0;
 
         if(!$this->order_id){
             $cart = OrderItem::query()
@@ -544,32 +550,72 @@ class Checkout extends Component
         $stn = Setting::where('name', 'service_fee')->first();
 
         $cart_arr = [];
+
+        $dicount_value = null;
+        $dicount_type = null;
+        $discount_amount = 0;
+        if($this->vendor_promo_code_id){
+            $code = VendorPromoCode::find($this->vendor_promo_code_id);
+            if($code->status == 1){
+                $dicount_type = $code->type;
+                $dicount_value = $code->value;
+            }
+        }
+
         foreach($cart AS $ct){
             $img = null;
             if($ct->product->images->count() > 0){
                 $img = $ct->product->images->first()->image_url;
             }
-            $tot = $ct->price * $ct->quantity;
 
-            $total_fee_amount = ($stn->value/100) * $tot;
-            $payable_fee = 0;
-            
-            if($ct->product->service_fee_payer == "50-50"){
-                $payable_fee = (50/100) * $total_fee_amount;
+            $tot = $ct->price * $ct->quantity;
+            $fee = 0;
+            $price = $ct->price;
+            $discount = 0;
+            if($dicount_type){
+                if($dicount_type == "percentage"){
+                    $discount = ($dicount_value/100) * $tot;
+                    $tot -= $discount;
+                }
+                elseif($dicount_type == "value"){
+                    $discount = $dicount_value;
+                    $tot -= $dicount_value;
+                }
+                $this->voucher_discount_amount += $discount;
             }
-            elseif($ct->product->service_fee_payer == "buyer"){
-                $payable_fee = $total_fee_amount;
+            $this->cart_sub_total += $tot;
+
+            if($ct->product->service_fee_payer == "buyer"){
+                $fee = ($stn->value / 100) * $tot;
             }
-            elseif($ct->product->service_fee_payer == "seller"){
-                $payable_fee = 0;
+            elseif($ct->product->service_fee_payer == "50-50"){
+                $tot_fee = ($stn->value / 100) * $tot;
+                $fee = $tot_fee / 2;
             }
-            
-            $ct->service_fee = $payable_fee;
+            $min_fee_stn = Setting::where('name', 'min_fee_amount')->first();
+            $min_fee_amount = $min_fee_stn->value;
+            if($fee < $min_fee_amount){
+                $fee = $min_fee_amount;
+            }
+            $tot += $fee;
+
+            if($ct->shipping_method == "courier"){
+                $tot += 99;
+                $ct->shipping_price = 99;
+                $this->shipping_tot += 99;
+                $this->cart_total += 99; 
+            }
+
+            $ct->service_fee = $fee;
+            $ct->listed_price = $ct->product->item_price;
+            $ct->price = $price;
+            $ct->total_paid = $tot;
+            $ct->discount = $discount;
             $ct->save();
 
-            $this->shipping_tot += $ct->shipping_price;
-            $this->service_fees += $ct->service_fee;
-            $this->cart_sub_total += $tot;
+            $this->service_fees += $fee;
+            $this->cart_total += $tot;
+            $this->total += $tot;
 
             $dealer = null;
             if($ct->ab_dealer_id){
@@ -603,47 +649,6 @@ class Checkout extends Component
                 "dealer" => $dealer,
             ];
             $this->cart[] = $arr;
-        }
-
-        $fee_rate = 5;
-        $min_fee = 25;
-        $stn_fee = Setting::where('name', 'service_fee')->first();
-        $stn_min_fee = Setting::where('name', 'min_fee_amount')->first();
-        if($stn_fee){
-            $fee_rate = $stn_fee->value;
-        }
-        if($stn_min_fee){
-            $min_fee = $stn_min_fee->value;
-        }
-        
-        if($this->service_fees < $min_fee){
-            $this->service_fees = $min_fee;
-        }
-
-
-        $this->cart_total = $this->shipping_tot + $this->service_fees + $this->cart_sub_total;
-        $this->total = $this->cart_total;
-
-        if($this->voucher_discount_amount){
-            if($this->voucher_discount_amount > $this->cart_total){
-                $this->total = 0;
-            }
-            else{
-                $this->total = $this->cart_total - $this->voucher_discount_amount;
-            }
-        }
-
-        if($this->vendor_promo_code_id){
-            $cd = VendorPromoCode::find($this->vendor_promo_code_id);
-            if($cd->status == 1 && $cd->deleted == 0){
-                if($cd->type == "value"){
-                    $this->vendor_promo_amount = $cd->value;
-                }
-                elseif($cd->type == "percentage"){
-                    $this->vendor_promo_amount = ($cd->value / 100) * $this->cart_total;
-                }
-                $this->total = $this->total - $this->vendor_promo_amount;
-            }
         }
     }
 

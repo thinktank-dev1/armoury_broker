@@ -81,7 +81,10 @@
                                                     <tr><th class="p-0">Item Title:</th><td class="p-0">{{ $item->product->item_name }}</td></tr>
                                                     <tr><th class="p-0">Quantity:</th><td class="p-0">{{ $item->quantity }}</td></tr>
                                                     <tr><th class="p-0">Listed Price:</th><td class="p-0">R {{ number_format($item->product->item_price,2) }}</td></tr>
-                                                    <tr><th class="p-0">Sold Price:</th><td class="p-0">R {{ number_format($item->price,2) }}</td></tr>
+                                                    @php
+                                                    $sold_price = ($item->total_paid - $item->shipping_price - $item->service_fee) / $item->quantity;
+                                                    @endphp
+                                                    <tr><th class="p-0">Sold Price:</th><td class="p-0">R {{ number_format($sold_price,2) }}</td></tr>
                                                     <tr><th class="p-0">Discount Applied:</th><td class="p-0">{{ $item->discount ?? 0 }} %</td></tr>
                                                 </tbody>
                                             </table>

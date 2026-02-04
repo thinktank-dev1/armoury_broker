@@ -10,6 +10,22 @@
                 </h3>
             </div>
         </div>
+        <div class="modal fade" tabindex="-1" id="approved-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">WITHDRAWAL VERIFIED</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Thank you for confirming your withdrawal. Please note that Armoury Broker processes weekly payments on a Wednesday for all verified withdrawal requests recieved before 23:59 on a Tuesday. Please allow for standard banking turn around times for the funds to reflect in your account.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row align-items-stretch">
             <div class="col-md-12">
                 <div class="row align-items-stretch">
@@ -493,4 +509,13 @@
             </div>
         </div>
     </div>
+    @if(session('message'))
+        @push('scripts')
+        <script>
+            $(document).ready(function(){
+                $('#approved-modal').modal('show');
+            })
+        </script>
+        @endpush
+    @endif
 </div>

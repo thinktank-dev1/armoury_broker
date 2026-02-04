@@ -216,6 +216,58 @@ class Orders extends Component
         if($go){
             $order->shipping_status = 1;
             $order->save();
+
+            foreach($order->items AS $item){
+                $order_data = "<table class='table-bodered' style='width: 100%'>";
+                $order_data .= "<thead><tr style='background-color: #e6e6e6;'><th colspan='2' style='text-align: center;'>AB-ORD-".str_pad($order->id, 4, '0', STR_PAD_LEFT)."</th></tr></thead>";
+                $order_data .= "<tbody>";
+                $order_data .= "<tr>";
+                if($item->product->images->count() > 0){
+                    $order_data .= "<td><img style='height: 100px' src='".url('storage/'.$item->product->images->first()->image_url)."'></td>";
+                }
+                else{
+                    $order_data .= "<td></td>";
+                }
+                $sold_price = ($item->total_paid - $item->shipping_price - $item->service_fee) / $item->quantity;
+                                                        
+                $order_data .= "<td>";
+                $order_data .= "<table style='width: 100%; border:none; border-collapse:collapse;' border='0' cellpadding='5' cellspacing='0'>";
+                $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
+                $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
+                $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
+                $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
+                $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($sold_price,2)."</td></tr>";
+                $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
+                $order_data .= "<tr><td>Delivery Type:</td><td>".ucwords(str_replace('_', ' ',$item->shipping_method))."</td></tr>";
+                $order_data .= "</table>";
+                $order_data .= "</td>";
+                $order_data .= "</tr>";
+                $order_data .= "</table>";
+            }
+
+            $dl_user = $dl->user;
+
+            $body = "Hi ".$item->user->vendor->name."</b><br /><br />
+            Great news!<br />
+            Your order ".str_pad($order->id, 4, '0', STR_PAD_LEFT)." has been shipped by ".$order->vendor->name.".".$order_data;
+            $body .= "<strong>Next step:<strong><br />
+            <p>Once the item has been received, please ensure that you update the status on the platform to “Item Received” and confirm that all is in order. </p>
+            <p>Only once that has been done, we will release the funds to the seller.</p>
+            <p>Congratulations on your purchase!</p>";
+
+            $data = [
+                'to' => $dl_user->email,
+                'name' => $dl_user->name,
+                'subject' => 'Shipping Confirmed',
+                'title' => "Shipping Confirmed",
+                'message_body' => $body,
+                'cta' => false,
+                'cta_text' => null,
+                'cta_url' => null,
+                'after_cta_body' => null,
+            ];
+            $comm = new Communication();
+            $comm->sendMail($data);
         }
         $this->dispatch('order-item-edited');
     }
