@@ -105,6 +105,19 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
+                                        <div class="mb-3">
+                                            <small>
+                                                <strong>Safety Reminder</strong>
+                                                <ul>
+                                                    <li>Always use the "Buy" button when making purchases</li>
+                                                    <li>Payments outside Armoury Broker violate our Terms and Conditions and are not protected</li>
+                                                    <li>Never open external links or scan QR codes sent through platform messaging. Keep all communication on the platform</li>
+                                                    <li>Armoury Broker will never ask you to change your login information, banking details, or social media account information</li>
+                                                    <li>All firearm transactions must comply with the Firearms Control Act of South Africa 60 of 2000</li>
+                                                    <li>Legal liability for correct firearm transfer procedures rests with the license holder and not Armoury Broker (Pty) Ltd or any of its members</li>
+                                                </ul>
+                                            </small>
+                                        </div>
                                         <div class="chat-container" wire:poll.15s>
                                             <div class="chat-body" id="chat-body">
                                                 @foreach($cur_msg->messages as $message)
