@@ -101,7 +101,7 @@ class ProcessPayment extends Controller
                             'release' => null,
                         ]);
                     }
-                    $amount = $item->total_paid - $fee;
+                    $amount = $item->total_paid - ($fee + $item->service_fee);
                     Transaction::create([
                         'name' => 'order_payment',
                         'transaction_type' => 'payfast_payment',
