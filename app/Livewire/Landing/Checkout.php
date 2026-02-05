@@ -22,6 +22,7 @@ use App\Models\Transaction;
 use App\Models\Vendor;
 use App\Models\VendorPromoCode;
 use App\Models\OfferPrice;
+use App\Models\CreditPayment;
 
 class Checkout extends Component
 {
@@ -82,10 +83,14 @@ class Checkout extends Component
         if($this->credit_payment > $credit){
             $this->credit_payment = $credit;
             $this->credit_error = "Your maximum credit is ".$credit;
+            return;
         }
-        else{
-            $this->credit_error = null;
+        if($this->credit_payment > $this->total){
+            $this->credit_payment = $credit;
+            $this->credit_error = "You have entered an amount greater than cart total";
+            return;
         }
+        $this->credit_error = null;
     }
 
     public function updatedPayWithWallet(){
@@ -153,6 +158,7 @@ class Checkout extends Component
     }
 
     public function processPayment($type = null){
+
         $this->dispatch('go-to-top');
         $this->validate([
             'terms_and_conditions' => 'required'
@@ -216,228 +222,40 @@ class Checkout extends Component
             }
         }
 
-        $do_payment = true;
-        if($this->voucher_code_id){
-            $code = PromoCode::where('code', $this->voucher_code)->where('status', 0)->first();
-            if($code){
-                $code_amount = $code->amount;
-                $discount = $code_amount;
-                if($code_amount >= $this->cart_total){
-                    $do_payment = False;
-                    $discount = $this->cart_total;
-                    
-                    $balance = $amount - $this->cart_total;
-                    if($balance > 0){
-                        Transaction::create([
-                            'name' => 'gift_voucher_credit',
-                            'transaction_type' => 'voucher_balance',
-                            'user_id' => Auth::user()->id,
-                            'vendor_id' => Auth::user()->vendor_id,
-                            'direction' => 'in',
-                            'amount' => $balance,
-                            'code' => $code->code,
-                            'payment_status' => 'COMPLETE',
-                            'release' => 1,
-                        ]);
-                    }
-                    foreach($order->items AS $item){
-                        $fee_rate = 5;
-                        $min_fee = 25;
-                        $stn_fee = Setting::where('name', 'service_fee')->first();
-                        $stn_min_fee = Setting::where('name', 'min_fee_amount')->first();
-                        if($stn_fee){
-                            $fee_rate = $stn_fee->value;
-                        }
-                        if($stn_min_fee){
-                            $min_fee = $stn_min_fee->value;
-                        }
-
-                        $item_amount = $item->price * $item->quantity;
-
-                        $prdt = $item->product;
-                        if($prdt->service_fee_payer == "buyer"){
-                            $fee = ($fee_rate / 100) * $item_amount;
-                            if($fee < $min_fee){
-                                $fee = $min_fee;
-                            }
-                            $usr = User::find($order->user_id);
-                            Transaction::create([
-                                'name' => 'service_fee',
-                                'transaction_type' => 'service_fee',
-                                'user_id' => $usr->id,
-                                'vendor_id' => $usr->vendor_id,
-                                'direction' => 'out',
-                                'amount' => $fee,
-                                'order_id' => $order->id,
-                                'order_item_id' => $item->id,
-                                'code' => '',
-                                'payment_status' => 'COMPLETE',
-                                'release' => null,
-                            ]);
-                        }
-                        elseif($prdt->service_fee_payer == "seller"){
-                            $fee = ($fee_rate / 100) * $item_amount;
-                            if($fee < $min_fee){
-                                $fee = $min_fee;
-                            }
-                            $item_amount -= $fee;
-                            $usr = User::where('vendor_id', $item->vendor_id)->first();
-                            Transaction::create([
-                                'name' => 'service_fee',
-                                'transaction_type' => 'service_fee',
-                                'user_id' => $usr->id,
-                                'vendor_id' => $usr->vendor_id,
-                                'direction' => 'out',
-                                'amount' => $fee,
-                                'order_id' => $order->id,
-                                'order_item_id' => $item->id,
-                                'code' => '',
-                                'payment_status' => 'COMPLETE',
-                                'release' => null,
-                            ]);
-                        }
-                        elseif($prdt->service_fee_payer == "50-50"){
-                            $fee = ($fee_rate / 100) * $item_amount;
-                            if($fee < $min_fee){
-                                $fee = $min_fee;
-                            }
-                            $fee = $fee / 2;
-                            $item_amount -= $fee;
-
-                            $vnd = User::where('vendor_id', $item->vendor_id)->first();
-                            Transaction::create([
-                                'name' => 'service_fee',
-                                'transaction_type' => 'service_fee',
-                                'user_id' => $vnd->id,
-                                'vendor_id' => $vnd->vendor_id,
-                                'direction' => 'out',
-                                'amount' => $fee,
-                                'order_id' => $order->id,
-                                'order_item_id' => $item->id,
-                                'code' => '',
-                                'payment_status' => 'COMPLETE',
-                                'release' => null,
-                            ]);
-                            $usr = User::find($order->user_id);
-                            Transaction::create([
-                                'name' => 'service_fee',
-                                'transaction_type' => 'service_fee',
-                                'user_id' => $usr->id,
-                                'vendor_id' => $usr->vendor_id,
-                                'direction' => 'out',
-                                'amount' => $fee,
-                                'order_id' => $order->id,
-                                'order_item_id' => $item->id,
-                                'code' => '',
-                                'payment_status' => 'COMPLETE',
-                                'release' => null,
-                            ]);
-                        }
-
-                        $item_amount += $item->shipping_fee;
-
-                        Transaction::create([
-                            'name' => 'order_payment',
-                            'transaction_type' => 'voucher_payment',
-                            'user_id' => $order->user_id,
-                            'vendor_id' => $item->vendor_id,
-                            'direction' => 'in',
-                            'amount' => $item_amount,
-                            'order_id' => $order->id,
-                            'order_item_id' => $item->id,
-                            'payment_status' => 'COMPLETE',
-                        ]);
-
-                        $offer = OfferPrice::where('user_id', $order->user_id)->where('product_id', $item->product_id)->whereNull('status')->first();
-                        if($offer){
-                            $offer->status = 1;
-                            $offer->save();
-                        }
-                    }
-                    $this->sendComm($order->id);
-
-                    $order->amount_paid = 0;
-                    $order->status = "COMPLETE";
-                    $order->save();
-
-                    session()->flash('status', 'Purchase successfully completed.');
-                }
-                else{
-                    $payment_amount = $this->cart_total - $code_amount;
-                    $this->cart_total = $payment_amount;
-                }
-                $order->promo_code_id = $code->id;
-                $order->discount_amount = $discount;
-                $order->promo_code = $code->code;
-
-                $order->g_payment_id = $code->code;
-                $order->short_reference = "Voucher discount";
-                $order->save();
-
-                $code->status = 1;
-                $code->save();
-            }
-        }
-
         if($this->vendor_promo_code_id){
-            $cd = VendorPromoCode::find($this->vendor_promo_code_id);
-            if($cd->status == 1 && $cd->deleted == 0){
-                $order->vendor_promo_code = $cd->code;
+            $code = VendorPromoCode::find($this->vendor_promo_code_id);
+            if($code){
+                $order->discount_amount = $this->voucher_discount_amount;
+                $order->vendor_promo_code = $this->vendor_promo_code;
                 $order->save();
-                
-                if($cd->type == "value"){
-                    $this->vendor_promo_amount = $cd->value;
-                }
-                elseif($cd->type == "percentage"){
-                    $this->vendor_promo_amount = ($cd->value / 100) * $this->cart_total;
-                }
-                $this->cart_total = $this->cart_total - $this->vendor_promo_amount;
             }
         }
 
-        $partial = False;
-        if($this->pay_with_wallet){
-            if($this->credit_payment){
-                foreach($order->items AS $item){
-                    Transaction::create([
-                        'name' => 'order_payment',
-                        'transaction_type' => 'wallet_payment',
-                        'user_id' => Auth::user()->id,
-                        'vendor_id' => $order->vendor_id,
-                        'direction' => 'in',
-                        'amount' => $this->credit_payment,
-                        'order_id' => $order->id,
-                        'order_item_id' => $item->id,
-                        'payment_status' => 'COMPLETE',
-                    ]);
-                    $this->cart_total -= $this->credit_payment;
-                    $order->g_payment_id = rand(100000,999999);
-                    $order->status = 'COMPLETE';
-                    $order->amount_paid = $this->credit_payment;
-                    $order->save();
-                }
-                return redirect('pf-payment/11/pending');
+        $do_payment = true;
+        $payable_amount = $this->total;
+        if($this->credit_payment){
+            if($this->credit_payment == $this->total){
+                $this->createTransactions();
+                $do_payment = false;
+
+                $order->g_payment_id = substr(bin2hex(random_bytes(3)), 0, 8);;
+                $order->amount_paid = $this->credit_payment;
+                $order->status = 'COMPLETE';
+                $order->save();
+
+                return redirect('pf-payment/'.$order->id.'/complete');
             }
-            if($this->cart_total > 0){
-                if($this->gift_voucher_payment && $this->cart_total >= $this->gift_voucher_payment){
-                    Transaction::create([
-                        'name' => 'order_payment',
-                        'transaction_type' => 'gift_voucher_payment',
-                        'user_id' => Auth::user()->id,
-                        'vendor_id' => $order->vendor_id,
-                        'direction' => 'in',
-                        'amount' => $this->gift_voucher_payment,
-                        'order_id' => $order->id,
-                        'payment_status' => 'Partial Payment',
-                    ]);
-                    $this->cart_total -= $this->credit_payment;
-                    $partial = True;
-                }
-            }
-            if($this->cart_total <= 0){
-                $do_payment = False;
-                session()->flash('status', 'Purchase successfully completed.');
-            }
+            else{
+                CreditPayment::create([
+                    'user_id' => Auth::user()->id,
+                    'vendor_id' => $this->vendor_id,
+                    'order_id' => $order->id,
+                    'amount' => $this->credit_payment,
+                    'order_status' => 0,
+                ]);
+                $do_payment = true;
+                $payable_amount -= $this->credit_payment; 
+            }   
         }
 
         if($do_payment){
@@ -447,17 +265,71 @@ class Checkout extends Component
                 'user_email' => Auth::user()->email,
                 'user_cell_number' => Auth::user()->mobile_number,
                 'payment_id' => $order->id,
-                'amount' => $this->total,
+                'amount' => $payable_amount,
             ];
-            if($partial){
-                $data['custom_str1'] = 'partial';
-            }
 
             $pf = new PayFastApi();
             $payload = $pf->setPayLoad($data);
             $payload = json_encode($payload);
             $this->dispatch('process-payment', data: $payload);
         }
+    }
+
+    public function createTransactions(){
+        $vnd = null;
+        $order = null;
+        foreach($this->cart AS $item){
+            $vnd = $item['product']->vendor;
+            $product = $item['product'];
+            $order_item = OrderItem::find($item['id']);
+            $order = Order::find($order_item->order_id);
+
+            $fee = (float)$item['service_fee'];
+            if($fee > 0){
+                Transaction::create([
+                    'name' => 'service_fee',
+                    'transaction_type' => 'service_fee',
+                    'user_id' => Auth::user()->id,
+                    'vendor_id' => Auth::user()->vendor_id,
+                    'direction' => 'out',
+                    'amount' => $fee,
+                    'order_id' => $order->id,
+                    'order_item_id' => $order_item->id,
+                    'code' => '',
+                    'payment_status' => 'COMPLETE',
+                    'release' => null,
+                ]);
+            }
+
+            $amount = $item['total'];
+            if($fee){
+                $amount -= $fee;
+            }
+            
+            Transaction::create([
+                'name' => 'order_payment',
+                'transaction_type' => 'wallet_credit_payment',
+                'user_id' => $vnd->user->id,
+                'vendor_id' => $vnd->id,
+                'direction' => 'in',
+                'amount' => $amount,
+                'order_id' => $order->id,
+                'order_item_id' => $order_item->id,
+                'payment_status' => 'COMPLETE',
+            ]);
+        }
+        $usr = Auth::user();
+        Transaction::create([
+            'name' => 'order_payment',
+            'transaction_type' => 'wallet_credit_payment',
+            'user_id' => $usr->id,
+            'vendor_id' => $usr->vendor_id,
+            'direction' => 'out',
+            'amount' => $this->credit_payment,
+            'order_id' => $order->id,
+            'order_item_id' => null,
+            'payment_status' => 'COMPLETE',
+        ]);
     }
 
     #[On('update-quantity')]
