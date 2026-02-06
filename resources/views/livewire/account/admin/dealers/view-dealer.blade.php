@@ -60,6 +60,34 @@
                 </div>
                 <div><hr /></div>
                 <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Vendor</th>
+                                <th>Buyer</th>
+                                <th>Item Name</th>
+                                <th>Qty</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($sels AS $sel)
+                            <tr>
+                                <td>
+                                    @if($sel->product->images->count() > 0)
+                                        <img style="height: 50px" src="{{ asset('storage/'.$sel->product->images->first()->image_url) }}" alt="Card image cap">
+                                    @endif
+                                </td>
+                                <td>{{ $sel->vendor->name }}</td>
+                                <td>{{ $sel->user->vendor->name }}</td>
+                                <td>{{ $sel->product->item_name }}</td>
+                                <td>{{ $sel->quantity }}</td>
+                                <td>{{ date('d M Y', strtotime($sel->created_at)) }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -40,7 +40,15 @@
                                 <th class="p-0 m-0 w-14">{{ $order->vendor->name }}<br/><small>Seller</small></th>
                                 <th class="p-0 m-0 w-14">{{ $order->g_payment_id }}<br/><small>Payment Ref</small></th>
                                 <th class="p-0 m-0 w-14">R {{ number_format($order->shiping_fee(),2) }}<br/><small>Shipping Fee</small></th>
-                                <th class="p-0 m-0 w-14">R {{ number_format($order->ab_fee(), 2) }}<br/><small>Platform Fee (Buyer)</small></th>
+                                @php
+                                $fee_arr = $order->plartform_fees();
+                                @endphp
+                                @if($fee_arr['seller'] > 0)
+                                <th class="p-0 m-0 w-14">R {{ number_format($fee_arr['seller'], 2) }}<br/><small>Platform Fee (Seller)</small></th>
+                                @endif
+                                @if($fee_arr['buyer'] > 0)
+                                <th class="p-0 m-0 w-14">R {{ number_format($fee_arr['buyer'], 2) }}<br/><small>Platform Fee (Seller)</small></th>
+                                @endif
                                 <th class="p-0 m-0 w-14">R {{ number_format($order->amount_paid, 2) }}<br/><small>Amount</small></th>
                                 <th class="p-0 m-0 w-14">
                                     @if($order->status == "COMPLETE")
