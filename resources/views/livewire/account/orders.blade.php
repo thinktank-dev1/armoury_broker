@@ -131,7 +131,7 @@
                                             </tr>
                                             @if($item->shipping_method == 'courier')
                                             <tr class="mb-1">
-                                                <th class="text-end">Deliver Service</th>
+                                                <th class="text-end">Delivery Service</th>
                                                 <td class="">
                                                     <div class="input-group">
                                                         @if($item->vendor_status != "Canceled")
