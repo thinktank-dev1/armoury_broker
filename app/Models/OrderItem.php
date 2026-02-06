@@ -59,4 +59,20 @@ class OrderItem extends Model
     public function dealer(){
         return $this->belongsTo(Dealer::class, 'ab_dealer_id');
     }
+
+    public function dispute(){
+        return $this->hasOne(Dispute::class, 'item_id');
+    }
+
+    public function hasDispute(){
+        if($this->dispute){
+            if(!$this->dispute->user_1_status){
+                return true;
+            }
+            if(!$this->dispute->user_2_status){
+                return true;
+            }
+        }
+        return false;
+    } 
 }

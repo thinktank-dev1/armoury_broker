@@ -63,6 +63,7 @@
                 <th style="text-align: left;">Date</th>
                 <th style="text-align: left;">Description</th>
                 <th style="text-align: right;">Amount</th>
+                <th style="text-align: right;">Order No.</th>
                 <th style="text-align: left;">Status</th>
             </tr>
  
@@ -76,6 +77,9 @@
                     </th>
                     <th style="font-size: 12px; text-align: right;">
                         {{ number_format($item['amount'],2) }}
+                    </th>
+                    <th style="font-size: 12px; text-align: right;">
+                        {{ $item['order_number'] }}
                     </th>
                     <th style="font-size: 12px; text-align: left;">
                         {{ $item['status'] }}

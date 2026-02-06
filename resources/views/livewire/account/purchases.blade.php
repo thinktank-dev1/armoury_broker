@@ -93,7 +93,7 @@
                                                     $sold_price = ($item->total_paid - $item->shipping_price - $item->service_fee) / $item->quantity;
                                                     @endphp
                                                     <tr><th class="p-0">Sold Price:</th><td class="p-0">R {{ number_format($sold_price,2) }}</td></tr>
-                                                    <tr><th class="p-0">Discount Applied:</th><td class="p-0">{{ $item->discount ?? 0 }} %</td></tr>
+                                                    <tr><th class="p-0">Discount Applied:</th><td class="p-0">R {{ number_format($item->discount,2) ?? 0 }}</td></tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -167,16 +167,41 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    @if($item->hasDispute())
+                                    <div class="mt-auto">
+                                        <p><strong>Note:</strong> Dispute has to be resolved before you can do further actions</p>
+                                        @if($item->dispute->user_1_status || $item->dispute->user_2_status)
+                                            @php
+                                            $cur = "You";
+                                            if($item->dispute->user_1_status && (Auth::user()->id == $item->dispute->user_1)){
+                                                $cur = "The Other party";
+                                            }
+                                            if($item->dispute->user_2_status && (Auth::user()->id == $item->dispute->user_2)){
+                                                $cur = "The Other party";
+                                            }
+                                            @endphp
+                                            <p class="text-danger">pending resolution from {{ $cur }}.</p>
+                                        @endif
+                                        <div class="d-grid mt-2">
+                                            <a href="#" class="btn btn-primary" wire:click.prevent="setDisputeResolved({{ $item->dispute->id }})">Dispute Resolved</a>
+                                        </div>
+                                    </div>
+                                    @else
                                     <div class="mt-auto">
                                         <div class="d-grid gap-2">
                                             @if(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed") && $item->buyer_status == null)
-                                            <a href="" class="btn btn-primary" wire:click.prevent="showReceiptConfirmation({{ $item->id }})">Item received</a>
+                                            <a href="" class="btn btn-primary" wire:click.prevent="showReceiptConfirmation({{ $item->id }})">
+                                                @if($item->dealer || $item->custom_dealer_details)
+                                                Dealer Stocked - Confirmed
+                                                @else
+                                                Item received
+                                                @endif
+                                            </a>
                                             @endif
-                                            
-                                            {{-- <b>Other Actions</b> --}}
                                             <a href="" class="btn btn-outline-danger" wire:click.prevent="showDisputeModal({{ $item->id }}, {{ $item->vendor_id }})">I have an issue with this order</a>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -59,14 +59,36 @@ class Orders extends Component
         $this->dispatch('show-dispute-modal');
     }
 
+    public function setDisputeResolved($id){
+        $dsp = Dispute::find($id);
+        if($dsp){
+            if($dsp->user_1 == Auth::user()->id){
+                $dsp->user_1_status = 1;
+            }
+            if($dsp->user_2 == Auth::user()->id){
+                $dsp->user_2_status = 1;
+            }
+            $dsp->save();
+        }
+    }
+
     public function seveDispute(){
-        Dispute::create([
-            'user_id' => Auth::user()->id,
-            'vendor_id' => $this->vendor_id,
-            'order_id' => $this->item_id,
-            'message' => $this->grievance,
-            'status' => 0,
-        ]);
+        $item = OrderItem::find($this->item_id);
+        $user_1 = Auth::user()->id;
+        $user_2 = $item->user_id;
+        $dsp = Dispute::where('order_id', $item->order_id)->where('item_id', $item->id)->first();
+        if(!$dsp){
+            $dsp = new Dispute();
+        }
+        
+        $dsp->user_1 = $user_1;
+        $dsp->user_2 = $user_2;
+        $dsp->order_id = $item->order_id;
+        $dsp->item_id = $item->id;
+        $dsp->message = $this->grievance;
+        $dsp->user_1_status = 0;
+        $dsp->user_2_status = 0;
+        $dsp->save();
 
         $item = OrderItem::find($this->item_id);
         $order = $item->order;

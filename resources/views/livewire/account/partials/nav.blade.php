@@ -59,6 +59,12 @@
                     </a>
                 </li>
                 <li>
+                    <a class="waves-effect waves-dark" href="{{ url('admin/disputes') }}" aria-expanded="false">
+                        <i class="icon-list"></i>
+                        <span class="hide-menu">Disputes</span>
+                    </a>
+                </li>
+                <li>
                     <a class="waves-effect waves-dark" href="{{ url('admin/users') }}" aria-expanded="false">
                         <i class="icon-list"></i>
                         <span class="hide-menu">Users</span>

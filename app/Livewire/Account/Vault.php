@@ -88,12 +88,17 @@ class Vault extends Component
 
         $data_trxs = [];
         foreach($trxs AS $trx){
+            $order_no = null;
+            if($trx->order){
+                $order_no = 'AB-ORD-'.str_pad($trx->order->id, 4, '0', STR_PAD_LEFT);
+            }
             $arr = [
                 'date' => $trx->created_at,
                 'name' => $trx->name,
                 'direction' => $trx->direction,
                 'amount' => $trx->amount,
                 'status' => $trx->payment_status,
+                'order_number' => $order_no,
             ];
             $data_trxs[] = $arr;
         }
