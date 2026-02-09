@@ -31,8 +31,8 @@ class ViewDealer extends Component
             $body = "
             Congratulations<br /><br />
             We are pleased to inform you that your dealer application has been approved, and you are now officially registered as a dealer on our platform.<br />
-            As a dealer, if you are selected by other users to stock products on their behalf, you will receive a fee for providing this stocking service. Further details regarding stocking will be communicated to you by the respective parties.<br />
-            Should you wish to cancel, you can do so in the settings section of your account<br /><br />
+            As a dealer, if you are selected by other users to stock products on their behalf, you will receive a fee for providing this stocking service. Further details regarding stocking will be communicated to you by the respective parties.<br /><br />
+            Should you wish to cancel, you can do so in the settings section of your account.<br /><br />
             We’re excited to have you on board and look forward to working with you. Should you have any questions, please don’t hesitate to reach out.<br /><br />
             Kind regards,
             ";
