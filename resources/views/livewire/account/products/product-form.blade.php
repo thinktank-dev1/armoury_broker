@@ -155,7 +155,7 @@
                                         </div>
                                         <div class="form-group mb-2">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.live="item_description" maxlength="100">
+                                                <input type="text" class="form-control" placeholder="Description*" name="item_description" wire:model.live="item_description" maxlength="500">
                                                 <span class="input-group-text" id="basic-addon1">{{ $description_word_count }}</span> 
                                             </div>
                                         </div>

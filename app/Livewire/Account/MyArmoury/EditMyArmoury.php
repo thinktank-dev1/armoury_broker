@@ -110,7 +110,7 @@ class EditMyArmoury extends Component
                 It’s great to have you with us!<br /><br />
                 Kind regards<br /><br />
                 The Armoury Broker Team<br /><br />
-                ** Should you wish to get in touch with us, please visit to the support page **
+                ** Should you wish to get in touch with us, please visit the support page **
                 ",
                 'read_status' => 0,
             ]);

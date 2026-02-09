@@ -48,15 +48,15 @@ class ProductForm extends Component
         $this->preview_quantity = 1;
 
         $this->item_name_word_count = 50;
-        $this->description_word_count = 100;
+        $this->description_word_count = 500;
     }
 
     public function updatedItemDescription(){
         $count = strlen($this->item_description);
-        if($count > 50){
-            $this->item_description = substr($this->item_description, 0, 50);
+        if($count > 500){
+            $this->item_description = substr($this->item_description, 0, 500);
         }
-        $this->description_word_count = 100 - strlen($this->item_description);
+        $this->description_word_count = 500 - strlen($this->item_description);
     }
 
     public function updatedItemName(){
