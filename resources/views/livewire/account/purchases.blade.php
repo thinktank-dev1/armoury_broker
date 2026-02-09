@@ -169,7 +169,7 @@
                                     </table>
                                     @if($item->hasDispute())
                                     <div class="mt-auto">
-                                        <p class="text-danger"><strong>Note:</strong> Dispute has to be resolved before you can do further actions</p>
+                                        <p class="text-danger"><strong>Note:</strong> Dispute has to be resolved before continuing with this order. Click below if resolved.</p>
                                         @if($item->dispute->user_1_status || $item->dispute->user_2_status)
                                             @php
                                             $cur = "You";

@@ -28,15 +28,17 @@ class Shop extends Component
     public $wanted = false;
 
     public function mount(){
-        if(isset($_GET['category'])){
-            $this->current_filters['category'][] = $_GET['category'];
-        }
-        if(isset($_GET['sub-category'])){
-            $this->current_filters['sub-category'][] = $_GET['sub-category'];
-        }
         if(isset($_GET['sub-sub-category'])){
             $this->current_filters['sub-sub-category'][] = $_GET['sub-sub-category'];
         }
+        elseif(isset($_GET['sub-category'])){
+            $this->current_filters['sub-category'][] = $_GET['sub-category'];
+        }
+        elseif(isset($_GET['category'])){
+            $this->current_filters['category'][] = $_GET['category'];
+        }
+        
+        
         if(isset($_GET['brands'])){
             $this->current_filters['brands'][] = $_GET['brands'];
         }
@@ -159,7 +161,15 @@ class Shop extends Component
             }
 
             foreach($filters AS $k => $v){
-                if($k == "sub-category"){
+                if($k == "sub-sub-category"){
+                    $query->whereHas('subCategory', function($q) use($v){
+                        return $q->whereIn('slug', $v);
+                    })
+                    ->orWhereHas('sub_sub', function($q) use($v){
+                        return $q->whereIn('slug', $v);
+                    });
+                }
+                elseif($k == "sub-category"){
                     $query->whereHas('subCategory', function($q) use($v){
                         return $q->whereIn('slug', $v);
                     })
