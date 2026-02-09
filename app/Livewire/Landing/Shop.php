@@ -147,23 +147,18 @@ class Shop extends Component
 
         $query = Product::query();
         if(count($filters) > 0){
-            if(isset($filters['category'])){
-                if(count($filters['category']) == 0){
-                    unset($filters['category']);
-                }
-            }
             if(isset($filters['sub-category'])){
                 if(count($filters['sub-category']) == 0){
                     unset($filters['sub-category']);
                 }
             }
+            elseif(isset($filters['category'])){
+                if(count($filters['category']) == 0){
+                    unset($filters['category']);
+                }
+            }
 
             foreach($filters AS $k => $v){
-                if($k == "category"){
-                    $query->whereHas('category', function($q) use($v){
-                        return $q->whereIn('slug', $v);
-                    });
-                }
                 if($k == "sub-category"){
                     $query->whereHas('subCategory', function($q) use($v){
                         return $q->whereIn('slug', $v);
@@ -172,6 +167,12 @@ class Shop extends Component
                         return $q->whereIn('slug', $v);
                     });
                 }
+                elseif($k == "category"){
+                    $query->whereHas('category', function($q) use($v){
+                        return $q->whereIn('slug', $v);
+                    });
+                }
+                
                 if($k == "brands"){
                     $query->whereHas('brand', function($q) use($v){
                         return $q->whereIn('slug', $v);

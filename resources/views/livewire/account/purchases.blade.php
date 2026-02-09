@@ -169,7 +169,7 @@
                                     </table>
                                     @if($item->hasDispute())
                                     <div class="mt-auto">
-                                        <p><strong>Note:</strong> Dispute has to be resolved before you can do further actions</p>
+                                        <p class="text-danger"><strong>Note:</strong> Dispute has to be resolved before you can do further actions</p>
                                         @if($item->dispute->user_1_status || $item->dispute->user_2_status)
                                             @php
                                             $cur = "You";
@@ -189,7 +189,7 @@
                                     @else
                                     <div class="mt-auto">
                                         <div class="d-grid gap-2">
-                                            @if(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed") && $item->buyer_status == null)
+                                            @if(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed" || $item->vendor_status == "Firearm dealer stocked") && $item->buyer_status == null)
                                             <a href="" class="btn btn-primary" wire:click.prevent="showReceiptConfirmation({{ $item->id }})">
                                                 @if($item->dealer || $item->custom_dealer_details)
                                                 Dealer Stocked - Confirmed
