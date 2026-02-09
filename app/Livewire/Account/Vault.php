@@ -87,6 +87,17 @@ class Vault extends Component
         ->get();
 
         $data_trxs = [];
+        if($type == "csv"){
+            $arr = [
+                'DATE',
+                'Name',
+                'Direction',
+                'Amount',
+                'Status',
+                'Order Number',
+            ];
+            $data_trxs[] = $arr;
+        }
         foreach($trxs AS $trx){
             $order_no = null;
             if($trx->order){
