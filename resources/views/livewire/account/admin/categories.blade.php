@@ -3,7 +3,12 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex">
-                    <h4 class="card-title">Categories</h4>
+                    <h3 class="page-title bold">
+                        @if(url()->current() != URL::previous())
+                        <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                        @endif
+                        Categories
+                    </h3>
                     <span class="ms-auto">
                         <a href="#" class="btn btn-primary" wire:click.prevent="showModal">Add Category</a>
                     </span>

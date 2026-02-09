@@ -1,7 +1,12 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12">
-            <h2>Disputes</h2>
+            <h3 class="page-title bold">
+                @if(url()->current() != URL::previous())
+                <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                @endif
+                Disputes
+            </h3>
         </div>
     </div>
     <div class="row mt-3">

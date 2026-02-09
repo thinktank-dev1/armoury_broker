@@ -1,7 +1,12 @@
 <div class="container-fluid">
     <div class="row mt-3">
         <div class="col-md-12 d-flex">
-            <h2>AB DEALER NETWORK</h2>
+            <h3 class="page-title bold">
+                @if(url()->current() != URL::previous())
+                <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                @endif
+                AB DEALER NETWORK
+            </h3>
             <span class="ms-auto">
                 <a href="#" class="btn btn-secondary">Export Dealers</a>
                 <a href="{{ url('admin/dealers/create') }}" class="btn btn-primary">Add Dealer</a>

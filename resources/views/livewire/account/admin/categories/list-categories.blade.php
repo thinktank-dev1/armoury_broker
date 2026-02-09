@@ -2,7 +2,12 @@
     <div class="row mt-3">
         <div class="col-md-12 d-flex">
             <div class="">
-                <h2>CATEGORIES</h2>
+                <h3 class="page-title bold">
+                    @if(url()->current() != URL::previous())
+                    <a href="{{ URL::previous() }}" wire:ignore><i class="fas fa-angle-left"></i></a> 
+                    @endif
+                    CATEGORIES
+                </h3>
             </div>
             <span class="ms-auto">
                 <a href="#" class="btn btn-primary" wire:click.prevent="showEdit">Add Category</a>
