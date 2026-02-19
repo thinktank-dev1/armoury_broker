@@ -119,6 +119,7 @@ class CategoriesTableSeeder extends Seeder
                     'Other',
                 ]
             ],
+            /*
             [
                 'name' => 'Reloading Components',
                 'regulated' => 1,
@@ -131,6 +132,7 @@ class CategoriesTableSeeder extends Seeder
                     'Primers',
                 ]
             ],
+            */
             [
                 'name'=> 'Safes & Storage',
                 'regulated' => 0,
