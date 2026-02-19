@@ -19,6 +19,7 @@ class CategoriesTableSeeder extends Seeder
         SubCategory::truncate();
 
         $cats = [
+            /*
             [
                 'name'=>'Ammunition',
                 'regulated' => 1,
@@ -74,6 +75,7 @@ class CategoriesTableSeeder extends Seeder
                     ],
                 ]
             ],
+            */
             [
                 'name' => 'Scopes & Optics',
                 'regulated' => 0,

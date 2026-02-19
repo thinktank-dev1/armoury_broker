@@ -9,7 +9,7 @@
                                 <div class="col-12 col-lg-6">
                                     <div class="banner_content overflow-hidden">
                                         <h5 class="mb-3 staggered-animation text-26 text-bold font-weight-light text-white" data-animation="slideInLeft" data-animation-delay="0.5s">SECURE | VERIFIED | RELIABLE</h5>
-                                        <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">The trading platform built specifically<br /> for South Africa's firearm and tactical <br />equipment community.</p>
+                                        <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">The trading platform built specifically<br /> for South Africa’s tactical and<br />outdoor equipment community.</p>
                                         <p class="staggered-animation text-white text-21" data-animation="slideInLeft" data-animation-delay="1s">Ready to <b>LEVEL UP?</b></p>
                                         <a class="btn btn-fill-out rounded-0 staggered-animation text-uppercase" href="{{ url('auth/login') }}" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
                                     </div>

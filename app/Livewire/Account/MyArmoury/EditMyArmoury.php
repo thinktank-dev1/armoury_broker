@@ -71,13 +71,6 @@ class EditMyArmoury extends Component
             $this->addError('error', 'Vendor name has been taken, please choose another name.');
             return;
         }
-        /*
-        $i = 1;
-        while(Vendor::where('url_name', $newName)->first()){
-            $newName = $base . $i;
-            $i++;
-        }
-        */
 
         $vendor->name = $this->armoury_name;
         $vendor->url_name = $newName;
@@ -101,13 +94,13 @@ class EditMyArmoury extends Component
             Message::create([
                 'message_thread_id' => $tr->id,
                 'user_id' => 1,
-                'message' => "Hi ".Auth::user()->name."<br />
-                Thank you for joining our trusted community.<br /><br />
-                You're now part of South Africa's leading secure marketplace transforming how firearms owners buy, sell, and trade equipment in a safe and secure environment.<br /><br />
-                You're currently viewing your ecommerce store dashboard—your central hub for accessing all platform features. The Dashboard tab in the left-hand menu provides an overview of your store with convenient shortcut links to navigate the entire platform. Getting around is simple: use either the left-hand menu tabs or the dashboard shortcuts.<br /><br />
-                Ready to start?<br /><br />
-                Browse quality equipment from verified sellers, list your unused gear, or explore competitive prices with complete peace of mind.<br /><br />
-                It’s great to have you with us!<br /><br />
+                'message' => "Hi ".Auth::user()->name."<br /><br />
+                <p>Thank you for joining our trusted community.</p> 
+                <p>You’re now part of South Africa’s leading, secure marketplace that is transforming how the tactical and outdoor community buy, sell and trade equipment in a safe and secure environment.</p>
+                <p>You're currently viewing your ecommerce store dashboard—your central hub for accessing all platform features. The Dashboard tab in the left-hand menu provides an overview of your store with convenient shortcut links to navigate the entire platform. Getting around is simple: use either the left-hand menu tabs or the dashboard shortcuts.</p>
+                <p><b>Ready to start?</b></p>
+                <p>Browse quality equipment from verified sellers and list your gear when its time to upgrade. This allows you to buy, sell and level up with complete peace of mind.</p>
+                <p><b>It’s great to have you with us!</b></p>
                 Kind regards<br /><br />
                 The Armoury Broker Team<br /><br />
                 ** Should you wish to get in touch with us, please visit the support page **
@@ -128,7 +121,7 @@ class EditMyArmoury extends Component
             session()->flash('status', 'Vendor successfully saved.');
             $this->dispatch('success-message', message: "Vendor successfully saved.");
             $this->sendWelcomeMessage();
-            $this->redirect('/dashboard'); 
+            $this->redirect('/dashboard?init=1'); 
         }
     }
 

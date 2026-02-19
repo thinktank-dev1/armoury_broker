@@ -8,7 +8,7 @@
                             <a href="#"><img src="{{ asset('img/footer_logo.png') }}" alt="logo"/></a>
                         </div>
                         <div class="text-center footer-right-p mt-2">
-                            <p>The trading platform built specifically for South Africa's firearm and tactical equipment community.</p>
+                            <p>The trading platform built specifically for South Africa’s tactical and outdoor equipment community.</p>
                         </div>
                         <div class="mt-3 mx-3 d-flex justify-content-around">
                             <a href="https://www.facebook.com/share/1b3FRqbnJS/?mibextid=wwXIfr" target="_blank" class="btn btn-sqr" style="padding: .375rem 1.099rem;"><i class="fab fa-facebook-f"></i></a>
@@ -47,7 +47,16 @@
                 <div class="col-md-4 mt-4 mt-md-0">
                     <div class="widget text-center text-md-start">
                         <h6 class="widget_title">Disclaimer</h6>
-                        <p class="footer-disclaimer">Armoury Broker is a peer-to-peer marketplace platform. All transactions must comply with the <b><a href="https://www.gov.za/documents/firearms-control-act" target="_blank">Firearms Control Act 60 of 2000</a></b>. We are not a licensed firearms dealer and do not handle firearms and regulated items directly. Users are solely responsible for legal compliance, licensing requirements, and all aspects of their transactions. Armoury Broker accepts no liability for user conduct, or legal compliance. Always consult licensed dealers and legal professionals regarding firearm transfers.</p>
+                        <p class="footer-disclaimer">
+                            Armoury Broker is a peer-to-peer marketplace platform for tactical equipment,
+                            peripherals, and non-firearm armoury-related merchandise. Armoury Broker (Pty) Ltd is
+                            not a licensed firearms dealer and does not facilitate the sale, purchase, or transfer of
+                            firearms or ammunition on the platform. The listing or trading of firearms and
+                            ammunition is strictly prohibited. Users are solely responsible for ensuring that all items
+                            listed and transacted comply with applicable South African law. Armoury Broker accepts
+                            no liability for user conduct or legal compliance. For firearm-related transactions, please
+                            consult a licensed firearms dealer or qualified legal professional.
+                        </p>
                     </div>
                 </div>
             </div>

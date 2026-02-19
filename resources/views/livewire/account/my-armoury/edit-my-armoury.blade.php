@@ -1,9 +1,5 @@
 <div class="container-fluid">
-    <div class="row mt-3">
-        <!-- <div class="col-md-12">
-            <h2>MY ARMOURY</h2>
-        </div> -->
-    </div>
+    <div class="row mt-5"></div>
     <div class="row">
         <div class="col-md-8 offset-md-2">
             @if($errors->any())
@@ -93,6 +89,7 @@
                                         <input type="file" class="form-control" placeholder="Armoury Logo / Avatar" name="avatar" wire:model.defer="avatar">
                                     </div>
                                 </div>
+                                {{--
                                 <div class="col-md-12">
                                     <b>The Armoury Broker Dealer Network</b>
                                     <p>We’re building a network of licensed firearms dealers to provide dealer stocking services to buyers and sellers on our platform.</p>
@@ -109,15 +106,6 @@
                                         <input class="form-check-input" type="radio" id="no_dealer_stock_service" value="not-dealer" name="dealer_stock_service" wire:model.live="dealer_stock_service">
                                         <label class="form-check-label" for="no_dealer_stock_service">
                                             I am not a licensed firearms dealer
-                                        </label>
-                                    </div>
-                                </div>
-                                {{--
-                                <div class="col-md-12 mb-5">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="dealer_stock_service" value="" name="dealer_stock_service" wire:model.live="dealer_stock_service">
-                                        <label class="form-check-label" for="dealer_stock_service">
-                                            Do you offer dealer stocking as a service? 
                                         </label>
                                     </div>
                                 </div>
@@ -316,9 +304,8 @@
                 <div class="modal-body">
                     <div class="">
                         <h2>Hi {{ Auth::user()->name }}</h2>
-                        <p>Thank you for joining our trusted community. You’re now part of South Africa’s leading, secure marketplace that is transforming how firearms owners buy, sell and trade equipment in a safe and secure environment.</p>
+                        <p>Thank you for joining our trusted community. You’re now part of South Africa’s leading, secure marketplace that is transforming how the tactical and outdoor community buy, sell and trade equipment in a safe and secure environment.</p>
                         <p><b>Let's get your Armoury set up!</b></p>
-
                     </div>
                 </div>
                 <div class="modal-footer">

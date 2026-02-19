@@ -17,7 +17,7 @@
                         <li class="nav-item" wire:ignore> <a class="nav-link active" data-bs-toggle="tab" href="#armoury" role="tab" aria-selected="true">My Armoury</a> </li>
                         <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">My Profile</a> </li>
                         <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#banking" role="tab" aria-selected="false">My Banking</a> </li>
-                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" data-bs-target="#dealer" href="#dealer" id="dealer-link" role="tab" aria-selected="false">Dealer Network</a> </li>
+                        {{-- <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" data-bs-target="#dealer" href="#dealer" id="dealer-link" role="tab" aria-selected="false">Dealer Network</a> </li> --}}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="armoury" role="tabpanel" wire:ignore.self>

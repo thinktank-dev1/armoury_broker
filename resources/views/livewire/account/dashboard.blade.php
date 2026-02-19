@@ -437,11 +437,44 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" id="init-modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Welcome to Armoury Broker</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <h2>Hi {{ Auth::user()->name }}</h2>
+                        <p>Thank you for joining our trusted community.</p> 
+                        <p>You’re now part of South Africa’s leading, secure marketplace that is transforming how the tactical and outdoor community buy, sell and trade equipment in a safe and secure environment.</p>
+                        <p>You're currently viewing your ecommerce store dashboard—your central hub for accessing all platform features. The Dashboard tab in the left-hand menu provides an overview of your store with convenient shortcut links to navigate the entire platform. Getting around is simple: use either the left-hand menu tabs or the dashboard shortcuts.</p>
+                        <p><b>Ready to start?</b></p>
+                        <p>Browse quality equipment from verified sellers and list your gear when its time to upgrade. This allows you to buy, sell and level up with complete peace of mind.</p>
+                        <p><b>It’s great to have you with us!</b></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
     <script src="{{ asset('account/assets/node_modules/chartist-js/dist/chartist.min.js') }}"></script>
     <script src="{{ asset('account/assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        $(document).ready(function(){
+            var queryString = window.location.search;
+
+            var urlParams = new URLSearchParams(queryString);
+            if (urlParams.has('init')){
+                $('#init-modal').modal('show');
+            }
+        })
         document.addEventListener('livewire:initialized', () => {
             @this.on('close-modal', (event) => {
                 $('.modal').modal('hide');
