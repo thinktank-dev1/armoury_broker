@@ -85,6 +85,7 @@
                                     </select>
                                 </div>
                             </div>
+                            {{--
                             <div class="col-md-12">
                                 <label class="form-label">Dealer Network Status</label>
                                 <div class="row">
@@ -97,9 +98,11 @@
                                     </div>
                                 </div>
                             </div>
+                            --}}
                             <div class="col-md-12 mt-4">
                                 <div class="row">
                                     <div class="col-md-6">
+                                        {{--
                                         <a class="btn btn-secondary" wire:click.prevent="activateDealerTab">
                                             @if(Auth::user()->dealer)
                                                 View dealer details
@@ -107,6 +110,7 @@
                                                 Join dealer network
                                             @endif
                                         </a>
+                                        --}}
                                     </div>
                                     <div class="col-md-6 text-end">
                                         <input type="submit" class="btn btn-primary" value="Update Details">
