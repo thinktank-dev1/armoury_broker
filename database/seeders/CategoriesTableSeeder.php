@@ -249,7 +249,8 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Knives & Multi-tool',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
-                'featured' => 0,
+                'featured' => 1,
+                'image' => 'init/KNIVES & MULTI-TOOLS.png',
                 'sub-categories' => [
                     'Hunting Knives',
                     'Multi-Tools',
@@ -277,7 +278,8 @@ class CategoriesTableSeeder extends Seeder
                 'name'=>'Outdoor Vehicles',
                 'regulated' => 0,
                 'measurement_type' => 'dimensions',
-                'featured' => 0,
+                'featured' => 1,
+                'image' => 'init/OUTDOOR VEHICLES.png',
                 'sub-categories' => [
                     'ATVs/Quad Bikes',
                     'Boats & Watercraft',
