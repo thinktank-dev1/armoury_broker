@@ -200,7 +200,6 @@ class ProcessPayment extends Controller
                     Once you've arranged delivery or collection, update the order status to:<br />
                     <ul>
                         <li>\"Order Dispatched\" for general items</li>
-                        <li>\"Dealer Stocked\" for firearms</li>
                     </ul><br />
                     <b>Funds release</b><br />
                     Once the buyer confirms receipt (or the item is dealer stocked), we'll release the funds to your Armoury Broker Vault.";
