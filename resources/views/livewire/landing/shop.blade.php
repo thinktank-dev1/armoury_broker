@@ -164,7 +164,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--
                             <div class="accordion-item mb-2" wire:ignore.self>
                                 <h2 class="accordion-header" id="headingCalibre">
                                     <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCalibre" aria-expanded="false" aria-controls="collapseCalibre" wire:ignore>
@@ -184,7 +183,6 @@
                                     </div>
                                 </div>
                             </div>
-                            --}}
                             <div class="accordion-item mb-2" wire:ignore.self>
                                 <h2 class="accordion-header" id="headingPrice" wire:ignore.self>
                                     <button class="accordion-button upper-cat-header collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice" wire:ignore>
