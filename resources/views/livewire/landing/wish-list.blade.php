@@ -24,7 +24,7 @@
         </div>
     </div>
     @if($cur_view == 'items')
-    <div class="section py-2">
+    <div class="section py-2" wire:key="{{ now() }}_items">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -34,7 +34,7 @@
                         $product = $list->product;
                         @endphp
                         @if($product->status == 1)
-                        <livewire:landing.shop.partials.product-list-item wire:key="{{ $product->id }}" :id="$product->id" />
+                        <livewire:landing.shop.partials.product-list-item wire:key="{{ $product->id }}_item" :id="$product->id" />
                             @endif
                         @endforeach
                     </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
     @elseif($cur_view == 'stores')
-    <div class="section py-2 mb-5">
+    <div class="section py-2 mb-5" wire:key="{{ now() }}_store">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

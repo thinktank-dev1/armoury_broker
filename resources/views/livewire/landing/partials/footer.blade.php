@@ -25,8 +25,8 @@
                             <li><a href="{{ url('/#categories') }}">Categories</a></li>
                             <li><a href="{{ url('support') }}">Support</a></li>
                             <li><a href="{{ url('how-it-works') }}">How Armoury Broker Works</a></li>
-                            <li><a href="{{ url('docs/Terms of Use and User Agreement_AB_Courier amendments_v02_20250629.pdf') }}" target="_blank">Terms of Use</a></li>
-                            <li><a href="{{ url('docs/Privacy Policy V1.0_20250702.pdf') }}" target="_blank">Privacy Policy</a></li>
+                            <li><a href="{{ url('docs/Terms_of_Use_V3_2_Revised.pdf') }}" target="_blank">Terms of Use</a></li>
+                            <li><a href="{{ url('docs/Privacy Policy V3.0_20260301.pdf') }}" target="_blank">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
