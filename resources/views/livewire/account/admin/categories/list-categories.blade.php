@@ -9,7 +9,8 @@
                     CATEGORIES
                 </h3>
             </div>
-            <span class="ms-auto">
+            <span class="ms-auto mt-3">
+                <a href="{{ url('admin/categories') }}" class="btn btn-primary">Refresh</a>
                 <a href="#" class="btn btn-primary" wire:click.prevent="showEdit">Add Category</a>
             </span>
         </div>
@@ -21,7 +22,7 @@
                     <div class="d-flex">
                         <div>
                             <h5 class="card-title">Categories</h5>
-                            <p><small>Click on a category to manage sub-categories.</small></p>
+                            <p><small><b>Note:</b> Click on a category name to manage sub-categories.</small></p>
                         </div>
                         <div class="ms-auto">
                             <div class="input-group mb-3">
@@ -35,7 +36,7 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>CATEGRY NAME</th>
+                                <th>CATEGORY NAME</th>
                                 @if(!$show_sub_sub && !$show_subs)
                                 <th>REGULATED</th>
                                 <th>FEATURED</th>
