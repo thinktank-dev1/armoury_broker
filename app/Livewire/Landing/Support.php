@@ -61,7 +61,7 @@ class Support extends Component
 
             ],
             "Buying and Selling" => [
-                "What do I do when the brand of my item is not available on the list?" => ["You can list the item as “Other” and email the name of the brand you would like to have added to the list to <a href='mailto:support@armourybroker.com'>support@armourybroker.com</a>. Our team will consolidate the updates and include them in future releases."],
+                "What do I do when the brand of my item is not available on the list?" => ["You can list the item as “Other” and email the name of the brand you would like to have added to the list to <a href='mailto:support@armourybroker.com'><b>support@armourybroker.com</b></a>. Our team will consolidate the updates and include them in future releases."],
             ],
             "Payments and Fees" => [
                 "What payment methods do you accept?" => ["We support the following payment methods",
@@ -81,22 +81,22 @@ class Support extends Component
             "Shipping and Delivery" => [
                 "How does shipping work?" => "Armoury Broker collects the funds for the courier during the purchase phase of the transaction. Once the item(s) has been confirmed as received by the buyer, Armoury Broker will release the funds to the seller, which will include the agreed purchase price and collected delivery fees (if applicable) less any costs that the seller has chosen to absorb.",
                 "What shipping and delivery options are available?" => [
-                    "Courier Delivery",
+                    "<b>Courier Delivery</b>",
                     "<ul>
                         <li>The seller selects Courier Delivery as an available delivery option when listing the item. They will need to select a suitable cargo size for the product. The fees will be applied based on the courier’s standard pricing.</li>
                         <li>The buyer will be charged the associated delivery fee (if applicable) during the checkout and payment phase of the transaction, which is paid into the Armoury Broker Escrow account</li>
                         <li>The seller will then ship the item to the agreed destination</li>
                         <li>Once the buyer confirms receipt of the item, the funds for the item and collected delivery fee will be released to the seller's wallet and be made available for withdrawal</li>
                     </ul>",
-                    "Collection or Delivery",
+                    "<b>Collection or Delivery</b>",
                     "<ul>
                         <li>The seller selects Collection or Delivery as an available delivery option when listing the item</li>
                         <li>The buyer and seller will agree via the platform messaging service on the pickup or drop-off location</li>
                         <li>Once the buyer confirms receipt of the purchased item, the funds for the item will be released to the seller's wallet and be made available for withdrawal</li>
                     </ul>",
-                    "Dealer Stocking (Firearms) – FUTURE DEVELOPMENT ",
+                    "<b>Dealer Stocking (Firearms) – FUTURE DEVELOPMENT</b>",
                     "<ul>
-                        <li>To remain compliant with the relevant legislation, firearms transactions default to “Dealer Stocking” as the available delivery option when listing the item. The Seller selects the dealer to be used from the verified list of Armoury Broker Dealers in our Dealer Network. Should a dealer not be available on the provided list, the Seller can email <a href='mailto:support@armourybroker.com'>support@armourybroker.com</a> with the dealers info and we will contact them and have them onboarded. Only then will they be available for selection when listing the item. Should the dealer not want to join the Armoury Broker Dealer Network, the firearm will unfortunately not be able to be listed on the platform while stocked at that dealer.</li>
+                        <li>To remain compliant with the relevant legislation, firearms transactions default to “Dealer Stocking” as the available delivery option when listing the item. The Seller selects the dealer to be used from the verified list of Armoury Broker Dealers in our Dealer Network. Should a dealer not be available on the provided list, the Seller can email <a href='mailto:support@armourybroker.com'><b>support@armourybroker.com</b></a> with the dealers info and we will contact them and have them onboarded. Only then will they be available for selection when listing the item. Should the dealer not want to join the Armoury Broker Dealer Network, the firearm will unfortunately not be able to be listed on the platform while stocked at that dealer.</li>
                         <li>The buyer and seller will arrange for dealer stocking of the firearm via the platform messaging system and complete the necessary paperwork with the dealer</li>
                         <li>All dealer stocking fees are paid to the selected dealer directly by the buyer</li>
                         <li>Once the firearm is confirmed to have been dealer stocked by the buyer, seller and dealer, the funds will be released to the seller's wallet and be made available for future purchases or withdrawal</li>
@@ -106,7 +106,7 @@ class Support extends Component
                     "Yes, we do. Armoury Broker is continuously growing our dealer network to ensure that any sales or purchases related to firearms and regulated items are done in accordance with the Firearms control Act 60 of 2000 and all other applicable legislation. Our intention is to provide users with a safe and legal platform to be able to buy and sell firearms and regulated items. ",
                     "We only allow firearms to be listed in the marketplace if the transaction is to be facilitated by a licensed firearms dealer, who is registered on our platform. Should the dealer that you are currently using not be available on the platform, you are welcome to mail us on <a href='mailto:support@armourybroker.com'>support@armourybroker.com</a> with the dealers information and we will contact them to have them onboarded. Only then will they be available for selection when listing the item. ",
                     "Should the dealer not want to join the Armoury Broker Dealer Network, the firearm will unfortunately not be able to be listed on the platform while stocked at that dealer.",
-                    "If you would like to join our dealer network, please email <a href='mailto:support@armourybroker.com'>support@armourybroker.com</a> or select “Join Dealer Network” under the settings tab of your dashboard.",
+                    "If you would like to join our dealer network, please email <a href='mailto:support@armourybroker.com'><b>support@armourybroker.com</b></a> or select “Join Dealer Network” under the settings tab of your dashboard.",
                 ],
                 "What happens if my item does not arrive?" => [
                     "Our escrow system protects you - funds are only released when you confirm receipt. If there are issues that you cannot resolve between yourself and the seller, you can initiate our formal dispute resolution process for investigation and potential refund.",

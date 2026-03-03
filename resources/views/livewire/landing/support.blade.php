@@ -83,11 +83,11 @@
                                                             @if(!is_numeric($sub_title))
                                                                 {{ $sub_title }}
                                                             @endif
-                                                            {!! $val !!}
+                                                            {!! $val !!}<br />
                                                             <br />
                                                         @endforeach
                                                     @else
-                                                        {{ $vals }}
+                                                        {{ $vals }}<br />
                                                         <br />
                                                     @endif
                                                 </div>
