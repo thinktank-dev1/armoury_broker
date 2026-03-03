@@ -91,7 +91,7 @@
                             <p><small>Click on a sub-category to manage sub-categories.</small></p>
                         </div>
                         <div class="ms-auto">
-                        <a href="#" wire:click.prevent="showSubCatModal({{ $cur_cat->id }}, '', '', 'new')">Add Sub Category</a>
+                        <a href="#" wire:click.prevent="showSubCatModal({{ $cur_cat->id }}, '', '', 'new')"><h5 class="card-title">Add Sub Category</h5></a>
                     </div>
                     </div>
                     <div class="">
@@ -122,7 +122,7 @@
                                         &nbsp;|&nbsp;
                                         <a href="#" wire:click.prevent="showSubCatModal({{ $cur_cat->id }}, {{ $cat->id }}, '', 'new')">Add Sub</a>
                                         &nbsp;|&nbsp;
-                                        <a href="#" class="text-danger">Remove</a>
+                                        <a href="#" class="text-danger" wire:click.prevent="removeSubCat({{ $cat->id }})">Remove</a>
                                     </td>
                                     @endif
                                 </tr>
@@ -150,6 +150,9 @@
                             @foreach($cur_cat->sub_cats->where('parent_id', $cur_sub_id) AS $cat)
                             <tr>
                                 <td>{{ $cat->sub_category_name }}</td>
+                                <td class="text-end">
+                                    <a href="#" class="text-danger" wire:click.prevent="removeSubCat({{ $cat->id }})">Remove</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

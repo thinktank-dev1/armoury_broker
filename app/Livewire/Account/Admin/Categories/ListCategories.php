@@ -26,6 +26,13 @@ class ListCategories extends Component
         $this->show_sub_sub = true;
     }
 
+    public function removeSubCat($id){
+        $sub = SubCategory::find($id);
+        if($sub){
+            $sub->delete();
+        }
+    }
+
     public function saveSubCategory(){
         $this->validate([
             'sub_category_name' => 'required',
