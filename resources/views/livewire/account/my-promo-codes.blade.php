@@ -100,7 +100,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <ul class="nav nav-tabs profile-tab settings-tabs" role="tablist" wire:ignore.self>
+                <ul class="nav nav-tabs profile-tab settings-tabs flex-nowrap overflow-x-auto" role="tablist" wire:ignore.self style="white-space: nowrap;">
                     <li class="nav-item" wire:ignore><a class="nav-link active" data-bs-toggle="tab" href="#active" role="tab">Active</a></li>
                     <li class="nav-item" wire:ignore><a class="nav-link" data-bs-toggle="tab" href="#inactive" role="tab">Inactive</a></li>
                 </ul>

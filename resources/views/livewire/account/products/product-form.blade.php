@@ -61,10 +61,10 @@
                             <div cass="col-md-12">
                                 <h3 class="bold">UPLOAD ITEM</h3>
                                 <b class="bold">Image Upload</b>
-                                <p>Upload up to 6 images <span class="ms-5"><a href="{{ url('docs/Armoury Broker Guideline Website.pdf') }}" target="_blank" class="text-black"><b><u>View image upload guide</u></b></a></span></p>
+                                <p>Upload up to 6 images. <span class="ms-md-5"><a href="{{ url('docs/Armoury Broker Guideline Website.pdf') }}" target="_blank" class="text-black"><b><u>View image upload guide</u></b></a></span></p>
                             </div>
                             <div class="col-md-6">
-                                <div class="row">
+                                <div class="row gx-1">
                                     @if($cur_product)
                                         @php
                                         $cnt = 0;
@@ -73,8 +73,8 @@
                                             @php
                                             $cnt += 1;
                                             @endphp
-                                            <div class="col-md-2">
-                                                <div class="img-cont @if($preview) img-cont-preview @endif d-flex justify-content-center align-items-center">
+                                            <div class="col-4 col-md-2 mb-2">
+                                                <div class="img-cont @if($preview) img-cont-preview @endif d-sm-flex d-flex justify-content-center align-items-center">
                                                     <div class="preview-cont w-100 h-100">
                                                         <img src="{{ asset('storage/'.$image->image_url) }}" class="prdt-img">
                                                         <a href="#" wire:click.prevent="deleteImage('{{ $image->id }}')"><span class="img-rem-icon"><i class="fas fa-times"></i></span></a>
@@ -87,8 +87,8 @@
                                             @php
                                             $cnt += 1;
                                             @endphp
-                                            <div class="col-md-2">
-                                                <div class="img-cont @if($preview) img-cont-preview @endif d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
+                                            <div class="col-4 col-md-2 mb-2">
+                                                <div class="img-cont @if($preview) img-cont-preview @endif d-sm-flex d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
                                                     @if($value)
                                                         @if($value->temporaryUrl())
                                                             @if(str_starts_with($value->getMimeType(), 'image/'))
@@ -113,8 +113,8 @@
                                         @endif
                                     @else
                                         @foreach($product_images AS $key => $value)
-                                        <div class="col-md-2">
-                                            <div class="img-cont @if($preview) img-cont-preview @endif d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
+                                        <div class="col-4 col-md-2 mb-2">
+                                            <div class="img-cont @if($preview) img-cont-preview @endif d-sm-flex d-flex justify-content-center align-items-center" onclick="triggerFileInput(this)">
                                                 @if($value)
                                                     @if($value->temporaryUrl())
                                                         @if(str_starts_with($value->getMimeType(), 'image/'))

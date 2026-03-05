@@ -10,12 +10,24 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mb-3">
-            <a href="#" class="btn @if($filter == 'all_orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_orders')">All Orders</a>
-            <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
-            <a href="#" class="btn @if($filter == 'pending_payement') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_payement')">Pending Payment</a>
-            <a href="#" class="btn @if($filter == 'pending_dispatch') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_dispatch')">Pending Dispatch</a>
-            <a href="#" class="btn @if($filter == 'dispatched') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('dispatched')">Dispatched</a>
+        <div class="col-md-12">
+            <div class="row g-2 mb-3">
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'all_orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_orders')">All Orders</a>
+                </div>
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
+                </div>
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'pending_payement') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_payement')">Pending Payment</a>
+                </div>
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'dispatched') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('dispatched')">Dispatched</a>
+                </div>
+                <div class="col-12 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'pending_dispatch') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_dispatch')">Pending Dispatch</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="accordion" id="accordionOrders" wire:ignore.self>
@@ -107,8 +119,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mt-3 d-flex flex-column">
-                                    <b class="bold">Order Status</b>
-                                    <table class="table table-borderless">
+                                    <b class="bold mb-2">Order Status</b>
+                                    
+                                    <!-- Desktop View (Original Table) -->
+                                    <table class="table table-borderless d-none d-md-table">
                                         <tbody>
                                             <tr>
                                                 <th class="text-end">Delivery Type</th>
@@ -193,6 +207,90 @@
                                             </tr>
                                         </tbody>
                                     </table>
+
+                                    <!-- Mobile View (Clean Labels) -->
+                                    <div class="d-md-none">
+                                        <div class="mb-2">
+                                            <label class="form-label mb-0 small bold text-muted">Delivery Type</label>
+                                            <div class="ps-1">
+                                                @if($item->shipping_method == "collection_delivery")
+                                                    {{ ucwords(str_replace('_', ' / ',$item->shipping_method)) }}
+                                                @else
+                                                    {{ ucwords(str_replace('_', ' ',$item->shipping_method)) }}
+                                                @endif
+                                                @if($item->dealer)
+                                                    <br />
+                                                    {{ $item->dealer->business_name }}<br />
+                                                    {{ $item->dealer->province }}<br />
+                                                    R {{ number_format($item->dealer->dealer_stocking_fee,2) }} pm<br />
+                                                @elseif($item->custom_dealer_details)
+                                                    <br />
+                                                    {{ $item->custom_dealer_details }}
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        @if($item->shipping_method == 'courier')
+                                        <div class="mb-2">
+                                            <label class="form-label mb-0 small bold text-muted">Delivery Service</label>
+                                            <div class="input-group input-group-sm">
+                                                @if($item->vendor_status != "Canceled")
+                                                <select class="form-control" name="shiping_service" wire:model.defer="orders_items_arr.{{ $item->id }}.shiping_service">
+                                                    <option value="">Select Option</option>
+                                                    @foreach($services AS $sv)
+                                                        <option value="{{ $sv->name }}">{{ $sv->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <button class="btn btn-outline-secondary" type="button"  data-bs-toggle="modal" data-bs-target="#add-shipping-service">Add</button>
+                                                @else
+                                                <div class="form-control-plaintext ps-1">{{ $item->shiping_service }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label mb-0 small bold text-muted">Tracking Number (optional)</label>
+                                            <input type="text" class="form-control form-control-sm" name="tracking_number" wire:model.defer="orders_items_arr.{{ $item->id }}.tracking_number">
+                                        </div>
+                                        @endif
+
+                                        @if($item->buyer_status != "Received")
+                                        <div class="mb-2">
+                                            <label class="form-label mb-0 small bold text-muted">Shipping Status</label>
+                                            <div class="ps-0">
+                                                @if($item->vendor_status != "Canceled" && ($item->vendor_status != "Order Dispatched" || $item->vendor_status == 'Dealer stocked - Confirmed'))
+                                                <select class="form-control form-control-sm" name="vendor_status" wire:model.defer="orders_items_arr.{{ $item->id }}.vendor_status">
+                                                    @if($item->dealer || $item->custom_dealer_details)
+                                                    <option value="">Pending Dealer Stocking</option>
+                                                    <option value="Firearm dealer stocked">Firearm Dealer Stocked</option>    
+                                                    @else 
+                                                    <option value="">Pending Dispatch</option>
+                                                    <option value="Order Dispatched">Order Dispatched</option>
+                                                    @endif
+                                                </select>
+                                                @else
+                                                    <div class="form-control-plaintext ps-1">{{ $item->vendor_status }}</div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        @endif
+
+                                        <div class="mb-3">
+                                            <label class="form-label mb-0 small bold text-muted">Order Status</label>
+                                            <div class="ps-1">
+                                                @if($item->vendor_status == "Canceled")
+                                                    Canceled
+                                                @elseif($item->vendor_status == null && $item->buyer_status == null)
+                                                    Pending
+                                                @elseif($item->vendor_status == "Firearm dealer stocked")
+                                                    Awaiting Firearm Dealer Stocked Confirmation
+                                                @elseif(($item->vendor_status == "Order Dispatched" || $item->vendor_status == 'Dealer stocked - Confirmed') && $item->buyer_status == null)
+                                                    Awaiting Buyer Confirmation
+                                                @else
+                                                    Complete
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                     @if($item->hasDispute())
                                     <div class="mt-auto">
                                         <p><strong>Note:</strong> Dispute has to be resolved before you can do further actions</p>

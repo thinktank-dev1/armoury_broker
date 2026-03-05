@@ -21,8 +21,14 @@
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <a href="#" class="btn @if($read_type == 'unread') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('unread')">Unread</a>
-                                        <a href="#" class="btn @if($read_type == 'read') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('read')">Read</a>
+                                        <div class="row g-2 mb-2">
+                                            <div class="col-6 col-md-auto d-grid d-md-inline-block">
+                                                <a href="#" class="btn @if($read_type == 'unread') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('unread')">Unread</a>
+                                            </div>
+                                            <div class="col-6 col-md-auto d-grid d-md-inline-block">
+                                                <a href="#" class="btn @if($read_type == 'read') btn-primary @else btn-secondary @endif" wire:click.prevent="changeType('read')">Read</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card mt-3">
@@ -72,7 +78,7 @@
                             <div class="col-md-8">
                                 @if($cur_msg)
                                 <div class="card">
-                                    <div class="card-header d-flex bg-dark p-0">
+                                    <div class="card-header d-sm-flex d-flex bg-dark p-0">
                                         <div class="chat-item bb-none">
                                             @if($cur_msg->user)
                                                 @if($cur_msg->user->vendor)
@@ -106,7 +112,7 @@
                                         <span class="ms-auto chat-item">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#terms-modal">
                                                 <h4 class="card-title text-white underline" style="font-size: 14px;">
-                                                    Terms Of Use <i class=" icon-info"></i>
+                                                    Terms&nbsp;Of&nbsp;Use&nbsp;<i class=" icon-info"></i>
                                                 </h4>
                                             </a>
                                         </span>

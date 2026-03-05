@@ -3,11 +3,22 @@
         <div class="container">
             <div class="nav_block">
                 <div class="row d-flex align-items-center">
-                    <div class="col-md-3 g-3">
+                    <div class="col-6 col-md-3 g-3">
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <img class="logo_light" src="{{ asset('img/logo.png') }}" alt="logo" />
                             <img class="logo_dark" src="{{ asset('img/logo.png') }}" alt="logo" />
                         </a>        
+                    </div>
+                    <div class="col-6 d-md-none text-end">
+                        @if(Auth::guest())
+                        <a class="btn btn-primary-outline btn-sm px-2" href="{{ url('auth/login') }}">Login</a>
+                        @else
+                        <a href="{{ url('cart') }}" class="position-relative me-3">
+                            <i class="ti-shopping-cart" style="font-size: 20px;"></i>
+                            @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif
+                        </a>
+                        <a href="{{ url('dashboard') }}"><i class="ti-layout-grid2" style="font-size: 20px;"></i></a>
+                        @endif
                     </div>
                     <div class="col-md-9 text-center ms-md-auto text-md-end g-4 d-none d-md-block">
                         @if(!Auth::guest())
@@ -146,7 +157,7 @@
                     </ul>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
-                    <li class="d-none d-md-block nav-search">
+                    <li class="nav-search">
                         <livewire:landing.partials.search />
                     </li>
                 </ul>

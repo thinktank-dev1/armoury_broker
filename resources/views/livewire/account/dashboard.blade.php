@@ -13,12 +13,13 @@
         </div>
     </div>
     <div class="row mb-4">
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3 mb-md-0">
             <div class="card h-100">
                 <div class="card-header">
                     <h4 class="card-title">My Armoury</h4>
                 </div>
-                <div class="card-body">
+                <!-- Desktop View -->
+                <div class="card-body d-none d-md-block">
                     <div class="row">
                         <div class="col-md-4">
                             <center class="profile-pic m-t-30">
@@ -41,7 +42,7 @@
                         <div class="col-md-8 ps-3 pt-4">
                             @if(Auth::user()->vendor)
                             <h3 class="bold">{{ Auth::user()->vendor->name }}</h3>
-                            <div class="d-flex d-sm-flex justify-content-around justify-content-md-start">
+                            <div class="d-flex justify-content-around justify-content-md-start">
                                 <div>
                                     <b>{{ Auth::user()->vendor->likes->count() }}</b> Likes
                                 </div>
@@ -98,14 +99,77 @@
                         </div>
                     </div>
                 </div>
+                <!-- Mobile View -->
+                <div class="card-body d-md-none">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="profile-pic mt-2 mb-2">
+                                <div class="d-flex justify-content-center">
+                                    @if(Auth::user()->vendor)
+                                        @if(Auth::user()->vendor->avatar)
+                                            <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle-dash-avatar" />
+                                        @else
+                                            <img src="{{ asset('img/PROFILE PIC.png') }}" class="circle-dash-avatar" />
+                                        @endif
+                                    @else
+                                        <img src="{{ asset('img/PROFILE PIC.png') }}" class="circle-dash-avatar" />
+                                    @endif
+                                    <span class="edit-btn">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-md-8 text-center">
+                            @if(Auth::user()->vendor)
+                            <h3 class="bold mb-1">{{ Auth::user()->vendor->name }}</h3>
+                            <div class="d-flex justify-content-center mb-3">
+                                <div class="me-4">
+                                    <b>{{ Auth::user()->vendor->likes->count() }}</b> Likes
+                                </div>
+                                <div>
+                                    <b>{{ Auth::user()->vendor->sold() }}</b> Sold
+                                </div>
+                            </div>
+                            <div class="mt-2 text-small">
+                                <div class="mb-1"><i class="ti-truck"></i> Ships in <font class="font-medium">{{ Auth::user()->vendor->average_delivery_time() }} days</font></div>
+                                <div><i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}</div>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="col-md-12 mt-3 pt-3 border-top">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 mb-2 text-center">
+                                    @if(Auth::user()->dealer)
+                                    <small class="text-muted">Registered AB Dealer</small>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-sm-flex justify-content-between text-small px-3">
+                                        <a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">
+                                            <i class="icon-share"></i> Share
+                                        </a>
+                                        <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">
+                                            <i class="icon-paper-clip"></i> Copy
+                                        </a>
+                                        <a href="{{ url('profile') }}" class="link">
+                                            <i class="icon-pencil"></i> Edit
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3 mb-md-0">
             <div class="card h-100">
                 <div class="card-header">
                     <h4 class="card-title">My Profile</h4>
                 </div>
-                <div class="card-body">
+                <!-- Desktop View -->
+                <div class="card-body d-none d-md-block">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="row mt-3">
@@ -121,9 +185,11 @@
                             </div>
                             <div><i class=" icon-envelope"></i> {{ Auth::user()->email }}</div>
                             <div><i class=" icon-phone"></i> {{ Auth::user()->mobile_number }}</div>
+                            @if(Auth::user()->vendor && Auth::user()->vendor->instagram_handle)
                             <div><i class=" icon-social-instagram"></i> {{ Auth::user()->vendor->instagram_handle }}</div>
+                            @endif
                             <div class="mt-2">
-                                <p class="text-muted m-l-5">
+                                <p class="text-muted">
                                     {{ Auth::user()->vendor->suburb }}<br />
                                     {{ Auth::user()->vendor->city }}<br />
                                     {{ Auth::user()->vendor->province }}<br />
@@ -132,11 +198,28 @@
                         </div>
                     </div>
                 </div>
+                <!-- Mobile View -->
+                <div class="card-body d-md-none text-center">
+                    <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
+                    <div class="mb-2">
+                    Dealer Status: <b>@if(Auth::user()->dealer) Active @else Inactive @endif</b>
+                    </div>
+                    <div class="mb-1"><i class=" icon-envelope"></i> {{ Auth::user()->email }}</div>
+                    <div class="mb-1"><i class=" icon-phone"></i> {{ Auth::user()->mobile_number }}</div>
+                    @if(Auth::user()->vendor && Auth::user()->vendor->instagram_handle)
+                    <div class="mb-1"><i class=" icon-social-instagram"></i> {{ Auth::user()->vendor->instagram_handle }}</div>
+                    @endif
+                    <div class="mt-3">
+                        <p class="text-muted">
+                            {{ Auth::user()->vendor->suburb }}, {{ Auth::user()->vendor->city }}, {{ Auth::user()->vendor->province }}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-4 d-fl">
+        <div class="col-md-4 mb-3 mb-md-0">
             <div class="card h-100">
-                <div class="card-header d-flex">
+                <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Vault</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
@@ -158,15 +241,16 @@
                         </span>
                     </div>
                 </div>
+                <!-- Desktop/Mobile View -->
                 <div class="card-body">
-                    <div>
-                        <table class="table table-sm table-borderless">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-borderless table-no-responsive">
                             <tr>
-                                <td class="bold pb-4">R {{ number_format($spendable_amount , 2) }}</td>
-                                <td class="bold pb-4">Available for shopping</td>
+                                <td class="bold pb-2 pb-md-4">R&nbsp;{{ number_format($spendable_amount , 2) }}</td>
+                                <td class="bold pb-2 pb-md-4">Available for shopping</td>
                             </tr>
                             <tr>
-                                <td>R {{ number_format($ab_credit, 2) }}</td>
+                                <td>R&nbsp;{{ number_format($ab_credit, 2) }}</td>
                                 <td>Armoury Broker Credit</td>
                             </tr>
                             <tr>
@@ -174,15 +258,15 @@
                                 <td class="text-muted">Gift Voucher Credit (Coming Soon)</td>
                             </tr>
                             <tr>
-                                <td>R {{ number_format($withdrawable_balance, 2) }}</td>
+                                <td>R&nbsp;{{ number_format($withdrawable_balance, 2) }}</td>
                                 <td>Withdrawable Funds</td>
                             </tr>
                             <tr>
-                                <td>R {{ number_format($orders_in_progress, 2) }}</td>
+                                <td>R&nbsp;{{ number_format($orders_in_progress, 2) }}</td>
                                 <td>Orders In Progress</td>
                             </tr>
                             <tr>
-                                <td class="bold pt-4">R {{ number_format($tot_credit, 2) }}</td>
+                                <td class="bold pt-4">R&nbsp;{{ number_format($tot_credit, 2) }}</td>
                                 <td class="bold pt-4">Total Balance</td>
                             </tr>
                         </table>
@@ -193,8 +277,8 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header d-flex">
+            <div class="card mb-4">
+                <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Orders</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
@@ -232,8 +316,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header d-flex">
+            <div class="card mb-4">
+                <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Purchases</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
@@ -270,8 +354,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header d-flex">
+            <div class="card mb-4">
+                <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Actions</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
@@ -310,8 +394,8 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header d-flex">
+            <div class="card mb-4">
+                <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Listings</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
@@ -349,7 +433,7 @@
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header d-flex">
+                <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">Order Analytics</h4>
                     <div class="ms-auto">
                         <span class="mytooltip tooltip-effect-1">
@@ -369,7 +453,9 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <canvas id="orderChart" height="45"></canvas>
+                    <div style="position: relative; height: 300px;">
+                        <canvas id="orderChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -517,6 +603,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     interaction: { mode: 'index', intersect: false },
                     stacked: false,
                     scales: {

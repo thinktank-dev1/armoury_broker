@@ -44,16 +44,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-body px-5">
+                        <!-- Desktop View -->
+                        <div class="card-body d-none d-md-block px-5">
                             <div class="row">
                                 <div class="col-md-2">
                                     <a href="{{ url('profile') }}">
-                                        <center class="mt-3">
+                                        <center class="mt-3 profile-pic">
                                             @if(Auth::user()->vendor->avatar) 
-                                            <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle img-fluid">
+                                            <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle-dash-avatar img-fluid">
                                             @else
-                                            <img src="{{ asset('img/PROFILE PIC.png') }}" class="img-circle img-fluid">
+                                            <img src="{{ asset('img/PROFILE PIC.png') }}" class="circle-dash-avatar img-fluid">
                                             @endif
+                                            <span class="edit-btn">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>
+                                            </span>
                                         </center>
                                     </a>
                                 </div>
@@ -73,8 +77,88 @@
                                             <i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}
                                         </div>
                                         <div class="col-6 col-md-6 text-end">
-                                            <div class="mb-2"><a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">Share <i class="icon-share"></i></a></div>
-                                            <div class="mb-2"><a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">Copy link <i class="icon-paper-clip"></i></a></div>
+                                            <div class="mb-2">
+                                                <a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">
+                                                    <span class="">
+                                                        <i class="icon-share order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                                        <span class="order-2 order-md-2">
+                                                            Share 
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="mb-2">
+                                                <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">
+                                                    <span class="">
+                                                        <i class="icon-paper-clip order-1 order-md-1 me-md-2 pt-md-1"></i>
+                                                        <span class="order-2 order-md-2">
+                                                            Copy 
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile View -->
+                        <div class="card-body d-md-none">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="profile-pic mt-2 mb-2">
+                                        <div class="d-flex justify-content-center">
+                                            @if(Auth::user()->vendor)
+                                                @if(Auth::user()->vendor->avatar)
+                                                    <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle-dash-avatar" />
+                                                @else
+                                                    <img src="{{ asset('img/PROFILE PIC.png') }}" class="circle-dash-avatar" />
+                                                @endif
+                                            @else
+                                                <img src="{{ asset('img/PROFILE PIC.png') }}" class="circle-dash-avatar" />
+                                            @endif
+                                            <span class="edit-btn">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>
+                                            </span>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-md-8 text-center">
+                                    @if(Auth::user()->vendor)
+                                    <h3 class="bold mb-1">{{ Auth::user()->vendor->name }}</h3>
+                                    <div class="d-flex justify-content-center mb-3">
+                                        <div class="me-4">
+                                            <b>{{ Auth::user()->vendor->likes->count() }}</b> Likes
+                                        </div>
+                                        <div>
+                                            <b>{{ Auth::user()->vendor->sold() }}</b> Sold
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 text-small">
+                                        <div class="mb-1"><i class="ti-truck"></i> Ships in <font class="font-medium">{{ Auth::user()->vendor->average_delivery_time() }} days</font></div>
+                                        <div><i class="ti-location-pin"></i> {{ Auth::user()->vendor->city }}</div>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-12 mt-3 pt-3 border-top">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6 mb-2 text-center">
+                                            @if(Auth::user()->dealer)
+                                            <small class="text-muted">Registered AB Dealer</small>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-sm-flex d-flex justify-content-between text-small px-1">
+                                                <a href="javascript:void(0)" class="link" data-bs-toggle="modal" data-bs-target="#share-modal">
+                                                    <i class="icon-share"></i> Share
+                                                </a>
+                                                <a href="javascript:void(0)" class="link" wire:click.prevent="copyLink">
+                                                    <i class="icon-paper-clip"></i> Copy
+                                                </a>
+                                                <a href="{{ url('profile') }}" class="link">
+                                                    <i class="icon-pencil"></i> Edit
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,9 +169,17 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <a href="#" class="btn @if($listing_type == 'sale') btn-primary @else btn-secondary @endif" wire:click.prevent="changeListingTypeFilter('sale')">For Sale</a>
-                    <a href="#" class="btn @if($listing_type == 'wanted') btn-primary @else btn-secondary @endif" wire:click.prevent="changeListingTypeFilter('wanted')">Wanted</a>
-                    <a href="#" class="btn @if($sold) btn-primary @else btn-secondary @endif" wire:click.prevent="toggleSoldFilter">Sold</a>
+                    <div class="row g-2">
+                        <div class="col-4 col-md-auto d-grid d-md-inline-block">
+                            <a href="#" class="btn @if($listing_type == 'sale') btn-primary @else btn-secondary @endif" wire:click.prevent="changeListingTypeFilter('sale')">For Sale</a>
+                        </div>
+                        <div class="col-4 col-md-auto d-grid d-md-inline-block">
+                            <a href="#" class="btn @if($listing_type == 'wanted') btn-primary @else btn-secondary @endif" wire:click.prevent="changeListingTypeFilter('wanted')">Wanted</a>
+                        </div>
+                        <div class="col-4 col-md-auto d-grid d-md-inline-block">
+                            <a href="#" class="btn @if($sold) btn-primary @else btn-secondary @endif" wire:click.prevent="toggleSoldFilter">Sold</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mt-4">
@@ -112,6 +204,40 @@
                 </div>
             </div>
             @endforeach
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="avatar-edit-modal" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Avatar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if($errors->any())
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                {{ $errors->first() }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Select Avatar</label>
+                                <input type="file" class="form-control" name="avatar" wire:model.defer="avatar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="saveAvater">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 

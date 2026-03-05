@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             @foreach($categories AS $cat)
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <div class="sale_banner">
                     <a class="hover_effect1" href="{{ url('shop?category='.$cat->slug) }}">
                         <img src="{{ asset('storage/'.$cat->category_image) }}" alt="shop_banner_img3">
@@ -20,7 +20,7 @@
         </div>
         <div class="row d-none" id="other-cats">
             @foreach($other_cats AS $cat)
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <div class="sale_banner">
                     <a class="hover_effect1" href="{{ url('shop?category='.$cat->slug) }}">
                         @if($cat->category_image)

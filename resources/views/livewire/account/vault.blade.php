@@ -32,7 +32,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered bg-dark h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="text-white bold">Vault Balance</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -55,7 +55,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="bold">Armoury Broker Credit</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -78,7 +78,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="bold text-muted">Gift Voucher Credit</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -101,7 +101,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered bg-dark h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="text-white bold">Total Purchases</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -124,7 +124,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered bg-dark h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="text-white bold">Withdrawable Funds</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -148,7 +148,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="bold">Pending Withdrawal</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -170,7 +170,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="bold">Orders In Progress</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -193,7 +193,7 @@
                     <div class="col-md-3 pb-0 mb-2">
                         <div class="card bordered bg-dark h-100 pb-0 mb-2">
                             <div class="card-body">
-                                <div class="d-flex">
+                                <div class="d-sm-flex d-flex">
                                     <h5 class="text-white bold">Total Sales</h5>
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
@@ -218,28 +218,56 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <a href="#" class="btn @if($filter == 'all_transactions') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_transactions')">All Transactions</a>
-                <a href="#" class="btn @if($filter == 'orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('orders')">Orders</a>
-                <a href="#" class="btn @if($filter == 'purchases') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('purchases')">Purchases</a>
-                <a href="#" class="btn @if($filter == 'refunds') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('refunds')">Refunds</a>
-                <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
-                <a href="#" class="btn @if($filter == 'pending') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending')">Pending</a>
+                <div class="row g-2">
+                    <div class="col-6 col-md-auto d-grid d-md-block">
+                        <a href="#" class="btn @if($filter == 'all_transactions') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_transactions')">All Transactions</a>
+                    </div>
+                    <div class="col-6 col-md-auto d-grid d-md-block">
+                        <a href="#" class="btn @if($filter == 'orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('orders')">Orders</a>
+                    </div>
+                    <div class="col-6 col-md-auto d-grid d-md-block">
+                        <a href="#" class="btn @if($filter == 'purchases') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('purchases')">Purchases</a>
+                    </div>
+                    <div class="col-6 col-md-auto d-grid d-md-block">
+                        <a href="#" class="btn @if($filter == 'refunds') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('refunds')">Refunds</a>
+                    </div>
+                    <div class="col-6 col-md-auto d-grid d-md-block">
+                        <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
+                    </div>
+                    <div class="col-6 col-md-auto d-grid d-md-block">
+                        <a href="#" class="btn @if($filter == 'pending') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending')">Pending</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex">
-                            <h5 class="card-title">Transaction History</h5>
-                            <div class="ms-auto">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">From</span>
-                                    <input type="date" class="form-control form-control-sm" placeholder="Start Date" name="date_from" wire:model.live="date_from">
-                                    <span class="input-group-text" id="basic-addon1">To</span>
-                                    <input type="date" class="form-control form-control-sm" placeholder="End Date" name="date_to" wire:model.live="date_to">
-                                    <a href="#" class="btn btn-sm btn-secondary px-3" wire:click.prevent="exportData('pdf')"><i class="fas fa-file-pdf"></i> Export PDF</a>
-                                    <a href="#" class="btn btn-sm btn-secondary px-3" wire:click.prevent="exportData('csv')"><i class="far fa-file-excel"></i> Export CSV</a>
+                        <div class="row mb-3 align-items-center">
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <h5 class="card-title mt-1">Transaction History</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row g-2">
+                                    <div class="col-6 col-md-3">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text px-1 px-md-2" style="font-size: 11px;">From</span>
+                                            <input type="date" class="form-control" name="date_from" wire:model.live="date_from">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text px-1 px-md-2" style="font-size: 11px;">To</span>
+                                            <input type="date" class="form-control" name="date_to" wire:model.live="date_to">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3 d-grid">
+                                        <a href="#" class="btn btn-sm btn-secondary" wire:click.prevent="exportData('pdf')"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    </div>
+                                    <div class="col-6 col-md-3 d-grid">
+                                        <a href="#" class="btn btn-sm btn-secondary" wire:click.prevent="exportData('csv')"><i class="far fa-file-excel"></i> CSV</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

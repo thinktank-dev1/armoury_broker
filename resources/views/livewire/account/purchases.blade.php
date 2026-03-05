@@ -10,12 +10,24 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mb-3">
-            <a href="#" class="btn @if($filter == 'all_orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_orders')">All Orders</a>
-            <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
-            <a href="#" class="btn @if($filter == 'pending_payement') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_payement')">Pending Payment</a>
-            <a href="#" class="btn @if($filter == 'pending_dispatch') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_dispatch')">Pending Dispatch</a>
-            <a href="#" class="btn @if($filter == 'dispatched') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('dispatched')">Dispatched</a>
+        <div class="col-md-12">
+            <div class="row g-2 mb-3">
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'all_orders') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('all_orders')">All Orders</a>
+                </div>
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'complete') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('complete')">Complete</a>
+                </div>
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'pending_payement') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_payement')">Pending Payment</a>
+                </div>
+                <div class="col-6 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'dispatched') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('dispatched')">Dispatched</a>
+                </div>
+                <div class="col-12 col-md-auto d-grid d-md-block">
+                    <a href="#" class="btn @if($filter == 'pending_dispatch') btn-primary @else btn-secondary @endif" wire:click.prevent="changeFilter('pending_dispatch')">Pending Dispatch</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="accordion" id="accordionOrders" wire:ignore.self>
@@ -107,8 +119,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mt-3 d-flex flex-column">
-                                    <b class="bold">Order Status</b>
-                                    <table class="table table-borderless">
+                                    <b class="bold mb-2">Order Status</b>
+                                    
+                                    <!-- Desktop View (Original Table) -->
+                                    <table class="table table-borderless d-none d-md-table">
                                         <tbody>
                                             <tr>
                                                 <th class="text-end">Delivery Type</th>
@@ -167,6 +181,65 @@
                                             </tr>
                                         </tbody>
                                     </table>
+
+                                    <!-- Mobile View (Clean Labels) -->
+                                    <div class="d-md-none">
+                                        <div class="mb-2">
+                                            <label class="form-label mb-0 small bold text-muted">Delivery Type</label>
+                                            <div class="ps-1">
+                                                @if($item->shipping_method == "collection_delivery")
+                                                    {{ ucwords(str_replace('_', ' / ',$item->shipping_method)) }}
+                                                @else
+                                                    {{ ucwords(str_replace('_', ' ',$item->shipping_method)) }}
+                                                @endif
+                                                @if($item->dealer)
+                                                    <br />
+                                                    {{ $item->dealer->business_name }}<br />
+                                                    {{ $item->dealer->province }}<br />
+                                                    R {{ number_format($item->dealer->dealer_stocking_fee,2) }} pm<br />
+                                                @elseif($item->custom_dealer_details)
+                                                    <br />
+                                                    {{ $item->custom_dealer_details }}
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        @if($item->shipping_method == 'courier')
+                                            @if($item->shiping_service)
+                                            <div class="mb-2">
+                                                <label class="form-label mb-0 small bold text-muted">Delivery Service</label>
+                                                <div class="ps-1">{{ $item->shiping_service }}</div>
+                                            </div>
+                                            @endif
+                                            @if($item->tracking_number)
+                                            <div class="mb-2">
+                                                <label class="form-label mb-0 small bold text-muted">Tracking Number</label>
+                                                <div class="ps-1">{{ $item->tracking_number }}</div>
+                                            </div>
+                                            @endif
+                                        @endif
+
+                                        <div class="mb-3">
+                                            <label class="form-label mb-0 small bold text-muted">Order Status</label>
+                                            <div class="ps-1">
+                                                @if($item->vendor_status == "Canceled")
+                                                    Canceled
+                                                @elseif($item->vendor_status == null && $item->buyer_staus == null)
+                                                    Pending
+                                                @elseif($item->vendor_status == "Firearm dealer stocked")
+                                                    Firearm Dealer Stocked
+                                                @elseif(($item->vendor_status == "Order Dispatched" || $item->vendor_status == "Dealer stocked - Confirmed") && $item->buyer_status == null)
+                                                    Awaiting Buyer Confirmation
+                                                @else
+                                                    @if($item->dealer || $item->custom_dealer_details)
+                                                        Complete - Dealer Stocked
+                                                    @else
+                                                        Complete
+                                                    @endif
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                     @if($item->hasDispute())
                                     <div class="mt-auto">
                                         <p class="text-danger"><strong>Note:</strong> Dispute has to be resolved before continuing with this order. Click below if resolved.</p>

@@ -11,7 +11,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            
+            <div class="row d-none d-md-flex">
                 @if($vendor->avatar)
                 <div class="col-md-3 text-center">
                     <img src="{{ asset('storage/'.$vendor->avatar) }}" class="img-fluid img-circle">
@@ -38,6 +39,46 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
+                            <livewire:landing.partials.share-block :vendor_id="$vendor->id" type="vendor-detail" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-md-none">
+                <!-- Mobile View -->
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="profile-pic mt-2 mb-2">
+                                <div class="d-flex justify-content-center">
+                                    @if($vendor->avatar)
+                                        <img src="{{ asset('storage/'.$vendor->avatar) }}" class="img-fluid img-circle" />
+                                    @else
+                                        <img src="{{ asset('img/PROFILE PIC.png') }}" class="img-fluid img-circle" />
+                                    @endif
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <h3 class="bold mb-1">{{ ucwords($vendor->name) }}</h3>
+                            <div class="d-flex justify-content-center mb-3">
+                                <div class="me-4">
+                                    <b>{{ $vendor->likes->count() }}</b> Likes
+                                </div>
+                                <div>
+                                    <b>{{ $vendor->sold() }}</b> Sold
+                                </div>
+                            </div>
+                            <div class="mt-2 text-small">
+                                <div class="mb-1"><i class="ti-truck"></i> Delivers in <font class="font-medium">{{ $vendor->average_delivery_time() }} days</font></div>
+                                <div><i class="ti-location-pin"></i> {{ $vendor->city }}</div>
+                            </div>
+                            <div class="mt-3 px-3">
+                                <p class="text-dark-blue small">{{ $vendor->description }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3 pt-3 border-top">
                             <livewire:landing.partials.share-block :vendor_id="$vendor->id" type="vendor-detail" />
                         </div>
                     </div>

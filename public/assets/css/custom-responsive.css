@@ -118,3 +118,110 @@
 .page-title{
     font-weight: 700 !important;
 }
+
+/* Global Responsive Fixes */
+@media (max-width: 767.98px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-dark-blue, .btn-dark-blue-outline, .btn-primary-outline {
+        padding: 8px 15px !important;
+        font-size: 14px;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .fixed-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px !important;
+        left: 20px !important;
+        width: calc(100% - 40px);
+        right: auto;
+    }
+
+    .table-responsive {
+        border: 0;
+    }
+
+    /* Responsive tables via horizontal scroll */
+    .table:not(.table-no-responsive) {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .table:not(.table-no-responsive) thead {
+        /* display: table-header-group; Keep header for scrolling tables */
+    }
+    .table:not(.table-no-responsive) tr {
+        /* display: table-row; */
+    }
+    .table:not(.table-no-responsive) td, .table:not(.table-no-responsive) th {
+        white-space: nowrap;
+    }
+
+    /* Fix search button on same line as input */
+    .input-group {
+        flex-wrap: nowrap !important;
+    }
+    .header-search-input {
+        width: auto !important;
+        flex: 1 !important;
+    }
+    .heder-search-btn {
+        width: auto !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Fix w-14 width on mobile */
+    .w-14 {
+        width: 100% !important;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .middle-header .navbar-brand img {
+        max-width: 150px;
+    }
+
+    .header_wrap.fixed-top + .section, .header_wrap.fixed-top + .banner_section {
+        margin-top: 100px !important; /* Adjust based on mobile header height */
+    }
+
+    /* Move category text higher on mobile */
+    .cat-text {
+        top: 60% !important;
+        padding: 5px 15px !important;
+    }
+    .cat-text h3 {
+        font-size: 14px !important;
+    }
+}
+
+/* Adjust for medium screens */
+@media (max-width: 991.98px) {
+    .nav-search {
+        margin-top: 10px;
+        width: 100%;
+    }
+    .attr-nav {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    .nav-search .input-group {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        width: 100%;
+    }
+    .nav-search .header-search-input {
+        width: 100% !important;
+        flex: 1;
+    }
+    .nav-search .heder-search-btn {
+        width: auto !important;
+        margin-bottom: 0 !important;
+    }
+}
