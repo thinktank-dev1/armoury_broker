@@ -15,7 +15,7 @@
     <div class="section suppor-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 pt-3">
+                <div class="col-12 col-lg-3 pt-3">
                     <h3 class="page-title">Frequently asked questions</h3>
                     <ul class="nav nav-tabs flex-column faq_nav mt-4" id="myTab" role="tablist">
                         @foreach($data AS $k => $v)
@@ -39,7 +39,7 @@
                         @endforeach
                     </ul>
                 </div>
-                <div class="col-md-9">
+                <div class="col-12 col-lg-9">
                     <div class="tab-content" id="myTabContent">
                         @foreach($data AS $k => $dt)
                             @php
@@ -105,7 +105,7 @@
     <div class="section" id="contact">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-12 col-lg-3">
                     <div class="">
                         <h4 class="page-title">Need Support?</h4>
                         <h5 class="bold-600 font-21 text-upper">Get in touch</h5>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-12 col-lg-9">
                     @if($errors->any())
                     <div class="row">
                         <div class="col-md-12">

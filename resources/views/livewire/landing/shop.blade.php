@@ -21,7 +21,7 @@
     <div class="section pt-5">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-lg-3">
                     <b class="text-dark-blue text-upper text-14">Filter Options</b>
                     <div class="shop-filters mt-4 w-100 sicky-filters">
                         <div class="accordion" id="filter_accodion" wire:ignore.self>
@@ -202,7 +202,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-9">
+                <div class="col-12 col-lg-9">
                     <div class="row">
                         <div class="col-md-12">
                             <b class="text-dark-blue text-14">{{ $results_count }} Results</b>
@@ -212,7 +212,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 col-md-7">
+                        <div class="col-12 col-lg-7">
                             @if(count($current_filters) > 0)
                                 <span class="text-dark-blue">Active filter:</span> 
                                 @foreach($current_filters AS $key => $filters)
@@ -222,7 +222,7 @@
                                 @endforeach
                             @endif
                         </div>
-                        <div class="col-12 col-md-5 d-flex mt-3 mt-md-0">
+                        <div class="col-12 col-lg-5 d-flex mt-3 mt-md-0">
                             <div class="ms-ms-auto d-flex">
                                 <span class="me-3 text-dark-blue">Sort By:</span>
                                 <div class="">

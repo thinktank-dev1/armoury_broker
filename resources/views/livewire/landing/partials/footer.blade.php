@@ -2,7 +2,7 @@
     <div class="footer_top">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 mt-4 mt-md-0 pe-0 pe-md-5">
+                <div class="col-md-4 col-lg-3 mt-4 mt-md-0 pe-0 pe-md-3 pe-lg-5">
                     <div class="widget text-center">
                         <div class="footer_logo text-center">
                             <a href="#"><img src="{{ asset('img/footer_logo.png') }}" alt="logo"/></a>
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 mt-4 mt-md-0 pe-0 pe-md-5">
+                <div class="col-md-4 col-lg-2 mt-4 mt-md-0 pe-0 pe-md-3 pe-lg-5">
                     <div class="widget text-center text-md-start">
                         <h6 class="widget_title">Quick Links</h6>
                         <ul class="widget_links">
@@ -30,7 +30,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 mt-4 mt-md-0 pe-0 pe-md-5">
+                <div class="col-md-4 col-lg-3 mt-4 mt-md-0 pe-0 pe-md-3 pe-lg-5">
                     <div class="widget text-center text-md-start">
                         @if(Auth::guest())
                         <a href="{{ url('auth/login') }}"><h6 class="widget_title">Register / Login</h6></a>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mt-4 mt-md-0">
+                <div class="col-md-12 col-lg-4 mt-4 mt-lg-0">
                     <div class="widget text-center text-md-start">
                         <h6 class="widget_title">Disclaimer</h6>
                         <p class="footer-disclaimer">
