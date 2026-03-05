@@ -184,7 +184,7 @@
             </div>
             <div class="row mt-4">
             @foreach($products AS $product)
-            <div class="col-6 col-md-2">
+            <div class="col-6 col-md-3 col-lg-2">
                 <div class="card img-container">
                     @if($product->images->count() > 0)
                     <div class="w-100 amoury-img-cont">

@@ -262,7 +262,7 @@ h1, h2, h3, h4, h5, h6, p, a{
     object-fit: cover;
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1023px) {
 	.mini-sidebar .hide-menu {
 	    display: inline-block;
 	}
@@ -326,6 +326,7 @@ h1, h2, h3, h4, h5, h6, p, a{
     
     .left-sidebar {
         left: -240px;
+        width: 240px !important;
     }
     
     .show-sidebar .left-sidebar {
@@ -432,21 +433,21 @@ label{
   	border-right: 50px solid transparent;
   	border-top: 15px solid #f5f5f5;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .navbar-header {
         width: 420px;
         flex-shrink: 0;
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
     .navbar-header {
-        width: 140px !important; /* Fixed width to fit burger + logo */
+        width: auto !important;
         padding-left: 0 !important;
         display: flex !important;
         align-items: center;
         height: 60px;
-        background: #293c47 !important; /* Blue background only on mobile */
+        background: #293c47 !important; /* Blue background only on mobile/tablet */
     }
     .topbar {
         background: #293c47 !important;

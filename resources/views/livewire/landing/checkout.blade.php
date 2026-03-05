@@ -187,7 +187,7 @@
     <div class="section py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-lg-8 offset-lg-2">
                     <div class="row">
                         <div class="col-md-12 mt-4">
                             <h2 class="page-title pb-0 mb-0">Platform Fees</h2>

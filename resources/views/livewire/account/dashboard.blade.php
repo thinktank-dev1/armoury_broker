@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row mb-4">
-        <div class="col-md-4 mb-3 mb-md-0">
+        <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
             <div class="card h-100">
                 <div class="card-header">
                     <h4 class="card-title">My Armoury</h4>
@@ -163,7 +163,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-3 mb-md-0">
+        <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
             <div class="card h-100">
                 <div class="card-header">
                     <h4 class="card-title">My Profile</h4>
@@ -217,7 +217,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mb-3 mb-md-0">
+        <div class="col-md-12 col-lg-4 mb-3 mb-lg-0">
             <div class="card h-100">
                 <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Vault</h4>
@@ -276,7 +276,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
             <div class="card mb-4">
                 <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Orders</h4>
@@ -315,7 +315,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
             <div class="card mb-4">
                 <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Purchases</h4>
@@ -353,7 +353,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-12 col-lg-4">
             <div class="card mb-4">
                 <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Actions</h4>
@@ -393,7 +393,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6 col-lg-4">
             <div class="card mb-4">
                 <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">My Listings</h4>
@@ -431,7 +431,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6 col-lg-8">
             <div class="card">
                 <div class="card-header d-sm-flex d-flex align-items-center">
                     <h4 class="card-title">Order Analytics</h4>
