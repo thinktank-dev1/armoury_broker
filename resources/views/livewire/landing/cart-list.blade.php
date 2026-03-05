@@ -2,7 +2,7 @@
     <div class="section py-5" wire:ignore.self> 
         <div class="container">
             <div class="row">
-                <div class="col-md-10 offset-md-1">
+                <div class="col-lg-10 offset-lg-1">
                     <div class="row">
                         @foreach($cart_items_model AS $k=>$item_group)
                         @php
