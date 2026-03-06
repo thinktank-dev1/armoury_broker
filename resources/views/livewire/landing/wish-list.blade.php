@@ -16,7 +16,7 @@
     <div class="section py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 d-grid d-md-flex text-center">
                     <a href="#" class="btn @if($cur_view == 'items') btn-secondary @else btn-primary-outline @endif" wire:click.prevent="changeView('items')">Liked Items</a>
                     <a href="#" class="btn @if($cur_view == 'stores') btn-secondary @else btn-primary-outline @endif" wire:click.prevent="changeView('stores')">Liked Stores</a>
                 </div>

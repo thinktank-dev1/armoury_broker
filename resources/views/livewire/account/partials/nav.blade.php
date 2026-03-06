@@ -1,4 +1,11 @@
 <aside class="left-sidebar">
+    <style>
+        @media (max-width: 767.98px) {
+            .acc_support_btn{
+                padding: 10px 60px !important;
+            }
+        }
+    </style>
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
@@ -134,16 +141,16 @@
                 </li>
             </ul>
             <div class="mt-5 mx-3 hide-menu">
-                <a href="{{ url('support') }}" class="btn btn-primary-outline">Support</a>
+                <a href="{{ url('support') }}" class="btn btn-primary-outline acc_support_btn">Support</a>
             </div>
             <div class="mt-3 text-center hide-menu ms-3 ms-md-0">
                 <div class="mb-2 text-center">
                     <a class="text-white y-hover" href="{{ url('support') }}">FAQ</a>
                 </div>
-                <a class="text-white y-hover" href="{{ url('how-it-works') }}">How Armoury Broker Works</a>
+                <a class="text-white y-hover" href="{{ url('how-it-works') }}">How Armoury Broker<br />Works</a>
             </div>
             <div class="hide-menu">
-                <div class="mt-3 mx-3 d-flex justify-content-around">
+                <div class="mt-3 mx-3 d-sm-flex d-flex justify-content-around">
                     <a href="https://www.facebook.com/profile.php?id=61577687066727" target="_blank" class="btn btn-sqr"><i class="fab fa-facebook-f"></i>&nbsp;</a>
                     <a href="https://www.instagram.com/armourybroker/" target="_blank" class="btn btn-sqr"><i class=" fab fa-instagram"></i></a>
                     <a href="https://www.whatsapp.com/channel/0029VbAeBVdGU3BG6pu2kS3C" target="_blank" class="btn btn-sqr"><i class="fab fa-whatsapp"></i></a>

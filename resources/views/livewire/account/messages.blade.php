@@ -293,7 +293,7 @@
                                                     <i class="mdi mdi-paperclip"></i>
                                                 </label>
                                                 <input type="file" id="fileInput" hidden wire:model.live="message_attachment">
-                                                <button class="btn btn-primary" type="button" id="button-addon1" wire:click.prevent="sendMessage">Send</button>
+                                                <button class="btn btn-primary msg-send-btn" type="button" id="button-addon1" wire:click.prevent="sendMessage">Send</button>
                                             </div>
                                             @if($message_attachment)
                                             <div class="form-text">
