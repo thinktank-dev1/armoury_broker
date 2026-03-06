@@ -53,7 +53,7 @@
                         <li><a class="nav-link nav_item bold" href="{{ url('shop') }}">Shop</a></li>
                         <li class="dropdown dropdown-mega-menu">
                             <a class="dropdown-toggle nav-link bold" href="#" data-bs-toggle="dropdown">Categories</a>
-                            <div class="d-md-none dropdown-menu">
+                            <div class="d-lg-none dropdown-menu">
                                 <ul class="mega-menu d-lg-flex">
                                     <li class="mega-menu-col col-lg-9">
                                         <ul class="d-lg-flex">
@@ -79,7 +79,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="d-none d-md-block dropdown-menu">
+                            <div class="d-none d-lg-block dropdown-menu">
                                 <ul class="mega-menu d-lg-flex">
                                     <li class="mega-menu-col col-lg-12">
                                         <ul class="d-lg-flex">
