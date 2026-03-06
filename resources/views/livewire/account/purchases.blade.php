@@ -122,7 +122,7 @@
                                     <b class="bold mb-2">Order Status</b>
                                     
                                     <!-- Desktop View (Original Table) -->
-                                    <table class="table table-borderless d-none d-md-table">
+                                    <table class="table table-borderless d-none d-lg-table">
                                         <tbody>
                                             <tr>
                                                 <th class="text-end">Delivery Type</th>
@@ -183,7 +183,7 @@
                                     </table>
 
                                     <!-- Mobile View (Clean Labels) -->
-                                    <div class="d-md-none">
+                                    <div class="d-lg-none">
                                         <div class="mb-2">
                                             <label class="form-label mb-0 small bold text-muted">Delivery Type</label>
                                             <div class="ps-1">

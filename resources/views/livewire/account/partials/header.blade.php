@@ -1,10 +1,10 @@
 <header class="topbar">
     <style>
         @media (max-width: 767px) {
-    .mini-sidebar .left-sidebar, .mini-sidebar .sidebar-footer {
-        left: -242px;
-    }
-}
+            .mini-sidebar .left-sidebar, .mini-sidebar .sidebar-footer {
+                left: -242px;
+            }
+        }
         @media (max-width: 1023px) {
             .topbar, .topbar .top-navbar, .topbar .top-navbar .navbar-header, .topbar .top-navbar .navbar-collapse {
                 background: #293c47 !important;
@@ -18,7 +18,7 @@
             .topbar .navbar-header {
                 display: flex !important;
                 align-items: center !important;
-                width: 140px !important;
+                width: 50% !important;
                 background: #293c47 !important;
             }
             .topbar .navbar-collapse {

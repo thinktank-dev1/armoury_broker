@@ -171,14 +171,14 @@
                 <!-- Desktop View -->
                 <div class="card-body d-none d-md-block">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="d-none d-xl-block col-xl-4">
                             <div class="row mt-3">
                                 <div class="col-md-6 offset-md-2">
                                     <div class="ribbon">Coming<br>soon</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-12 col-xl-8">
                             <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
                             <div class="mb-2">
                             Dealer Status: <b>@if(Auth::user()->dealer) Active @else Inactive @endif</b>

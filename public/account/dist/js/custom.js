@@ -13,12 +13,12 @@ $(function () {
         var width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
         var topOffset = 55;
         if (width < 1170) {
-            $("body").addClass("mini-sidebar");
+            // $("body").addClass("mini-sidebar");
             $('.navbar-brand span').hide();
             $(".sidebartoggler i").addClass("ti-menu");
         }
         else {
-            $("body").removeClass("mini-sidebar");
+            // $("body").removeClass("mini-sidebar");
             $('.navbar-brand span').show();
         }
         
@@ -42,7 +42,7 @@ $(function () {
         }
         else {
             $("body").trigger("resize");
-            $("body").addClass("mini-sidebar");
+            // $("body").addClass("mini-sidebar");
             $('.navbar-brand span').hide();
         }
     });

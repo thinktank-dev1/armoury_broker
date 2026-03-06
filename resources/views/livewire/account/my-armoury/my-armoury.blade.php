@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-md-2">
+        <div class="col-md-3 col-xl-2">
             <div class="mb-3">
                 <select class="form-control" name="listing_type" wire:model.live="listing_type">
                     <option value="">Filter By Listing Type</option>
@@ -40,14 +40,14 @@
                 <a href="{{ url('list-item') }}" class="bnt btn-primary text-center">Add Item</a>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9 col-xl-10">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <!-- Desktop View -->
                         <div class="card-body d-none d-md-block px-5">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3 col-xl-2">
                                     <a href="{{ url('profile') }}">
                                         <center class="mt-3 profile-pic">
                                             @if(Auth::user()->vendor->avatar) 
@@ -61,7 +61,7 @@
                                         </center>
                                     </a>
                                 </div>
-                                <div class="col-md-10 text-center text-md-start">
+                                <div class="col-md-9 col-xl-10 text-center text-md-start">
                                     <h4 class="card-title m-t-10">{{ Auth::user()->vendor->name }} </h4>
                                     <h6 class="card-subtitle mt-2">{{ url(Auth::user()->vendor->url_name) }}</h6>
                                     <div>
@@ -184,7 +184,7 @@
             </div>
             <div class="row mt-4">
             @foreach($products AS $product)
-            <div class="col-6 col-md-3 col-lg-2">
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2">
                 <div class="card img-container">
                     @if($product->images->count() > 0)
                     <div class="w-100 amoury-img-cont">
