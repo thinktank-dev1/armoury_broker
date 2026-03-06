@@ -67,12 +67,12 @@
                                                             <span class="ms-auto me-2"></span>
                                                         </a>
                                                     </li>
+                                                    @endforeach
                                                     <li>
                                                         <a class="dropdown-item nav-link nav_item d-flex" href="{{ url('shop?wanted') }}">
                                                             Wanted
                                                         </a>
                                                     </li>
-                                                    @endforeach
                                                 </ul>
                                             </li>
                                         </ul>
