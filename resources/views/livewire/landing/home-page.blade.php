@@ -1,4 +1,17 @@
 <div>
+    <style>
+        @media (max-width: 767.98px) {
+            .btn-selling-float{
+                width: 70%;
+            }
+            .fixed-button {
+                bottom: 10px;
+            }
+        }
+        @media (max-width: 767.98px) {
+    
+}
+    </style>
     <div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap" wire:ignore.self> 
         <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -53,7 +66,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <a href="{{ url('list-item') }}" class="btn btn-secondary fixed-button">Start Selling</a>
+                        <a href="{{ url('list-item') }}" class="btn btn-secondary fixed-button btn-selling-float">Start Selling</a>
                     </div>
                 </div>
             </div>

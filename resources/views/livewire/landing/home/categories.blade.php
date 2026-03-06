@@ -2,7 +2,7 @@
     @if($categories->count() > 0)
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center mb-5">
+            <div class="col-md-12 text-center mb-2 mb-md-5">
                 <h2 class="page-title">Categories</h2>
             </div>
         </div>

@@ -113,7 +113,7 @@
                             <p>For support, get in touch via email or fill in and submit the contact form and we we will get in touch with you.</p>
                         </div>
                     </div>
-                    <div class="">
+                    <div class="mb-5 mb-lg-0">
                         <div class="">
                             <i class="linearicons-envelope bold me-2"></i>
                             <b>support@armourybroker.co.za</b>

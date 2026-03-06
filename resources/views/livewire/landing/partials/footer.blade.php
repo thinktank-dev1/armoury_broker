@@ -1,4 +1,11 @@
 <footer class="footer_dark">
+    <style>
+        @media (max-width: 767.98px) {
+            .footer-bottom{
+                padding-bottom: 50px;
+            }
+        }
+    </style>
     <div class="footer_top">
         <div class="container">
             <div class="row">

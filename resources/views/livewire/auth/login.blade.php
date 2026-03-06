@@ -2,7 +2,7 @@
     <div class="section auth-bg" wire:ignore.self>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 offset-md-3">
+                <div class="col-lg-6 offset-lg-3">
                     <div class="card auth-cont">
                         <div class="card-body px-4">
                             <div class="d-grid mt-3">

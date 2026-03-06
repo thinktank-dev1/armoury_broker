@@ -1,4 +1,14 @@
 <header class="header_wrap fixed-top header_with_topbar">
+    <style>
+        @media (max-width: 767.98px) {
+            .btn-primary, .btn-secondary, .btn-dark-blue, .btn-dark-blue-outline, .btn-primary-outline {
+                padding: 12px 15px !important;
+                font-size: 14px;
+                width: 80%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
     <div class="middle-header dark_skin header-top-section">
         <div class="container">
             <div class="nav_block">
@@ -152,7 +162,7 @@
                         @endif
                         <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('cart') }}">Cart</a></li>
                         <li class="d-md-none mb-5 text-center">
-                            <a class="ms-3 btn btn-secondary btn-header-sm btn-nav" href="{{ url('auth/login') }}">Register / Login</a>
+                            <a class="ms-3 btn btn-secondary btn-header-sm btn-nav btn-login" href="{{ url('auth/login') }}">Register / Login</a>
                         </li> 
                     </ul>
                 </div>
