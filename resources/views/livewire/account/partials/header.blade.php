@@ -14,12 +14,20 @@
                 flex-direction: row !important;
                 flex-wrap: nowrap !important;
                 justify-content: space-between !important;
+                position: relative;
             }
             .topbar .navbar-header {
                 display: flex !important;
                 align-items: center !important;
                 width: 50% !important;
                 background: #293c47 !important;
+            }
+            .topbar .navbar-brand {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 0 !important;
+                color: #ffffff !important;
             }
             .topbar .navbar-collapse {
                 display: flex !important;
@@ -29,7 +37,7 @@
             .topbar .navbar-nav {
                 flex-direction: row !important;
             }
-            .topbar .nav-link, .topbar .nav-link i, .topbar .navbar-brand {
+            .topbar .nav-link, .topbar .nav-link i {
                 color: #ffffff !important;
             }
         }
