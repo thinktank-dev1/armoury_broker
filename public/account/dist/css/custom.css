@@ -914,3 +914,18 @@ select.form-control{
 .msg-send-btn{
 	margin-bottom: 0 !important;
 }
+
+@media only screen and (max-width: 575px) {
+	.tooltip-content-end {
+    	left: -350% !important;
+    	bottom: auto;
+	}
+	.tooltip-content-top {
+	    left: -350% !important;
+	    bottom: auto;
+	}
+	.tooltip-content{
+		left: -350% !important;
+	    bottom: auto;
+	}
+}
