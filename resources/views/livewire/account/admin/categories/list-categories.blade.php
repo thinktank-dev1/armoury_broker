@@ -192,6 +192,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Category Image</label>
                                     <input type="file" class="form-control" name="category_image" wire:model.defer="category_image">
+                                    <div class="form-text" wire:loading> 
+                                        Saving post...
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -240,7 +243,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="saveCategory">Save changes</button>
+                    <button type="button" class="btn btn-primary" wire:loading.remove wire:click.prevent="saveCategory">Save changes</button>
                 </div>
             </div>
         </div>
