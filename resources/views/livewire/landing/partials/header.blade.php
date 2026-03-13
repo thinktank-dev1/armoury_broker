@@ -37,7 +37,7 @@
                         @endif
                         <a class="ms-3 bold" href="{{ url('cart') }}">Cart @if($cart_count)<span class="cart_count">{{ $cart_count }}</span>@endif</a>
                         @if(Auth::guest())
-                        <a class="ms-3 btn btn-primary-outline" href="{{ url('auth/login') }}">Register / Login</a>
+                        <a class="ms-0 ms-md-3 btn btn-primary-outline" href="{{ url('auth/login') }}">Register / Login</a>
                         @endif
                         @if(!Auth::guest())
                             @if($msg_count)
