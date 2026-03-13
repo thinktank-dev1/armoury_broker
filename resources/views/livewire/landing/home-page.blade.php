@@ -2,7 +2,7 @@
     <style>
         @media (max-width: 767.98px) {
             .btn-selling-float{
-                width: 70%;
+                width: 60%;
             }
             .fixed-button {
                 bottom: 10px;

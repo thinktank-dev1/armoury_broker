@@ -161,7 +161,7 @@
                         <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('wishlist') }}">Wishlist</a></li>
                         @endif
                         <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('cart') }}">Cart</a></li>
-                        <li class="d-md-none mb-5 text-center">
+                        <li class="d-md-none mb-5 pt-5 text-center">
                             <a class="ms-3 btn btn-secondary btn-header-sm btn-nav btn-login" href="{{ url('auth/login') }}">Register / Login</a>
                         </li> 
                     </ul>
