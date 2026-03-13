@@ -24,7 +24,7 @@
             }
             .topbar .navbar-brand {
                 position: absolute;
-                left: 50%;
+                left: 40%;
                 transform: translateX(-50%);
                 margin: 0 !important;
                 color: #ffffff !important;
@@ -52,7 +52,7 @@
                         <img src="{{ asset('img/HEADER LOGO.png') }}" alt="homepage" class="light-logo" style="width: 360px;" />
                     </div>
                     <div class="d-lg-none">
-                        <img src="{{ asset('img/logo-sm.png') }}" alt="homepage" class="light-logo" style="width: 50px; display: block !important;"/>    
+                        <img src="{{ asset('img/MOBILE LOGO 2.png') }}" alt="homepage" class="light-logo" style="width: 100px; display: block !important;"/>    
                     </div>
                 </b> 
             </a>

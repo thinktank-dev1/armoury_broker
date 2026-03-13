@@ -184,7 +184,7 @@
     }
     
     .middle-header .navbar-brand img {
-        max-width: 160px;
+        max-width: 215px;
     }
 
     .header_wrap.fixed-top + .section, .header_wrap.fixed-top + .banner_section {
@@ -232,5 +232,11 @@
     .nav-search .heder-search-btn {
         width: auto !important;
         margin-bottom: 0 !important;
+    }
+    .middle-header{
+        padding: 5px 0;
+    }
+    .d-grid .btn{
+        width: 100%;
     }
 }

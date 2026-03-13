@@ -270,6 +270,23 @@
         </div>
     </div>
     @endif
+
+    <div class="modal fade" tabindex="-1" id="info-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="info-title">Link Copied</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="info-text">Link has been copied to clipboard.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     @push('scripts')
     <script>
@@ -278,6 +295,8 @@
                 var link = event.link;
                 navigator.clipboard.writeText(link);
 
+                $('#info-modal').modal('show');
+                /*
                 Swal.fire({
                     position: 'top-end',
                     type: 'success',
@@ -285,6 +304,7 @@
                     showConfirmButton: false,
                     timer: 1500
                 })
+                */
             });
         })
         function showShareOptions(){

@@ -13,7 +13,7 @@
         <div class="container">
             <div class="nav_block">
                 <div class="row d-flex align-items-center">
-                    <div class="col-6 col-md-3 g-3">
+                    <div class="col-6 col-md-3 g-0 g-md-3">
                         <a class="navbar-brand" href="{{ url('/') }}">
                             <img class="logo_light" src="{{ asset('img/logo.png') }}" alt="logo" />
                             <img class="logo_dark" src="{{ asset('img/logo.png') }}" alt="logo" />

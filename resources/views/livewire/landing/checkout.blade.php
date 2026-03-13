@@ -9,7 +9,7 @@
                                 <i class="fas fa-chevron-left"></i> &nbsp;&nbsp;Back
                             </a>
                         </div>
-                        <div class="col-md-12 mt-4">
+                        <div class="col-md-12 mt-4 mx-3 mx-md-0">
                             <h2 class="page-title">Cart</h2>
                         </div>
                         @if($errors->any())
@@ -187,7 +187,7 @@
     <div class="section py-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 offset-lg-2">
+                <div class="mx-3 mx-md-0 col-lg-8 offset-lg-2">
                     <div class="row">
                         <div class="col-md-12 mt-4">
                             <h2 class="page-title pb-0 mb-0">Platform Fees</h2>
