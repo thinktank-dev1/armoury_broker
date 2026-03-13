@@ -54,6 +54,7 @@ class Support extends Component
     }
 
     public function setFaq(){
+        /*
         $this->data = [
             'General Platform Questions' => [
                 "What is Armoury Broker?" => "Armoury Broker is a multi-vendor marketplace designed specifically for South Africa's outdoor and tactical equipment community. We facilitate secure peer-to-peer transactions of outdoor and tactical equipment and peripherals, through our platform.",
@@ -120,7 +121,7 @@ class Support extends Component
                 "Can I track my shipment?" => 'Sellers provide tracking details in the order, which can be viewed on your dashboard under “My Purchases”',
             ]
         ];
-        /*
+        */
         $this->data = [
             "General Platform Questions" => [
                 'What is Armoury Broker?' => "Armoury Broker is a multi-vendor marketplace designed specifically for South Africa's firearms and firearm related equipment community. We facilitate secure peer-to-peer transactions of weapons, peripherals, and related tactical equipment through our platform.",
@@ -213,6 +214,5 @@ class Support extends Component
                 "How can I stay updated on new features?" => "Follow our announcements through the platform notifications, email updates, and our official communications channels on our social media accounts.",
             ],
         ];
-        */
     }
 }
