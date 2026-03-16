@@ -193,7 +193,7 @@
                                             @if($category->measurement_type)
                                             <div class="form-group mb-2">
                                                 @if($category->measurement_type == "caliber")
-                                                    <select class="form-control" name="size" wire:model.defer="size">
+                                                    <select class="form-control caliber-select" name="size" wire:model.defer="size" wire:ignore onchange="updatedCaluberSelect()">
                                                         <option value="">Select Calibre</option>
                                                         @foreach($calibers AS $cal)
                                                         <option value="{{ $cal->caliber }}">{{ $cal->caliber }}</option>
@@ -212,8 +212,8 @@
                                             </div>
                                             @endif
                                         @endif
-                                        <div class="form-group mb-2">
-                                            <select class="form-control" placeholder="Brand*" name="brand_id" wire:model.blur="brand_id">
+                                        <div class="form-group mb-2" wire:ignore>
+                                            <select class="form-control brands-select" placeholder="Brand*" name="brand_id" wire:model.blur="brand_id" onchange="updatedBrandSelect()">
                                                 <option value="">Brand*</option>
                                                 @foreach($brands AS $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
@@ -548,8 +548,12 @@
             </div>
         </div>
     </div>
+    @push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    @endpush
 
     @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.thumb').on('click', function() {
@@ -559,40 +563,34 @@
                 $(this).addClass('active');
             });
         });
+        function updatedBrandSelect(){
+            var value = $('.brands-select').val();
+            @this.dispatch('brand-updated', { brand: value });
+        }
+        function updatedCaluberSelect(){
+            var value = $('.caliber-select').val();
+            @this.dispatch('caliber-updated', { caliber: value });
+        }
+
         function triggerFileInput(elem){
             const input = elem.querySelector('input[type="file"]');
             input.click();
         }
         document.addEventListener('livewire:initialized', () => {
+            $(document).ready(function() {
+                $('.brands-select').select2();
+                // $('.caliber-select').select2();
+            });
+            @this.on('set-calibre-select2', () => {
+                $('.caliber-select').select2();
+                alert("HERE");
+            });
+
             @this.on('go-to-top', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
             @this.on('item-saved', (e) => {
                 $('#item-added-modal').modal('show');
-                /*
-                id = e.id;
-                Swal.fire({
-                    type: 'success',
-                    title: "Congrats, item added!",
-                    html: `<div class="row">
-                        <div class="col-md-12">
-                            <p>Your item is now live.</p>
-                        </div>
-                        <div class="col-md-12 d-grid mb-3">
-                            <a href="{{ url('shop/product/') }}/${id}" class="btn btn-primary">Go to item</a>
-                        </div>
-                        <div class="col-md-12 d-grid mb-3">
-                            <a href="{{ url('my-armoury') }}" class="btn btn-primary">Go to your armoury</a>
-                        </div>
-                        <div class="col-md-12 d-grid mb-3">
-                            <a href="{{ url('list-item') }}" class="btn btn-primary">Add new item</a>
-                        </div>
-                    </div>`,
-                    showConfirmButton: false,  // hides the OK button
-                    showCancelButton: false,   // hides the Cancel button
-                    allowOutsideClick: false,  // prevents closing when clicking outside
-                });
-                */
             });
         });
     </script>

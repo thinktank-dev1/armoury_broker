@@ -14,6 +14,13 @@ class Brands extends Component
     public $cur_brand;
     public $brand_name, $brand_logo , $featured;
 
+    public function removeBrand($id){
+        $br = Brand::find($id);
+        if($br){
+            $br->delete();
+        }
+    }
+
     public function showEdit($id = null){
         if($id){
             $brand = Brand::find($id);

@@ -279,7 +279,7 @@ class ProductDetail extends Component
 
     #[Layout('components.layouts.landing')]
     public function render(){
-        $may_likes = Product::inRandomOrder()->take(8)->get();
+        $may_likes = Product::where('status', 1)->inRandomOrder()->take(6)->get();
         return view('livewire.landing.product-detail', [
             'may_likes' => $may_likes
         ]);

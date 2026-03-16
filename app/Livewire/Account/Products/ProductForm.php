@@ -5,6 +5,7 @@ namespace App\Livewire\Account\Products;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
+use Livewire\Attributes\On;
 
 use Auth;
 use App\Models\Vendor;
@@ -49,6 +50,16 @@ class ProductForm extends Component
 
         $this->item_name_word_count = 50;
         $this->description_word_count = 500;
+    }
+
+    #[On('brand-updated')]
+    public function brandUpdated($brand){
+        $this->brand_id = $brand;
+    }
+
+    #[On('caliber-updated')]
+    public function caliberUpdated($caliber){
+        dd($caliber);
     }
 
     public function updatedItemDescription(){
@@ -373,6 +384,9 @@ class ProductForm extends Component
         $this->sub_category_id = null;
         $this->sub_sub = [];
         $this->category = Category::find($this->category_id);
+        if($this->category->measurement_type == "caliber"){
+            $this->dispatch('set-calibre-select2');
+        }
     }
 
     public function setStaticData(){

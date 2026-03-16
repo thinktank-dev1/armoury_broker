@@ -151,6 +151,8 @@
                             <tr>
                                 <td>{{ $cat->sub_category_name }}</td>
                                 <td class="text-end">
+                                    <a href="#" wire:click.prevent="showSubCatModal({{ $cur_cat->id }}, {{ $cat->id }}, '', 'edit')">Edit</a>
+                                    &nbsp;|&nbsp;
                                     <a href="#" class="text-danger" wire:click.prevent="removeSubCat({{ $cat->id }})">Remove</a>
                                 </td>
                             </tr>

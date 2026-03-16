@@ -20,6 +20,7 @@
 
         <link href="{{ asset('account/dist/css/style.min.css') }}" rel="stylesheet">
         <link href="{{ asset('account/dist/css/custom.css') }}" rel="stylesheet">
+        @stack('styles')
     </head>
     <body class="skin-default-dark fixed-layout">
         <div class="preloader">

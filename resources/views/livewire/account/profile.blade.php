@@ -14,9 +14,24 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="card">
                     <ul class="nav nav-tabs profile-tab settings-tabs flex-nowrap overflow-x-auto" role="tablist" wire:ignore.self style="white-space: nowrap;">
-                        <li class="nav-item" wire:ignore> <a class="nav-link active" data-bs-toggle="tab" href="#armoury" role="tab" aria-selected="true">My Armoury</a> </li>
-                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">My Profile</a> </li>
-                        <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" href="#banking" role="tab" aria-selected="false">My Banking</a> </li>
+                        <li class="nav-item" wire:ignore> 
+                            <a class="nav-link active" data-bs-toggle="tab" href="#armoury" role="tab" aria-selected="true">
+                                <i class="icons-Army-Key d-md-none"></i>
+                                <span class="d-none d-md-block">My Armoury</span>
+                            </a> 
+                        </li>
+                        <li class="nav-item" wire:ignore> 
+                            <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-selected="false">
+                                <i class="fa fa-user d-md-none"></i>
+                                <span class="d-none d-md-block">My Profile</span>
+                            </a> 
+                        </li>
+                        <li class="nav-item" wire:ignore> 
+                            <a class="nav-link" data-bs-toggle="tab" href="#banking" role="tab" aria-selected="false">
+                                <i class="mdi mdi-credit-card-multiple d-md-none"></i>
+                                <span class="d-none d-md-block">My Banking</span>
+                            </a> 
+                        </li>
                         {{-- <li class="nav-item" wire:ignore> <a class="nav-link" data-bs-toggle="tab" data-bs-target="#dealer" href="#dealer" id="dealer-link" role="tab" aria-selected="false">Dealer Network</a> </li> --}}
                     </ul>
                     <div class="tab-content">

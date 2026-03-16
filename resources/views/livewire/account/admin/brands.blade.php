@@ -21,20 +21,28 @@
                     <h5 class="card-title">Brands</h5>
                     <div class="message-box ps ps--theme_default ps--active-y" id="task2">
                         <div class="message-widget message-scroll">
-                            @foreach($brands AS $brand)
-                            <a href="#" wire:click.prevent="showEdit({{ $brand->id }})">
-                                <div class="user-img"> 
-                                    @if($brand->brand_logo)
-                                    <img src="{{ asset('storage/'.$brand->brand_logo) }}" alt="brand" class="img-circle"> 
-                                    @else
-                                    <span class="round">{{ mb_substr($brand->brand_name, 0,1) }}</span>
-                                    @endif
-                                </div>
-                                <div class="mail-contnet">
-                                    <h5>{{ $brand->brand_name }}</h5> 
-                                </div>
-                            </a>
-                            @endforeach
+                            <ul class="list-group">
+                                @foreach($brands AS $brand)
+                                <li class="list-group-item d-flex">
+                                    <a href="#" class="d-flex w-50" wire:click.prevent="showEdit({{ $brand->id }})">
+                                        <div class="user-img"> 
+                                            @if($brand->brand_logo)
+                                                <img src="{{ asset('storage/'.$brand->brand_logo) }}" alt="brand" class="img-circle"> 
+                                            @else
+                                                <span class="round">{{ mb_substr($brand->brand_name, 0,1) }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="mail-contnet">
+                                            <h5>{{ $brand->brand_name }}</h5> 
+                                        </div>
+                                    </a>
+                                    <span class="ms-auto d-flex">
+                                        <a href="#" class="text-danger" wire:click.prevent="removeBrand({{ $brand->id }})"><i class="fa fa-trash"></i></a>
+                                        <a href="#" wire:click.prevent="showEdit({{ $brand->id }})"><i class="fa fa-edit"></i></a>
+                                    </span>
+                                </li>
+                                @endforeach
+                            </ul>
                         </div>
                         <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;">
                             <div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>

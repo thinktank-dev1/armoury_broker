@@ -124,9 +124,9 @@ class Support extends Component
         */
         $this->data = [
             "General Platform Questions" => [
-                'What is Armoury Broker?' => "Armoury Broker is a multi-vendor marketplace designed specifically for South Africa's firearms and firearm related equipment community. We facilitate secure peer-to-peer transactions of weapons, peripherals, and related tactical equipment through our platform.",
+                'What is Armoury Broker?' => "Armoury Broker is a multi-vendor marketplace designed specifically for South Africa&#39;s outdoor and tactical equipment community. We facilitate secure peer-to-peer transactions of outdoor and tactical equipment and peripherals, through our platform.",
                 'How is Armoury Broker different from other platforms?' => 'Unlike fragmented, informal channels like Telegram and WhatsApp, Armoury Broker provides a unified marketplace with secure escrow payments, comprehensive buyer and seller protection, transparent transaction history, and integrated dispute resolution processes.',
-                'Who can use Armoury Broker?' => 'Our platform is designed for registered firearm owners, reloaders, sports and recreational shooters, dealers, and accessories suppliers who live in South Africa. Every user can act as both a buyer and seller through dual-role accounts.',
+                'Who can use Armoury Broker?' => 'Our platform is designed for reloaders, sports, hunting and recreational shooters, dealers, outdoor and accessory suppliers who live in South Africa. Every user can act as both a buyer and seller through dual-role accounts.',
                 'What devices can I use to access Armoury Broker?' => 'Armoury Broker is available on desktop, tablet and mobile devices via your web browser. You can also easily add it as a shortcut on your screen.',
             ],
             "Account & Registration" => [
@@ -135,7 +135,7 @@ class Support extends Component
             ],
             "Buying & Selling" => [
                 "How do I list an item for sale?" => "To create a listing for your store, you select the option to add a new item. After that, you can upload high-quality images and include a description and information on quantity, brand, condition, and pricing. Our platform supports comprehensive categorization of all major manufacturers.",
-                "What do I do when The brand of my item is not available on the list?" => "You can list the item as “Other” and email the name of the brand you would like to have added to the list to support@armourybroker.com. Our team will consolidate the updates and include them in future releases.",
+                "What do I do when the brand of my item is not available on the list?" => "You can list the item as “Other” and email the name of the brand you would like to have added to the list to support@armourybroker.com Our team will consolidate the updates and include them in future releases.",
                 "What happens when someone wants to buy my item?" => "When a buyer purchases your item, you'll receive an automated notification that the item has been sold, pending payment confirmation. No manual confirmation is required from you at this stage.",
                 "How do I search for items?" => "Use our advanced search with filtering and sorting options. You can search by category, brand, calibre, price range, and location. You can also favourite stores and items for easy access later.",
                 "Can I make offers on items?" => "Yes, our platform includes offer and counter-offer functionality, allowing negotiation between buyers and sellers before finalizing transactions.",
@@ -164,18 +164,17 @@ class Support extends Component
                     "We support multiple payment methods including:",
                     "<ul>
                         <li>Traditional EFT</li>
-                        <li>Instant EFT (additional transaction charges apply, these will be presented on checkout)</li>
-                        <li>Debit/Credit cards (additional transaction charges apply, these will be presented on checkout)</li>
+                        <li>Debit/Credit cards</li>
                     </ul>",
                     "Future development is being considered for Apple Pay, Google Pay, and other providers through the secure payment gateway.",
                 ],
                 "How does the escrow system work?" => "When a buyer makes a payment, funds are held securely in our escrow account until the buyer confirms receipt and approves the item's condition. Only then are funds released to the seller's wallet, ensuring protection for both parties.",
-                "How do I get paid as a seller?" => "Once the buyer confirms receipt on the sold item, funds are released to your Armoury Broker wallet. You can then either use these funds for future purchases or request that payment is made to your bank account. This is done via EFT which is processed through our daily payment extraction system. Standard banking turnaround times will apply to the funds reflecting in your nominated bank account.",
-                "Can I offer discount codes?" => "We are working to make discount codes available for you to share on your store and via social media. They will be value or percentage based.",
-                "Can I buy vouchers?" => "An Armoury Broker voucher is the perfect gift for the firearms enthusiast in your life. These can be purchased on the site. The values are configurable and are valid towards purchases made on the platform. They cannot be redeemed for cash and are valid for 12 months from date of purchase.",
+                "How do I get paid as a seller?" => "Once the buyer confirms receipt on the sold item, funds are released to your Armoury Broker wallet. You can then either use these funds for future purchases or request that payment is made to your bank account. This is done via EFT which is processed through our weekly payment extraction and execution system. Withdrawal requests made before 23:59 each Tuesday will be paid on the Wednesday. Standard banking turnaround times will apply to the funds reflecting in your nominated bank account.",
+                "Can I offer discount codes?" => "Yes! Our platform provides users with the ability to create and publish discount codes for their store. You have the choice to create a Rand value or percentage-based code for a defined period. These are found under the Promo Codes tab on your dashboard.<br /><br /> Importantly, a discount code will be applicable to all items that you have listed for sale in your store. Should you wish to only offer a discounted price on a single item, you should either adjust the listing (My Armoury tab on your Dashboard) to reflect the revised price or alternatively, enable the “Open to Offers” option under the listing, which will allow prospective buyers to make an offer against the specific item.",
+                "Can I buy vouchers?" => "An Armoury Broker voucher is the perfect gift for the outdoor and tactical enthusiast in your life. We are currently developing this functionality, and it will be available in the next release. The values are configurable and are valid towards purchases made on the platform. They cannot be redeemed for cash and are valid for 12 months from date of purchase.",
             ],
             "Shipping & Delivery" => [
-                "How does shipping work?" => "Armoury Broker collects the funds for the courier during the purchase phase of the transaction. The seller arranges the courier and delivers the item to them for shipping (this happens outside of the platform). Once the item(s) has been confirmed as received by the buyer, Armoury Broker will release the funds to the seller, which will include the agreed purchase price and collected delivery fees (if applicable) less any costs that the seller has chosen to absorb.",
+                "How does shipping work?" => "Armoury Broker collects the funds for the courier during the purchase phase of the transaction. Once the item(s) has been confirmed as received by the buyer, Armoury Broker will release the funds to the seller, which will include the agreed purchase price and collected delivery fees (if applicable) less any costs that the seller has chosen to absorb.",
                 "What shipping and delivery options are available?" => [
                     "Courier Delivery" => "<ul>
                         <li>The seller selects Courier Delivery as an available delivery option when listing the item. They will need to select a suitable cargo size for the product. The fees will be applied based on the courier’s standard pricing.</li>
@@ -187,19 +186,12 @@ class Support extends Component
                         <li>The seller selects Collection or Delivery as an available delivery option when listing the item</li>
                         <li>The buyer and seller will agree via the platform messaging service on the pickup or drop-off location</li>
                         <li>Once the buyer confirms receipt of the purchased item, the funds for the item will be released to the seller's wallet and be made available for withdrawal</li>
-                    </ul>",
-                    "Dealer Stocking (Firearms Only)" => "<ul>
-                        <li>The seller selects Dealer Stocking as an available delivery option when listing the item</li>
-                        <li>The buyer and seller will agree via the platform messaging service as to the most appropriate dealer to be used for dealer stocking</li>
-                        <li>The buyer and seller will arrange for dealer stocking of the firearm and complete the necessary paperwork with the dealer</li>
-                        <li>All dealer stocking fees are paid to the chosen dealer directly by the buyer</li>
-                        <li>Once the firearm is confirmed to have been dealer stocked by the buyer, the funds will be released to the seller's wallet and be made available for withdrawal</li>
                     </ul>"
                 ],
-                "Does Armoury Broker have a dealer stocking network?" => "Armoury Broker is working on building a dealer network to create a footprint across South Africa. If you would like to join our dealer network, please email support@armourybroker.com or select “join dealer network” under “Profile completion” on your user dashboard.",
-                "What happens if my item doesn't arrive?" => "Our escrow system protects you - funds are only released when you confirm receipt (or Dealer Stocking in the case of firearm transactions). If there are issues, you can initiate our formal dispute resolution process for investigation and potential refund.",
+                "Does Armoury Broker have a dealer stocking network?" => "We are currently exploring the options available to us in terms of being able to include the buying and selling of firearms and other regulated items on the platform. A big part of this process is to build out a Dealer Network of licensed firearms dealers that will be used to facilitate these transactions. Should you wish to know more about the Armoury Dealer Network please email support@armourybroker.com",
+                "What happens if my item doesn't arrive?" => "Our escrow system protects you - funds are only released when you confirm receipt. If there are issues that you cannot resolve between yourself and the seller, you can initiate our formal dispute resolution process for investigation and potential refund..",
                 "What happens if I don't obtain my license after the item I have purchased is dealer stocked, and the funds have been released to the seller?" => "The Armoury Broker platform provides a secure trading environment for the buying and selling of firearms and related equipment. Once the firearm has been dealer stocked, the buyer must confirm as such on the platform to allow Armoury Broker to release the funds to the seller. At this stage, the Armoury Broker service offering is complete, and the transaction is deemed to have been finalized. The responsibility for the buyer to obtain their license to possess the firearm resides with the buyer and this is facilitated outside of the platform. Should a license not be obtained for the firearm, the buyer should engage with the dealer where the firearm is stocked to review the options available to them.",
-                "Can I track my shipment?" => "Sellers provide tracking details via the platform messaging service when they confirm shipment. Full courier integration with automated tracking will be available in future platform updates.",
+                "Can I track my shipment?" => "Sellers provide tracking details in the order, which can be viewed on your dashboard under “My Purchases”.",
             ],
             "Security & Compliance" => [
                 "Is Armoury Broker a licensed firearms dealer?" => "No, Armoury Broker is not a licensed firearms dealer. Armoury Broker provides a unified marketplace with secure escrow payments, comprehensive buyer and seller protection, transparent transaction history, and integrated dispute resolution processes. All transactions must comply with South African law and more specifically, the SA Firearms Control Act (60), 2020. The responsibility resides with the platform users to ensure that they remain compliant with all relevant regulations and laws.",

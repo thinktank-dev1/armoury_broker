@@ -294,7 +294,8 @@ footer .widget {
 	color: #0f1f24;
 }
 .support-bg{
-	background-image: url('../../../img/suppor_bg.png');	
+	background-image: url('../../../img/BANNER IMAGE_Support Page.png');
+	background-size: cover;	
 }
 .suppor-section{
 	background-color: #e6e6e6;
@@ -450,7 +451,9 @@ footer .widget {
     position: relative;
 }
 .shop-bg{
-	background-image: url('../../img/shop_banner.png');
+	background-image: url('../../img/BANNER IMAGE_Shop Page.png');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .head-back{
 	padding: 20px 0;
