@@ -81,7 +81,7 @@
                                                     @if(is_array($vals))
                                                         @foreach($vals AS $sub_title => $val)
                                                             @if(!is_numeric($sub_title))
-                                                                {{ $sub_title }}
+                                                                {!! $sub_title !!}
                                                             @endif
                                                             {!! $val !!}<br />
                                                             <br />

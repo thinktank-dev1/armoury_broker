@@ -193,12 +193,14 @@
                                             @if($category->measurement_type)
                                             <div class="form-group mb-2">
                                                 @if($category->measurement_type == "caliber")
-                                                    <select class="form-control caliber-select" name="size" wire:model.defer="size" wire:ignore onchange="updatedCaluberSelect()">
-                                                        <option value="">Select Calibre</option>
-                                                        @foreach($calibers AS $cal)
-                                                        <option value="{{ $cal->caliber }}">{{ $cal->caliber }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <div wire:ignore>
+                                                        <select class="form-control caliber-select" name="size" wire:model.defer="size" onchange="updatedCaluberSelect()">
+                                                            <option value="">Select Calibre</option>
+                                                            @foreach($calibers AS $cal)
+                                                            <option value="{{ $cal->caliber }}">{{ $cal->caliber }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 @elseif($category->measurement_type == "size")
                                                     <select class="form-control" placeholder="Size" name="size" wire:model.defer="size">
                                                         <option value="">Size</option>
@@ -550,6 +552,26 @@
     </div>
     @push('styles')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: none !important; 
+            border-radius: 4px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            border-color: #000 transparent transparent transparent;
+            border-style: solid;
+            border-width: 6px 5px 0 5px;
+            height: 0;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: -2px;
+            position: absolute;
+            top: 50%;
+            width: 0;
+        }
+    </style>
     @endpush
 
     @push('scripts')
@@ -577,13 +599,17 @@
             input.click();
         }
         document.addEventListener('livewire:initialized', () => {
+            Livewire.hook('message.processed', (message, component) => {
+                $('.caliber-select').select2();
+            });
             $(document).ready(function() {
                 $('.brands-select').select2();
                 // $('.caliber-select').select2();
             });
             @this.on('set-calibre-select2', () => {
-                $('.caliber-select').select2();
-                alert("HERE");
+                setTimeout(() => {
+                    $('.caliber-select').select2();
+                }, 0);
             });
 
             @this.on('go-to-top', () => {

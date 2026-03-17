@@ -59,7 +59,7 @@ class ProductForm extends Component
 
     #[On('caliber-updated')]
     public function caliberUpdated($caliber){
-        dd($caliber);
+        $this->size = $caliber;
     }
 
     public function updatedItemDescription(){
