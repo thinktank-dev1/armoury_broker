@@ -110,7 +110,7 @@
                         <h4 class="page-title">Need Support?</h4>
                         <h5 class="bold-600 font-21 text-upper">Get in touch</h5>
                         <div class="mt-3">
-                            <p>For support, get in touch via email or fill in and submit the contact form and we we will get in touch with you.</p>
+                            <p>For support, get in touch via email or fill in and submit the contact form and we will get in touch with you.</p>
                         </div>
                     </div>
                     <div class="mb-5 mb-lg-0">
