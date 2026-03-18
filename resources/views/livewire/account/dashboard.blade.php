@@ -21,7 +21,7 @@
                 <!-- Desktop View -->
                 <div class="card-body d-none d-md-block">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-lg-12 col-xl-4">
                             <center class="profile-pic m-t-30">
                                 <div class="d-flex justify-content-center">
                                     @if(Auth::user()->vendor)
@@ -39,14 +39,14 @@
                                 </div> 
                             </center>
                         </div>
-                        <div class="col-md-8 ps-3 pt-4">
+                        <div class="col-lg-12 col-xl-8 ps-3 pt-4">
                             @if(Auth::user()->vendor)
                             <h3 class="bold">{{ Auth::user()->vendor->name }}</h3>
                             <div class="d-flex justify-content-around justify-content-md-start">
                                 <div>
                                     <b>{{ Auth::user()->vendor->likes->count() }}</b> Likes
                                 </div>
-                                <div class="ms-md-5">
+                                <div class="ms-0 ms-lg-5">
                                     <b>{{ Auth::user()->vendor->sold() }}</b> Items Sold
                                 </div>
                             </div>

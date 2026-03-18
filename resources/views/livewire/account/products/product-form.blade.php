@@ -571,6 +571,16 @@
             top: 50%;
             width: 0;
         }
+
+        .select2-container--default .select2-selection--single {
+            border-color: #e9ecef !important;
+            height: 38px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #000;
+            line-height: 39px;
+        }
     </style>
     @endpush
 

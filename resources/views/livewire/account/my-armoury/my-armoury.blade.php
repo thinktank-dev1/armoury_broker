@@ -47,8 +47,8 @@
                         <!-- Desktop View -->
                         <div class="card-body d-none d-md-block px-5">
                             <div class="row">
-                                <div class="col-md-3 col-xl-2">
-                                    <a href="{{ url('profile') }}">
+                                <div class="col-md-3 col-xl-2 tt1">
+                                    <!-- <a href="{{ url('profile') }}"> -->
                                         <center class="mt-3 profile-pic">
                                             @if(Auth::user()->vendor->avatar) 
                                             <img src="{{ asset('storage/'.Auth::user()->vendor->avatar) }}" class="circle-dash-avatar img-fluid">
@@ -59,7 +59,7 @@
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#avatar-edit-modal"><i class="icon-pencil"></i></a>
                                             </span>
                                         </center>
-                                    </a>
+                                    <!-- </a> -->
                                 </div>
                                 <div class="col-md-9 col-xl-10 text-center text-md-start">
                                     <h4 class="card-title m-t-10">{{ Auth::user()->vendor->name }} </h4>
