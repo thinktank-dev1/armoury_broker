@@ -14,6 +14,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class Withdrawals extends Component
 {
+    public $status;
+
+    public function mount(){
+        $this->status = 0;
+    }
+
     public function exportWithdrawals(){
         return Excel::download(new PaymentExport, 'withdrawals.xlsx');
     }
@@ -53,7 +59,7 @@ class Withdrawals extends Component
     }
 
     public function render(){
-        $requests = WithdrawalRequest::where('verified', 1)->where('status', 0)->get();
+        $requests = WithdrawalRequest::where('verified', 1)->where('status', $this->status)->get();
         return view('livewire.account.admin.withdrawals', [
             'requests' => $requests
         ]);

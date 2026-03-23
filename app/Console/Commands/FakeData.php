@@ -105,7 +105,7 @@ class FakeData extends Command
     public function init(){
         $faker = Faker::create();
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $user = User::whereNotNull('vendor_id')->inRandomOrder()->first();
             $brand = Brand::inRandomOrder()->first();
             $cat = Category::inRandomOrder()->first();

@@ -581,6 +581,15 @@
             color: #000;
             line-height: 39px;
         }
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            display: block;
+            padding-left: 0.75rem;
+            padding-right: 49px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-family: "Montserrat", sans-serif;
+        }
     </style>
     @endpush
 

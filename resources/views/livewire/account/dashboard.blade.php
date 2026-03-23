@@ -180,9 +180,11 @@
                         </div>
                         <div class="col-12 col-xl-8">
                             <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
+                            {{--
                             <div class="mb-2">
                             Dealer Status: <b>@if(Auth::user()->dealer) Active @else Inactive @endif</b>
                             </div>
+                            --}}
                             <div><i class=" icon-envelope"></i> {{ Auth::user()->email }}</div>
                             <div><i class=" icon-phone"></i> {{ Auth::user()->mobile_number }}</div>
                             @if(Auth::user()->vendor && Auth::user()->vendor->instagram_handle)

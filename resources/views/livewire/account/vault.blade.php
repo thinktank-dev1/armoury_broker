@@ -106,7 +106,7 @@
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
                                             <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix" style="bottom: -119px;">
+                                            <span class="tooltip-content tooltip-content-end clearfix" style="bottom: -119px;">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Purchases</b>
                                                     <p class="text-white">Monies spent on in platform purchases</p>
@@ -198,7 +198,7 @@
                                     <div class="ms-auto">
                                         <span class="mytooltip tooltip-effect-1">
                                             <span class="tooltip-item text-white"><i class=" icon-info"></i></span> 
-                                            <span class="tooltip-content clearfix">
+                                            <span class="tooltip-content tooltip-content-end clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Total Sales</b>
                                                     <p class="text-white">Monies generated from in platfrom sales</p>

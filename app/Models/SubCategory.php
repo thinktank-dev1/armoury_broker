@@ -18,7 +18,7 @@ class SubCategory extends Model
     }
     
     public function sub_sub(){
-        return $this->hasMany(SubCategory::class, 'parent_id');
+        return $this->hasMany(SubCategory::class, 'parent_id')->orderBy('sub_category_name', 'ASC');
     }
 
     public function category(){

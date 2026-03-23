@@ -17,6 +17,6 @@ class Category extends Model
     ];
 
     public function sub_cats(){
-        return $this->hasMany(SubCategory::class);
+        return $this->hasMany(SubCategory::class)->orderBy('sub_category_name', 'ASC');
     }
 }

@@ -252,9 +252,18 @@
                                                                 },
                                                                 $message->message
                                                             );
+                                                            /*
                                                             $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
                                                             $masked = preg_replace($regex, '*', $masked);
                                                             $masked = preg_replace('/\b((https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i', ' ', $masked);
+                                                            */
+
+
+                                                            $host = preg_quote(request()->getHost(), '@');
+
+                                                            $regex = "@https?://(?!{$host})([-\\w\\.]+[-\\w])+(:\\d+)?(/([\\w/_\\.#-]*(\\?\\S+)?[^\\.\\s])?)?@i";
+                                                            $masked = preg_replace($regex, '*', $masked);
+                                                            $masked = preg_replace('/\b((https?|ftp|file):\/\/|www\.)((?!' . $host . ')[-A-Z0-9+&@#\/%?=~_|$!:,.;]*)/i',' ',$masked);
 
                                                             @endphp
                                                             {!! $masked !!}

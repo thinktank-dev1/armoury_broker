@@ -314,7 +314,14 @@ class ProductForm extends Component
         $prdt->model_number = $this->model_number;
         $prdt->item_description = $this->item_description;
         $prdt->condition = $this->condition;
-        $prdt->quantity = $this->quantity;
+        if($this->cur_id){
+            $qty = $prdt->quantity;
+            $qty += $this->quantity;
+            $prdt->quantity = $qty;
+        }
+        else{
+            $prdt->quantity = $this->quantity;
+        }
         $prdt->size = $this->size;
         $prdt->service_fee_payer = $this->service_fee_payer;
         $prdt->item_price = $this->item_price;

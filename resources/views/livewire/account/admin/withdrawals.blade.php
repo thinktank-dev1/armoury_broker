@@ -16,7 +16,13 @@
                     <div class="d-flex">
                         <h4 class="card-title">Withdrawal Requests</h4>
                         <span class="ms-auto">
-                            <a href="#" class="btn btn-primary btn-sm" wire:click.prevent="exportWithdrawals">Export</a>
+                            <div class="input-group mb-3">
+                                <select class="form-control" wire:model.live="status">
+                                    <option value="0">Pending</option>
+                                    <option value="1">Paid</option>
+                                </select>
+                                <button class="btn btn-primary" type="button" wire:click.prevent="exportWithdrawals">Export</button>
+                            </div>
                         </span>
                     </div>
 
@@ -46,7 +52,9 @@
                                         <td>{{ $req->account_number }}</td>
                                         <td>R {{ number_format($req->amount,2) }}</td>
                                         <td class="text-end">
+                                            @if($req->status == 0)
                                             <a href="#" class="btn btn-primary" wire:click.prevent="setPaid({{ $req->id }})">Paid</a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
