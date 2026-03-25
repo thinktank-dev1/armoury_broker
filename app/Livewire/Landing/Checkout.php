@@ -457,17 +457,21 @@ class Checkout extends Component
             }
             $this->cart_sub_total += $tot;
 
+            $min_fee_stn = Setting::where('name', 'min_fee_amount')->first();
+            $min_fee_amount = $min_fee_stn->value;
+
             if($ct->product->service_fee_payer == "buyer"){
                 $fee = ($stn->value / 100) * $tot;
+                if($fee > $min_fee_amount){
+                    $fee = $min_fee_amount;
+                }
             }
             elseif($ct->product->service_fee_payer == "50-50"){
                 $tot_fee = ($stn->value / 100) * $tot;
+                if($tot_fee > $min_fee_amount){
+                    $fee = $min_fee_amount;
+                }
                 $fee = $tot_fee / 2;
-            }
-            $min_fee_stn = Setting::where('name', 'min_fee_amount')->first();
-            $min_fee_amount = $min_fee_stn->value;
-            if($fee < $min_fee_amount){
-                $fee = $min_fee_amount;
             }
             $tot += $fee;
 
