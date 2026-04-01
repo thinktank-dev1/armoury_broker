@@ -83,10 +83,10 @@ class ProcessPayment extends Controller
                     }
                     $fee = ($fee_val / 100) * $item->price;
                     if($product->service_fee_payer == "50-50"){
-                        $fee = $fee / 2;
                         if($fee < $min_fee_val){
                             $fee = $min_fee_val;
                         }
+                        $fee = $fee / 2;
                     }
                     elseif($product->service_fee_payer == "buyer"){
                         $fee = 0;
@@ -116,6 +116,18 @@ class ProcessPayment extends Controller
                         'user_id' => $seller->id,
                         'vendor_id' => $seller->vendor_id,
                         'direction' => 'in',
+                        'amount' => $amount,
+                        'order_id' => $order->id,
+                        'order_item_id' => $item->id,
+                        'payment_status' => 'COMPLETE',
+                    ]);
+
+                    Transaction::create([
+                        'name' => 'completed_order_payment',
+                        'transaction_type' => 'payfast_payment',
+                        'user_id' => $buyer->id,
+                        'vendor_id' => $buyer->vendor_id,
+                        'direction' => 'out',
                         'amount' => $amount,
                         'order_id' => $order->id,
                         'order_item_id' => $item->id,

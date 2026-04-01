@@ -71,9 +71,10 @@ class Vendor extends Model
         $trx_in = Transaction::query()
         ->where('vendor_id', $this->id)
         ->where(function($q){
-            return $q->where('transaction_type', 'order_payment')
-            ->orWhere('transaction_type', 'refund');
+            return $q->where('name', 'order_payment')
+            ->orWhere('name', 'refund');
         })
+        ->where('direction', 'in')
         ->where('release', 1)
         ->get();
 
@@ -83,11 +84,11 @@ class Vendor extends Model
         $trx_out = Transaction::query()
         ->where('user_id', $this->user->id)
         ->where(function($q){
-            return $q->where('transaction_type', 'withdrawal')
-            ->orWhere('transaction_type', 'canceled_order')
-            ->orWhere('transaction_type', 'wallet_payment');
+            return $q->where('name', 'withdrawal')
+            ->orWhere('name', 'canceled_order')
+            ->orWhere('transaction_type', 'wallet_credit_payment');
         })
-        ->where('release', 1)
+        ->where('direction', 'out')
         ->get();
 
         foreach($trx_out AS $trx){
