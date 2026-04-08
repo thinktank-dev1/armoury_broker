@@ -78,7 +78,7 @@ class Order extends Model
             if($item->product->service_fee_payer == "buyer"){
                 $fee_arr['buyer'] += $item->service_fee;
             }
-            elseif($item->product->service_fee_payer == "buyer"){
+            elseif($item->product->service_fee_payer == "seller"){
                 $fee_arr['seller'] += $fee;
             }
             else{
