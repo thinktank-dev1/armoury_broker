@@ -64,6 +64,7 @@ class ProcessPayment extends Controller
                 $min_fee_val = $stn_min_fee->value;
 
                 foreach($order->items AS $item){
+                    $buyer_paid = $item->total_paid;
                     $product = $item->product;
                     
                     if($item->service_fee){
@@ -80,6 +81,7 @@ class ProcessPayment extends Controller
                             'payment_status' => 'COMPLETE',
                             'release' => null,
                         ]);
+                        $buyer_paid -= $item->service_fee;
                     }
                     $fee = ($fee_val / 100) * $item->price;
                     if($product->service_fee_payer == "50-50"){
@@ -87,12 +89,13 @@ class ProcessPayment extends Controller
                             $fee = $min_fee_val;
                         }
                         $fee = $fee / 2;
+                        $buyer_paid -= $fee;
                     }
                     elseif($product->service_fee_payer == "buyer"){
                         $fee = 0;
                     }
                     if($fee){
-                        if($fee < $min_fee_val){
+                        if($fee < $min_fee_val && $product->service_fee_payer != "50-50"){
                             $fee = $min_fee_val;
                         }
                         Transaction::create([
@@ -128,7 +131,7 @@ class ProcessPayment extends Controller
                         'user_id' => $buyer->id,
                         'vendor_id' => $buyer->vendor_id,
                         'direction' => 'out',
-                        'amount' => $amount,
+                        'amount' => $buyer_paid,
                         'order_id' => $order->id,
                         'order_item_id' => $item->id,
                         'payment_status' => 'COMPLETE',

@@ -284,8 +284,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $currentOrder = null;
+                                        $colorToggle = false;
+                                    @endphp
                                     @foreach($trxs AS $trx)
-                                    <tr>
+                                    @php
+                                    if ($currentOrder !== $trx->order_id) {
+                                        $colorToggle = !$colorToggle;
+                                        $currentOrder = $trx->order_id;
+                                    }
+                                    @endphp
+                                    <tr class="{{ $colorToggle ? 'table-active' : 'bg-white' }}">
                                         <td>{{ date('Y-m-d', strtotime($trx->created_at)) }}</td>
                                         <td>{{ ucwords(str_replace('_', ' ',$trx->transaction_type)) }}</td>
                                         <td>

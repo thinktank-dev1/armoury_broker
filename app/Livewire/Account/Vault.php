@@ -279,6 +279,7 @@ class Vault extends Component
                 return $q->where('payment_status','<>', 'COMPLETE');
             }
         })
+        ->orderBy('order_id', 'DESC')
         ->orderBy('created_at', 'DESC')
         ->paginate(12);
 
