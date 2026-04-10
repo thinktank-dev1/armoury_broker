@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Request;
+use Log;
 
 use App\Lib\Communication;
 
@@ -20,6 +21,7 @@ use App\Models\CreditPayment;
 class ProcessPayment extends Controller
 {
     public function pfPayment($id){
+        Log::info(Request::all());
         $order = Order::find($id);
         $wallet_pay = CreditPayment::where('order_id', $order->id)->first();
 
@@ -37,8 +39,9 @@ class ProcessPayment extends Controller
                         dd("NOT PAID");
                     } 
                 }
-                elseif(Request::input('amount_gross') != $order->cart_total){
-                    dd("Invalid amount");
+                elseif(str_replace(',', '', str_replace(' ', '', Request::input('amount_gross'))) != str_replace(' ','',str_replace(',','',number_format($order->cart_total,2)))){
+                    Log::error('Invalid amount');
+                    dd("Invalid amount", Request::input('amount_gross'));
                 }
                 
                 $order->g_payment_id = Request::input('pf_payment_id');
