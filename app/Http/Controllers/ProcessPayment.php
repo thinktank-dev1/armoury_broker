@@ -89,7 +89,7 @@ class ProcessPayment extends Controller
                             $fee = $min_fee_val;
                         }
                         $fee = $fee / 2;
-                        $buyer_paid -= $fee;
+                        // $buyer_paid -= $fee;
                     }
                     elseif($product->service_fee_payer == "buyer"){
                         $fee = 0;
