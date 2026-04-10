@@ -469,7 +469,7 @@ class Checkout extends Component
             elseif($ct->product->service_fee_payer == "50-50"){
                 $tot_fee = ($stn->value / 100) * $tot;
                 if($tot_fee < $min_fee_amount){
-                    $fee = $min_fee_amount;
+                    $tot_fee = $min_fee_amount;
                 }
                 $fee = $tot_fee / 2;
             }
