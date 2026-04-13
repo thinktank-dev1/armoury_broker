@@ -7,6 +7,9 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/FAVICON.png') }}">
+
+        <link rel="apple-touch-icon" href="{{ asset('img/FAVICON.png') }}">
+
         <title>Armoury Broker</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com">

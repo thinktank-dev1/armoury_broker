@@ -8,6 +8,8 @@
         <title>Armoury Broker</title>
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/FAVICON.png') }}">
 
+        <link rel="apple-touch-icon" href="{{ asset('img/FAVICON.png') }}">
+
         <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">	
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
 
