@@ -57,8 +57,7 @@
                                 @endphp
                                 <th class="p-0 m-0 w-14">R {{ number_format($fee_arr['seller'], 2) }}<br/><small>Platform Fee (Seller)</small></th>
                                 <th class="p-0 m-0 w-14">R {{ number_format($fee_arr['buyer'], 2) }}<br/><small>Platform Fee (Buyer)</small></th>
-                                <th class="p-0 m-0 w-14">R {{ number_format($order->amount_paid, 2) }}<br/><small>Amount Paid</small></th>
-                                <th class="p-0 m-0 w-14">R&nbsp;{{ number_format($order->amount_paid, 2) }}<br/><small>Amount</small></th>
+                                <th class="p-0 m-0 w-14">R {{ number_format($order->totalPaid(), 2) }}<br/><small>Amount Paid</small></th>
                             </tr>
                         </thead>
                     </table>

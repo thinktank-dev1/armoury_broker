@@ -49,6 +49,8 @@ class ProcessPayment extends Controller
                 $order->status = Request::input('payment_status');
                 $order->save();
 
+                $wallet_amount = 0;
+
                 if($wallet_pay){
                     Transaction::create([
                         'name' => 'order_payment',
@@ -61,6 +63,9 @@ class ProcessPayment extends Controller
                         'order_item_id' => null,
                         'payment_status' => 'COMPLETE',
                     ]);
+                    $wallet_amount = $wallet_pay->amount;
+                    $count = $order->items->count();
+                    $wallet_amount = $wallet_amount / $count;
                 }
 
                 $fee_val = $stn_fee->value;
@@ -127,7 +132,7 @@ class ProcessPayment extends Controller
                         'order_item_id' => $item->id,
                         'payment_status' => 'COMPLETE',
                     ]);
-
+                    $buyer_paid -= $wallet_amount;
                     Transaction::create([
                         'name' => 'completed_order_payment',
                         'transaction_type' => 'payfast_payment',

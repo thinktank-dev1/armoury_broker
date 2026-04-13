@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Setting;
+use App\Models\Transaction;
 
 class Order extends Model
 {
@@ -29,6 +30,15 @@ class Order extends Model
         'shipping_status',
         'receipt_status',
     ];
+
+    public function totalPaid(){
+        $paid = $this->amount_paid;
+        $wlt = Transaction::where('order_id', $this->id)->where('transaction_type', 'wallet_credit_payment')->first();
+        if($wlt){
+            $paid += $wlt->amount;
+        }
+        return $paid;
+    }
 
     public function items(){
         return $this->hasMany(OrderItem::class);
