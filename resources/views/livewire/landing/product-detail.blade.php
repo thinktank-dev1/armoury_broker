@@ -69,10 +69,10 @@
                             </div>
                             @if($tag != "Sold")
                             <div class="cart-product-quantity">
-                                <div class="quantity">
-                                    <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" id="quantity" title="Qty" class="qty" size="4" max="{{ $qty }}" wire:model.live="quantity">
-                                    <input type="button" value="+" class="plus">
+                                <div class="qty">
+                                    <input type="button" value="-" class="sub" wire:click.prevent="changeQyty('red')">
+                                    <input type="text" name="quantity" id="quantity" title="Qty" class="qty_val" size="4" max="{{ $qty }}" wire:model.live="quantity">
+                                    <input type="button" value="+" class="add" wire:click.prevent="changeQyty('inc')">
                                 </div>
                             </div>
                             @endif
@@ -93,7 +93,7 @@
                                 @if($availability)
                                 <div class="row mt-3">
                                     <div class="@if($product->allow_offers) col-md-6 @else col-md-12 @endif d-grid mb-2">
-                                        <a href="#" class="bnt btn-primary" wire:click.prevent="addToCart">Buy</a>
+                                        <a href="#" class="bnt btn-primary" wire:click.prevent="addToCart" wire:loading.remove>Buy</a>
                                     </div>
                                     @if($product->allow_offers)
                                     <div class="col-md-6 d-grid mb-2">
@@ -254,6 +254,7 @@
             });
             function setQtyVal(){
                 var qty = parseInt($('#quantity').val());
+                console.log(qty)
                 @this.set('quantity', qty);
             }
         });

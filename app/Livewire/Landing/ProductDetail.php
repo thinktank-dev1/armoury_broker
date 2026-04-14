@@ -83,6 +83,21 @@ class ProductDetail extends Component
         }
     }
 
+    public function changeQyty($type){
+        if($type == "inc"){
+            $this->quantity += 1;
+            if($this->quantity > $this->vailable_qty){
+                $this->quantity = $this->vailable_qty;
+            }
+        }
+        if($type == "red"){
+            $this->quantity -= 1;
+            if($this->quantity == 0){
+                $this->quantity = 1;
+            }
+        }
+    }
+
     public function updatedQuantity(){
         if($this->quantity > $this->vailable_qty){
             $this->quantity = $this->vailable_qty;

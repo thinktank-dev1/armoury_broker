@@ -969,3 +969,34 @@ footer .widget_title {
          margin-left: 0 !important; 
     }
 }
+
+.qty {
+    display: table;
+}
+
+.qty .sub, .qty .add {
+    background-color: #eee;
+    display: block;
+    float: left;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    width: 34px;
+    height: 34px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 20px;
+    margin: 4px;
+}
+
+.qty .qty_val {
+    float: left;
+    width: 55px;
+    height: 36px;
+    border: 1px solid #ddd;
+    background-color: transparent;
+    text-align: center;
+    padding: 0;
+    margin: 3px;
+}
