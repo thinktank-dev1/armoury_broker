@@ -589,6 +589,8 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             font-family: "Montserrat", sans-serif;
+            font-size: .875rem;
+            font-weight: 400;
         }
     </style>
     @endpush

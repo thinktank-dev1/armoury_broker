@@ -198,6 +198,11 @@
                                         Saving post...
                                     </div>
                                 </div>
+                                @if($cur_cat_img)
+                                <div class="mb-3">
+                                    <img src="{{ asset('storage/'.$cur_cat_img) }}" style="height: 100px;">
+                                </div>
+                                @endif
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">

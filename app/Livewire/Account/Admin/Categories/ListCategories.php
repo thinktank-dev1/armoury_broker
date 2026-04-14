@@ -20,6 +20,7 @@ class ListCategories extends Component
     public $show_subs = false;
     public $cur_sub_id, $cur_parent_id, $sub_category_name;
     public $show_sub_sub = false;
+    public $cur_cat_img;
 
     public function showSubSub($id){
         $this->cur_sub_id = $id;
@@ -123,6 +124,13 @@ class ListCategories extends Component
                 }
                 if($cat->featured){
                     $this->featured = true;
+                }
+
+                if($cat->category_image){
+                    $this->cur_cat_img = $cat->category_image;
+                }
+                else{
+                    $this->cur_cat_img = null;
                 }
             }
             else{

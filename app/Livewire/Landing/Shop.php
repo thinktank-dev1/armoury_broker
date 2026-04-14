@@ -221,7 +221,9 @@ class Shop extends Component
                 ->orwhereHas('brand', function($qq) use($key){
                     return $qq->where('brand_name', 'LIKE', '%'.$key.'%');
                 });
-            });
+            })
+            ->withSum('orders', 'quantity')
+            ->havingRaw('COALESCE(orders_sum_quantity, 0) < products.quantity');
         }
 
         if($this->sort_by){
