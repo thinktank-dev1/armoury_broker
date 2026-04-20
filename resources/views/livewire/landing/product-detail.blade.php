@@ -110,12 +110,18 @@
                                 </div>
                             @endif
                             <div class="mt-3">
-                                <span class="badge badge-outine-dark-blue">{{ $product->category->category_name }}</span>
+                                <a href="{{ url('shop?category='.$product->category->slug) }}">
+                                    <span class="badge badge-outine-dark-blue">{{ $product->category->category_name }}</span>
+                                </a>
                                 @if($product->subCategory)
-                                <span class="badge badge-outine-dark-blue">{{ $product->subCategory->sub_category_name }}</span>
+                                <a href="{{ url('shop?sub-category='.$product->subCategory->slug) }}">
+                                    <span class="badge badge-outine-dark-blue">{{ $product->subCategory->sub_category_name }}</span>
+                                </a>
                                 @endif
                                 @if($product->sub_sub)
-                                <span class="badge badge-outine-dark-blue">{{ $product->sub_sub->sub_category_name }}</span>
+                                <a href="{{ url('shop?sub-sub-category='.$product->sub_sub->slug) }}">
+                                    <span class="badge badge-outine-dark-blue">{{ $product->sub_sub->sub_category_name }}</span>
+                                </a>
                                 @endif
                             </div>
                             <div class="mt-1">
@@ -123,7 +129,9 @@
                                 <span class="badge badge-outine-dark-blue">{{ $product->condition }}</span>
                                 @endif
                                 @if($product->brand)
-                                <span class="badge badge-outine-dark-blue">Brand: {{ $product->brand->brand_name }}</span>
+                                <a href="{{ url('shop?brand='.$product->brand->slug) }}">
+                                    <span class="badge badge-outine-dark-blue">Brand: {{ $product->brand->brand_name }}</span>
+                                </a>
                                 @endif
                             </div>
                             <div class="mt-4 bg-grey text-dark-blue px-3 py-2">
@@ -149,7 +157,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <livewire:landing.partials.share-block :vendor_id="$product->vendor->id" type="product-detail" />
+                            <livewire:landing.partials.share-block :vendor_id="$product->vendor->id" :product_id="$product->id" type="product-detail" />
                         </div>
                     </div>
                 </div>

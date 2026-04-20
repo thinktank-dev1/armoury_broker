@@ -264,10 +264,16 @@ class Vault extends Component
         })
         ->when($filter, function($q) use($filter){
             if($filter == "orders"){
-                return $q->where('vendor_id', Auth::user()->vendor_id);
+                // return $q->where('vendor_id', Auth::user()->vendor_id);
+                return $q->where('name', 'order_payment')
+                ->where('direction', 'in');
             }
             if($filter == "purchases"){
-                return $q->where('user_id', Auth::user()->id);
+                // return $q->where('user_id', Auth::user()->id);
+                return $q->where(function($qq){
+                    return $qq->where('name', 'completed_order_payment')->orWhere('transaction_type', 'wallet_credit_payment');
+                })
+                ->where('direction', 'out');
             }
             if($filter == "refunds"){
                 return $q->where('transaction_type', 'refund');

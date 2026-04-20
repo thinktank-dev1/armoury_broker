@@ -80,7 +80,7 @@
                 @else
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('wishlist') }}" aria-expanded="false">
-                        <i class="icon-basket"></i>
+                        <i class="icon-star"></i>
                         <span class="hide-menu">Wishlist</span>
                     </a>
                 </li>
@@ -92,7 +92,7 @@
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('my-armoury') }}" aria-expanded="false">
-                        <i class="icons-Army-Key"></i>
+                        <i class="icons-Shop"></i>
                         <span class="hide-menu">My Armoury</span>
                     </a>
                 </li>

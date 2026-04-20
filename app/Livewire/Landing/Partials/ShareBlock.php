@@ -18,11 +18,18 @@ class ShareBlock extends Component
 
     public $name, $surname, $email, $contact_number, $message;
 
-    public function mount($vendor_id, $type){
+    public $product_id;
+
+    public function mount($vendor_id, $type, $product_id = null){
         $this->vendor_id = $vendor_id;
         $this->view_type = $type;
         $this->vendor = Vendor::find($vendor_id);
-        $this->link = url($this->vendor->url_name);
+        if($type == "product-detail" && $product_id){
+            $this->link = url('shop/product/'.$product_id);
+        }
+        else{
+            $this->link = url($this->vendor->url_name);
+        }
     }
 
     public function likeVendor(){
@@ -79,8 +86,7 @@ class ShareBlock extends Component
 
     public function copyLink(){
         if($this->vendor){
-            $link = url($this->vendor->url_name);
-            $this->link = $link;
+            $link = $this->link;
             $this->dispatch('copy-link', link: $link);
         }
     }

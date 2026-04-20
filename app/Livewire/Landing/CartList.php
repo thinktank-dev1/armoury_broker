@@ -40,6 +40,29 @@ class CartList extends Component
         return redirect('cart');
     }
 
+    public function gotToCheckOut($id){
+        $order_item = OrderItem::query()
+        ->where('user_id', Auth::user()->id)
+        ->whereNull('order_id')
+        ->where('vendor_id', $id)
+        ->get();
+
+        $go = true;
+
+        foreach($order_item AS $itm){
+            if(!$itm->product->hasStock()){
+                $go = false;
+                break;
+            }
+        }
+        if($go){
+            return redirect('cart/'.$id);
+        }
+        else{
+            $this->addError('error', 'Your cart has product(s) out of stock. Please remove item(s) before proceeding');
+        }
+    }
+
     public function getCart(){
         if(!Auth::guest()){
             //Check If session has orders

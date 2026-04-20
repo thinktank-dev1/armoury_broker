@@ -98,7 +98,9 @@
                                                     <h4 class="card-title text-white">
                                                         @if($cur_msg->user)
                                                             @if($cur_msg->user->vendor)
-                                                                {{ $cur_msg->user->vendor->name }}
+                                                                <a class="text-white" href="{{ url('/'.$cur_msg->user->vendor->url_name) }}">
+                                                                    {{ $cur_msg->user->vendor->name }}
+                                                                </a>
                                                             @else
                                                                 {{ $cur_msg->user->name.' '.$cur_msg->user->surname }}
                                                             @endif
@@ -295,27 +297,40 @@
                                             </div>
                                         </div>
                                         @if($cur_msg->user->vendor->id != 1)
-                                        <div class="">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control border-right-none" placeholder="Reply..." name="message" wire:model.defer="message">
-                                                <label class="input-group-text chat-file-link" for="fileInput" style="cursor:pointer;">
-                                                    <i class="mdi mdi-paperclip"></i>
-                                                </label>
-                                                <input type="file" id="fileInput" hidden wire:model.live="message_attachment">
-                                                <button class="btn btn-primary msg-send-btn" type="button" id="button-addon1" wire:click.prevent="sendMessage">Send</button>
-                                            </div>
-                                            @if($message_attachment)
-                                            <div class="form-text">
-                                                @php
-                                                $is_temp_image = str_starts_with($message_attachment->getMimeType(), 'image/');
-                                                @endphp
-                                                @if($is_temp_image)
-                                                <a href="{{ $message_attachment->temporaryUrl() }}" target="_blank">View attachment</a>
-                                                @endif
-                                                <span class="ms-3"><a href="#" class="text-danger" wire:click.prevent="removeAttachment"><i class="ti-trash"></i></a></span>
-                                            </div>
+                                            @php
+                                            $blocked = $cur_msg->isBlocked();
+                                            @endphp
+                                            @if(!$blocked['blocked'])
+                                                <div class="">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control border-right-none" placeholder="Reply..." name="message" wire:model.defer="message">
+                                                        <label class="input-group-text chat-file-link" for="fileInput" style="cursor:pointer;">
+                                                            <i class="mdi mdi-paperclip"></i>
+                                                        </label>
+                                                        <input type="file" id="fileInput" hidden wire:model.live="message_attachment">
+                                                        <button class="btn btn-primary msg-send-btn" type="button" id="button-addon1" wire:click.prevent="sendMessage">Send</button>
+                                                    </div>
+                                                    @if($message_attachment)
+                                                    <div class="form-text">
+                                                        @php
+                                                        $is_temp_image = str_starts_with($message_attachment->getMimeType(), 'image/');
+                                                        @endphp
+                                                        @if($is_temp_image)
+                                                        <a href="{{ $message_attachment->temporaryUrl() }}" target="_blank">View attachment</a>
+                                                        @endif
+                                                        <span class="ms-3"><a href="#" class="text-danger" wire:click.prevent="removeAttachment"><i class="ti-trash"></i></a></span>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            @else
+                                                <div class="alert alert-dark">
+                                                    @if($blocked["blocked_by"] == "me")
+                                                        You cannot send messages to this seller because you blocked them.
+                                                    @else
+                                                        You cannot send messages to this seller because they blocked you.
+                                                    @endif
+                                                </div>
                                             @endif
-                                        </div>
                                         @endif
                                     </div>
                                 </div>

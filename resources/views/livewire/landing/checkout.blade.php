@@ -5,7 +5,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="row">
                         <div class="col-md-12">
-                            <a class="text-dark-blue" href="{{ URL::previous() }}">
+                            <a class="text-dark-blue" href="{{ URL::previous() }}" wire:ignore>
                                 <i class="fas fa-chevron-left"></i> &nbsp;&nbsp;Back
                             </a>
                         </div>
@@ -59,7 +59,7 @@
                                                         <ul class="list-group">
                                                             <li class="list-group-item d-flex">
                                                                 <small class="">Item Name</small>
-                                                                <span class="ms-auto"><b>{{ ucwords($product->item_name) }}</b></span>
+                                                                <span class="ms-auto"><a href="{{ url('shop/product/'.$product->id) }}"><b>{{ ucwords($product->item_name) }}</b></a></span>
                                                             </li>
                                                             @if($product->model_number)
                                                             <li class="list-group-item d-flex">
@@ -69,7 +69,7 @@
                                                             @endif
                                                             <li class="list-group-item d-flex">
                                                                 <small class="">Vendor</small>
-                                                                <span class="ms-auto"><b>{{ ucwords($item['vendor_name']) }}</b></span>
+                                                                <span class="ms-auto"><a href="{{ url('/'.$product->vendor->url_name) }}"><b>{{ ucwords($item['vendor_name']) }}</b></a></span>
                                                             </li>
                                                             <li class="list-group-item d-flex">
                                                                 <small>Quantity</small>
@@ -302,7 +302,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terms_check" wire:model.defer="terms_and_conditions">
                                 <label class="form-check-label" for="terms_check">
-                                    <small style="color: #000">I acknowledge that I have read and understood the <a href="{{ url('terms-and-conditions') }}" style="font-weight: 600;">Terms and Conditions</a>. I confirm that I am legally authorized to use this platform and that I will comply with all applicable South African laws, including the Firearms Control Act (60), 2020. I understand that I am solely responsible for ensuring compliance with all relevant regulations and laws.</small>
+                                    <small style="color: #000">I acknowledge that I have read and understood the <a href="{{ url('docs/Terms_of_Use_V3_2_Revised.pdf') }}" target="_blank" style="font-weight: 600;">Terms and Conditions</a>. I confirm that I am legally authorized to use this platform and that I will comply with all applicable South African laws, including the Firearms Control Act (60), 2020. I understand that I am solely responsible for ensuring compliance with all relevant regulations and laws.</small>
                                 </label>
                             </div>
                         </div>

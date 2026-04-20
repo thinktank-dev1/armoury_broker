@@ -76,4 +76,24 @@ class Product extends Model
     public function orders(){
         return $this->hasMany(OrderItem::class);
     }
+
+    public function order_items(){
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function hasStock(){
+        $cnt = 0;
+        foreach($this->order_items AS $itm){
+            if($itm->order){
+                if($itm->order->g_payment_id){
+                    $cnt += $itm->quantity;
+                }
+            }
+        }
+
+        if($cnt >= $this->quantity){
+            return false;
+        }
+        return true;
+    }
 }

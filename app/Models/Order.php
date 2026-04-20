@@ -34,7 +34,8 @@ class Order extends Model
     public function totalPaid(){
         $paid = $this->amount_paid;
         $wlt = Transaction::where('order_id', $this->id)->where('transaction_type', 'wallet_credit_payment')->first();
-        if($wlt){
+        $gateway_payment = Transaction::where('order_id', $this->id)->where('transaction_type', 'payfast_payment')->first();
+        if($wlt && $gateway_payment){
             $paid += $wlt->amount;
         }
         return $paid;

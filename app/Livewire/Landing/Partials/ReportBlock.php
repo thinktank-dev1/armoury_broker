@@ -14,21 +14,26 @@ class ReportBlock extends Component
 {
     public $vendor;
     public $description;
+    public $is_blocked;
 
     public function mount($vendor_id){
         $this->vendor = Vendor::find($vendor_id);
     }
 
-    #[On('block-vendor')]
-    public function blockVendor($vendor_id){
+    public function toggleBlock(){
+        $vendor_id = $this->vendor->id;
         if(!Auth::guest()){
             $blk = BlockVendor::where('user_id', Auth::user()->id)->where('vendor_id', $vendor_id)->first();
             if(!$blk){
                 $blk = new BlockVendor();
+
+                $blk->user_id = Auth::user()->id;
+                $blk->vendor_id = $vendor_id;
+                $blk->save();
             }
-            $blk->user_id = Auth::user()->id;
-            $blk->vendor_id = $vendor_id;
-            $blk->save();
+            else{
+                $blk->delete();
+            }
         }
     } 
 
@@ -48,8 +53,15 @@ class ReportBlock extends Component
         $this->dispatch('report-sent');
     }
 
-    public function render()
-    {
+    public function render(){
+        $blk = BlockVendor::where('user_id', Auth::user()->id)->where('vendor_id', $this->vendor->id)->first();
+        if($blk){
+            $this->is_blocked = true;
+        }
+        else{
+            $this->is_blocked = false;
+        }
+
         return view('livewire.landing.partials.report-block');
     }
 }

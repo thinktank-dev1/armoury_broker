@@ -46,7 +46,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p>Refer to our <b><a href="{{ url('docs/Terms of Use and User Agreement_AB_Courier amendments_v02_20250629.pdf') }}" target="_blank">Terms of Use</a></b> for more information</p>
+                    <p>Refer to our <b><a href="{{ url('docs/Terms_of_Use_V3_2_Revised.pdf') }}" target="_blank">Terms of Use</a></b> for more information</p>
                 </div>
             </div>
         </div>

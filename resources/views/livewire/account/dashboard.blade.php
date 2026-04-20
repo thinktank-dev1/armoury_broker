@@ -203,9 +203,11 @@
                 <!-- Mobile View -->
                 <div class="card-body d-md-none text-center">
                     <h3>{{ Auth::user()->name.' '.Auth::user()->surname }}</h3>
+                    {{--
                     <div class="mb-2">
                     Dealer Status: <b>@if(Auth::user()->dealer) Active @else Inactive @endif</b>
                     </div>
+                    --}}
                     <div class="mb-1"><i class=" icon-envelope"></i> {{ Auth::user()->email }}</div>
                     <div class="mb-1"><i class=" icon-phone"></i> {{ Auth::user()->mobile_number }}</div>
                     @if(Auth::user()->vendor && Auth::user()->vendor->instagram_handle)

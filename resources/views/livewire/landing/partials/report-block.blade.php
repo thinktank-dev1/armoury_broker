@@ -5,7 +5,15 @@
     <ul class="dropdown-menu" aria-labelledby="seller-warning-dropdown">
         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#report-modal">Report Seller</a></li>
         @if(!Auth::guest())
-        <li><a class="dropdown-item" href="#" id="block-seller" >Block Seller</a></li>
+            <li>
+                <a class="dropdown-item" href="#" wire:click.prevent="toggleBlock">
+                    @if(!$is_blocked)
+                    Block Seller
+                    @else
+                    Unblock Seller
+                    @endif
+                </a>
+            </li>
         @endif
     </ul>
 
