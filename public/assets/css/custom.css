@@ -1000,3 +1000,7 @@ footer .widget_title {
     padding: 0;
     margin: 3px;
 }
+
+tr.text-no-stock td{
+	color: #d65027 !important;
+}

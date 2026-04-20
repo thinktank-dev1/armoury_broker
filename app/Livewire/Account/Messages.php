@@ -12,6 +12,7 @@ use App\Models\Message;
 use App\Models\MessageThread;
 use App\Models\OfferPrice;
 use App\Models\User;
+use App\Models\BlockVendor;
 
 class Messages extends Component
 {

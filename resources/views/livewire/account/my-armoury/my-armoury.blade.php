@@ -35,8 +35,10 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3 d-grid gap-2">
-                <a href="#" class="bnt btn-primary text-center" wire:click.prevent="clearFilters">Clear</a>
+            <div class="mb-3 text-center">
+                <a href="#" class="u-b-link" wire:click.prevent="clearFilters">Clear Filter</a>
+            </div>
+            <div class="mb-3 d-grid gap-2 text-center">
                 <a href="{{ url('list-item') }}" class="bnt btn-primary text-center">Add Item</a>
             </div>
         </div>

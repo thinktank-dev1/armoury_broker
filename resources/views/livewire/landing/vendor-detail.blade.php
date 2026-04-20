@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
-                            <livewire:landing.partials.share-block :vendor_id="$vendor->id" type="vendor-detail" />
+                            <livewire:landing.partials.share-block :vendor_id="$vendor->id" :product_id="null" type="vendor-detail" />
                         </div>
                     </div>
                 </div>

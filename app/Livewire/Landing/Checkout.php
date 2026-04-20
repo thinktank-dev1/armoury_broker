@@ -300,10 +300,44 @@ class Checkout extends Component
                     'release' => null,
                 ]);
             }
+            $vendor_fee = 0;
+            if($product->service_fee_payer == "50-50"){
+                $vendor_fee = $fee;
+            }
+            elseif($product->service_fee_payer == "seller"){
+                $stn = Setting::where('name', 'service_fee')->first();
+                $stn_min = Setting::where('name', 'min_fee_amount')->first();
 
-            $amount = $item['total'];
-            if($fee){
-                $amount -= $fee;
+                $fee_per = $stn->value;
+                $vendor_fee = ($fee_per/100) * $product->item_price;
+
+                if($vendor_fee < $stn_min->value){
+                    $vendor_fee = $stn_min->value;
+                }
+            }
+            if($vendor_fee){
+                $vendor_fee = number_format($vendor_fee,2);
+                $vendor_fee = str_replace(' ', '', $vendor_fee);
+                $vendor_fee = str_replace(',','.',$vendor_fee);
+
+                Transaction::create([
+                    'name' => 'service_fee',
+                    'transaction_type' => 'service_fee',
+                    'user_id' => $vnd->user->id,
+                    'vendor_id' => $vnd->id,
+                    'direction' => 'out',
+                    'amount' => $vendor_fee,
+                    'order_id' => $order->id,
+                    'order_item_id' => $order_item->id,
+                    'code' => '',
+                    'payment_status' => 'COMPLETE',
+                    'release' => null,
+                ]);
+            }
+
+            $amount = $item['price'];
+            if($vendor_fee){
+                $amount -= $vendor_fee;
             }
             
             Transaction::create([
@@ -317,19 +351,21 @@ class Checkout extends Component
                 'order_item_id' => $order_item->id,
                 'payment_status' => 'COMPLETE',
             ]);
+
+            $usr = Auth::user();
+            $buyer_paid = $item['total'] - $item['service_fee'];
+            Transaction::create([
+                'name' => 'order_payment',
+                'transaction_type' => 'wallet_credit_payment',
+                'user_id' => $usr->id,
+                'vendor_id' => $usr->vendor_id,
+                'direction' => 'out',
+                'amount' => $buyer_paid,
+                'order_id' => $order->id,
+                'order_item_id' => null,
+                'payment_status' => 'COMPLETE',
+            ]);
         }
-        $usr = Auth::user();
-        Transaction::create([
-            'name' => 'order_payment',
-            'transaction_type' => 'wallet_credit_payment',
-            'user_id' => $usr->id,
-            'vendor_id' => $usr->vendor_id,
-            'direction' => 'out',
-            'amount' => $this->credit_payment,
-            'order_id' => $order->id,
-            'order_item_id' => null,
-            'payment_status' => 'COMPLETE',
-        ]);
     }
 
     #[On('update-quantity')]

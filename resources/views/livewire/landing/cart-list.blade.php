@@ -3,6 +3,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
+                    @if($errors->any())
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                {{ $errors->first() }}
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="row">
                         @foreach($cart_items_model AS $k=>$item_group)
                         @php
@@ -12,9 +21,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex">
-                                        <h4 class="card-title text-bold">{{ ucwords($f_item->vendor->name) }}</h4>
+                                        <a href="{{ url('/'.$f_item->vendor->url_name) }}">
+                                            <h4 class="card-title text-bold">{{ ucwords($f_item->vendor->name) }}</h4>
+                                        </a>
                                         <div class="ms-auto">
+                                            {{--
                                             <a href="{{ url('cart/'.$f_item->vendor->id) }}" class="btn btn-primary-outline">Checkout</a>
+                                            --}}
+                                            <a href="#" class="btn btn-primary-outline" wire:click.prevent="gotToCheckOut({{$f_item->vendor->id}})">Checkout</a>
                                         </div>
                                     </div>
                                     <hr />
@@ -22,6 +36,7 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th>Name</th>
                                                     <th>Description</th>
                                                     <th class="text-center">Quantity</th>
@@ -31,8 +46,29 @@
                                             </thead>
                                             <tbody>
                                                 @foreach($item_group AS $item)
-                                                <tr>
-                                                    <td>{{ ucwords($item->product->item_name) }}</td>
+                                                @php
+                                                $stk = $item->product->hasStock();
+                                                if(!$stk){
+                                                    $class = "text-no-stock";
+                                                }
+                                                else{
+                                                    $class = "";
+                                                }
+                                                @endphp
+                                                <tr class="{{ $class }}">
+                                                    <td style="min-width: 50px;">
+                                                        @if($item->product->images->count() > 0)
+                                                            <img src="{{ asset('storage/'.$item->product->images->first()->image_url) }}" style="height: 25px;">
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if(!$stk)
+                                                            <span class="pr_flash2  bg-warning ">Sold</span>
+                                                        @endif
+                                                        <a href="{{ url('shop/product/'.$item->product->id) }}">
+                                                            {{ ucwords($item->product->item_name) }}
+                                                        </a>
+                                                    </td>
                                                     <td>{{ $item->product->item_description }}</td>
                                                     <td class="text-center">{{ $item->quantity }}</td>
                                                     <td class="text-end">R{{ number_format($item->price,2) }}</td>

@@ -40,7 +40,7 @@
                                             <span class="tooltip-content clearfix" style="bottom: -119px;">
                                                 <span class="tooltip-text px-2">
                                                     <b>Available for shopping</b>
-                                                    <p class="text-white">Total of all funds across all catagories</p>
+                                                    <p class="text-white">Total of all funds across all categories</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -132,7 +132,7 @@
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
                                                     <b>Withdrawable Funds</b>
-                                                    <p class="text-white">You completed transaction earnings.(Can spend in the platfrom or cashout via EFT)</p>
+                                                    <p class="text-white">Your completed transaction earnings. (Can spend in the platfrom or cashout via EFT)</p>
                                                 </span> 
                                             </span>
                                         </span>
@@ -155,7 +155,7 @@
                                             <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                             <span class="tooltip-content clearfix">
                                                 <span class="tooltip-text px-2">
-                                                    <b>Pending Withdrawal</b>
+                                                    <b>Funds currently pending payout</b>
                                                 </span> 
                                             </span>
                                         </span>
