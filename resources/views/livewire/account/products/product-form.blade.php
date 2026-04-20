@@ -231,7 +231,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group mb-2">
-                                            <input type="number" class="form-control" placeholder="Quantity*" name="quantity" wire:model.live="quantity"> 
+                                            <input type="number" class="form-control" placeholder="Quantity*" name="quantity" wire:model.live.blur="quantity"> 
                                         </div>
                                     </div>    
                                 </div>
