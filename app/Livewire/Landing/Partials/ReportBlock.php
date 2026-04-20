@@ -54,12 +54,12 @@ class ReportBlock extends Component
     }
 
     public function render(){
-        $blk = BlockVendor::where('user_id', Auth::user()->id)->where('vendor_id', $this->vendor->id)->first();
-        if($blk){
-            $this->is_blocked = true;
-        }
-        else{
-            $this->is_blocked = false;
+        $this->is_blocked = false;
+        if(!Auth::guest()){
+            $blk = BlockVendor::where('user_id', Auth::user()->id)->where('vendor_id', $this->vendor->id)->first();
+            if($blk){
+                $this->is_blocked = true;
+            }
         }
 
         return view('livewire.landing.partials.report-block');
