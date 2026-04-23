@@ -937,3 +937,7 @@ select.form-control{
 	font-weight: 600;
 	text-decoration: underline;
 }
+
+.card-title a:hover{
+	color: #d65027 !important;
+}

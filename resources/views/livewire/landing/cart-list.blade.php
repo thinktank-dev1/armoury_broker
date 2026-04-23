@@ -28,7 +28,7 @@
                                             {{--
                                             <a href="{{ url('cart/'.$f_item->vendor->id) }}" class="btn btn-primary-outline">Checkout</a>
                                             --}}
-                                            <a href="#" class="btn btn-primary-outline" wire:click.prevent="gotToCheckOut({{$f_item->vendor->id}})">Checkout</a>
+                                            <a href="#" class="btn btn-primary-outline btn-checkout" wire:click.prevent="gotToCheckOut({{$f_item->vendor->id}})">Checkout</a>
                                         </div>
                                     </div>
                                     <hr />
@@ -89,7 +89,10 @@
                                 <li class="list-group-item active d-flex align-items-center" aria-current="true">
                                     <h3>{{ ucwords($f_item->vendor->name) }}</h3>
                                     <div class="ms-auto">
+                                        {{--
                                         <a href="{{ url('cart/'.$f_item->vendor->id) }}" class="btn btn-primary-outline btn-sm">Checkout</a>
+                                        --}}
+                                        <a href="#" class="btn btn-primary-outline btn-sm btn-checkout" wire:click.prevent="gotToCheckOut({{$f_item->vendor->id}})">Checkout</a>
                                     </div>
                                 </li>
                                 @foreach($item_group AS $item)

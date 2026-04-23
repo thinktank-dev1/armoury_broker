@@ -968,6 +968,10 @@ footer .widget_title {
     .btn + .btn {
          margin-left: 0 !important; 
     }
+    .btn-checkout{
+		font-size: 11px !important;
+		width: 100% !important;
+	}
 }
 
 .qty {
