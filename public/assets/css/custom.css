@@ -1008,3 +1008,9 @@ footer .widget_title {
 tr.text-no-stock td{
 	color: #d65027 !important;
 }
+
+@media (max-width: 767.98px) {
+    .btn-primary, .btn-secondary, .btn-dark-blue, .btn-dark-blue-outline, .btn-primary-outline {
+     	width: 100% !important;  
+    }
+}
