@@ -1069,3 +1069,9 @@ tr.text-no-stock td{
 	border: 2px solid #FFF !important;
 	color: #FFF;
 }
+.dash-img{
+	max-height: 330px; 
+	position: absolute; 
+	top: 70px; 
+	right: 168px
+}

@@ -24,7 +24,7 @@
             </div>
             <div class="row mt-5">
                 <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="about-box1 card">
+                    <div class="about-box1 card h-100">
                         <div class="card-body ms-3 my-3">
                             <div class="about-box1-head mb-2">
                                 <b class="text-21">REGISTERED USERS</b>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="about-box1 card">
+                    <div class="about-box1 card h-100">
                         <div class="card-body ms-3 my-3">
                             <div class="about-box1-head mb-2">
                                 <b class="text-21">LISTED ITEMS</b>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="about-box1 card">
+                    <div class="about-box1 card h-100">
                         <div class="card-body ms-3 my-3">
                             <div class="about-box1-head mb-2">
                                 <b class="text-21">ITEMS SOLD</b>
@@ -62,9 +62,9 @@
     <div class="section" id="contact">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6 mb-3 mb-md-0">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                     <div class="card about-bg-grey h-100">
-                        <div class="card-body mx-lg-5 my-lg-5">
+                        <div class="card-body mx-3 my-3 mx-lg-5 my-lg-5">
                             <img src="{{ asset('img/about_who_we_are_Icon.png') }}">
                             <div class="py-3">
                                 <h3 class="page-title">WHO WE ARE</h3>
@@ -75,9 +75,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 mb-3 mb-md-0">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                     <div class="card about-bg-problem h-100">
-                        <div class="card-body mx-lg-5 my-lg-5">
+                        <div class="card-body mx-3 my-3 mx-lg-5 my-lg-5">
                             <img src="{{ asset('img/about_problem_solving_icon.png') }}">
                             <div class="py-3">
                                 <h3 class="page-title text-white">THE PROBLEM WE ARE SOLVING</h3>
@@ -88,10 +88,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-md-5">
+            <div class="row mt-0 mt-lg-4">
                 <div class="col-12">
                     <div class="card about-cta-bg">
-                        <div class="card-body mx-lg-5 my-lg-5">
+                        <div class="card-body mx-3 my-3 mx-lg-5 my-lg-5">
                             <div class="my-4">
                                 <h3 class="page-title text-white">SECURE  |  VERIFIED  |  RELIABLE </h3>
                             </div>
@@ -118,7 +118,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                     <div class="card about-bg-grey about-card-bordered h-100">
-                        <div class="card-body mx-lg-5 my-lg-5">
+                        <div class="card-body mx-3 my-3 mx-lg-5 my-lg-5">
                             <h3 class="page-title">WHAT IS ESCROW</h3>
                             <p>When a purchase is made, Armoury Broker holds the buyer’s payment securely.</p>
                             <p class="mb-0">Funds are only released to the seller once the buyer confirms the goods have arrived as described. Neither party can be left out of pocket.</p>
@@ -146,23 +146,23 @@
                     <div class="mb-3">
                         <h3 class="page-title">OUR VISION</h3>
                     </div>
-                    <p>This community values <b>quality, authenticity, and trust</b> above all else.</p>
-                    <p>Armoury Broker is the foundation of a circular economy built around those values. Better tools. Better protection. Better access to the gear that fuels the lifestyle.</p>
+                    <p style="font-size: 28px; line-height: 28px;">This community values <b>quality, authenticity, and trust</b> above all else.</p>
+                    <p class="text-21">Armoury Broker is the foundation of a circular economy built around those values. Better tools. Better protection. Better access to the gear that fuels the lifestyle.</p>
                     <div class="">
                         <a href="{{ url('auth/login') }}" class="btn btn-secondary">SIGN UP</a>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 text-center d-none d-lg-block">
-                    <img src="{{ asset('img/about_image_3.png') }}" style="max-height: 330px; position: absolute; top: 33px; right: 163px">
+                <div class="col-12 col-lg-6 text-center d-none d-xxl-block">
+                    <img src="{{ asset('img/about_image_3.png') }}" class="dash-img">
                 </div>
-                <div class="col-12 col-lg-6 text-center d-lg-none mt-5">
+                <div class="col-12 col-xl-6 text-center d-xxl-none mt-5">
                     <img src="{{ asset('img/about_image_3.png') }}">
                 </div>
             </div>
         </div>
     </div>
-    <div class="section about-contact-section">
-        <div class="container">
+    <div class="section about-contact-section py-5">
+        <div class="container py-2">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="mb-3">
@@ -172,8 +172,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 mb-3 mb-md-0">
-                    <div class="card about-contact-card">
+                <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                    <div class="card about-contact-card h-100">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
                                 <img src="{{ asset('img/Address Icon.png') }}" style="height: 20px; vertical-align: middle;"> 
@@ -186,8 +186,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3 mb-md-0">
-                    <div class="card about-contact-card">
+                <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                    <div class="card about-contact-card h-100">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
                                 <img src="{{ asset('img/Whatsapp Icon.png') }}" style="height: 20px; vertical-align: middle;"> 
@@ -200,8 +200,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3 mb-md-0">
-                    <div class="card about-contact-card">
+                <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                    <div class="card about-contact-card h-100">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
                                 <img src="{{ asset('img/Email Icon.png') }}" style="height: 20px; vertical-align: middle;"> 
@@ -214,8 +214,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3 mb-md-0">
-                    <div class="card about-contact-card">
+                <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                    <div class="card about-contact-card h-100">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
                                 <img src="{{ asset('img/Support Icon.png') }}" style="height: 20px; vertical-align: middle;"> 

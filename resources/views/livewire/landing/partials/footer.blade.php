@@ -74,7 +74,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-8 text-center text-md-start">
-                    <p>&copy; 2025 ARMOURY BROKER, (PTY) LTD. | All Rights Reserved | Developed by <a href="https://thinktank.co.za" target="_blank">Thinktank Creative</a></p>
+                    <p>&copy; {{ date('Y') }} ARMOURY BROKER, (PTY) LTD. | All Rights Reserved | Developed by <a href="https://thinktank.co.za" target="_blank">Thinktank Creative</a></p>
                 </div>
             </div>
         </div>
