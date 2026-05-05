@@ -229,7 +229,7 @@
             <div class="row">
                 <div class="col-md-12 text-center mt-5">
                     <p class="text-white">Fill in our quick and easy contact form, and we’ll be in touch.</p>
-                    <a href="{{ url('support') }}" class="btn btn btn-primary-outline btn-white-alt">CONTACT FROM</a>
+                    <a href="{{ url('support#contact') }}" class="btn btn btn-primary-outline btn-white-alt">CONTACT FROM</a>
                 </div>
             </div>
         </div>
