@@ -1075,3 +1075,7 @@ tr.text-no-stock td{
 	top: 70px; 
 	right: 168px
 }
+.btn-white-alt:hover{
+	background-color: #FFF;
+	color: #293c47;
+}
