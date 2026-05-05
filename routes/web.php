@@ -30,6 +30,7 @@ use App\Livewire\Landing\PaymentNotice;
 use App\Livewire\Landing\ProductDetail;
 use App\Livewire\Landing\VendorDetail;
 use App\Livewire\Landing\Support;
+use App\Livewire\Landing\About;
 use App\Livewire\Landing\HowItWorks;
 use App\Livewire\Account\Dashboard;
 
@@ -69,6 +70,7 @@ use App\Livewire\Auth\FbConfirmation;
 
 Route::get('/', HomePage::class);
 Route::get('support', Support::class);
+Route::get('about-us', About::class);
 Route::get('how-it-works', HowItWorks::class);
 Route::get('privacy-policy', PrivacyPolicy::class);
 Route::get('terms-and-conditions', TermsConaditions::class);

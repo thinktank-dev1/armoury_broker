@@ -156,6 +156,7 @@
                             </div>
                         </li>
                         <li><a class="nav-link nav_item bold" href="{{ url('support') }}">Support</a></li>
+                        <li><a class="nav-link nav_item bold" href="{{ url('about-us') }}">About Us</a></li>
                         @if(!Auth::guest())
                         <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('dashboard') }}">Dashboard</a></li>
                         <li class="d-md-none"><a class="nav-link nav_item bold" href="{{ url('wishlist') }}">Wishlist</a></li>

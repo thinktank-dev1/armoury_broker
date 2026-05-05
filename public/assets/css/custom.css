@@ -297,6 +297,10 @@ footer .widget {
 	background-image: url('../../../img/BANNER IMAGE_Support Page.png');
 	background-size: cover;	
 }
+.about-bg{
+	background-image: url('../../../img/AboutBanner.png');
+	background-size: cover;	
+}
 .suppor-section{
 	background-color: #e6e6e6;
 }
@@ -672,6 +676,9 @@ footer .widget {
 .bold-600{
 	font-weight: 600;
 }
+.bold-700{
+	font-weight: 700;
+}
 
 .bg_grey{
 	background-color: #e6e6e6;
@@ -1013,4 +1020,52 @@ tr.text-no-stock td{
     .btn-primary, .btn-secondary, .btn-dark-blue, .btn-dark-blue-outline, .btn-primary-outline {
      	width: 100% !important;  
     }
+}
+.text-21{
+	font-size: 21px;
+}
+.about-box1{
+	border-left: 10px solid #293c47;
+}
+.about-box1-head{
+	text-transform: uppercase;
+	border-bottom: 1px solid #e6e6e6;
+	width: 100%;
+}
+.about-box1-count{
+	color: #d65027;
+	font-size: 30px;
+}
+.about-bg-grey{
+	background-color: #e6e6e6;
+	border: none;
+}
+.about-bg-problem{
+	background-image: url('../../img/about_image_1.png');
+	background-size: cover;
+}
+.about-cta-bg{
+	background-image: url('../../img/about_image_2.png');
+	background-size: cover;
+}
+.about-card-bordered{
+	border: 1px solid #0f1f24;
+}
+.about-contact-section{
+	background-color: #0f1f24;
+	color: #FFF;
+}
+.about-contact-card{
+	background-color: #293c47;
+}
+.about-contact-card b{
+	color: #FFF;
+}
+.about-contact-head{
+	border-bottom: 1px solid #FFF;
+	padding-bottom: 10px;
+}
+.btn-white-alt{
+	border: 2px solid #FFF !important;
+	color: #FFF;
 }
