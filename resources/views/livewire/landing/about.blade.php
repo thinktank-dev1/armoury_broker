@@ -25,33 +25,33 @@
             <div class="row mt-5">
                 <div class="col-md-4 mb-3 mb-md-0">
                     <div class="about-box1 card">
-                        <div class="card-body">
+                        <div class="card-body ms-3 my-3">
                             <div class="about-box1-head mb-2">
                                 <b class="text-21">REGISTERED USERS</b>
                             </div>
-                            <h3 class="about-box1-count bold-700">{{ $user_count }}</h3>
+                            <h3 class="about-box1-count bold-600 stat" data-target="{{ $user_count }}">0</h3>
                             <b class="about-box1-foot-text text-muted">Verified members</b>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0">
                     <div class="about-box1 card">
-                        <div class="card-body">
+                        <div class="card-body ms-3 my-3">
                             <div class="about-box1-head mb-2">
                                 <b class="text-21">LISTED ITEMS</b>
                             </div>
-                            <h3 class="about-box1-count bold-700">{{ $product_count }}</h3>
+                            <h3 class="about-box1-count bold-600 stat" data-target="{{ $product_count }}">0</h3>
                             <b class="about-box1-foot-text text-muted">Active listings</b>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0">
                     <div class="about-box1 card">
-                        <div class="card-body">
+                        <div class="card-body ms-3 my-3">
                             <div class="about-box1-head mb-2">
                                 <b class="text-21">ITEMS SOLD</b>
                             </div>
-                            <h3 class="about-box1-count bold-700">{{ $sold_count }}</h3>
+                            <h3 class="about-box1-count bold-600 stat" data-target="{{ $sold_count }}">0</h3>
                             <b class="about-box1-foot-text text-muted">Completed transactions</b>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-12 col-lg-6 mb-3 mb-md-0">
                     <div class="card about-bg-grey h-100">
-                        <div class="card-body">
+                        <div class="card-body mx-lg-5 my-lg-5">
                             <img src="{{ asset('img/about_who_we_are_Icon.png') }}">
                             <div class="py-3">
                                 <h3 class="page-title">WHO WE ARE</h3>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-12 col-lg-6 mb-3 mb-md-0">
                     <div class="card about-bg-problem h-100">
-                        <div class="card-body">
+                        <div class="card-body mx-lg-5 my-lg-5">
                             <img src="{{ asset('img/about_problem_solving_icon.png') }}">
                             <div class="py-3">
                                 <h3 class="page-title text-white">THE PROBLEM WE ARE SOLVING</h3>
@@ -91,7 +91,7 @@
             <div class="row mt-md-5">
                 <div class="col-12">
                     <div class="card about-cta-bg">
-                        <div class="card-body">
+                        <div class="card-body mx-lg-5 my-lg-5">
                             <div class="my-4">
                                 <h3 class="page-title text-white">SECURE  |  VERIFIED  |  RELIABLE </h3>
                             </div>
@@ -111,17 +111,17 @@
                     <h3 class="page-title">HOW WE SOLVE IT</h3>
                 </div>
                 <div class="col-md-12 text-center mt-3">
-                    <b class="text-21">Armoury Broker replaces informal channels with a fully managed platform.</b><br />
-                    <b class="text-21">Every user is verified before transacting. Every transaction is covered by secure escrow.</b>
+                    <p><b class="text-21">Armoury Broker replaces informal channels with a fully managed platform.</b></p>
+                    <p><b class="text-21">Every user is verified before transacting. Every transaction is covered by secure escrow.</b></p>
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-12 col-lg-6">
-                    <div class="card about-bg-grey about-card-bordered h-100 py-3">
-                        <div class="card-body">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                    <div class="card about-bg-grey about-card-bordered h-100">
+                        <div class="card-body mx-lg-5 my-lg-5">
                             <h3 class="page-title">WHAT IS ESCROW</h3>
                             <p>When a purchase is made, Armoury Broker holds the buyer’s payment securely.</p>
-                            <p>Funds are only released to the seller once the buyer confirms the goods have arrived as described. Neither party can be left out of pocket.</p>
+                            <p class="mb-0">Funds are only released to the seller once the buyer confirms the goods have arrived as described. Neither party can be left out of pocket.</p>
                         </div>
                     </div>
                 </div>
@@ -152,8 +152,11 @@
                         <a href="{{ url('auth/login') }}" class="btn btn-secondary">SIGN UP</a>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 text-center">
-                    <img src="{{ asset('img/about_image_3.png') }}" style="max-height: 250px;">
+                <div class="col-12 col-lg-6 text-center d-none d-lg-block">
+                    <img src="{{ asset('img/about_image_3.png') }}" style="max-height: 330px; position: absolute; top: 33px; right: 163px">
+                </div>
+                <div class="col-12 col-lg-6 text-center d-lg-none mt-5">
+                    <img src="{{ asset('img/about_image_3.png') }}">
                 </div>
             </div>
         </div>
@@ -229,9 +232,37 @@
             <div class="row">
                 <div class="col-md-12 text-center mt-5">
                     <p class="text-white">Fill in our quick and easy contact form, and we’ll be in touch.</p>
-                    <a href="{{ url('support#contact') }}" class="btn btn btn-primary-outline btn-white-alt">CONTACT FROM</a>
+                    <a href="{{ url('support#contact') }}" class="btn btn btn-primary-outline btn-white-alt">CONTACT FORM</a>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        $(window).on('scroll', function () {
+            $('.stat').each(function () {
+                var $this = $(this);
+
+                if ($this.hasClass('counted')) return;
+
+                if ($(window).scrollTop() + $(window).height() > $this.offset().top) {
+                    $this.addClass('counted');
+
+                    $({ countNum: 0 }).animate(
+                        { countNum: $this.data('target') },
+                        {
+                            duration: 2000,
+                            step: function () {
+                                $this.text(Math.floor(this.countNum));
+                            },
+                            complete: function () {
+                                $this.text(this.countNum);
+                            }
+                        }
+                    );
+                }
+            });
+        });
+    </script>
+    @endpush
 </div>
