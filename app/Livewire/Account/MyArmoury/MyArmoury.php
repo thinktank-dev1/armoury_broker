@@ -96,6 +96,7 @@ class MyArmoury extends Component
             return $q->whereHas('orders');
         })
         ->where('status', 1)
+        ->orderBy('created_at', 'DESC')
         ->get();
 
         $cats = Category::orderBy('category_name', 'ASC')->get();
