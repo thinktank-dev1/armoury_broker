@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3 mb-md-0">
                     <div class="about-box1 card">
                         <div class="card-body">
                             <div class="about-box1-head mb-2">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3 mb-md-0">
                     <div class="about-box1 card">
                         <div class="card-body">
                             <div class="about-box1-head mb-2">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3 mb-md-0">
                     <div class="about-box1 card">
                         <div class="card-body">
                             <div class="about-box1-head mb-2">
@@ -62,7 +62,7 @@
     <div class="section" id="contact">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6 mb-3 mb-md-0">
                     <div class="card about-bg-grey h-100">
                         <div class="card-body">
                             <img src="{{ asset('img/about_who_we_are_Icon.png') }}">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6 mb-3 mb-md-0">
                     <div class="card about-bg-problem h-100">
                         <div class="card-body">
                             <img src="{{ asset('img/about_problem_solving_icon.png') }}">
@@ -169,7 +169,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 mb-3 mb-md-0">
                     <div class="card about-contact-card">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 mb-3 mb-md-0">
                     <div class="card about-contact-card">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
@@ -197,7 +197,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 mb-3 mb-md-0">
                     <div class="card about-contact-card">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 mb-3 mb-md-0">
                     <div class="card about-contact-card">
                         <div class="card-body">
                             <div class="about-contact-head d-flex align-items-center">
