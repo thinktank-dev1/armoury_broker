@@ -69,7 +69,7 @@
                             <div class="py-3">
                                 <h3 class="page-title">WHO WE ARE</h3>
                             </div>
-                            <p>Armoury Broker is South Africa’s first managed marketplace built exclusively for the tactical and outdoor equipment community.</p>
+                            <p><b>Armoury Broker</b> is South Africa’s first managed marketplace built exclusively for the tactical and outdoor equipment community.</p>
                             <p>Individuals and businesses can buy and sell new and used goods across a wide range of categories, including optics, archery equipment, tactical gear, safes, outdoor vehicles, and adventure kit.</p>
                             <p>We exist for one reason: to bring structure, safety, and trust to a market that has long operated without it.</p>
                         </div>
@@ -146,8 +146,8 @@
                     <div class="mb-3">
                         <h3 class="page-title">OUR VISION</h3>
                     </div>
-                    <p style="font-size: 28px; line-height: 28px;">This community values <b>quality, authenticity, and trust</b> above all else.</p>
-                    <p class="text-21">Armoury Broker is the foundation of a circular economy built around those values. Better tools. Better protection. Better access to the gear that fuels the lifestyle.</p>
+                    <p class="">This community values <b>quality, authenticity, and trust</b> above all else.</p>
+                    <p class="">Armoury Broker is the foundation of a circular economy built around those values. Better tools. Better protection. Better access to the gear that fuels the lifestyle.</p>
                     <div class="">
                         <a href="{{ url('auth/login') }}" class="btn btn-secondary">SIGN UP</a>
                     </div>
