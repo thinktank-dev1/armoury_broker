@@ -157,16 +157,6 @@
                                                                 <span class="ms-auto"><b>{{ $product->collection_address }}</b></span>
                                                             </li>
                                                             @endif
-                                                            @if($item['deliver_collection'] == "Courier" || $item['deliver_collection'] == "seller delivery")
-                                                            <li class="list-group-item d-flex">
-                                                                <small class="">Delivery Address</small>
-                                                                <span class="ms-auto">
-                                                                    <div class="">
-                                                                        <textarea class="form-control" name="delivery_address" wire:model.blur="cart.{{ $k }}.delivery_address"></textarea>
-                                                                    </div>
-                                                                </span>
-                                                            </li>
-                                                            @endif
                                                             <li class="list-group-item">
                                                                 <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee Selected By Seller:</b> {{ ucwords($item['product']->service_fee_payer) }}</small>
                                                             </li>
@@ -178,12 +168,96 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @if($show_courier_fields)
+                            <div class="row mt-3">
+                                <div class="col-md-12 mb-2">
+                                    <b>Delivery Address</b>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label"><b>Drop Off Point</b></label>
+                                    <div class="form-check form-check-inline ms-3">
+                                        <input class="form-check-input" type="radio" name="drop_off_point" id="door" value="door" wire:model.live="drop_off_point">
+                                        <label class="form-check-label" for="door">Door</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="drop_off_point" id="locker" value="locker" wire:model.live="drop_off_point">
+                                        <label class="form-check-label" for="locker">Locker</label>
+                                    </div>
+                                </div>
+                                @if($drop_off_point == "locker")
+                                <div class="col-md-12">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" placeholder="Terminal ID" name="terminal_id" wire:model.defer="terminal_id">
+                                    </div>
+                                </div>
+                                @elseif($drop_off_point == "door")
+                                <div class="col-md-4">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" placeholder="Street" name="street" wire:model.defer="street">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="Local Area" name="local_area" wire:model.defer="local_area">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" placeholder="Suburb" name="suburb" wire:model.defer="suburb">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" placeholder="City" name="city" wire:model.defer="city">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" placeholder="Postal Code" name="postal_code" wire:model.defer="postal_code">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-2">
+                                        <select class="form-control" name="province" wire:model.defer="province">
+                                            <option value="">Select Province</option>
+                                            @foreach($provinces AS $k => $pr)
+                                            <option value="{{ $k }}">{{ $pr }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-2">
+                                        <select class="form-control" name="type" wire:model.blur="type">
+                                            <option value="">Select Address Type</option>
+                                            <option value="residential">Residential</option>
+                                            <option value="business">Business</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" placeholder="Longitude" name="longitude" wire:model.defer="longitude">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control" placeholder="Latitude" name="latitude" wire:model.defer="latitude">
+                                    </div>
+                                </div>
+                                @endif
+                                <div class="col-md-12 text-center">
+                                    <a href="#" class="btn btn btn-secondary" wire:click.prevent="setDeliveryAddress">NEXT</a>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @if($show_payment_section)
     <div class="section py-5">
         <div class="container">
             <div class="row">
@@ -298,6 +372,46 @@
                             @endif
                         </div>
                         @endif
+
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <h2 class="page-title pb-0 mb-0">Payment Method</h2>
+                            </div>
+                            <div class="">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="card" value="card" wire:model.live="payment_method">
+                                    <label class="form-check-label" for="card">Card</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="bank_to_bank" value="bank_to_bank" wire:model.live="payment_method">
+                                    <label class="form-check-label" for="bank_to_bank">Bank To Bank</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="capitec_pay" value="capitec_pay" wire:model.live="payment_method">
+                                    <label class="form-check-label" for="capitec_pay">Capitec Pay</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="absa_pay" value="absa_pay" wire:model.live="payment_method">
+                                    <label class="form-check-label" for="absa_pay">ABSA Pay</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="nedbank_eft" value="nedbank_eft" wire:model.live="payment_method">
+                                    <label class="form-check-label" for="nedbank_eft">Nedbank EFT</label>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                @if($payment_method == "card")
+                                    <p><b>Note:</b> A {{ $card_fee_stnt }} % transaction fee is applied for for card payments.</p>
+                                @endif
+                                @if($payment_method == "capitec_pay")
+                                    <div class="mb-3">
+                                        <label for="id_number" class="form-label">ID Number</label>
+                                        <input type="text" class="form-control" id="id_number" wire:model.defer="id_number">
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="col-md-12 mt-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terms_check" wire:model.defer="terms_and_conditions">
@@ -317,9 +431,29 @@
             </div>
         </div>
     </div>
+    @endif
     @push('scripts')
+    <script src="https://js.walletdoc.com/v1/walletdoc.js"></script>
     <script>
         document.addEventListener('livewire:initialized', () => {
+            @this.on('send-to-payment', (event) => {
+                var trx_id = event.id;
+                var url = event.url;
+
+                console.log(trx_id);
+                console.log(url);
+                
+                var form = $(document.createElement('form'));
+                $(form).attr("action", url);
+                $(form).attr("method", "POST");
+
+                var input = $("<input>").attr("type", "hidden").attr("name", 'id').val(trx_id);
+                $(form).append($(input));
+
+                $(document.body).append(form);
+                $(form).submit();
+            });
+
             @this.on('go-to-top', () => {
                 $("html, body").animate({ scrollTop: 0 }, "slow");
             });

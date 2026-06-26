@@ -96,4 +96,8 @@ class Product extends Model
         }
         return true;
     }
+
+    public function courierDetails(){
+        return $this->hasOne(CourierPackageDetail::class);
+    }
 }

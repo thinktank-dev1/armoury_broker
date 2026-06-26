@@ -12,10 +12,10 @@
                             </div>
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-12 text-center mb-5">
-                                    @if($status == "pending")
+                                    @if($status == "successful")
                                         <b>Your payment was successful, please give us a moment to notify the seller.</b>
-                                    @elseif($status == "canceled")
-                                        <b>Your payment was cancelled.</b>
+                                    @else
+                                        <b>Your payment was {{ $status }}.</b>
                                     @endif
                                 </div>
                                 <div class="col-md-12 mb-5 text-center">

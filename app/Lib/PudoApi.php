@@ -1,0 +1,84 @@
+<?php
+namespace App\Lib;
+
+use Log;
+
+class PudoApi{
+	function getRate($col,$del,$coll_add, $del_add, $parcels){
+		if($col == "door" && $del == "door"){
+			$data = [
+				'collection_address' => $coll_add,
+				'delivery_address' => $del_add,
+				'parcels' => [$parcels],
+			];
+		}
+		else{
+			$data = [
+				'collection_address' => $coll_add,
+				'delivery_address' => $del_add,
+			];
+		}
+
+		$api_key = env('PUDO_API_KEY');
+		$url = env('PUDO_URL').'/rates';
+
+		$ch = curl_init();
+
+		curl_setopt_array($ch, [
+    		CURLOPT_URL => $url,
+    		CURLOPT_RETURNTRANSFER => true,
+    		CURLOPT_POST => true,
+    		CURLOPT_HTTPHEADER => [
+        		"Authorization: Bearer {$api_key}",
+        		"Content-Type: application/json",
+        		"ACCEPT: application/json"
+    		],
+    		CURLOPT_POSTFIELDS => json_encode($data)
+		]);
+
+		$response = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		curl_close($ch);
+
+		if ($httpCode >= 200 && $httpCode < 300) {
+    		$rates = json_decode($response, true);
+    		
+    		if($col == "door" && $del == "door"){
+    			return $rates["rates"][0];
+    		}
+
+    		if($col == "door" && $del == "locker"){
+	    		$package = [$parcels['submitted_length_cm'], $parcels['submitted_width_cm'], $parcels['submitted_height_cm']];
+	    		sort($package);
+
+	    		foreach($rates['rates'] AS $rate){
+	    			$sv = $rate['service_level'];
+	    			$dm = $sv['dimensions'];
+	    			$dm_arr = [$dm['width'], $dm['height'],$dm['length']];
+	    			sort($dm_arr);
+	    			if(
+	    				(int)$dm_arr[0] >= (int)$package[0] &&
+	    				(int)$dm_arr[1] >= (int)$package[1] &&
+	    				(int)$dm_arr[2] >= (int)$package[2] &&
+	    				(int)$dm['weight'] >= (int)$parcels['submitted_weight_kg']
+	    			){
+	    				return $rate;
+	    			}
+	    		}
+    		}
+    		return [
+    			"status" => "error",
+    			"message" => "Failed to find candidate rate",
+    		];
+    		
+		} 
+		else {
+			dd($response,$data);
+    		Log::error($response);
+    		return false;
+		}
+
+	}
+}
+?>

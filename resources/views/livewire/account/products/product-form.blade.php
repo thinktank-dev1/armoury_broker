@@ -339,6 +339,119 @@
                                                 </span>
                                             </label>
                                         </div>
+                                        @if($courier)
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <h3 class="bold">Collection Address</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="pick_point" id="door" value="door" wire:model.live="pick_point">
+                                                    <label class="form-check-label" for="door">Door</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="pick_point" id="locker" value="locker" wire:model.live="pick_point">
+                                                    <label class="form-check-label" for="locker">Locker</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if($pick_point == "locker")
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Terminal ID" name="terminal_id" wire:model.defer="terminal_id">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @elseif($pick_point == "door")
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Street" name="street" wire:model.defer="street">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" placeholder="Local Area" name="local_area" wire:model.defer="local_area">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Suburb" name="suburb" wire:model.defer="suburb">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="City" name="city" wire:model.defer="city">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Postal Code" name="postal_code" wire:model.defer="postal_code">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <select class="form-control" name="province" wire:model.defer="province">
+                                                        <option value="">Select Province</option>
+                                                        @foreach($provinces AS $k => $pr)
+                                                        <option value="{{ $k }}">{{ $pr }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <select class="form-control" name="type" wire:model.defer="type">
+                                                        <option value="">Select Address Type</option>
+                                                        <option value="residential">Residential</option>
+                                                        <option value="business">Business</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Longitude" name="longitude" wire:model.defer="longitude">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Latitude" name="latitude" wire:model.defer="latitude">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <h3 class="bold">Parcel Dimensions</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Length (cm)" name="length_cm" wire:model.defer="length_cm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Width (cm)" name="width_cm" wire:model.defer="width_cm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Height (cm)" name="height_cm" wire:model.defer="height_cm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-2">
+                                                    <input type="text" class="form-control" placeholder="Weight (kg)" name="weight_kg" wire:model.defer="weight_kg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
                                         @if($dealer_stock)
                                             <div class="mb-3">
                                                 <label class="form-label">Please select a dealer type</label>

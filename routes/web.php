@@ -107,6 +107,8 @@ Route::post('fb/delete', [FbController::class, 'delete']);
 Route::get('fb/delete', [FbController::class, 'delete']);
 Route::get('fb-status/{token}', FbConfirmation::class);
 
+Route::post('payment-complete', PaymentNotice::class);
+
 Route::middleware(['auth', 'verified'])->group(function (){
 	Route::get('my-armoury/edit', EditMyArmoury::class);
     Route::middleware([EnsureHasVendor::class])->group(function (){

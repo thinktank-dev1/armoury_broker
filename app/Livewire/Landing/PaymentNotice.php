@@ -8,17 +8,21 @@ use Livewire\Attributes\Layout;
 use App\Models\Order;
 use App\Models\OrderItem;
 
+use Request;
+
 class PaymentNotice extends Component
 {
-    public $order_id, $status;
     
-    public function mount($id, $status){
-        $this->order_id = $id;
-        $this->status = $status;
+    public function mount(){
+        // $this->order_id = $id;
+        // $this->status = $status;
     }
 
     #[Layout('components.layouts.landing')]
     public function render(){
-        return view('livewire.landing.payment-notice');
+        $status = Request::input('status');
+        return view('livewire.landing.payment-notice', [
+            'status' => $status
+        ]);
     }
 }

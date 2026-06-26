@@ -9,6 +9,8 @@ use Livewire\Attributes\On;
 use App\Lib\BobPay;
 use App\Lib\PayFastApi;
 use App\Lib\Communication;
+use App\Lib\WalletDocApi;
+use App\Lib\PudoApi;
 
 use Auth;
 use App\Models\User;
@@ -23,6 +25,7 @@ use App\Models\Vendor;
 use App\Models\VendorPromoCode;
 use App\Models\OfferPrice;
 use App\Models\CreditPayment;
+use App\Models\OrderDeliveryAddress;
 
 class Checkout extends Component
 {
@@ -41,6 +44,12 @@ class Checkout extends Component
     public $pay_with_wallet, $show_wallet_options;
     public $credit_payment, $gift_voucher_payment;
     public $credit_error, $gf_error;
+    public $payment_method, $card_fee_stnt, $id_number;
+    public $payment_id;
+    public $provinces = [];
+    public $drop_off_point, $show_courier_fields;
+    public $terminal_id, $street, $local_area, $suburb, $city, $postal_code, $province, $type, $longitude, $latitude;
+    public $show_payment_section;
 
     public function mount($id, $order_id = null){
         if(!Auth::user()->vendor_id){
@@ -52,6 +61,8 @@ class Checkout extends Component
             $this->order_id = $order_id;
         }
         $this->payment_url = env('PAYFAST_SANDBOX_URL');
+        $this->show_courier_fields = false;
+        $this->show_payment_section = true;
         $this->getCart();
 
         $this->address = Auth::user()->vendor->suburb."\n".Auth::user()->vendor->city."\n".Auth::user()->vendor->province."\n";
@@ -62,6 +73,156 @@ class Checkout extends Component
             $cds = VendorPromoCode::where('vendor_id', $this->vendor_id)->where('status', 1)->where('deleted', 0)->count();
             if($cds > 0){
                 $this->has_vendor_promo_codes = true;
+            }
+        }
+        $card_fee_stnt = Setting::where('name', 'card_fee')->first();
+        $this->card_fee_stnt = $card_fee_stnt->value;
+
+        $this->provinces = [
+            'EC' => 'Eastern Cape',
+            'FS' => 'Free State',
+            'GP' => 'Gauteng',
+            'KZN' => 'KwaZulu-Natal',
+            'LP' => 'Limpopo',
+            'MP' => 'Mpumalanga',
+            'NW' => 'North West',
+            'NC' => 'Northern Cape',
+            'WC' => 'Western Cape,'
+        ];
+    }
+
+    public function setDeliveryAddress(){
+        $this->dispatch('go-to-top');
+        $rules = [
+            'drop_off_point' => "required",
+        ];
+        if($this->drop_off_point == "locker"){
+            $rules["terminal_id"] = "required";
+        }
+        if($this->drop_off_point == "door"){
+            $rules["street"] = "required"; 
+            $rules["local_area"] = "required";
+            $rules["suburb"] = "required";
+            $rules["city"] = "required";
+            $rules["postal_code"] = "required";
+            $rules["province"] = "required";
+            $rules["type"] = "required";
+            $rules["longitude"] = "required";
+            $rules["latitude"] = "required";
+        }
+        $this->validate($rules);
+        
+        if(!$this->order_id){
+            $order = new Order();
+            $order->user_id = Auth::user()->id;
+            $order->vendor_id = $this->vendor_id;
+            $order->cart_total = $this->total;
+            $order->fee = $this->service_fees;
+            $order->total_shipping_fee = $this->shipping_tot;
+            $order->save();
+            $this->order_id = $order->id;
+        }
+        $add = null;
+        if($this->order_id){
+            $add = OrderDeliveryAddress::where('order_id', $this->order_id)->first();
+        }
+        if(!$add){
+            $add = new OrderDeliveryAddress();
+        }
+
+        $add->order_id = $order->id;
+        if($this->drop_off_point == "locker"){
+            $add->terminal_id = $this->terminal_id;
+            $add->street = null; 
+            $add->local_area = null;
+            $add->suburb = null;
+            $add->city = null;
+            $add->postal_code = null;
+            $add->province = null;
+            $add->type = null;
+            $add->longitude = null;
+            $add->latitude = null;
+        }
+        elseif($this->drop_off_point == "door"){
+            $add->terminal_id = null;
+            $add->street = $this->street; 
+            $add->local_area = $this->local_area;
+            $add->suburb = $this->suburb;
+            $add->city = $this->city;
+            $add->postal_code = $this->postal_code;
+            $add->province = $this->province;
+            $add->type = $this->type;
+            $add->longitude = $this->longitude;
+            $add->latitude = $this->latitude;
+        }
+        $add->save();
+
+        foreach($this->cart AS $ct){
+            if($ct['shipping_method'] == "courier"){
+                $vnd_det = $ct['product']->courierDetails;
+                $pick_up_type = null;
+                $collection_address = [];
+
+                $delivery_type = null;
+                $delivery_address = [];
+
+                $parcels = [
+                    "submitted_length_cm" => $vnd_det->length_cm,
+                    "submitted_width_cm" => $vnd_det->width_cm,
+                    "submitted_height_cm" => $vnd_det->height_cm,
+                    "submitted_weight_kg" => $vnd_det->weight_kg,
+                    "parcel_description" => $ct['product']->item_description,
+                    "alternative_tracking_reference" => "AB-ORD".str_pad($this->order_id, 4, '0', STR_PAD_LEFT),
+                ];
+
+                if($vnd_det->terminal_id){
+                    $pick_up_type = "locker";
+                    $collection_address = [
+                        'terminal_id' => $vnd_det->terminal_id,
+                    ];
+                }
+                else{
+                    $pick_up_type = "door";
+                    $collection_address = [
+                        "type" => $vnd_det->type,
+                        "entered_address" => $vnd_det->street.', '.$vnd_det->local_area.', '.$vnd_det->suburb.', '.$vnd_det->city.', '.$vnd_det->postal_code,
+                        "company" => $ct['product']->vendor->name,
+                        "street_address" => $vnd_det->street,
+                        "local_area" => $vnd_det->local_area,
+                        "code" => $vnd_det->postal_code,
+                        "city" => $vnd_det->city,
+                        "zone" => $vnd_det->province,
+                        "country" => "South Africa",
+                        "lat" => $vnd_det->latitude,
+                        "lng" => $vnd_det->longitude,
+                    ];
+                }
+
+                if($this->drop_off_point == "locker"){
+                    $delivery_type = "locker";
+                    $delivery_address = [
+                        "terminal_id" => $this->terminal_id,
+                    ];
+                }
+                else{
+                    $delivery_type = "door";
+                    $delivery_address = [
+                        "type" => "business",
+                        "entered_address" => $add->street.', '.$add->local_area.', '.$add->suburb.', '.$add->city.', '.$add->postal_code,
+                        "company" => Auth::user()->vendor->name,
+                        "street_address" => $add->street,
+                        "local_area" => $add->local_area,
+                        "code" => $add->postal_code,
+                        "city" => $add->city,
+                        "zone" => $add->province,
+                        "country" => "South Africa",
+                        "lat" => $add->latitude,
+                        "lng" => $add->longitude,
+                    ];
+                }
+                $pudo = new PudoApi();
+                $rates = $pudo->getRate($pick_up_type,$delivery_type,$collection_address, $delivery_address, $parcels);
+                dd($rates);
             }
         }
     }
@@ -259,6 +420,39 @@ class Checkout extends Component
         }
 
         if($do_payment){
+            $order_no = 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT);
+            if($this->$this->payment_method == "card"){
+                $fee = ($card_fee_stnt/100) * $payable_amount;
+                $payable_amount += $fee;
+            }
+            $data = [
+                'amount' => $payable_amount * 100,
+                'currency' => 'ZAR',
+                'reference' => $order_no,
+                'statement_descriptor' => $order_no,
+                'payment_method' => $this->payment_method,
+                'capture' => true,
+                'return_url' => url('payment-complete'),
+            ];
+            if($this->payment_method == "capitec_pay"){
+                $data['national_id'] = $this->id_number;
+                $data['mobile_number'] = Auth::user()->mobile_number;
+            }
+            $doc = new WalletDocApi();
+            $transaction = $doc->genPayment($data);
+            if(!$transaction){
+                $this->addError('error', "Failed to create transaction");
+            }
+            else{
+                $order->uuid = $transaction['id'];
+                $order->save();
+
+                $payment_id = $transaction['redirect']['id'];
+                $url = $transaction['redirect']['redirect_url'];
+                $this->dispatch('send-to-payment', id:$payment_id, url:$url);
+            }
+
+            /*
             $data = [
                 'user_first_name' => Auth::user()->name,
                 'user_last_name' => Auth::user()->surname,
@@ -272,6 +466,8 @@ class Checkout extends Component
             $payload = $pf->setPayLoad($data);
             $payload = json_encode($payload);
             $this->dispatch('process-payment', data: $payload);
+            */
+
         }
     }
 
@@ -453,6 +649,20 @@ class Checkout extends Component
             ->where('vendor_id', $this->vendor_id)
             ->where('order_id', $this->order_id)
             ->get();
+
+            $add = OrderDeliveryAddress::where('order_id', $this->order_id)->first();
+            if($add){
+                $this->terminal_id = $add->terminal_id;
+                $this->street = $add->street;
+                $this->local_area = $add->local_area;
+                $this->suburb = $add->suburb;
+                $this->city = $add->city;
+                $this->postal_code = $add->postal_code; 
+                $this->province = $add->province;
+                $this->type = $add->type;
+                $this->logitude = $add->logitude;
+                $this->latitude = $add->latitude;
+            }
         }
 
         $stn = Setting::where('name', 'service_fee')->first();
@@ -511,12 +721,14 @@ class Checkout extends Component
             }
             $tot += $fee;
 
+            /*
             if($ct->shipping_method == "courier"){
                 $tot += 99;
                 $ct->shipping_price = 99;
                 $this->shipping_tot += 99;
                 $this->cart_total += 99; 
             }
+            */
 
             $ct->service_fee = $fee;
             $ct->listed_price = $ct->product->item_price;
@@ -560,6 +772,10 @@ class Checkout extends Component
                 "custom_dealer_details" => $ct->custom_dealer_details,
                 "dealer" => $dealer,
             ];
+            if($ct->shipping_method == "courier"){
+                $this->show_courier_fields = true;
+                $this->show_payment_section = false;
+            }
             $this->cart[] = $arr;
         }
     }

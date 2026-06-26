@@ -20,6 +20,7 @@ use App\Models\Caliber;
 use App\Models\Dealer;
 use App\Models\OfferPrice;
 use App\Models\MessageThread;
+use App\Models\CourierPackageDetail;
 
 class ProductForm extends Component
 {
@@ -34,6 +35,11 @@ class ProductForm extends Component
     public $preview, $preview_quantity, $sub_name, $brand_name, $sub_sub_name;
     public $dealer_stock_type, $ab_dealer_id, $private_dealer_details;
     public $item_name_word_count, $description_word_count;
+    public $provinces = [];
+    public $street, $local_area, $suburb, $city, $postal_code, $province, $type, $longitude, $latitude;
+    public $terminal_id;
+    public $length_cm, $width_cm, $height_cm, $weight_kg;
+    public $pick_point;
 
     public function mount($id = null){
         if(!Auth::user()->vendor_id){
@@ -50,6 +56,18 @@ class ProductForm extends Component
 
         $this->item_name_word_count = 50;
         $this->description_word_count = 500;
+
+        $this->provinces = [
+            'EC' => 'Eastern Cape',
+            'FS' => 'Free State',
+            'GP' => 'Gauteng',
+            'KZN' => 'KwaZulu-Natal',
+            'LP' => 'Limpopo',
+            'MP' => 'Mpumalanga',
+            'NW' => 'North West',
+            'NC' => 'Northern Cape',
+            'WC' => 'Western Cape,'
+        ];
     }
 
     #[On('brand-updated')]
@@ -205,6 +223,30 @@ class ProductForm extends Component
                 $this->$tp = true;
             }
             $this->category = Category::find($this->category_id);
+
+            $cr = CourierPackageDetail::where('product_id', $this->cur_id)->first();
+            if($cr){
+                if($cr->terminal_id){
+                    $this->pick_point = "locker";
+                }
+                else{
+                    $this->pick_point = "door";
+                }
+                $this->terminal_id = $cr->terminal_id;
+                $this->street = $cr->street;
+                $this->local_area = $cr->local_area;
+                $this->suburb = $cr->suburb;
+                $this->city = $cr->city;
+                $this->postal_code = $cr->postal_code; 
+                $this->province = $cr->province;
+                $this->type = $cr->type;
+                $this->longitude = $cr->longitude;
+                $this->latitude = $cr->latitude;
+                $this->length_cm = $cr->length_cm;
+                $this->width_cm = $cr->width_cm;
+                $this->height_cm = $cr->height_cm;
+                $this->weight_kg = $cr->weight_kg;
+            }
         }
     }
 
@@ -273,7 +315,30 @@ class ProductForm extends Component
                 $this->addError('error', 'Please upload at least 1 image ');
                 return;
             }
-        }        
+        }
+
+        if($this->courier && $this->pick_point == "door"){
+            $rules['street'] = "required";
+            $rules['local_area'] = "required";
+            $rules['suburb'] = "required";
+            $rules['city'] = "required";
+            $rules['postal_code'] = "required";
+            $rules['province'] = "required";
+            $rules['type'] = "required";
+            $rules['longitude'] = "required";
+            $rules['latitude'] = "required";
+            $rules['length_cm'] = "required";
+            $rules['width_cm'] = "required";
+            $rules['height_cm'] = "required";
+            $rules['weight_kg'] = "required";
+        } 
+        if($this->courier && $this->pick_point == "locker"){
+            $rules['terminal_id'] = "required";
+            $rules['length_cm'] = "required";
+            $rules['width_cm'] = "required";
+            $rules['height_cm'] = "required";
+            $rules['weight_kg'] = "required";
+        }   
 
         $this->validate($rules, $messages);
         if($this->cur_id){
@@ -345,6 +410,42 @@ class ProductForm extends Component
                     'image_url' => $file
                 ]);
             }
+        }
+
+        if($this->courier){
+            $cr = CourierPackageDetail::where('product_id', $prdt->id)->first();
+            if(!$cr){
+                $cr = new CourierPackageDetail();
+            }
+            $cr->product_id = $prdt->id;
+            if($this->pick_point == "locker"){
+                $cr->terminal_id = $this->terminal_id;  
+                $cr->street = null;
+                $cr->local_area = null;
+                $cr->suburb = null;
+                $cr->city = null;
+                $cr->postal_code = null;
+                $cr->province = null;
+                $cr->type = null;  
+            }
+            else{
+                $cr->terminal_id = null;
+                $cr->product_id = $prdt->id;
+                $cr->street = $this->street;
+                $cr->local_area = $this->local_area;
+                $cr->suburb = $this->suburb;
+                $cr->city = $this->city;
+                $cr->postal_code = $this->postal_code;
+                $cr->province = $this->province;
+                $cr->type = $this->type;
+            }
+            $cr->longitude = $this->longitude;
+            $cr->latitude = $this->latitude;
+            $cr->length_cm = $this->length_cm;
+            $cr->width_cm = $this->width_cm;
+            $cr->height_cm = $this->height_cm;
+            $cr->weight_kg = $this->weight_kg;
+            $cr->save();
         }
 
         $ships = ['collection_delivery', 'courier', 'dealer_stock', 'free_delivery'];

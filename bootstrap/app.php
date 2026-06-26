@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'pf-notify-payment/*',
             'pf-notify-payment-promo/*',
             'fb/delete/*',
+            'payment-complete',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
