@@ -20,6 +20,11 @@ use App\Models\CreditPayment;
 
 class ProcessPayment extends Controller
 {
+    public function walletDocWebHookListen(){
+        $req = Request::all();
+        Log::info($req);
+    }
+
     public function pfPayment($id){
         Log::info(Request::all());
         $order = Order::find($id);

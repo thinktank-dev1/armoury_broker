@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'pf-notify-payment-promo/*',
             'fb/delete/*',
             'payment-complete',
+            'wallet-doc-hook',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
