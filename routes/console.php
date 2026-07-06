@@ -9,4 +9,5 @@ Schedule::command('shipping:monitor')->dailyAt('08:00');
 Schedule::command('cart:monitor')->dailyAt('08:00');
 Schedule::command('cart:monitor')->dailyAt('14:00');
 Schedule::command('cart:monitor')->dailyAt('18:00');
+Schedule::command('app:track-tranactions')->hourly();
 
