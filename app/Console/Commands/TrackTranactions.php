@@ -174,7 +174,7 @@ class TrackTranactions extends Command
                 }
 
                 $order->g_payment_id = $res['id'];
-                $order->amount_paid = $res['amount'];
+                $order->amount_paid = $paid_amount;
                 $order->status = 'COMPLETE';
                 $order->save();
 
