@@ -78,5 +78,49 @@ class PudoApi{
     		return false;
 		}
 	}
+
+	public function createShipment($col,$del,$coll_add, $del_add, $parcels,$vendor_detail,$buyer_details){
+		$data = [
+			'collection_min_date' => date('Y-m-d', strtotime('+3 days')),
+			'collection_address' => $coll_add,
+			'special_instructions_collection' => 'None',
+			'collection_contact' => $vendor_detail,
+			'delivery_min_date' => date('Y-m-d', strtotime('+5 days')),
+			'delivery_address' => $del_add,
+			'delivery_contact' => $buyer_details,
+			'parcels' => [$parcels],
+			'opt_in_rates' => [],
+			'opt_in_time_based_rates' => [],
+			'service_level_code' => 'OVN',
+		];
+
+		$api_key = env('PUDO_API_KEY');
+		$url = env('PUDO_URL').'/shipments';
+
+		$ch = curl_init();
+
+		curl_setopt_array($ch, [
+    		CURLOPT_URL => $url,
+    		CURLOPT_RETURNTRANSFER => true,
+    		CURLOPT_POST => true,
+    		CURLOPT_HTTPHEADER => [
+        		"Authorization: Bearer {$api_key}",
+        		"Content-Type: application/json",
+        		"ACCEPT: application/json"
+    		],
+    		CURLOPT_POSTFIELDS => json_encode($data)
+		]);
+
+		$response = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		curl_close($ch);
+
+		if ($httpCode >= 200 && $httpCode < 300) {
+    		$result = json_decode($response, true);
+    		return $result;
+    	}
+    	return false;
+	}
 }
 ?>
