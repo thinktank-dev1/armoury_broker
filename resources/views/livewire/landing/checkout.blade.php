@@ -401,7 +401,7 @@
                             </div>
                             <div class="mt-3">
                                 @if($payment_method == "card")
-                                    <p><b>Note:</b> A {{ $card_fee_stnt }} % transaction fee is applied for for card payments.</p>
+                                    <p><b>Note:</b> A <b>{{ $card_fee_stnt }} %</b> transaction fee is applied for for card payments.</p>
                                 @endif
                                 @if($payment_method == "capitec_pay")
                                     <div class="mb-3">

@@ -89,6 +89,7 @@ class Checkout extends Component
             'NC' => 'Northern Cape',
             'WC' => 'Western Cape,'
         ];
+        $this->drop_off_point = 'door';
     }
 
     public function setDeliveryAddress(){
@@ -122,6 +123,9 @@ class Checkout extends Component
             $order->save();
             $this->order_id = $order->id;
         }
+        else{
+            $order = Order::find($this->order_id);
+        }
         $add = null;
         if($this->order_id){
             $add = OrderDeliveryAddress::where('order_id', $this->order_id)->first();
@@ -129,7 +133,7 @@ class Checkout extends Component
         if(!$add){
             $add = new OrderDeliveryAddress();
         }
-
+        
         $add->order_id = $order->id;
         if($this->drop_off_point == "locker"){
             $add->terminal_id = $this->terminal_id;
@@ -222,9 +226,27 @@ class Checkout extends Component
                 }
                 $pudo = new PudoApi();
                 $rates = $pudo->getRate($pick_up_type,$delivery_type,$collection_address, $delivery_address, $parcels);
-                dd($rates);
+                if($rates){
+                    if(is_array($rates)){
+                        if(isset($rates['rate'])){
+                            $rate = $rates['rate'];
+                            $this->shipping_tot = $rate;
+                            $prdt = $ct['product'];
+                            $ord_itm = OrderItem::find($ct['id']);
+                            $ord_itm->shipping_price = $rate;
+                            $ord_itm->order_id = $order->id;
+                            $ord_itm->save();   
+                        }
+                    }
+                }
+                else{
+                    $this->addError('error', $rates);
+                    return;
+                }
             }
         }
+        $this->getCart();
+        $this->show_payment_section = true;
     }
 
     public function updatedGiftVoucherPayment(){
@@ -421,9 +443,13 @@ class Checkout extends Component
 
         if($do_payment){
             $order_no = 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT);
-            if($this->$this->payment_method == "card"){
-                $fee = ($card_fee_stnt/100) * $payable_amount;
-                $payable_amount += $fee;
+            if($this->payment_method == "card"){
+                $stn = Setting::where('name', 'card_fee')->first();
+                if($stn){
+                    $card_fee_stnt = $stn->value;
+                    $fee = ($card_fee_stnt/100) * $payable_amount;
+                    $payable_amount += $fee;
+                }
             }
             $data = [
                 'amount' => $payable_amount * 100,
@@ -649,6 +675,7 @@ class Checkout extends Component
             ->where('vendor_id', $this->vendor_id)
             ->where('order_id', $this->order_id)
             ->get();
+            // dd($cart,Auth::user()->id,$this->vendor_id,$this->order_id);
 
             $add = OrderDeliveryAddress::where('order_id', $this->order_id)->first();
             if($add){
@@ -662,6 +689,8 @@ class Checkout extends Component
                 $this->type = $add->type;
                 $this->logitude = $add->logitude;
                 $this->latitude = $add->latitude;
+
+                $this->show_payment_section = true;
             }
         }
 
@@ -679,7 +708,7 @@ class Checkout extends Component
                 $dicount_value = $code->value;
             }
         }
-
+        // dd($cart);
         foreach($cart AS $ct){
             $img = null;
             if($ct->product->images->count() > 0){
@@ -721,14 +750,11 @@ class Checkout extends Component
             }
             $tot += $fee;
 
-            /*
             if($ct->shipping_method == "courier"){
-                $tot += 99;
-                $ct->shipping_price = 99;
-                $this->shipping_tot += 99;
-                $this->cart_total += 99; 
+                $tot += $ct->shipping_price;
+                $this->shipping_tot += $ct->shipping_price;
+                $this->cart_total += $ct->shipping_price; 
             }
-            */
 
             $ct->service_fee = $fee;
             $ct->listed_price = $ct->product->item_price;

@@ -30,7 +30,6 @@ class WalletDocApi{
     		return $transaction;
 		} 
 		else {
-			dd($response,$data);
     		Log::error($response);
     		return false;
 		}

@@ -102,6 +102,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::post('pf-notify-payment/{id}', [ProcessPayment::class, 'pfPayment']);
 Route::post('pf-notify-payment-promo/{id}', [ProcessPayment::class, 'pfPromoPayment']);
 Route::get('approve-withdrawal/{id}', [ProcessPayment::class, 'approveWithDrawal']);
+Route::post('wallet-doc-hook', [ProcessPayment::class, 'walletDocWebHookListen']);
 
 Route::post('fb/delete', [FbController::class, 'delete']);
 Route::get('fb/delete', [FbController::class, 'delete']);

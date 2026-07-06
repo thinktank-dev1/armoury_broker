@@ -74,11 +74,9 @@ class PudoApi{
     		
 		} 
 		else {
-			dd($response,$data);
     		Log::error($response);
     		return false;
 		}
-
 	}
 }
 ?>
