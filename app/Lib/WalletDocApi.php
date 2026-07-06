@@ -34,5 +34,34 @@ class WalletDocApi{
     		return false;
 		}
 	}
+
+	public function checkPayment($id){
+		$privateApiKey = env('WALLET_DOC_PVT');
+
+		$ch = curl_init();
+
+		curl_setopt_array($ch, [
+    		CURLOPT_URL => "https://www.walletdoc.com/v1/transactions/".$id,
+    		CURLOPT_RETURNTRANSFER => true,
+    		CURLOPT_HTTPHEADER => [
+        		"Authorization: Basic {$privateApiKey}",
+        		"Content-Type: application/json"
+    		]
+		]);
+
+		$response = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		curl_close($ch);
+
+		if ($httpCode >= 200 && $httpCode < 300) {
+    		$transaction = json_decode($response, true);
+    		return $transaction;
+		} 
+		else {
+    		Log::error($response);
+    		return false;
+		}
+	}
 }
 ?>
