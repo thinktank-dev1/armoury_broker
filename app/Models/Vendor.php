@@ -21,6 +21,7 @@ class Vendor extends Model
         'province',
         'instagram_handle',
         'status',
+        'wallet_doc_customer_id',
     ];
 
     public function user(){

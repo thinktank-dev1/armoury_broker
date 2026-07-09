@@ -1079,3 +1079,16 @@ tr.text-no-stock td{
 	background-color: #FFF;
 	color: #293c47;
 }
+.payment-sel{
+	width: 5%;
+}
+.payment-type-text{
+	width: 60%;
+}
+.payment-logos{
+	width: 35%;
+}
+.payment-logo{
+	height: 30px;
+	margin-right: 10px;
+}

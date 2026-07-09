@@ -288,7 +288,174 @@
                         </div>
                         @endif
 
-                        <div class="col-md-12 mt-1">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-4">
+                                        <h2 class="page-title pb-0 mb-0">Payment Method</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 border-bottom py-2">
+                                    <b class="payment-title">WALLET</b>
+                                </div>
+                                <div class="col-md-12 border-bottom">
+                                    @php
+                                    $disabled = false;
+                                    if(!Auth::user()->vendor->withdrawableBalance()){
+                                        $disabled = true;
+                                    }
+                                    @endphp
+                                    <div class="d-flex align-items-center py-2">
+                                        <div class="payment-sel">
+                                            <input class="form-check-input" type="checkbox" id="pay_with_wallet" wire:model.live="pay_with_wallet" @if($disabled) disabled @endif >
+                                        </div>
+                                        <div class="payment-type-text ms-3">
+                                            <p class="m-0 p-0 @if($disabled) text-muted @endif">Pay with your Armoury Broker Wallet</p>
+                                            <p class="m-0 p-0 text-muted"><i>This can be the full or partial value</i></p>
+                                        </div>
+                                        <div class="payment-logos">
+                                            <b @if($disabled) class="text-muted" @endif>R {{ number_format(Auth::user()->vendor->withdrawableBalance(),2) }}</b>
+                                            <p class="m-0 p-0 @if($disabled) text-muted @endif">Available for shopping</p>
+                                        </div>
+                                    </div>
+                                    @if($show_wallet_options)
+                                    <div class="mt-3">
+                                        @if(Auth::user()->vendor->withdrawableBalance() > 0)
+                                            <div class="mb-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">R</span>
+                                                    <input type="text" class="form-control" name="credit_payment" wire:model.live="credit_payment">
+                                                </div>
+                                                @if($credit_error)
+                                                <div id="emailHelp" class="form-text text-danger">{{ $credit_error }}</div>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-12 border-bottom py-2">
+                                    <b class="payment-title">OTHER OPTIONS</b>
+                                </div>
+                                @php
+                                $prefix = "c";
+                                if(!$show_wallet_doc_options){
+                                    $prefix = "g";    
+                                }
+                                @endphp
+                                <div class="col-md-12 border-bottom">
+                                    <div class="d-flex align-items-center py-2">
+                                        <div class="payment-sel">
+                                            <input class="form-check-input" type="radio" name="payment_method" value="eft" wire:model.live="payment_method" @if($prefix == "g") disabled @endif >
+                                        </div>
+                                        <div class="payment-type-text ms-3">
+                                            <p class="m-0 p-0 @if($prefix == 'g') text-muted @endif">Pay with instant EFT</p>
+                                        </div>
+                                        <div class="payment-logos">
+                                            <div class="d-flex">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/eft.png') }}" class="payment-logo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 border-bottom">
+                                    <div class="d-flex align-items-center py-2">
+                                        <div class="payment-sel">
+                                            <input class="form-check-input" type="radio" name="payment_method" value="direct_eft" wire:model.live="payment_method" @if($prefix == "g") disabled @endif >
+                                        </div>
+                                        <div class="payment-type-text ms-3">
+                                            <p class="m-0 p-0 @if($prefix == 'g') text-muted @endif">Pay with direct bank EFT</p>
+                                        </div>
+                                        <div class="payment-logos">
+                                            <div class="d-flex">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/absa_pay.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/capitec_pay.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/nedbank.png') }}" class="payment-logo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if($payment_method == "direct_eft")
+                                    <div class="text-end">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="direct_eft_type" id="absa_pay" value="absa_pay" wire:model.defer="direct_eft_type">
+                                            <label class="form-check-label" for="absa_pay">ABSA Pay</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="direct_eft_type" id="capitec_pay" value="capitec_pay" wire:model.defer="direct_eft_type">
+                                            <label class="form-check-label" for="capitec_pay">Capitec Pay</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="direct_eft_type" id="nedbank_eft" value="nedbank_eft" wire:model.defer="direct_eft_type">
+                                            <label class="form-check-label" for="nedbank_eft">Nedbank FFT</label>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-12 border-bottom">
+                                    <div class="d-flex align-items-center py-2">
+                                        <div class="payment-sel">
+                                            <input class="form-check-input" type="radio" name="payment_method" value="card" wire:model.live="payment_method" @if($prefix == "g") disabled @endif >
+                                        </div>
+                                        <div class="payment-type-text ms-3">
+                                            <p class="m-0 p-0 @if($prefix == 'g') text-muted @endif">Pay with credit/debit card</p>
+                                            <p class="m-0 p-0 text-muted"><i>Connivance fee: 1% of the total value of the transaction</i></p>
+                                        </div>
+                                        <div class="payment-logos">
+                                            <div class="d-flex">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/visa.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/mastercard.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/diners_club.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/amex.png') }}" class="payment-logo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 border-bottom">
+                                    <div class="d-flex align-items-center py-2">
+                                        <div class="payment-sel">
+                                            <input class="form-check-input" type="radio" name="payment_method" value="digital_wallet" wire:model.live="payment_method" @if($prefix == "g") disabled @endif > 
+                                        </div>
+                                        <div class="payment-type-text ms-3">
+                                            <p class="m-0 p-0 @if($prefix == 'g') text-muted @endif">Pay with digital wallet</p>
+                                            <p class="m-0 p-0 text-muted"><i>Connivance fee: 1% of the total value of the transaction</i></p>
+                                        </div>
+                                        <div class="payment-logos">
+                                            <div class="d-flex">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/apple_pay.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/google_pay.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/samsung_pay.png') }}" class="payment-logo">
+                                                <img src="{{ asset('img/payment/'.$prefix.'/click_to_pay.png') }}" class="payment-logo">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if($payment_method == "digital_wallet")
+                                    <div class="text-end">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="digital_wallet_type" id="apple_pay" value="apple_pay" wire:model.defer="digital_wallet_type">
+                                            <label class="form-check-label" for="apple_pay">Apple Pay</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="digital_wallet_type" id="google_pay" value="google_pay" wire:model.defer="digital_wallet_type">
+                                            <label class="form-check-label" for="google_pay">Google Pay</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="digital_wallet_type" id="samsung_pay" value="samsung_pay" wire:model.defer="digital_wallet_type">
+                                            <label class="form-check-label" for="samsung_pay">Samsung Pay</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="digital_wallet_type" id="click_to_pay" value="click_to_pay" wire:model.defer="digital_wallet_type">
+                                            <label class="form-check-label" for="click_to_pay">Click To Pay</label>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-12 mt-4 p-3 bg-grey">
+                                    <b>Why are you charged a convenience fee?</b>
+                                    <p class="m-0 p-0">When you opt to use a non-standard payment channel or method, a convenience fee is levied by the merchant offering the payment service.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-5">
                             <h2 class="page-title pb-0 mb-0">Summary</h2>
                             <ul class="list-group mt-4">
                                 <li class="list-group-item d-flex">
@@ -334,84 +501,6 @@
                                 @endif
                             @endif
                         </div>
-                        @if(Auth::user()->vendor->balance() > 0)
-                        <div class="col-md-12 mt-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="pay_with_wallet" wire:model.live="pay_with_wallet">
-                                <label class="form-check-label" for="pay_with_wallet">
-                                    Would you like to pay with your wallet
-                                </label>
-                            </div>
-                            @if($show_wallet_options)
-                            <div class="mt-3">
-                                @if(Auth::user()->vendor->withdrawableBalance() > 0)
-                                    <div class="mb-3">
-                                        <label class="form-label">Withdrawable Credit (<b>R {{ number_format(Auth::user()->vendor->withdrawableBalance(),2) }}</b>)</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1">R</span>
-                                            <input type="text" class="form-control" name="credit_payment" wire:model.live="credit_payment">
-                                        </div>
-                                        @if($credit_error)
-                                        <div id="emailHelp" class="form-text text-danger">{{ $credit_error }}</div>
-                                        @endif
-                                    </div>
-                                @endif
-                                @if(Auth::user()->vendor->giftVoucherBalance() > 0)
-                                    <div class="mb-3">
-                                        <label class="form-label">Gift Voucher Credit (<b>R {{ number_format(Auth::user()->vendor->giftVoucherBalance(),2) }}</b>)</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1">R</span>
-                                            <input type="text" class="form-control" name="gift_voucher_payment" wire:model.blur="gift_voucher_payment">
-                                        </div>
-                                        @if($gf_error)
-                                        <div id="emailHelp" class="form-text text-danger">{{ $gf_error }}</div>
-                                        @endif
-                                    </div>
-                                @endif
-                            </div>
-                            @endif
-                        </div>
-                        @endif
-
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <h2 class="page-title pb-0 mb-0">Payment Method</h2>
-                            </div>
-                            <div class="">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="card" value="card" wire:model.live="payment_method">
-                                    <label class="form-check-label" for="card">Card</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="bank_to_bank" value="bank_to_bank" wire:model.live="payment_method">
-                                    <label class="form-check-label" for="bank_to_bank">Bank To Bank</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="capitec_pay" value="capitec_pay" wire:model.live="payment_method">
-                                    <label class="form-check-label" for="capitec_pay">Capitec Pay</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="absa_pay" value="absa_pay" wire:model.live="payment_method">
-                                    <label class="form-check-label" for="absa_pay">ABSA Pay</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="payment_method" id="nedbank_eft" value="nedbank_eft" wire:model.live="payment_method">
-                                    <label class="form-check-label" for="nedbank_eft">Nedbank EFT</label>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                @if($payment_method == "card")
-                                    <p><b>Note:</b> A <b>{{ $card_fee_stnt }} %</b> transaction fee is applied for for card payments.</p>
-                                @endif
-                                @if($payment_method == "capitec_pay")
-                                    <div class="mb-3">
-                                        <label for="id_number" class="form-label">ID Number</label>
-                                        <input type="text" class="form-control" id="id_number" wire:model.defer="id_number">
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="col-md-12 mt-4">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terms_check" wire:model.defer="terms_and_conditions">
@@ -436,6 +525,24 @@
     <script src="https://js.walletdoc.com/v1/walletdoc.js"></script>
     <script>
         document.addEventListener('livewire:initialized', () => {
+            
+            @this.on('wallet-process', (event) => {
+                var pub = event.pub
+                var id = event.id;
+                var key = event.key;
+                console.log(event.pub);
+                console.log(event.id);
+                console.log(event.key);
+
+                let walletdoc = Walletdoc(pub);
+                console.log(walletdoc);
+                walletdoc.processTransaction({
+                    transactionId: id,
+                    clientKey: key
+                }).then(function(result) {
+                    console.log(result);
+                });
+            });
             @this.on('send-to-payment', (event) => {
                 var trx_id = event.id;
                 var url = event.url;

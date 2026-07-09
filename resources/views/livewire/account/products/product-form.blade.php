@@ -292,7 +292,7 @@
                                             <div class="form-check mb-2">
                                                 <input class="form-check-input" type="checkbox" value="" id="courier" wire:model.live="courier">
                                                 <label class="form-check-label" for="courier">
-                                                    Courier (Flat Fee of R 99.00)
+                                                    Courier
                                                     <span class="mytooltip tooltip-effect-1">
                                                     <span class="tooltip-item"><i class=" icon-info"></i></span> 
                                                     <span class="tooltip-content clearfix">

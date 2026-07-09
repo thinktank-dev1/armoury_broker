@@ -50,6 +50,9 @@ class Checkout extends Component
     public $drop_off_point, $show_courier_fields;
     public $terminal_id, $street, $local_area, $suburb, $city, $postal_code, $province, $type, $longitude, $latitude;
     public $show_payment_section;
+    public $show_wallet_doc_options;
+    public $direct_eft_type, $digital_wallet_type;
+    public $wallet_doc_pub, $wallet_doc_trx_id, $wallet_doc_client_key;
 
     public function mount($id, $order_id = null){
         if(!Auth::user()->vendor_id){
@@ -90,6 +93,8 @@ class Checkout extends Component
             'WC' => 'Western Cape,'
         ];
         $this->drop_off_point = 'door';
+        
+        $this->updatePaymentMethodDisplay();
     }
 
     public function setDeliveryAddress(){
@@ -261,19 +266,20 @@ class Checkout extends Component
     }
 
     public function updatedCreditPayment(){
+        $this->credit_error = null;
         $this->credit_payment = str_replace(' ', '', str_replace(',', '', $this->credit_payment));
         $credit = Auth::user()->vendor->withdrawableBalance();
         if($this->credit_payment > $credit){
             $this->credit_payment = $credit;
             $this->credit_error = "Your maximum credit is ".$credit;
-            return;
+            // return;
         }
         if($this->credit_payment > $this->total){
-            $this->credit_payment = $credit;
+            $this->credit_payment = $this->total;
             $this->credit_error = "You have entered an amount greater than cart total";
-            return;
+            // return;
         }
-        $this->credit_error = null;
+        $this->updatePaymentMethodDisplay();
     }
 
     public function updatedPayWithWallet(){
@@ -282,6 +288,43 @@ class Checkout extends Component
         }
         else{
             $this->show_wallet_options = false;
+            $this->credit_payment = null;
+        }
+        $this->updatePaymentMethodDisplay();
+    }
+
+    public function updatedPaymentMethod(){
+        $this->updatePaymentMethodDisplay();
+
+        if($this->credit_payment){
+            if($this->credit_payment == $this->total){
+                $this->payment_method = null;
+            }
+        }
+        elseif(!$this->credit_payment){
+            $this->show_wallet_options = false;
+        }
+    }
+
+    public function updatePaymentMethodDisplay(){
+        $this->show_wallet_doc_options = true;
+
+        if(!Auth::user()->vendor->withdrawableBalance()){
+            $this->pay_with_wallet = false;
+            $this->credit_payment = null;
+            $this->show_wallet_options = false;
+        }
+        if($this->pay_with_wallet){
+            if($this->credit_payment){
+                if($this->credit_payment == $this->total){
+                    $this->show_wallet_doc_options = false;
+                    $this->show_wallet_options = true;
+                    $this->payment_method = null;
+                }
+                else{
+                    $this->show_wallet_doc_options = true;
+                }
+            }
         }
     }
 
@@ -341,11 +384,19 @@ class Checkout extends Component
     }
 
     public function processPayment($type = null){
-
         $this->dispatch('go-to-top');
-        $this->validate([
+
+        $rules = [
             'terms_and_conditions' => 'required'
-        ],
+        ];
+        if($this->payment_method == "direct_eft"){
+            $rules['direct_eft_type'] = 'required';
+        }
+        if($this->payment_method == "digital_wallet"){
+            $rules['digital_wallet_type'] = 'required';
+        }
+
+        $this->validate($rules,
         [
             'terms_and_conditions.required'=> "Please accept the Terms and Conditions"
         ]);
@@ -443,7 +494,7 @@ class Checkout extends Component
 
         if($do_payment){
             $order_no = 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT);
-            if($this->payment_method == "card"){
+            if($this->payment_method == "card" || $this->payment_method == "digital_wallet"){
                 $stn = Setting::where('name', 'card_fee')->first();
                 if($stn){
                     $card_fee_stnt = $stn->value;
@@ -451,21 +502,52 @@ class Checkout extends Component
                     $payable_amount += $fee;
                 }
             }
+
+            $method = 'card';
+            if($this->payment_method == "eft"){
+                $method = "bank2bank";
+            }
+            if($this->payment_method == "direct_eft"){
+                $method = $this->direct_eft_type;
+            }
+
+            $doc = new WalletDocApi();
+
+            $doc_customer_id = Auth::user()->vendor->wallet_doc_customer_id;
+            if(!$doc_customer_id){
+                $usr = Auth::user();
+                $data = [
+                    'first_name' => $usr->name,
+                    'last_name' => $usr->surname,
+                    'email' => $usr->email,
+                ];
+                $res = $doc->createCustomer($data);
+                if($res){
+                    $usr->vendor->wallet_doc_customer_id = $res['customer_id'];
+                    $usr->vendor->save();
+                }
+            }
+
             $data = [
                 'amount' => $payable_amount * 100,
                 'currency' => 'ZAR',
+                'customer_id' => $doc_customer_id,
+                'capture' => false,
                 'reference' => $order_no,
                 'statement_descriptor' => $order_no,
-                'payment_method' => $this->payment_method,
-                'capture' => true,
+                'payment_method' => $method,
+                
                 'return_url' => url('payment-complete'),
             ];
-            if($this->payment_method == "capitec_pay"){
-                $data['national_id'] = $this->id_number;
+            if($method == "capitec_pay"){
                 $data['mobile_number'] = Auth::user()->mobile_number;
             }
-            $doc = new WalletDocApi();
+            if($this->payment_method == "digital_wallet"){
+                $data['digital_wallet'] = $this->digital_wallet_type;
+            }
+
             $transaction = $doc->genPayment($data);
+
             if(!$transaction){
                 $this->addError('error', "Failed to create transaction");
             }
@@ -473,27 +555,22 @@ class Checkout extends Component
                 $order->uuid = $transaction['id'];
                 $order->save();
 
+                // $trx_id = $transaction['id'];
+                // $client_key = $transaction['client_key'];
+                /*
+                $trx_data = [
+                    'client_key' => $client_key,
+                    'capture_amount' => $payable_amount * 100,
+                ];
+                */
+
+                // $trx_res = $doc->processTransaction($transaction['id'],$trx_data);
+                // dd($transaction,$trx_res);
+
                 $payment_id = $transaction['redirect']['id'];
                 $url = $transaction['redirect']['redirect_url'];
                 $this->dispatch('send-to-payment', id:$payment_id, url:$url);
             }
-
-            /*
-            $data = [
-                'user_first_name' => Auth::user()->name,
-                'user_last_name' => Auth::user()->surname,
-                'user_email' => Auth::user()->email,
-                'user_cell_number' => Auth::user()->mobile_number,
-                'payment_id' => $order->id,
-                'amount' => $payable_amount,
-            ];
-
-            $pf = new PayFastApi();
-            $payload = $pf->setPayLoad($data);
-            $payload = json_encode($payload);
-            $this->dispatch('process-payment', data: $payload);
-            */
-
         }
     }
 
