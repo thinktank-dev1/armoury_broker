@@ -295,10 +295,10 @@
                                                     Courier
                                                     <span class="mytooltip tooltip-effect-1">
                                                     <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                                    <span class="tooltip-content clearfix">
+                                                    <span class="tooltip-content clearfix tooltip-left-offset1">
                                                         <span class="tooltip-text px-2">
                                                             <b>Courier</b><br />
-                                                            R99 flat delivery fee (refunded to seller) - arrangements made via platform messaging between buyer and seller
+                                                            Courier Delivery fee charged to the buyers account on item checkout.
                                                         </span> 
                                                     </span>
                                                 </span>
@@ -330,7 +330,7 @@
                                                 Free Delivery
                                                 <span class="mytooltip tooltip-effect-1">
                                                     <span class="tooltip-item"><i class=" icon-info"></i></span> 
-                                                    <span class="tooltip-content clearfix">
+                                                    <span class="tooltip-content clearfix tooltip-left-offset1">
                                                         <span class="tooltip-text px-2">
                                                             <b>Free Delivery</b><br /> 
                                                             No delivery charge - buyer and seller arrange delivery details through the platform messaging system
@@ -360,42 +360,95 @@
                                         </div>
                                         @if($pick_point == "locker")
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            @php
+                                            $col = "col-md-12";
+                                            if($localities){
+                                                $col = "col-md-6";
+                                            }
+                                            if($sublocalities){
+                                                $col = "col-md-4";
+                                            }
+                                            if($filteredLockers){
+                                                $col = "col-md-3";
+                                            }
+                                            @endphp
+                                            <div class="{{ $col }}">
                                                 <div class="mb-2">
-                                                    <input type="text" class="form-control" placeholder="Terminal ID" name="terminal_id" wire:model.defer="terminal_id">
+                                                    <select class="form-control" name="terminal_province" wire:model.live="terminal_province">
+                                                        <option value="">Select Province</option>
+                                                        @foreach($provinces AS $pr)
+                                                        <option value="{{ $pr }}">{{ $pr }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+                                            @if($localities)
+                                            <div class="{{ $col }}">
+                                                <div class="mb-2">
+                                                    <select class="form-control" name="locality" wire:model.live="locality">
+                                                        <option value="">Select Locality</option>
+                                                        @foreach($localities AS $lc)
+                                                        <option value="{{ $lc }}">{{ $lc }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @if($sublocalities)
+                                            <div class="{{ $col }}">
+                                                <div class="mb-2">
+                                                    <select class="form-control" name="sublocality" wire:model.live="sublocality">
+                                                        <option value="">Select Sub Locality</option>
+                                                        @foreach($sublocalities AS $slc)
+                                                        <option value="{{ $slc }}">{{ $slc }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @endif
+                                            @if($filteredLockers)
+                                            <div class="{{ $col }}">
+                                                <div class="mb-2">
+                                                    <select class="form-control" name="terminal_id" wire:model.live="terminal_id">
+                                                        <option value="">Select Locker</option>
+                                                        @foreach($filteredLockers AS $tlc)
+                                                        <option value="{{ $tlc['code'] }}">{{ $tlc['name'] }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @endif
                                         </div>
                                         @elseif($pick_point == "door")
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="mb-2">
-                                                    <input type="text" class="form-control" placeholder="Street" name="street" wire:model.defer="street">
+                                                    <input type="text" class="form-control" placeholder="Street" name="street" wire:model.live.blur="street">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="mb-3">
-                                                    <input type="text" class="form-control" placeholder="Local Area" name="local_area" wire:model.defer="local_area">
+                                                    <input type="text" class="form-control" placeholder="Local Area" name="local_area" wire:model.live.blur="local_area">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="mb-2">
-                                                    <input type="text" class="form-control" placeholder="Suburb" name="suburb" wire:model.defer="suburb">
+                                                    <input type="text" class="form-control" placeholder="Suburb" name="suburb" wire:model.live.blur="suburb">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="mb-2">
-                                                    <input type="text" class="form-control" placeholder="City" name="city" wire:model.defer="city">
+                                                    <input type="text" class="form-control" placeholder="City" name="city" wire:model.live.blur="city">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="mb-2">
-                                                    <input type="text" class="form-control" placeholder="Postal Code" name="postal_code" wire:model.defer="postal_code">
+                                                    <input type="text" class="form-control" placeholder="Postal Code" name="postal_code" wire:model.live.blur="postal_code">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="mb-2">
-                                                    <select class="form-control" name="province" wire:model.defer="province">
+                                                    <select class="form-control" name="province" wire:model.live.blur="province">
                                                         <option value="">Select Province</option>
                                                         @foreach($provinces AS $k => $pr)
                                                         <option value="{{ $k }}">{{ $pr }}</option>
@@ -426,10 +479,21 @@
                                         @endif
                                         <div class="row mt-3">
                                             <div class="col-md-12">
-                                                <h3 class="bold">Parcel Dimensions</h3>
+                                                <h3 class="bold">Parcel Size</h3>
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <select class="form-control" name="parcel_size" wire:model.live.blur="parcel_size">
+                                                        <option value="">Select option</option>
+                                                        @foreach($pudo_sizes AS $sz)
+                                                        <option value="{{ $sz->id }}">{{ $sz->name.' - '.$sz->width.'cm x '.$sz->height.'cm x '.$sz->length.'cm x '.$sz->max_weight.'kg (max)' }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {{--
                                             <div class="col-md-12">
                                                 <div class="mb-2">
                                                     <input type="text" class="form-control" placeholder="Length (cm)" name="length_cm" wire:model.defer="length_cm">
@@ -450,6 +514,7 @@
                                                     <input type="text" class="form-control" placeholder="Weight (kg)" name="weight_kg" wire:model.defer="weight_kg">
                                                 </div>
                                             </div>
+                                            --}}
                                         </div>
                                         @endif
                                         @if($dealer_stock)

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             SettingsTableSeeder::class,
             BrandsTableSeeder::class,
             AdminAccountSeeder::class,
+            PudoSizeTableSeeder::class,
         ]);  
     }
 }

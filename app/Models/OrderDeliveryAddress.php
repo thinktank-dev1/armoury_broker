@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDeliveryAddress extends Model
 {
     protected $fillable = [
-        'order_id',
         'terminal_id',
         'street', 
         'local_area', 

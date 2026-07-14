@@ -11,6 +11,7 @@ use App\Lib\PayFastApi;
 use App\Lib\Communication;
 use App\Lib\WalletDocApi;
 use App\Lib\PudoApi;
+use App\Lib\SharedFunctions;
 
 use Auth;
 use App\Models\User;
@@ -53,6 +54,7 @@ class Checkout extends Component
     public $show_wallet_doc_options;
     public $direct_eft_type, $digital_wallet_type;
     public $wallet_doc_pub, $wallet_doc_trx_id, $wallet_doc_client_key;
+    public $pudo_terminal;
 
     public function mount($id, $order_id = null){
         if(!Auth::user()->vendor_id){
@@ -90,11 +92,54 @@ class Checkout extends Component
             'MP' => 'Mpumalanga',
             'NW' => 'North West',
             'NC' => 'Northern Cape',
-            'WC' => 'Western Cape,'
+            'WC' => 'Western Cape'
         ];
         $this->drop_off_point = 'door';
         
         $this->updatePaymentMethodDisplay();
+    }
+
+    public function updatedDropOffPoint(){
+        if($this->drop_off_point == "locker"){
+            $api = new PudoApi();
+            $res = $api->getTerminals();
+            if($res){
+                return collect($res);
+            }
+        }
+        return false;
+    }
+
+    public function getCoord(){
+        if($this->street && $this->local_area && $this->suburb && $this->city && $this->postal_code && $this->province){
+            $add = $this->street .', '. $this->local_area .', '. $this->suburb .', '. $this->city .', '. $this->postal_code .', '. $this->province.', South Africa';
+
+            $lib = new SharedFunctions();
+            $res = $lib->getCoordinatesFree($add);
+            if($res){
+                $this->latitude = $res['lat'];
+                $this->longitude = $res['lon'];
+            }
+        }
+    }
+
+    public function updatedStreet(){
+        $this->getCoord();
+    }
+    public function updatedLocalArea(){
+        $this->getCoord();
+    }
+    public function updatedSuburb(){
+        $this->getCoord();
+    }
+    public function updatedCity(){
+        $this->getCoord();
+    }
+    public function updatedPostalCode(){
+        $this->getCoord();
+    }
+    public function updatedProvince(){
+        $this->getCoord();
     }
 
     public function setDeliveryAddress(){
@@ -117,54 +162,6 @@ class Checkout extends Component
             $rules["latitude"] = "required";
         }
         $this->validate($rules);
-        
-        if(!$this->order_id){
-            $order = new Order();
-            $order->user_id = Auth::user()->id;
-            $order->vendor_id = $this->vendor_id;
-            $order->cart_total = $this->total;
-            $order->fee = $this->service_fees;
-            $order->total_shipping_fee = $this->shipping_tot;
-            $order->save();
-            $this->order_id = $order->id;
-        }
-        else{
-            $order = Order::find($this->order_id);
-        }
-        $add = null;
-        if($this->order_id){
-            $add = OrderDeliveryAddress::where('order_id', $this->order_id)->first();
-        }
-        if(!$add){
-            $add = new OrderDeliveryAddress();
-        }
-        
-        $add->order_id = $order->id;
-        if($this->drop_off_point == "locker"){
-            $add->terminal_id = $this->terminal_id;
-            $add->street = null; 
-            $add->local_area = null;
-            $add->suburb = null;
-            $add->city = null;
-            $add->postal_code = null;
-            $add->province = null;
-            $add->type = null;
-            $add->longitude = null;
-            $add->latitude = null;
-        }
-        elseif($this->drop_off_point == "door"){
-            $add->terminal_id = null;
-            $add->street = $this->street; 
-            $add->local_area = $this->local_area;
-            $add->suburb = $this->suburb;
-            $add->city = $this->city;
-            $add->postal_code = $this->postal_code;
-            $add->province = $this->province;
-            $add->type = $this->type;
-            $add->longitude = $this->longitude;
-            $add->latitude = $this->latitude;
-        }
-        $add->save();
 
         foreach($this->cart AS $ct){
             if($ct['shipping_method'] == "courier"){
@@ -217,29 +214,33 @@ class Checkout extends Component
                     $delivery_type = "door";
                     $delivery_address = [
                         "type" => "business",
-                        "entered_address" => $add->street.', '.$add->local_area.', '.$add->suburb.', '.$add->city.', '.$add->postal_code,
+                        "entered_address" => $this->street.', '.$this->local_area.', '.$this->suburb.', '.$this->city.', '.$this->postal_code,
                         "company" => Auth::user()->vendor->name,
-                        "street_address" => $add->street,
-                        "local_area" => $add->local_area,
-                        "code" => $add->postal_code,
-                        "city" => $add->city,
-                        "zone" => $add->province,
+                        "street_address" => $this->street,
+                        "local_area" => $this->local_area,
+                        "code" => $this->postal_code,
+                        "city" => $this->city,
+                        "zone" => $this->province,
                         "country" => "South Africa",
-                        "lat" => $add->latitude,
-                        "lng" => $add->longitude,
+                        "lat" => $this->latitude,
+                        "lng" => $this->longitude,
                     ];
                 }
                 $pudo = new PudoApi();
                 $rates = $pudo->getRate($pick_up_type,$delivery_type,$collection_address, $delivery_address, $parcels);
+                $add = null;
                 if($rates){
                     if(is_array($rates)){
                         if(isset($rates['rate'])){
                             $rate = $rates['rate'];
                             $this->shipping_tot = $rate;
                             $prdt = $ct['product'];
+                            
                             $ord_itm = OrderItem::find($ct['id']);
+                            $add = $this->saveDeliveryAddress($ord_itm->id);
+
                             $ord_itm->shipping_price = $rate;
-                            $ord_itm->order_id = $order->id;
+                            $ord_itm->order_delivery_address_id = $add->id;
                             $ord_itm->save();   
                         }
                     }
@@ -252,6 +253,45 @@ class Checkout extends Component
         }
         $this->getCart();
         $this->show_payment_section = true;
+    }
+
+    public function saveDeliveryAddress($order_item_id){
+        $itm = OrderItem::find($order_item_id);
+        if($itm){
+            if($itm->order_delivery_address_id){
+                $add = OrderDeliveryAddress::find($itm->order_delivery_address_id);
+            }
+            else{
+                $add = new OrderDeliveryAddress();
+            }
+
+            if($this->drop_off_point == "locker"){
+                $add->terminal_id = $this->terminal_id;
+                $add->street = null; 
+                $add->local_area = null;
+                $add->suburb = null;
+                $add->city = null;
+                $add->postal_code = null;
+                $add->province = null;
+                $add->type = null;
+                $add->longitude = null;
+                $add->latitude = null;
+            }
+            elseif($this->drop_off_point == "door"){
+                $add->terminal_id = null;
+                $add->street = $this->street; 
+                $add->local_area = $this->local_area;
+                $add->suburb = $this->suburb;
+                $add->city = $this->city;
+                $add->postal_code = $this->postal_code;
+                $add->province = $this->province;
+                $add->type = $this->type;
+                $add->longitude = $this->longitude;
+                $add->latitude = $this->latitude;
+            }
+            $add->save();
+        }
+        return $add;
     }
 
     public function updatedGiftVoucherPayment(){
@@ -690,7 +730,7 @@ class Checkout extends Component
             if($arr[1] == "shipping_method"){
                 $ord->shipping_method = $v;
                 $del = DeliverOption::where('product_id', $ord->product_id)->where('type', $v)->first();
-                $ord->shipping_price = $del->price;
+                //$ord->shipping_price = $del->price;
 
                 if($v != "dealer_stock"){
                     $ord->dealer_option = null;
@@ -878,17 +918,124 @@ class Checkout extends Component
             if($ct->shipping_method == "courier"){
                 $this->show_courier_fields = true;
                 $this->show_payment_section = false;
+
+                if($ct->order_delivery_address_id){
+                    $add = OrderDeliveryAddress::find($ct->order_delivery_address_id);
+                    if($add){
+                        $this->terminal_id = $add->terminal_id;
+                        $this->street = $add->street; 
+                        $this->local_area = $add->local_area;
+                        $this->suburb = $add->suburb;
+                        $this->city = $add->city;
+                        $this->postal_code = $add->postal_code;
+                        $this->province = $add->province;
+                        $this->type = $add->type;
+                        $this->longitude = $add->longitude;
+                        $this->latitude = $add->latitude;
+                    }
+                }
             }
             $this->cart[] = $arr;
         }
     }
 
+    public $terminal_province, $locality, $sublocality;
+
+    public function updatedTerminalProvince(){
+        $this->locality = null; 
+        $this->sublocality = null;
+    }
+    public function updatedLocality(){
+        $this->sublocality = null;
+    }
+    public function updatedSublocality(){}
+
     #[Layout('components.layouts.landing')] 
     public function render(){
         $dealers = Dealer::where('province', Auth::user()->vendor->province)->orderBy('business_name', 'ASC')->get();
+
+        $lockers = $this->updatedDropOffPoint();
+        
+        $lc_provinces = null;
+        $localities = null;
+        $sublocalities = null;
+        $filteredLockers = null;
+        
+        if($lockers){
+            if($this->terminal_province){
+                $pr_arr = $this->provinceAliases($this->terminal_province);
+                
+                $localities = $lockers
+                ->whereIn('detailed_address.province', $pr_arr)
+                ->pluck('detailed_address.locality')
+                ->unique()
+                ->sort()
+                ->values();
+
+                $localities->sort();
+            }
+            if($this->locality){
+                $sublocalities = $lockers
+                ->whereIn('detailed_address.province', $pr_arr)
+                ->where('detailed_address.locality', $this->locality)
+                ->pluck('detailed_address.sublocality')
+                ->unique()
+                ->sort()
+                ->values();
+
+                $sublocalities->sort();
+            }
+            else{
+                $sublocalities = null;
+            }
+            if($this->sublocality){
+                $filteredLockers = $lockers
+                ->whereIn('detailed_address.province', $pr_arr)
+                ->where('detailed_address.locality', $this->locality)
+                ->where('detailed_address.sublocality', $this->sublocality)
+                ->values();
+            }
+            else{
+                $filteredLockers = null;
+            }
+        }
+
         return view('livewire.landing.checkout', [
-            'dealers' => $dealers
+            'dealers' => $dealers,
+            'localities' => $localities,
+            'sublocalities' => $sublocalities,
+            'filteredLockers' => $filteredLockers,
         ]);
+    }
+
+    public function provinceAliases($pr){
+        if($pr == "Eastern Cape"){
+            return ['EC', 'Eastern Cape'];
+        }
+        if($pr == "Free State"){
+            return ['FS', 'Free State'];
+        }
+        if($pr == "Gauteng"){
+            return ["Gauteng", "GP"];
+        }
+        if($pr == "KwaZulu-Natal"){
+            return ["KZN", "KwaZulu-Natal"];
+        }
+        if($pr == "Limpopo"){
+            return ["LM", "Limpopo"];
+        }
+        if($pr == "Mpumalanga"){
+            return ["MP", "Mpumalanga"];
+        }
+        if($pr == "North West"){
+            return ["NW", "North West"];
+        }
+        if($pr == "Northern Cape"){
+            return ["NC", "Northern Cape"];
+        }
+        if($pr == "Western Cape"){
+            return ["WC", "Western Cape"];
+        }
     }
 
     public function sendComm($id){

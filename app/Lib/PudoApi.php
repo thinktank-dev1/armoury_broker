@@ -4,6 +4,35 @@ namespace App\Lib;
 use Log;
 
 class PudoApi{
+	function getTerminals(){
+		$api_key = env('PUDO_API_KEY');
+		// $url = "https://wqvdmjybt6.execute-api.af-south-1.amazonaws.com/lockers-data";
+		$url = env('PUDO_URL').'/lockers-data';
+
+		$ch = curl_init();
+
+		curl_setopt_array($ch, [
+    		CURLOPT_URL => $url,
+    		CURLOPT_RETURNTRANSFER => true,
+    		CURLOPT_HTTPHEADER => [
+        		"Authorization: Bearer {$api_key}",
+        		"Content-Type: application/json",
+        		"ACCEPT: application/json"
+    		]
+		]);
+
+		$response = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$response = json_decode($response,true);
+		
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		if ($httpCode >= 200 && $httpCode < 300) {
+			return $response;
+		}
+		return false;
+	}
+
 	function getRate($col,$del,$coll_add, $del_add, $parcels){
 		if($col == "door" && $del == "door"){
 			$data = [

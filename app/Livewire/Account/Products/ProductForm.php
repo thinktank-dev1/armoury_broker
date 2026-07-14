@@ -7,6 +7,9 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 use Livewire\Attributes\On;
 
+use App\Lib\SharedFunctions;
+use App\Lib\PudoApi;
+
 use Auth;
 use App\Models\Vendor;
 use App\Models\Category;
@@ -21,6 +24,7 @@ use App\Models\Dealer;
 use App\Models\OfferPrice;
 use App\Models\MessageThread;
 use App\Models\CourierPackageDetail;
+use App\Models\PudoSize;
 
 class ProductForm extends Component
 {
@@ -40,6 +44,7 @@ class ProductForm extends Component
     public $terminal_id;
     public $length_cm, $width_cm, $height_cm, $weight_kg;
     public $pick_point;
+    public $parcel_size;
 
     public function mount($id = null){
         if(!Auth::user()->vendor_id){
@@ -68,6 +73,87 @@ class ProductForm extends Component
             'NC' => 'Northern Cape',
             'WC' => 'Western Cape,'
         ];
+    }
+    public function provinceAliases($pr){
+        if($pr == "Eastern Cape"){
+            return ['EC', 'Eastern Cape'];
+        }
+        if($pr == "Free State"){
+            return ['FS', 'Free State'];
+        }
+        if($pr == "Gauteng"){
+            return ["Gauteng", "GP"];
+        }
+        if($pr == "KwaZulu-Natal"){
+            return ["KZN", "KwaZulu-Natal"];
+        }
+        if($pr == "Limpopo"){
+            return ["LM", "Limpopo"];
+        }
+        if($pr == "Mpumalanga"){
+            return ["MP", "Mpumalanga"];
+        }
+        if($pr == "North West"){
+            return ["NW", "North West"];
+        }
+        if($pr == "Northern Cape"){
+            return ["NC", "Northern Cape"];
+        }
+        if($pr == "Western Cape"){
+            return ["WC", "Western Cape"];
+        }
+    }
+
+    public function updatedPickPoint(){
+        if($this->pick_point == "locker"){
+            $api = new PudoApi();
+            $res = $api->getTerminals();
+            if($res){
+                return collect($res);
+            }
+        }
+        return false;
+    }
+
+    public function updatedParcelSize(){
+        $sx = PudoSize::find($this->parcel_size);
+        if($sx){
+            $this->width_cm = $sx->width;
+            $this->length_cm = $sx->length;
+            $this->height_cm = $sx->height;
+            $this->weight_kg = $sx->max_weight;
+        }
+    }
+
+    public function getCoord(){
+        if($this->street && $this->local_area && $this->suburb && $this->city && $this->postal_code && $this->province){
+            $lib = new SharedFunctions();
+            $add = $this->street.', '.$this->local_area.', '.$this->suburb.', '.$this->city.', '.$this->postal_code.', '.$this->province.', South Africa';
+            $res = $lib->getCoordinatesFree($add);
+            if($res){
+                $this->longitude = $res['lon'];
+                $this->latitude = $res['lat'];
+            }
+        }
+    }
+
+    public function updatedStreet(){
+        $this->getCoord();
+    }
+    public function updatedLocalArea(){
+        $this->getCoord();
+    }
+    public function updatedSuburb(){
+        $this->getCoord();
+    }
+    public function updatedCity(){
+        $this->getCoord();
+    }
+    public function updatedPostalCode(){
+        $this->getCoord();
+    }
+    public function updatedProvince(){
+        $this->getCoord();
     }
 
     #[On('brand-updated')]
@@ -531,6 +617,17 @@ class ProductForm extends Component
         $this->listing_type = $type;
     }
 
+    public $terminal_province, $locality, $sublocality;
+
+    public function updatedTerminalProvince(){
+        $this->locality = null; 
+        $this->sublocality = null;
+    }
+    public function updatedLocality(){
+        $this->sublocality = null;
+    }
+    public function updatedSublocality(){}
+
     public function render(){
         $cats = Category::orderBy('category_name', 'ASC')->get();
         $brands = Brand::orderBy('brand_name', 'ASC')->get();
@@ -550,13 +647,66 @@ class ProductForm extends Component
 
         $dealers = Dealer::where('province', Auth::user()->vendor->province)->where('status', 1)->get();
 
+        $pudo_sizes = PudoSize::all();
+
+        $lockers = $this->updatedPickPoint();
+
+        $lc_provinces = null;
+        $localities = null;
+        $sublocalities = null;
+        $filteredLockers = null;
+
+        if($lockers){
+            if($this->terminal_province){
+                $pr_arr = $this->provinceAliases($this->terminal_province);
+                
+                $localities = $lockers
+                ->whereIn('detailed_address.province', $pr_arr)
+                ->pluck('detailed_address.locality')
+                ->unique()
+                ->sort()
+                ->values();
+
+                $localities->sort();
+            }
+            if($this->locality){
+                $sublocalities = $lockers
+                ->whereIn('detailed_address.province', $pr_arr)
+                ->where('detailed_address.locality', $this->locality)
+                ->pluck('detailed_address.sublocality')
+                ->unique()
+                ->sort()
+                ->values();
+
+                $sublocalities->sort();
+            }
+            else{
+                $sublocalities = null;
+            }
+            if($this->sublocality){
+                $filteredLockers = $lockers
+                ->whereIn('detailed_address.province', $pr_arr)
+                ->where('detailed_address.locality', $this->locality)
+                ->where('detailed_address.sublocality', $this->sublocality)
+                ->values();
+            }
+            else{
+                $filteredLockers = null;
+            }
+        }
+
         return view('livewire.account.products.product-form', [
             "cats" => $cats,
             'brands' => $brands,
             'fee' => $fee,
             'max_offer' => $max_offer,
             'calibers' => $calibers,
-            'dealers' => $dealers
+            'dealers' => $dealers,
+            'pudo_sizes' => $pudo_sizes,
+
+            'localities' => $localities,
+            'sublocalities' => $sublocalities,
+            'filteredLockers' => $filteredLockers,
         ]);
     }
 }

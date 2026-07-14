@@ -941,3 +941,7 @@ select.form-control{
 .card-title a:hover{
 	color: #d65027 !important;
 }
+
+.tooltip-left-offset1{
+	margin-left: 1px;
+}
