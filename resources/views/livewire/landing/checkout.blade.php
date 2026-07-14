@@ -243,13 +243,6 @@
                                     </div>
                                 </div>
                                 @endif
-                                {{--
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <input type="text" class="form-control" placeholder="Terminal ID" name="terminal_id" wire:model.defer="terminal_id">
-                                    </div>
-                                </div>
-                                --}}
                                 @elseif($drop_off_point == "door")
                                 <div class="col-md-4">
                                     <div class="mb-2">

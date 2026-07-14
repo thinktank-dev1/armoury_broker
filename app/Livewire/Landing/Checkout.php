@@ -290,8 +290,9 @@ class Checkout extends Component
                 $add->latitude = $this->latitude;
             }
             $add->save();
+            return $add;
         }
-        return $add;
+        return false;
     }
 
     public function updatedGiftVoucherPayment(){
