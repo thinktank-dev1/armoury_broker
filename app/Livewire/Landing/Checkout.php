@@ -795,7 +795,7 @@ class Checkout extends Component
             ->get();
             // dd($cart,Auth::user()->id,$this->vendor_id,$this->order_id);
 
-            $add_id = $cart->order->items->first()->order_delivery_address_id;
+            $add_id = $cart->items->first()->order_delivery_address_id;
             if($add_id){
                 $add = OrderDeliveryAddress::find($add_id);
                 if($add){
