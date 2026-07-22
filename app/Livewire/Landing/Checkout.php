@@ -573,7 +573,7 @@ class Checkout extends Component
                 'amount' => $payable_amount * 100,
                 'currency' => 'ZAR',
                 'customer_id' => $doc_customer_id,
-                'capture' => false,
+                'capture' => true,
                 'reference' => $order_no,
                 'statement_descriptor' => $order_no,
                 'payment_method' => $method,
