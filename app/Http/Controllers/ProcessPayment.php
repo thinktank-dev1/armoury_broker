@@ -18,11 +18,14 @@ use App\Models\Dealer;
 use App\Models\OfferPrice;
 use App\Models\CreditPayment;
 
+use Illuminate\Support\Facades\Artisan;
+
 class ProcessPayment extends Controller
 {
     public function walletDocWebHookListen(){
         $req = Request::all();
         Log::info($req);
+        Artisan::call('app:track-tranactions');
     }
 
     public function pfPayment($id){

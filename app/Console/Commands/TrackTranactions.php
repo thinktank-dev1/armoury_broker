@@ -94,7 +94,7 @@ class TrackTranactions extends Command
                     ];
                 }
 
-                $add = OrderDeliveryAddress::where('order_id', $order->id)->first();
+                $add = OrderDeliveryAddress::find($item->order_delivery_address_id);
                 if($add->terminal_id){
                     $delivery_type = "locker";
                     $delivery_address = [
