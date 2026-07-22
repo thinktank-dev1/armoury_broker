@@ -165,12 +165,12 @@ class TrackTranactions extends Command
                 if($wallet_pay){
                     $to_pay = $to_pay - $wallet_pay->amount;
                     if($to_pay != $paid_amount){
-                        dd("NOT PAID");
+                        // dd("NOT PAID");
                     } 
                 }
                 elseif($to_pay != $paid_amount){
                     Log::error('Invalid amount');
-                    dd("Invalid amount", $paid_amount);
+                    // dd("Invalid amount", $paid_amount);
                 }
 
                 $order->g_payment_id = $res['id'];

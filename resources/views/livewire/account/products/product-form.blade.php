@@ -427,7 +427,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <div class="mb-3">
+                                                <div class="mb-2">
                                                     <input type="text" class="form-control" placeholder="Local Area" name="local_area" wire:model.live.blur="local_area">
                                                 </div>
                                             </div>
