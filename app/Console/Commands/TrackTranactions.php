@@ -399,7 +399,7 @@ class TrackTranactions extends Command
                 }
             }
             else{
-                $this->warn($res['status']);
+                $this->warn($order->id.'::'.$res['status']);
             }
         }
     }
