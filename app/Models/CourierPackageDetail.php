@@ -9,6 +9,7 @@ class CourierPackageDetail extends Model
     protected $fillable = [
         'product_id',
         'terminal_id',
+        'box_id',
         'street', 
         'local_area', 
         'suburb', 

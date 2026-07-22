@@ -332,6 +332,28 @@ class ProductForm extends Component
                 $this->width_cm = $cr->width_cm;
                 $this->height_cm = $cr->height_cm;
                 $this->weight_kg = $cr->weight_kg;
+
+                if($this->terminal_id){
+                    $lockers = $this->updatedPickPoint();
+                    $locker = $lockers->where('code', $this->terminal_id);
+                    if($locker){
+                        $locker = $locker->first();
+                        $this->terminal_province = $locker['detailed_address']['province'];
+                        $this->locality = $locker['detailed_address']['locality'];
+                        $this->sublocality = $locker['detailed_address']['sublocality'];
+
+                        $pack_dim = [(int)$cr->length_cm,(int)$cr->width_cm,(int)$cr->height_cm];
+                        $weight = $cr->weight_kg;
+                        sort($pack_dim);
+                        foreach($locker['lstTypesBoxes'] AS $bx){
+                            $bx_arr = [$bx['width'],$bx['height'],$bx['length']];
+                            sort($bx_arr);
+                            if($bx_arr == $pack_dim){
+                                $this->box_id = $bx['id'];
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -532,6 +554,25 @@ class ProductForm extends Component
             $cr->height_cm = $this->height_cm;
             $cr->weight_kg = $this->weight_kg;
             $cr->save();
+
+            if($this->pick_point == "locker"){
+                $lockers = $this->updatedPickPoint();
+                $locker = $lockers->where('code', $this->terminal_id);
+                if($locker){
+                    $locker = $locker->first();
+                    $pack_dim = [(int)$cr->length_cm,(int)$cr->width_cm,(int)$cr->height_cm];
+                    $weight = $cr->weight_kg;
+                    sort($pack_dim);
+                    foreach($locker['lstTypesBoxes'] AS $bx){
+                        $bx_arr = [$bx['width'],$bx['height'],$bx['length']];
+                        sort($bx_arr);
+                        if($bx_arr == $pack_dim){
+                            $cr->box_id = $bx['id'];
+                            $cr->save();
+                        }
+                    }
+                }
+            }
         }
 
         $ships = ['collection_delivery', 'courier', 'dealer_stock', 'free_delivery'];
@@ -688,6 +729,9 @@ class ProductForm extends Component
                 ->whereIn('detailed_address.province', $pr_arr)
                 ->where('detailed_address.locality', $this->locality)
                 ->where('detailed_address.sublocality', $this->sublocality)
+                ->reject(function ($item) {
+                    return collect($item)->has('status');
+                })
                 ->values();
             }
             else{

@@ -95,27 +95,29 @@ class TrackTranactions extends Command
                 }
 
                 $add = OrderDeliveryAddress::find($item->order_delivery_address_id);
-                if($add->terminal_id){
-                    $delivery_type = "locker";
-                    $delivery_address = [
-                        "terminal_id" => $add->terminal_id,
-                    ];
-                }
-                else{
-                    $delivery_type = "door";
-                    $delivery_address = [
-                        "type" => "business",
-                        "entered_address" => $add->street.', '.$add->local_area.', '.$add->suburb.', '.$add->city.', '.$add->postal_code,
-                        "company" => $item->user->vendor->name,
-                        "street_address" => $add->street,
-                        "local_area" => $add->local_area,
-                        "code" => $add->postal_code,
-                        "city" => $add->city,
-                        "zone" => $add->province,
-                        "country" => "South Africa",
-                        "lat" => $add->latitude,
-                        "lng" => $add->longitude,
-                    ];
+                if($add){
+                    if($add->terminal_id){
+                        $delivery_type = "locker";
+                        $delivery_address = [
+                            "terminal_id" => $add->terminal_id,
+                        ];
+                    }
+                    else{
+                        $delivery_type = "door";
+                        $delivery_address = [
+                            "type" => "business",
+                            "entered_address" => $add->street.', '.$add->local_area.', '.$add->suburb.', '.$add->city.', '.$add->postal_code,
+                            "company" => $item->user->vendor->name,
+                            "street_address" => $add->street,
+                            "local_area" => $add->local_area,
+                            "code" => $add->postal_code,
+                            "city" => $add->city,
+                            "zone" => $add->province,
+                            "country" => "South Africa",
+                            "lat" => $add->latitude,
+                            "lng" => $add->longitude,
+                        ];
+                    }
                 }
 
                 $vendor_detail = [

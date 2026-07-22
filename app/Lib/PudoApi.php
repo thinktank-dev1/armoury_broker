@@ -72,7 +72,6 @@ class PudoApi{
 
 		if ($httpCode >= 200 && $httpCode < 300) {
     		$rates = json_decode($response, true);
-    		
     		if($col == "door" && $del == "door"){
     			return $rates["rates"][0];
     		}
@@ -103,8 +102,9 @@ class PudoApi{
     		
 		} 
 		else {
-    		Log::error($response);
-    		return false;
+			$res = json_decode($response, true);
+    		Log::error($res);
+    		return ['error' => $res["message"]];
 		}
 	}
 

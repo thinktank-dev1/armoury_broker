@@ -184,7 +184,7 @@ class Checkout extends Component
                 if($vnd_det->terminal_id){
                     $pick_up_type = "locker";
                     $collection_address = [
-                        'terminal_id' => $vnd_det->terminal_id,
+                        'terminal_id' => $vnd_det->terminal_id.$vnd_det->box_id,
                     ];
                 }
                 else{
@@ -231,6 +231,18 @@ class Checkout extends Component
                 $add = null;
                 if($rates){
                     if(is_array($rates)){
+                        if(isset($rates['status']) || isset($rates['error'])){
+                            if(isset($rates['error'])){
+                                $this->addError('error', $rates['error']);
+                                return;
+                            }
+                            if($rates['status'] == "error"){
+                                // dd($pick_up_type,$delivery_type,$collection_address, $delivery_address, $parcels);
+                                $this->addError('error', $rates['message']);
+                                return;
+                            }
+                        }
+
                         if(isset($rates['rate'])){
                             $rate = $rates['rate'];
                             $this->shipping_tot = $rate;
@@ -997,6 +1009,9 @@ class Checkout extends Component
                 ->whereIn('detailed_address.province', $pr_arr)
                 ->where('detailed_address.locality', $this->locality)
                 ->where('detailed_address.sublocality', $this->sublocality)
+                ->reject(function ($item) {
+                    return collect($item)->has('status');
+                })
                 ->values();
             }
             else{
