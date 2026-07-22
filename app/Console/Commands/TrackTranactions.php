@@ -398,6 +398,9 @@ class TrackTranactions extends Command
                     $comm->sendMail($data);
                 }
             }
+            else{
+                $this->warn($res['status']);
+            }
         }
     }
 }
