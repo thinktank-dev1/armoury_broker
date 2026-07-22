@@ -9,13 +9,13 @@ use App\Models\Order;
 use App\Models\OrderItem;
 
 use Request;
+use Illuminate\Support\Facades\Artisan;
 
 class PaymentNotice extends Component
 {
     
     public function mount(){
-        // $this->order_id = $id;
-        // $this->status = $status;
+        Artisan::call('app:track-tranactions');
     }
 
     #[Layout('components.layouts.landing')]
