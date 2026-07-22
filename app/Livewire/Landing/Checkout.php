@@ -795,20 +795,23 @@ class Checkout extends Component
             ->get();
             // dd($cart,Auth::user()->id,$this->vendor_id,$this->order_id);
 
-            $add = OrderDeliveryAddress::where('order_id', $this->order_id)->first();
-            if($add){
-                $this->terminal_id = $add->terminal_id;
-                $this->street = $add->street;
-                $this->local_area = $add->local_area;
-                $this->suburb = $add->suburb;
-                $this->city = $add->city;
-                $this->postal_code = $add->postal_code; 
-                $this->province = $add->province;
-                $this->type = $add->type;
-                $this->logitude = $add->logitude;
-                $this->latitude = $add->latitude;
+            $add_id = $cart->order->items->first()->order_delivery_address_id;
+            if($add_id){
+                $add = OrderDeliveryAddress::find($add_id);
+                if($add){
+                    $this->terminal_id = $add->terminal_id;
+                    $this->street = $add->street;
+                    $this->local_area = $add->local_area;
+                    $this->suburb = $add->suburb;
+                    $this->city = $add->city;
+                    $this->postal_code = $add->postal_code; 
+                    $this->province = $add->province;
+                    $this->type = $add->type;
+                    $this->logitude = $add->logitude;
+                    $this->latitude = $add->latitude;
 
-                $this->show_payment_section = true;
+                    $this->show_payment_section = true;
+                }
             }
         }
 
