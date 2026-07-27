@@ -102,8 +102,9 @@ class Checkout extends Component
     public function updatedDropOffPoint(){
         if($this->drop_off_point == "locker"){
             $api = new PudoApi();
-            $res = $api->getTerminals();
+            $res = $api->getAllLockers();
             if($res){
+                // dd($res);
                 return collect($res);
             }
         }
@@ -164,6 +165,13 @@ class Checkout extends Component
         $this->validate($rules);
 
         foreach($this->cart AS $ct){
+            if(!$ct['shipping_method']){
+                $this->addError('error', "Please select shipping method for all items.");
+                return;
+            }
+        }
+
+        foreach($this->cart AS $ct){
             if($ct['shipping_method'] == "courier"){
                 $vnd_det = $ct['product']->courierDetails;
                 $pick_up_type = null;
@@ -171,6 +179,9 @@ class Checkout extends Component
 
                 $delivery_type = null;
                 $delivery_address = [];
+
+                $pc = null;
+                $pd = null;
 
                 $parcels = [
                     "submitted_length_cm" => $vnd_det->length_cm,
@@ -183,11 +194,13 @@ class Checkout extends Component
 
                 if($vnd_det->terminal_id){
                     $pick_up_type = "locker";
+                    $pc = "L";
                     $collection_address = [
-                        'terminal_id' => $vnd_det->terminal_id.$vnd_det->box_id,
+                        'terminal_id' => $vnd_det->terminal_id,
                     ];
                 }
                 else{
+                    $pc = "D";
                     $pick_up_type = "door";
                     $collection_address = [
                         "type" => $vnd_det->type,
@@ -205,12 +218,14 @@ class Checkout extends Component
                 }
 
                 if($this->drop_off_point == "locker"){
+                    $pd = "L";
                     $delivery_type = "locker";
                     $delivery_address = [
                         "terminal_id" => $this->terminal_id,
                     ];
                 }
                 else{
+                    $pd = "D";
                     $delivery_type = "door";
                     $delivery_address = [
                         "type" => "business",
@@ -226,8 +241,18 @@ class Checkout extends Component
                         "lng" => $this->longitude,
                     ];
                 }
+
+                $method = $pc."2".$pd;
+                $rates_data = [
+                    'collection' => $collection_address,
+                    'delivery' => $delivery_address,
+                    'parcels' => [$parcels],
+                    'method' => $method,
+                ];
+
                 $pudo = new PudoApi();
-                $rates = $pudo->getRate($pick_up_type,$delivery_type,$collection_address, $delivery_address, $parcels);
+                $rates = $pudo->getRates($rates_data);
+                // dd($rates,$rates_data);
                 $add = null;
                 if($rates){
                     if(is_array($rates)){
@@ -245,16 +270,20 @@ class Checkout extends Component
 
                         if(isset($rates['rate'])){
                             $rate = $rates['rate'];
-                            $this->shipping_tot = $rate;
+                            $this->shipping_tot += $rate["rate"];
                             $prdt = $ct['product'];
                             
                             $ord_itm = OrderItem::find($ct['id']);
                             $add = $this->saveDeliveryAddress($ord_itm->id);
 
-                            $ord_itm->shipping_price = $rate;
+                            $ord_itm->shipping_price = $rate["rate"];
                             $ord_itm->order_delivery_address_id = $add->id;
                             $ord_itm->save();   
                         }
+                    }
+                    else{
+                        $this->addError('error', $rates);
+                        return;
                     }
                 }
                 else{
@@ -1009,9 +1038,9 @@ class Checkout extends Component
                 ->whereIn('detailed_address.province', $pr_arr)
                 ->where('detailed_address.locality', $this->locality)
                 ->where('detailed_address.sublocality', $this->sublocality)
-                ->reject(function ($item) {
-                    return collect($item)->has('status');
-                })
+                // ->reject(function ($item) {
+                    // return collect($item)->has('status');
+                // })
                 ->values();
             }
             else{

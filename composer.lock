@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c9eb03899394fc7d94d9ee230ca184f",
+    "content-hash": "bf045dac726095375626ee5b53f78ead",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -4627,6 +4627,47 @@
                 "source": "https://github.com/bobthecow/psysh/tree/v0.12.10"
             },
             "time": "2025-08-04T12:39:37+00:00"
+        },
+        {
+            "name": "pudo/pudo-common",
+            "version": "v0.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/The-Courier-Guy/PUDO_Common.git",
+                "reference": "eecf996fa3dc4bc79c8b6cf65fb09c62f12b85ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/The-Courier-Guy/PUDO_Common/zipball/eecf996fa3dc4bc79c8b6cf65fb09c62f12b85ba",
+                "reference": "eecf996fa3dc4bc79c8b6cf65fb09c62f12b85ba",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pudo\\Common\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "App Inlet (Pty) Ltd",
+                    "email": "info@appinlet.com"
+                }
+            ],
+            "description": "PUDO common class for modules.",
+            "homepage": "https://github.com/The-Courier-Guy/PUDO_Common",
+            "support": {
+                "issues": "https://github.com/The-Courier-Guy/PUDO_Common/issues",
+                "source": "https://github.com/The-Courier-Guy/PUDO_Common/tree/v0.5.2"
+            },
+            "time": "2026-07-16T11:11:02+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -10287,12 +10328,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }
