@@ -107,7 +107,7 @@ class ProductForm extends Component
     public function updatedPickPoint(){
         if($this->pick_point == "locker"){
             $api = new PudoApi();
-            $res = $api->getTerminals();
+            $res = $api->getAllLockers();
             if($res){
                 return collect($res);
             }
@@ -729,9 +729,11 @@ class ProductForm extends Component
                 ->whereIn('detailed_address.province', $pr_arr)
                 ->where('detailed_address.locality', $this->locality)
                 ->where('detailed_address.sublocality', $this->sublocality)
+                /*
                 ->reject(function ($item) {
                     return collect($item)->has('status');
                 })
+                */
                 ->values();
             }
             else{

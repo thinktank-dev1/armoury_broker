@@ -236,6 +236,7 @@ class PudoApi{
     		$result = json_decode($response, true);
     		return $result;
     	}
+    	Log::error($response);
     	return false;
 	}
 }

@@ -15,7 +15,7 @@ class PaymentNotice extends Component
 {
     
     public function mount(){
-        Artisan::call('app:track-tranactions');
+        //Artisan::call('app:track-tranactions');
     }
 
     #[Layout('components.layouts.landing')]
