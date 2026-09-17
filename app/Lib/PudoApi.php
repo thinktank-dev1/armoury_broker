@@ -145,17 +145,18 @@ class PudoApi{
 
 	private function buildDeliveryAddress($data,$method): stdClass
     {
+        // dd($data);
         $deliveryAddress = new stdClass();
         if($method == "L2L" || $method == 'D2L'){
         	$deliveryAddress->terminal_id = $data['terminal_id'];
         }
         else{
             $deliveryAddress->type            = $data['type'];
-            $deliveryAddress->street_address  = $data['street'];
+            $deliveryAddress->street_address  = $data['street_address'];
             $deliveryAddress->city            = $data['city'];
             $deliveryAddress->local_area      = $data['local_area'];
-            $deliveryAddress->code            = $data['postal_code'];
-            $deliveryAddress->zone            = $data['province'];
+            $deliveryAddress->code            = $data['code'];
+            $deliveryAddress->zone            = $data['zone'];
             $deliveryAddress->country         = "South Africa";
             $deliveryAddress->entered_address = "{$deliveryAddress->street_address}, {$deliveryAddress->city}, {$deliveryAddress->code}";
         }
@@ -229,6 +230,7 @@ class PudoApi{
 
 		$response = curl_exec($ch);
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		dd($response,$data);
 
 		curl_close($ch);
 

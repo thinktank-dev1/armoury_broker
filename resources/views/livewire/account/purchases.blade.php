@@ -41,6 +41,8 @@
             $expanded = "true";
             $show = 'show';
         }
+        $string = $order->g_payment_id;
+        $truncated_reff = strlen($string) > 13 ? substr($string, 0, 6) . '....' . substr($string, -7) : $string;
         @endphp
         <div class="accordion-item" wire:ignore.self>
             <h2 class="accordion-header" id="heading_{{ $order->id }}" wire:ignore.self>
@@ -50,7 +52,17 @@
                             <tr class="p-0 m-0">
                                 <th class="p-0 m-0 w-14">{{ 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT) }}<br/><small>Order Number</small></th>
                                 <th class="p-0 m-0 w-14">{{ $order->vendor->name }}<br/><small>Seller</small></th>
-                                <th class="p-0 m-0 w-14">{{ $order->g_payment_id }}<br/><small>Payment Ref</small></th>
+                                <th class="p-0 m-0 w-14">
+                                    {{ $truncated_reff }} 
+                                    <button type="button"
+                                        onclick="copyToClipboard('{{ $string }}')"
+                                        title="Copy"
+                                        style="border: 0; background: none; cursor: pointer;">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <br/>
+                                    <small>Payment Ref</small>
+                                </th>
                                 <th class="p-0 m-0 w-14">R {{ number_format($order->shiping_fee(),2) }}<br/><small>Shipping Fee</small></th>
                                 @php
                                     $fee_arr = $order->plartform_fees();
@@ -344,6 +356,11 @@
 
     @push('scripts')
     <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // $('#info-modal').modal('show');
+            });
+        }
         document.addEventListener('livewire:initialized', () => {
             @this.on('show-confirm-receipt', () => {
                 $('#confirmation-modal').modal('show');

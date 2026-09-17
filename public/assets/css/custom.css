@@ -837,7 +837,7 @@ footer .widget_title {
     padding-bottom: 0px;
 }
 .text-muted{
-	color: #CCC !important;
+	color: #333 !important;
 }
 .nav_style3.owl-theme .owl-nav [class*="owl-"], .nav_style4.owl-theme .owl-nav [class*="owl-"] {
     top: -92px;

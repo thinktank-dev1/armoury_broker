@@ -55,6 +55,7 @@ class Checkout extends Component
     public $direct_eft_type, $digital_wallet_type;
     public $wallet_doc_pub, $wallet_doc_trx_id, $wallet_doc_client_key;
     public $pudo_terminal;
+    public $card_fee;
 
     public function mount($id, $order_id = null){
         if(!Auth::user()->vendor_id){
@@ -386,6 +387,14 @@ class Checkout extends Component
         elseif(!$this->credit_payment){
             $this->show_wallet_options = false;
         }
+
+        if($this->payment_method == "card" || $this->payment_method == "digital_wallet"){
+            $fee = (1/100) * $this->total;
+            $this->card_fee = round($fee,2);
+        }
+        else{
+            $this->card_fee = null;
+        }        
     }
 
     public function updatePaymentMethodDisplay(){

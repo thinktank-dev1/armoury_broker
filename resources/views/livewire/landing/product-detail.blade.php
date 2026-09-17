@@ -196,12 +196,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label">Your Offer</label>
+                                    <label class="form-label">Your Offer <span class="text-muted">(R{{ number_format($min_offer,2) }} - R{{ number_format($product->item_price,2) }})</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="offer-addon">R</span>
                                         <input type="number" class="form-control" placeholder="Yoour offer" aria-label="Your offer" aria-describedby="offer-addon" wire:model.defer="offer_amount">
                                     </div>
                                 </div>
+                                <small>The seller has 48 hours to accept, decline or counter.</small>
                             </div>
                         </div>
                     </form>

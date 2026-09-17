@@ -28,6 +28,7 @@ class ProductDetail extends Component
     public $qty, $vailable_qty;
     public $offer_price = null;
     public $tag;
+    public $min_offer;
 
     public function mount($id){
         $this->product = Product::find($id);
@@ -81,6 +82,9 @@ class ProductDetail extends Component
         elseif ($this->product->created_at->gte(now()->subDays(30))) {
             $this->tag = "New";
         }
+
+        $cur_price = $this->product->item_price;
+        $this->min_offer = $cur_price - ((20/100) * $cur_price);
     }
 
     public function changeQyty($type){

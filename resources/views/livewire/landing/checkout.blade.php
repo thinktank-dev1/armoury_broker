@@ -535,11 +535,17 @@
                                     <span class="ms-auto"><b>-R {{ number_format($vendor_promo_amount, 2) }}</b></span>
                                 </li>
                                 @endif
+                                @if($card_fee)
+                                <li class="list-group-item d-flex">
+                                    <span><b>Convenience Fee</b></span>
+                                    <span class="ms-auto"><b>R {{ number_format($card_fee, 2) }}</b></span>
+                                </li>
+                                @endif
                             </ul>
                             <div class="row mt-3 ms-1 me-1 border-bottom">
                                 <div class="col-md-12 d-flex">
                                     <b>TOTAL</b>
-                                    <b class="ms-auto">R {{ number_format($total, 2) }}</b>
+                                    <b class="ms-auto">R {{ number_format($total+$card_fee, 2) }}</b>
                                 </div>
                             </div>
                             @if($voucher_discount_amount)

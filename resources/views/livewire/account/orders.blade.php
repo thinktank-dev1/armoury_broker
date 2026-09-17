@@ -41,6 +41,8 @@
             $expanded = "true";
             $show = 'show';
         }
+        $string = $order->g_payment_id;
+        $truncated_reff = strlen($string) > 13 ? substr($string, 0, 6) . '....' . substr($string, -7) : $string;
         @endphp
         <div class="accordion-item" wire:ignore.self>
             <h2 class="accordion-header" id="heading_{{ $order->id }}" wire:ignore.self>
@@ -50,7 +52,17 @@
                             <tr class="p-0 m-0">
                                 <th class="p-0 m-0 w-14">{{ 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT) }}<br/><small>Order Number</small></th>
                                 <th class="p-0 m-0 w-14">{{ $order->user->vendor->name }}<br/><small>Buyer</small></th>
-                                <th class="p-0 m-0 w-14">{{ $order->g_payment_id }}<br/><small>Payment Ref</small></th>
+                                <th class="p-0 m-0 w-14">
+                                    {{ $truncated_reff }} 
+                                    <button type="button"
+                                        onclick="copyToClipboard('{{ $string }}')"
+                                        title="Copy"
+                                        style="border: 0; background: none; cursor: pointer;">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                    <br/>
+                                    <small>Payment Ref</small>
+                                </th>
                                 <th class="p-0 m-0 w-14">R {{ number_format($order->shiping_fee(),2) }}<br/><small>Shipping Fee</small></th>
                                 @php
                                     $fee_arr = $order->plartform_fees();
@@ -428,9 +440,30 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" id="info-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="info-title">Link Copied</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="info-text">Link has been copied to clipboard.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     @push('scripts')
     <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // $('#info-modal').modal('show');
+            });
+        }
         document.addEventListener('livewire:initialized', () => {
             @this.on('dispute-saved', () => {
                 $('#dispute-confirmation-modal').modal('show');
