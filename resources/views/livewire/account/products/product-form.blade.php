@@ -652,7 +652,7 @@
                                             </div>
                                             <div class="col-md-8 pt-4">
                                                 <p>{{ $item_name ?? 'Item name' }}</p>
-                                                <h4 class="bold">R {{ number_format($item_price,2) ?? '0.00' }}</h4>
+                                                <h4 class="bold">R {{ is_numeric($item_price) ? number_format($item_price, 2) : '0.00' }}</h4>
                                                 <div class="cart-product-quantity">
                                                     <div class="quantity">
                                                         <input type="button" value="-" class="minus" wire:click.prevent="updatePreviewQty('minus')">
