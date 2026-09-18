@@ -451,7 +451,7 @@
                                         </div>
                                         <div class="payment-type-text ms-3">
                                             <p class="m-0 p-0 @if($prefix == 'g') text-muted @endif">Pay with credit/debit card</p>
-                                            <p class="m-0 p-0 text-muted"><i>Connivance fee: 1% of the total value of the transaction</i></p>
+                                            <p class="m-0 p-0 text-muted"><i>Convenience fee: 1% of the total value of the transaction</i></p>
                                         </div>
                                         <div class="payment-logos">
                                             <div class="d-flex">
@@ -470,7 +470,7 @@
                                         </div>
                                         <div class="payment-type-text ms-3">
                                             <p class="m-0 p-0 @if($prefix == 'g') text-muted @endif">Pay with digital wallet</p>
-                                            <p class="m-0 p-0 text-muted"><i>Connivance fee: 1% of the total value of the transaction</i></p>
+                                            <p class="m-0 p-0 text-muted"><i>Convenience fee: 1% of the total value of the transaction</i></p>
                                         </div>
                                         <div class="payment-logos">
                                             <div class="d-flex">
