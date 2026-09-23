@@ -35,7 +35,16 @@ class OrderItem extends Model
 
         'buyer_status',
         'receipt_date',
+
+        'pudo_service',
+        'waybill',
+        'collection_date',
+        'parcel_id',
     ];
+
+    public function delivery(){
+        return $this->belongsTo(OrderDeliveryAddress::class, 'order_delivery_address_id');
+    }
 
     public function vendor(){
         return $this->belongsTo(Vendor::class, 'vendor_id');

@@ -22,12 +22,30 @@ class Purchases extends Component
     public $filter;
     public $order_item;
 
-    public $item_id, $vendor_id, $grievance;
+    public $item_id, $vendor_id, $grievance, $issue_type;
+
+    public $grievance_types = [];
+    public $cur_dsp_id;
 
     public function mount(){
         $this->filter = "all_orders";
 
         $this->show_action_btn = false;
+
+        $this->grievance_types = [
+            'Item not as listed',
+            'Item not received',
+            'Item damaged',
+            'Wrong item received',
+            'Missing items/accessories',
+            'Item defective/not working',
+            'Item condition misrepresented',
+            'Quantity incorrect',
+            'Counterfeit/fake item',
+            'Seller failed to deliver',
+            'Buyer claims non-delivery',
+            'Other',
+        ];
     }
 
     public function changeFilter($f){
@@ -69,7 +87,10 @@ class Purchases extends Component
         $dsp->message = $this->grievance;
         $dsp->user_1_status = 0;
         $dsp->user_2_status = 0;
+        $dsp->issue_type = $this->issue_type;
         $dsp->save();
+
+        $this->cur_dsp_id = $dsp->id;
 
         $item = OrderItem::find($this->item_id);
         $order = $item->order;
@@ -104,6 +125,7 @@ class Purchases extends Component
         $order_data .= "</table>";
 
         $body = Auth::user()->vendor->name." has filed a dispute <b>(Buyer)</b>.<br /><br />
+        <b>Issue Type: </b>: ".$this->issue_type."<br />
         <b>Dispute Message:</b><br />
         ".$this->grievance."<br /><br />
         <b>Product Details:</b>

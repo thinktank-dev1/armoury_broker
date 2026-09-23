@@ -27,8 +27,6 @@ class PaymentNotice extends Component
         $order = Order::where('uuid', $order_ref)->first();
         $order_no = 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT);
 
-        Log::info(Request::all()); 
-
         return view('livewire.landing.payment-notice', [
             'status' => $status,
             'order_no' => $order_no,

@@ -1,4 +1,17 @@
 <div class="container-fluid">
+    <style>
+        .custom-callout {
+            background-color: #f8f9fa; /* Light gray background matching the image */
+            border-left: 4px solid #e04f1a !important; /* Thick orange left border */
+            border-color: #dee2e6; /* Soft border color for top, right, bottom */
+        }
+        .custom-orange-icon {
+            color: #e04f1a; /* Matching orange color for the shield icon */
+        }
+        .text-orange{
+            color: #e04f1a;
+        }
+    </style>
     <div class="row mt-3">
         <div class="col-md-12">
             <h3 class="page-title bold">
@@ -144,20 +157,42 @@
                                                 </td>
                                             </tr>
                                             @if($item->shipping_method == 'courier')
-                                                @if($item->shiping_service)
-                                                <tr>
-                                                    <th class="text-end">Delivery Service</th>
-                                                    <td>{{ $item->shiping_service }}</td>
-                                                </tr>
-                                                @endif
-                                                @if($item->tracking_number)
+                                                @if($item->pudo_service)
                                                 <tr class="mb-1">
-                                                    <th class="text-end">Tracking Number</th>
+                                                    <th class="text-end">Service</th>
                                                     <td class="">
-                                                        {{ $item->tracking_number }}
+                                                        <div class="input-group">
+                                                            @if($item->pudo_service)
+                                                                Pudo - {{ $item->pudo_service }}
+                                                            @endif
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @endif
+                                                @if($item->waybill)
+                                                <tr class="mb-1">
+                                                    <th class="text-end">Waybill</th>
+                                                    <td class="">
+                                                        <b>{{ $item->waybill }}</b>
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                                <tr class="mb-1">
+                                                    <th class="text-end">Collection From</th>
+                                                    <td class="">
+                                                        <b>{{ $item->product->vendor->name.' - '.$item->product->vendor->city }}</b>
+                                                    </td>
+                                                </tr>
+                                                <tr class="mb-1">
+                                                    <th class="text-end">Deliver to</th>
+                                                    <td class="">
+                                                        @if($item->delivery->terminal_id)
+                                                        <b>{{ $item->delivery->terminal_id }}</b>
+                                                        @else
+                                                        <b>{{ $item->delivery->street.', '.$item->delivery->local_area.', '.$item->delivery->suburb.', '.$item->delivery->city }}</b>
+                                                        @endif
+                                                    </td>
+                                                </tr>
                                             @endif
                                             <tr>
                                                 <th class="text-end">Order Status</th>
@@ -295,9 +330,20 @@
                 <div class="modal-body">
                     <form wire:submit.prevent="seveDispute">
                         <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label">What went wrong?</label>
+                                <select class="form-control" name="issue_type" wire:model.defer="issue_type">
+                                    <option value="">Select Option</option>
+                                    @foreach($grievance_types AS $tp)
+                                    <option value="{{ $tp }}">{{ $tp }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div cass="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label">Please Enter Your Grievance Note</label>
+                                    <label class="form-label">Tell us what happened</label>
                                     <textarea class="form-control" name="grievance" wire:model.defer="grievance"></textarea>
                                 </div>
                             </div>
@@ -344,7 +390,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Your dispute has been logged, one of our agents will contact you as soon as possible</p>
+                    <p>Reference: <b>{{ 'AB-DSP-'.str_pad($cur_dsp_id,4,0,STR_PAD_LEFT) }}</b></p>
+                    <p>An agent will review and be in touch <b>within 1 business day.</b></p>
+                    <div class="col-md-12 px-0">
+                        <div class="mt-3">
+                            <div class="custom-callout p-3 rounded-end border border-start-0 d-flex align-items-start gap-3">
+                                <div class="text-start">
+                                    <p class=" mb-0 small">
+                                        Your payment stays safely in escrow — nothing is released while the dispute is open.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-3">
+                        <span class="badge bg-warning text-dark"><i class="fa fa-dot"></i> Under review</span>
+                    </div>
+                    <small class="mt-3 text-muted">Closed by whoever raised it, or by an Armoury Broker admin — not by the other party.</small>
                 </div>
                 <div class="modal-footer d-grid">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -11,6 +11,7 @@ use App\Lib\Communication;
 use App\Lib\PudoApi;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Transaction;
 use App\Models\PromoCode;
 use App\Models\WithdrawalRequest;
@@ -43,7 +44,28 @@ class TrackTranactions extends Command
      */
     public function handle()
     {
-        $this->init();
+        // $this->init();
+        // $this->alertCourier(2);
+        $this->traceShipment();
+    }
+
+    public function traceShipment(){
+        $items = OrderItem::query()
+        ->whereNotNull('waybill')
+        ->where(function ($query) {
+            $query->where('vendor_status', '<>', 'Complete')
+            ->orWhereNull('vendor_status');
+        })
+        ->get();
+        
+        foreach($items AS $item){
+            $pudo = new PudoApi();
+            $res = $pudo->traceShipment($item->parcel_id,$item->waybill);
+            if(isset($res['status'])){
+                $item->vendor_status = $res["status"];
+                $item->save();
+            }
+        }
     }
 
     public function alertCourier($id){
@@ -74,13 +96,14 @@ class TrackTranactions extends Command
                 if($vnd_det->terminal_id){
                     $pick_up_type = "locker";
                     $collection_address = [
+                        'type' => "locker",
                         'terminal_id' => $vnd_det->terminal_id,
                     ];
                 }
                 else{
                     $pick_up_type = "door";
                     $collection_address = [
-                        "type" => $vnd_det->type,
+                        "type" => "residential",
                         "entered_address" => $vnd_det->street.', '.$vnd_det->local_area.', '.$vnd_det->suburb.', '.$vnd_det->city.', '.$vnd_det->postal_code,
                         "company" => $product->vendor->name,
                         "street_address" => $vnd_det->street,
@@ -99,13 +122,14 @@ class TrackTranactions extends Command
                     if($add->terminal_id){
                         $delivery_type = "locker";
                         $delivery_address = [
+                            "type" => "locker",
                             "terminal_id" => $add->terminal_id,
                         ];
                     }
                     else{
                         $delivery_type = "door";
                         $delivery_address = [
-                            "type" => "business",
+                            "type" => "residential",
                             "entered_address" => $add->street.', '.$add->local_area.', '.$add->suburb.', '.$add->city.', '.$add->postal_code,
                             "company" => $item->user->vendor->name,
                             "street_address" => $add->street,
@@ -134,6 +158,15 @@ class TrackTranactions extends Command
 
                 $pudo = new PudoApi();
                 $res = $pudo->createShipment($pick_up_type,$delivery_type,$collection_address, $delivery_address, $parcels, $vendor_detail,$buyer_details);
+                
+                if(!isset($res["error"])){
+                    $item->pudo_service = $res["service_level_name"];
+                    $item->waybill = $res["custom_tracking_reference"];
+                    $item->collection_date = $res["collection_min_date"];
+                    $item->parcel_id = $res['id'];
+
+                    $item->save();
+                }
             }
         }
     }

@@ -14,6 +14,7 @@ class Dispute extends Model
         'message',
         'user_1_status',
         'user_2_status',
+        'issue_type',
     ];
 
     public function item(){

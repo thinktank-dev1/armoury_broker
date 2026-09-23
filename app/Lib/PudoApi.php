@@ -9,13 +9,15 @@ use Illuminate\Support\Facades\Http;
 
 use Pudo\Common\Processor\APIProcessor;
 
+use App\Models\PudoSize;
+
 class PudoApi{
 	public $apiURL;
 	public $accountKey;
 	public $lockers;
 
 	function __construct(){
-		$this->apiURL = 'https://sandbox.api-pudo.co.za';
+		$this->apiURL = env('PUDO_URL');
 		$this->accountKey = env('PUDO_API_KEY');
 		$this->lockers = $this->getAllLockers();
 	}
@@ -163,83 +165,79 @@ class PudoApi{
         return $deliveryAddress;
     }
 
-	/***********************************************************************/
+	public function createShipment($col,$del,$coll_add, $del_add, $parcels,$vendor_detail,$buyer_details){
+		$srv_pst = "";
+		$pudo_size = PudoSize::where('width', $parcels['submitted_width_cm'])->where('height', $parcels['submitted_height_cm'])->where('length', $parcels['submitted_length_cm'])->first();
+		if($pudo_size->name == "Extra Small"){
+			$srv_pst = "XS - ECO";
+		}
+		if($pudo_size->name == "Small"){
+			$srv_pst = "S - ECO";
+		}
+		if($pudo_size->name == "Medium"){
+			$srv_pst = "M - ECO";
+		}
+		if($pudo_size->name == "Large"){
+			$srv_pst = "L - ECO";
+		}
+		if($pudo_size->name == "Extra Large"){
+			$srv_pst = "XL - ECO";
+		}
 
-	/*
-	function getTerminals(){
-		$api_key = env('PUDO_API_KEY');
-		// $url = "https://wqvdmjybt6.execute-api.af-south-1.amazonaws.com/lockers-data";
-		$url = env('PUDO_URL').'/lockers-data';
+		$serv = "";
+		if($col == "door" && $del == "door"){
+			$serv = "OVN";
+		}
+		elseif($col == "locker" && $del == "door"){
+			$serv = "L2D".$srv_pst;
+		}
+		elseif($col == "locker" && $del == "locker"){
+			$serv = "L2L".$srv_pst;
+		}
+		elseif($col == "door" && $del == "locker"){
+			$serv = "D2L".$srv_pst;
+		}
 
-		$ch = curl_init();
+		$data = new stdClass();
+		$data->collection_min_date = date('Y-m-d', strtotime('+3 days'));
+		$data->collection_address = $coll_add;
+		$data->special_instructions_collection = 'None';
+		$data->collection_contact = $vendor_detail;
+		$data->delivery_min_date = date('Y-m-d', strtotime('+5 days'));
+		$data->delivery_address = $del_add;
+		$data->delivery_contact = $buyer_details;
+		$data->parcels = [$parcels];
+		$data->opt_in_rates = [];
+		$data->opt_in_time_based_rates = [];
+		$data->service_level_code = $serv;
 
-		curl_setopt_array($ch, [
-    		CURLOPT_URL => $url,
-    		CURLOPT_RETURNTRANSFER => true,
-    		CURLOPT_HTTPHEADER => [
-        		"Authorization: Bearer {$api_key}",
-        		"Content-Type: application/json",
-        		"ACCEPT: application/json"
-    		]
-		]);
+		$response = $this->callPudoApi( 'booking_request', json_encode($data));
+		if ($response->successful()){
+			$body = $response->json();
+			return $body;
+		}
+		else{
+			$res = $response->json();
+			Log::error($res);
+			return [
+				"error" => "Failed to create shipment",
+				"message" => $res["message"],
+			];
 
-		$response = curl_exec($ch);
-		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		$response = json_decode($response,true);
-		
-		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-		if ($httpCode >= 200 && $httpCode < 300) {
-			return $response;
 		}
 		return false;
 	}
-	*/
 
-	public function createShipment($col,$del,$coll_add, $del_add, $parcels,$vendor_detail,$buyer_details){
-		$data = [
-			'collection_min_date' => date('Y-m-d', strtotime('+3 days')),
-			'collection_address' => $coll_add,
-			'special_instructions_collection' => 'None',
-			'collection_contact' => $vendor_detail,
-			'delivery_min_date' => date('Y-m-d', strtotime('+5 days')),
-			'delivery_address' => $del_add,
-			'delivery_contact' => $buyer_details,
-			'parcels' => [$parcels],
-			'opt_in_rates' => [],
-			'opt_in_time_based_rates' => [],
-			'service_level_code' => 'OVN',
-		];
+	public function traceShipment($parcel_id,$waybill){
+		$url = env('PUDO_URL').'/api/v1/tracking/shipments';
+		$token = $this->accountKey;
 
-		$api_key = env('PUDO_API_KEY');
-		$url = env('PUDO_URL').'/shipments';
-
-		$ch = curl_init();
-
-		curl_setopt_array($ch, [
-    		CURLOPT_URL => $url,
-    		CURLOPT_RETURNTRANSFER => true,
-    		CURLOPT_POST => true,
-    		CURLOPT_HTTPHEADER => [
-        		"Authorization: Bearer {$api_key}",
-        		"Content-Type: application/json",
-        		"ACCEPT: application/json"
-    		],
-    		CURLOPT_POSTFIELDS => json_encode($data)
+		$response = Http::withToken($token)
+		->get($url, [
+			'waybill' => $waybill,
 		]);
-
-		$response = curl_exec($ch);
-		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		dd($response,$data);
-
-		curl_close($ch);
-
-		if ($httpCode >= 200 && $httpCode < 300) {
-    		$result = json_decode($response, true);
-    		return $result;
-    	}
-    	Log::error($response);
-    	return false;
+		$data = $response->json();
+		return $data;
 	}
 }
 ?>

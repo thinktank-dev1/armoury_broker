@@ -1,4 +1,17 @@
 <div>
+    <style>
+        .custom-callout {
+            background-color: #f8f9fa; /* Light gray background matching the image */
+            border-left: 4px solid #e04f1a !important; /* Thick orange left border */
+            border-color: #dee2e6; /* Soft border color for top, right, bottom */
+        }
+        .custom-orange-icon {
+            color: #e04f1a; /* Matching orange color for the shield icon */
+        }
+        .text-orange{
+            color: #e04f1a;
+        }
+    </style>
     <div class="section py-5 bg-grey" wire:ignore.self>
         <div class="container">
             <div class="row">
@@ -158,7 +171,15 @@
                                                             </li>
                                                             @endif
                                                             <li class="list-group-item">
-                                                                <small style="font-size: 13px;"><b style="font-weight: 500;">Platform Fee Selected By Seller:</b> {{ ucwords($item['product']->service_fee_payer) }}</small>
+                                                                <small style="font-size: 13px;">
+                                                                    @if($item['product']->service_fee_payer == "buyer")
+                                                                        Platform fee — covered by you, as set by the seller
+                                                                    @elseif($item['product']->service_fee_payer == "seller")
+                                                                        Platform fee — covered by the seller (no charge to you
+                                                                    @else
+                                                                        Platform fee — split 50/50 with the seller
+                                                                    @endif
+                                                                </small>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -506,6 +527,19 @@
                                     <b>Why are you charged a convenience fee?</b>
                                     <p class="m-0 p-0">When you opt to use a non-standard payment channel or method, a convenience fee is levied by the merchant offering the payment service.</p>
                                 </div>
+                                <div class="col-md-12 px-0">
+                                    <div class="mt-3">
+                                        <div class="custom-callout p-3 rounded-end border border-start-0 d-flex align-items-start gap-3">
+                                            <i class="fa fa-shield-alt custom-orange-icon fs-4 flex-shrink-0"></i>
+                                            <div class="text-start">
+                                                <h6 class="fw-bold text-dark mb-1">Your payment is protected by escrow</h6>
+                                                <p class=" mb-0 small">
+                                                    Funds are held securely and released to the seller only once you confirm your item arrived as described.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12 mt-5">
@@ -568,11 +602,17 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4 text-center">
-                            <a href="#" class="btn btn-secondary" wire:click.prevent="processPayment">Proceed with payment</a>
+                        <div class="col-md-12 mt-4 text-center d-grid gap-3">
+                            <a href="#" class="btn btn-secondary" wire:click.prevent="processPayment">
+                                <i class="fa fa-lock text-warning"></i>
+                                Proceed with payment
+                            </a>
                             @if(Auth::user()->wallet_total() > $cart_total)
                             <a href="#"class="btn btn-primary-outline" wire:click.prevent="processPayment('wallet')">Pay with wallet</a>
                             @endif
+                        </div>
+                        <div class="text-center mt-3">
+                            <small><i class="fa fa-lock text-warning"></i> Secured by Armoury Broker escrow</small>
                         </div>
                     </div>
                 </div>
