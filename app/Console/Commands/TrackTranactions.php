@@ -44,8 +44,7 @@ class TrackTranactions extends Command
      */
     public function handle()
     {
-        // $this->init();
-        // $this->alertCourier(2);
+        $this->init();
         $this->traceShipment();
     }
 
