@@ -401,6 +401,14 @@ class TrackTranactions extends Command
                 }
             }
             else{
+                if($res['status'] == "failed"){
+                    foreach($order->items AS $itm){
+                        $itm->order_id = null;
+                        $itm->total_paid = null;
+                        $itm->save();
+                    }
+                    $order->delete();
+                }
                 $this->warn($order->id.'::'.$res['status']);
             }
         }

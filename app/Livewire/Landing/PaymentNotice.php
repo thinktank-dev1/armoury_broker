@@ -21,8 +21,15 @@ class PaymentNotice extends Component
     #[Layout('components.layouts.landing')]
     public function render(){
         $status = Request::input('status');
+        $order_no = Request::input('reference');
+
+        $id = (int)preg_replace('/[^0-9]/', '', $order_no);
+        $order = Order::find($id); 
+
         return view('livewire.landing.payment-notice', [
-            'status' => $status
+            'status' => $status,
+            'order_no' => $order_no,
+            'order' => $order,
         ]);
     }
 }
