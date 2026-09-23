@@ -22,10 +22,10 @@ class PaymentNotice extends Component
     #[Layout('components.layouts.landing')]
     public function render(){
         $status = Request::input('status');
-        $order_no = Request::input('reference');
+        $order_ref = Request::input('id');
 
-        $id = (int)preg_replace('/[^0-9]/', '', $order_no);
-        $order = Order::find($id);
+        $order = Order::where('uuid', $order_ref)->first();
+        $order_no = 'AB-ORD-'.str_pad($order->id, 4, '0', STR_PAD_LEFT);
 
         Log::info(Request::all()); 
 
