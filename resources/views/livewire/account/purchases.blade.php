@@ -209,7 +209,7 @@
                                                         @if($item->dealer || $item->custom_dealer_details)
                                                             Complete - Dealer Stocked
                                                         @else
-                                                            Complete
+                                                            {{ ucwords(str_replace('-', ' ',$item->vendor_status)) }}
                                                         @endif
                                                     @endif
                                                 </td>
