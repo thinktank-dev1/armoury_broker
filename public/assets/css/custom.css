@@ -1092,3 +1092,10 @@ tr.text-no-stock td{
 	height: 30px;
 	margin-right: 10px;
 }
+.payment-type-text, .checkout-acknowledgement{
+	font-weight: 400;
+}
+.disabled-btn{
+	cursor: not-allowed;
+	opacity: 0.6;
+}

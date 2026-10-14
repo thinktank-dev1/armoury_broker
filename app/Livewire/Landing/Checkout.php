@@ -389,7 +389,11 @@ class Checkout extends Component
         }
 
         if($this->payment_method == "card" || $this->payment_method == "digital_wallet"){
-            $fee = (1/100) * $this->total;
+            $stn = Setting::where('name', 'card_fee')->first();
+            $fee = 0;
+            if($stn){
+                $fee = ($stn->value/100) * $this->total;
+            }
             $this->card_fee = round($fee,2);
         }
         else{
@@ -630,6 +634,7 @@ class Checkout extends Component
                 
                 'return_url' => url('payment-complete'),
             ];
+            
             if($method == "capitec_pay"){
                 $data['mobile_number'] = Auth::user()->mobile_number;
             }
