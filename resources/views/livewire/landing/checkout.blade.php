@@ -362,7 +362,7 @@
                         </div>
                         @endif
 
-                        <div class="col-md-12">
+                        <div class="col-md-12" id="payment_section">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-4">
@@ -662,6 +662,14 @@
 
             @this.on('go-to-top', () => {
                 $("html, body").animate({ scrollTop: 0 }, "slow");
+            });
+            @this.on('go-to-payment', () => {
+                requestAnimationFrame(() => {
+                    document.getElementById('payment_section')?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
             });
             @this.on('process-payment', (event) => {
                 var data = JSON.parse(event.data);

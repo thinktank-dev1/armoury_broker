@@ -145,7 +145,6 @@ class Checkout extends Component
     }
 
     public function setDeliveryAddress(){
-        // $this->dispatch('go-to-top');
         $rules = [
             'drop_off_point' => "required",
         ];
@@ -295,6 +294,7 @@ class Checkout extends Component
         }
         $this->getCart();
         $this->show_payment_section = true;
+        $this->dispatch('go-to-payment');
     }
 
     public function saveDeliveryAddress($order_item_id){
