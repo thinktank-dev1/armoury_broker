@@ -408,6 +408,7 @@
                                     </div>
                                     @endif
                                 </div>
+                                {{--
                                 <div class="col-md-12 border-bottom py-2">
                                     <b class="payment-title">OTHER OPTIONS</b>
                                 </div>
@@ -523,6 +524,7 @@
                                     </div>
                                     @endif
                                 </div>
+                                --}}
                                 <div class="col-md-12 mt-4 p-3 bg-grey">
                                     <b>Why are you charged a convenience fee?</b>
                                     <p class="m-0 p-0">When you opt to use a non-standard payment channel or method, a convenience fee is levied by the merchant offering the payment service.</p>

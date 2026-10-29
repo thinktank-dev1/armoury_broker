@@ -83,6 +83,7 @@ class Checkout extends Component
         }
         $card_fee_stnt = Setting::where('name', 'card_fee')->first();
         $this->card_fee_stnt = $card_fee_stnt->value;
+        $this->card_fee = $this->card_fee_stnt;
 
         $this->provinces = [
             'EC' => 'Eastern Cape',

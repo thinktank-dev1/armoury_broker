@@ -1099,3 +1099,6 @@ tr.text-no-stock td{
 	cursor: not-allowed;
 	opacity: 0.6;
 }
+.form-check-input[type=checkbox] {
+	border: 1px solid #000;
+}
