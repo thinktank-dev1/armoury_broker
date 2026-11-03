@@ -175,7 +175,7 @@
                                                                     @if($item['product']->service_fee_payer == "buyer")
                                                                         Platform fee — covered by you, as set by the seller
                                                                     @elseif($item['product']->service_fee_payer == "seller")
-                                                                        Platform fee — covered by the seller (no charge to you
+                                                                        Platform fee — covered by the seller (no charge to you)
                                                                     @else
                                                                         Platform fee — split 50/50 with the seller
                                                                     @endif
@@ -525,10 +525,12 @@
                                     @endif
                                 </div>
                                 --}}
+                                {{--
                                 <div class="col-md-12 mt-4 p-3 bg-grey">
                                     <b>Why are you charged a convenience fee?</b>
                                     <p class="m-0 p-0">When you opt to use a non-standard payment channel or method, a convenience fee is levied by the merchant offering the payment service.</p>
                                 </div>
+                                --}}
                                 <div class="col-md-12 px-0">
                                     <div class="mt-3">
                                         <div class="custom-callout p-3 rounded-end border border-start-0 d-flex align-items-start gap-3">
@@ -571,12 +573,14 @@
                                     <span class="ms-auto"><b>-R {{ number_format($vendor_promo_amount, 2) }}</b></span>
                                 </li>
                                 @endif
+                                {{--
                                 @if($card_fee)
                                 <li class="list-group-item d-flex">
                                     <span><b>Convenience Fee</b></span>
                                     <span class="ms-auto"><b>R {{ number_format($card_fee, 2) }}</b></span>
                                 </li>
                                 @endif
+                                --}}
                             </ul>
                             <div class="row mt-3 ms-1 me-1 border-bottom">
                                 <div class="col-md-12 d-flex">

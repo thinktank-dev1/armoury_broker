@@ -595,7 +595,8 @@ class Checkout extends Component
                 $stn = Setting::where('name', 'card_fee')->first();
                 if($stn){
                     $card_fee_stnt = $stn->value;
-                    $fee = ($card_fee_stnt/100) * $payable_amount;
+                    // $fee = ($card_fee_stnt/100) * $payable_amount;
+                    $fee = 0;
                     $payable_amount += $fee;
                 }
             }
