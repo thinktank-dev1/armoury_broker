@@ -100,7 +100,7 @@
                                                         <div class="card-body">
                                                             <h6 class="fw-bold text-orange">Step 3</h6>
                                                             <h6 class="fw-bold">You confirm</h6>
-                                                            <p>We release funds to the seller.</p>
+                                                            <p>We release funds to the seller.<br />&nbsp;</p>
                                                         </div>
                                                     </div>
                                                 </div>
