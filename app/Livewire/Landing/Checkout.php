@@ -914,6 +914,12 @@ class Checkout extends Component
             $min_fee_stn = Setting::where('name', 'min_fee_amount')->first();
             $min_fee_amount = $min_fee_stn->value;
 
+            if($ct->shipping_method == "courier"){
+                $tot += $ct->shipping_price;
+                $this->shipping_tot += $ct->shipping_price;
+                $this->cart_total += $ct->shipping_price; 
+            }
+            
             if($ct->product->service_fee_payer == "buyer"){
                 $fee = ($stn->value / 100) * $tot;
                 if($fee < $min_fee_amount){
@@ -928,12 +934,6 @@ class Checkout extends Component
                 $fee = $tot_fee / 2;
             }
             $tot += $fee;
-
-            if($ct->shipping_method == "courier"){
-                $tot += $ct->shipping_price;
-                $this->shipping_tot += $ct->shipping_price;
-                $this->cart_total += $ct->shipping_price; 
-            }
 
             $ct->service_fee = $fee;
             $ct->listed_price = $ct->product->item_price;

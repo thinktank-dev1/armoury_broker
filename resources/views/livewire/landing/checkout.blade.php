@@ -585,7 +585,7 @@
                             <div class="row mt-3 ms-1 me-1 border-bottom">
                                 <div class="col-md-12 d-flex">
                                     <b>TOTAL</b>
-                                    <b class="ms-auto">R {{ number_format($total+$card_fee, 2) }}</b>
+                                    <b class="ms-auto">R {{ number_format($total, 2) }}</b>
                                 </div>
                             </div>
                             @if($voucher_discount_amount)
