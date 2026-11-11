@@ -141,6 +141,36 @@ class Support extends Component
                 "Can I make offers on items?" => "Yes, our platform includes offer and counter-offer functionality, allowing negotiation between buyers and sellers before finalizing transactions.",
                 "Can I buy items from multiple stores at once?" => "You can only make purchases from a single store at a time. Your purchase can include multiple items from that store.",
                 "What happens if I don’t like the item I’ve purchased?" => "Please carefully read item descriptions, view pictures and request additional information from the seller to make sure you are comfortable before making a purchase. Some sellers may include specific terms of purchase such as no refunds/returns in their store bio. Armoury Broker will assist in managing disputes when the item does not arrive or match the item listed for sale, personal preferences will need to be discussed directly with the seller or mitigated by careful review of listings.",
+                "How do I save on courier fees when buying multiple items?" => [
+                    "Each item on Armoury Broker has its own courier fee. If you check out three items from the same seller separately, you’ll pay three courier fees, even if they could fit in one box.",
+                    "To pay for one parcel instead:",
+                    "<ol>
+                        <li><b>Add the items to your cart</b> so you know what you want.</li>
+                        <li><b>Message the seller</b> using the chat on any of their listings. Tell them which items you’d like to buy together.</li>
+                        <li><b>Wait for the seller to create a bundle.</b> They’ll set up one listing with all your items, the combined price and one courier fee. It will be marked as reserved for you.</li>
+                        <li><b>Remove the individual items from your cart</b> and check out the bundle instead.</li>
+                    </ol>
+                    ",
+                    "Your payment is still held safely in escrow until you’ve received your order.",
+                    "<b>Tip:</b> Check out the bundle as soon as it’s ready, so it isn’t held up."
+                ],
+                "A buyer wants several of my items. How do I combine shipping?" => [
+                    "Create a bundle listing so the buyer pays one courier fee instead of one per item.",
+                    "<ol>
+                        <li><b>Confirm the items with the buyer</b> in chat.</li>
+                        <li><b>Create a new listing:</b>
+                            <ul>
+                                <li><b>Title:</b> Bundle – reserved for [buyer’s username]</li>
+                                <li><b>Description:</b> List each item included.</li>
+                                <li><b>Price:</b> The combined price of all items.</li>
+                                <li><b>Delivery:</b> Courier, with a box size that fits everything.</li>
+                            </ul>
+                        </li>
+                        <li><b>Pause or remove the original listings</b> so they can’t be sold to someone else.</li>
+                        <li><b>Let the buyer know</b> the bundle is ready to check out.</li>
+                    </ol>",
+                    "Once they’ve paid, ship everything together in one parcel.",
+                ],
             ],
             "Payments & Fees" => [
                 "How much does it cost to use Armoury Broker?" => [

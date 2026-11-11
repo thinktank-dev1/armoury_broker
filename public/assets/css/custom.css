@@ -612,6 +612,9 @@ footer .widget {
 .tab-content ul{
 	padding-left: 2rem;
 }
+.tab-content ol {
+    padding-left: 2rem;
+}
 
 .faq_nav .nav-link {
     color: #0f1f24;

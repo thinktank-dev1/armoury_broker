@@ -239,5 +239,17 @@ class PudoApi{
 		$data = $response->json();
 		return $data;
 	}
+
+	public function cancelShipment($id){
+		$url = env('PUDO_URL').'/api/v1/shipments/'.$id;
+		$token = $this->accountKey;
+
+		$response = Http::withToken($token)
+		->get($url, [
+			"status" => "cancelled"
+		]);
+		$data = $response->json();
+		return $data;
+	}
 }
 ?>

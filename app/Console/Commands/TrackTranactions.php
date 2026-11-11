@@ -285,7 +285,13 @@ class TrackTranactions extends Command
                             'release' => null,
                         ]);
                     }
-                    $amount = $item->total_paid - ($fee + $item->service_fee);
+                    if($order->total_shipping_fee){
+                        $amount = $item->total_paid - ($fee + $item->service_fee + $order->total_shipping_fee);
+                    }
+                    else{
+                        $amount = $item->total_paid - ($fee + $item->service_fee);
+                    }
+
                     Transaction::create([
                         'name' => 'order_payment',
                         'transaction_type' => 'payfast_payment',
