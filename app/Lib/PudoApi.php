@@ -245,7 +245,7 @@ class PudoApi{
 		$token = $this->accountKey;
 
 		$response = Http::withToken($token)
-		->get($url, [
+		->put($url, [
 			"status" => "cancelled"
 		]);
 		$data = $response->json();

@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\On; 
 
 use App\Lib\Communication;
+use App\Lib\PudoApi;
 
 use Auth;
 use App\Models\Vendor;
@@ -190,6 +191,11 @@ class Orders extends Component
     public function cancelOrder(){
         $ord = OrderItem::find($this->cancel_id);
         if($ord){
+            $pudo = new PudoApi();
+            if($ord->parcel_id){
+                $res = $pudo->cancelShipment($ord->parcel_id);
+            }
+
             $ord->vendor_status = "Canceled";
             $ord->save();
 
