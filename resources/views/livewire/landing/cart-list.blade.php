@@ -79,7 +79,7 @@
                                         </table>
                                     </div>
                                     <div class="mt-2">
-                                      <small><b><i>Buying more than one item from this seller? Message them to combine items into one parcel and save on courier costs.</i></b> <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal"><b>Message Seller</b></a></small> 
+                                      <small><b><i>Buying more than one item from this seller? Message them to combine items into one parcel and save on courier costs.</i></b> <a href="#" wire:click.prevent="showMessageModal({{ $f_item->vendor->id }})"><b>Message Seller</b></a></small> 
                                     </div>
                                 </div>
                             </div>
@@ -198,4 +198,87 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" id="message-modal" wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @if($vendor)
+                <div class="modal-header bg-blue">
+                    <h5 class="modal-title text-white">Contact {{ $vendor->name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent="saveMessage">
+                        @if($errors->any())
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger">
+                                    {{ $errors->first() }}
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="row">
+                            @if(Auth::guest())
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" name="name" wire:model.defer="name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Surname</label>
+                                    <input type="text" class="form-control" name="surname" wire:model.defer="surname">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" wire:model.defer="email">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Contact Number</label>
+                                    <input type="text" class="form-control" name="contact_number" wire:model.defer="contact_number">
+                                </div>
+                            </div>
+                            @endif
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Message</label>
+                                    <textarea class="form-control" name="message" wire:model.defer="message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary-outline" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" wire:click.prevent="saveMessage">Save changes</button>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('show-message-modal', () => {
+                $('#message-modal').modal('show');
+            })
+            @this.on('message-sent', () => {
+                $('.modal').modal('hide');
+                $.notify("Message has been sent", "success");
+            });
+            @this.on('copy-link', (event) => {
+                var link = event.link;
+                navigator.clipboard.writeText(link);
+                $.notify("Link has been copied", "success");
+            });
+        });
+    </script>
+    @endpush
 </div>
