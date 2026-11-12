@@ -343,8 +343,8 @@ class TrackTranactions extends Command
                     $order_data .= "<tr><td>Order Date:</td><td>".date('Y-m-d', strtotime($item->created_at))."</td></tr>";
                     $order_data .= "<tr><td>Item Name:</td><td>".$item->product->item_name."</td></tr>";
                     $order_data .= "<tr><td>Quantity:</td><td>".$item->quantity."</td></tr>";
-                    $order_data .= "<tr><td>Listed Price:</td><td>R ".number_format($item->product->item_price,2)."</td></tr>";
-                    $order_data .= "<tr><td>Sold Price:</td><td>R ".number_format($sold_price,2)."</td></tr>";
+                    $order_data .= "<tr><td>Listed Price:</td><td> R ".number_format($item->product->item_price,2)."</td></tr>";
+                    $order_data .= "<tr><td>Sold Price:</td><td> R ".number_format($sold_price,2)."</td></tr>";
                     $order_data .= "<tr><td>Discount Applied:</td><td>".$item->discount."</td></tr>";
                     $order_data .= "<tr><td>Delivery Type:</td><td>".ucwords(str_replace('_', ' ',$item->shipping_method))."</td></tr>";
                     $order_data .= "</table>";
@@ -380,7 +380,7 @@ class TrackTranactions extends Command
                         }
                     }
 
-                    $vnd = "<table><tr><td><b>Due to you</b></td><td><b>R ".number_format(($amount),2)."</b></td></tr><table>";
+                    $vnd = "<table><tr><td><b>Due to you</b></td><td><b> R ".number_format(($amount),2)."</b></td></tr><table>";
 
                     $body = "Looks like you have just helped someone to <b>LEVEL UP!</b><br /><br />
                     Great news! An order has been placed for an item currently listed in your Armoury.<br /><br />
@@ -411,7 +411,7 @@ class TrackTranactions extends Command
                     ];
                     $comm->sendMail($data);
 
-                    $slr = "<table><tr><td><b>Total paid</b></td><td><b>R ".number_format($item->total_paid,2)."</b></td></tr></table>";
+                    $slr = "<table><tr><td><b>Total paid</b></td><td><b> R ".number_format($item->total_paid,2)."</b></td></tr></table>";
                     $body = "Looks like you have just <b>LEVELED UP!</b><br /><br />
                     Great news! Your purchase has been confirmed, and your payment is now securely held in escrow. We've notified the seller to prepare your items for shipment.<br />
                     ".$order_data.$slr;
