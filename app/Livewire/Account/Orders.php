@@ -299,7 +299,7 @@ class Orders extends Component
 
             $body = "Great news!<br />
             Your order ".str_pad($order->id, 4, '0', STR_PAD_LEFT)." has been shipped by ".$order->vendor->name.".".$order_data;
-            $body .= "<strong>Next step:<strong><br />
+            $body .= "<strong>Next step:</strong><br />
             <p>Once the item has been received, please ensure that you update the status on the platform to “Item Received” and confirm that all is in order. </p>
             <p>Only once that has been done, we will release the funds to the seller.</p>
             <p>If you would like to speak with the Seller regarding delivery details, you can simply go to the order under the My Purchases tab of your dashboard and select the “Message Seller” option, which will open an in platform message with the Seller directly.</p>
