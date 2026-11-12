@@ -78,6 +78,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="mt-2">
+                                      <small><b><i>Buying more than one item from this seller? Message them to combine items into one parcel and save on courier costs.</i></b> <a href="#" data-bs-toggle="modal" data-bs-target="#message-modal"><b>Message Seller</b></a></small> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
