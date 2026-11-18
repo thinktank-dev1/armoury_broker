@@ -292,7 +292,7 @@
                                     &nbsp;|&nbsp;
                                     <a href="{{ url('support#contact') }}" style="color:#293c47; text-decoration: none;">Contact Support</a>
                                     &nbsp;|&nbsp;
-                                    <a href="{{ url('docs/Terms_of_Use_V3_2_Revised.pdf') }}" style="color:#293c47; text-decoration: none;">Terms of Use</a>
+                                    <a href="{{ url('storage/'.$terms_of_use) }}" style="color:#293c47; text-decoration: none;">Terms of Use</a>
                                 </div>
                                 <div style="margin-top: 10px; font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:300;line-height:1;text-align:center;color:#575757;">
                                     <a href="{{ $unsubscribe_link }}" style="color:#575757;">Unsubscribe</a>

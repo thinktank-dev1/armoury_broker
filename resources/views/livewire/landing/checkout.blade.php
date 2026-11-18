@@ -604,7 +604,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terms_check" wire:model.live="terms_and_conditions">
                                 <label class="form-check-label" for="terms_check">
-                                    <small style="color: #000" class="checkout-acknowledgement">I acknowledge that I have read and understood the <a href="{{ url('docs/Terms_of_Use_V3_2_Revised.pdf') }}" target="_blank" style="font-weight: 600;">Terms and Conditions</a>. I confirm that I am legally authorized to use this platform and that I will comply with all applicable South African laws, including the Firearms Control Act (60), 2020. I understand that I am solely responsible for ensuring compliance with all relevant regulations and laws.</small>
+                                    <small style="color: #000" class="checkout-acknowledgement">I acknowledge that I have read and understood the <a href="{{ url('storage/'.$terms_of_use) }}" target="_blank" style="font-weight: 600;">Terms and Conditions</a>. I confirm that I am legally authorized to use this platform and that I will comply with all applicable South African laws, including the Firearms Control Act (60), 2020. I understand that I am solely responsible for ensuring compliance with all relevant regulations and laws.</small>
                                 </label>
                             </div>
                         </div>

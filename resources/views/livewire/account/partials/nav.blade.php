@@ -77,6 +77,12 @@
                         <span class="hide-menu">Users</span>
                     </a>
                 </li>
+                <li>
+                    <a class="waves-effect waves-dark" href="{{ url('admin/legal-docs') }}" aria-expanded="false">
+                        <i class="icon-list"></i>
+                        <span class="hide-menu">Legal Docs</span>
+                    </a>
+                </li>
                 @else
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('wishlist') }}" aria-expanded="false">

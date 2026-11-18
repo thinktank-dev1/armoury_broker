@@ -33,8 +33,8 @@
                             <li><a href="{{ url('support') }}">Support</a></li>
                             <li><a href="{{ url('about-us') }}">About Us</a></li>
                             <li><a href="{{ url('how-it-works') }}">How Armoury Broker Works</a></li>
-                            <li><a href="{{ url('docs/Terms_of_Use_V3_2_Revised.pdf') }}" target="_blank">Terms of Use</a></li>
-                            <li><a href="{{ url('docs/Privacy Policy V3.0_20260301.pdf') }}" target="_blank">Privacy Policy</a></li>
+                            <li><a href="{{ url('storage/'.$terms_of_use) }}" target="_blank">Terms of Use</a></li>
+                            <li><a href="{{ url('storage/'.$privacy_policy) }}" target="_blank">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>

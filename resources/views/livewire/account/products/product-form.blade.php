@@ -576,7 +576,7 @@
                                         <div class="form-check mb-2">
                                             <input class="form-check-input" type="checkbox" id="acknowledgement" name="acknowledgement" wire:model.defer="acknowledgement">
                                             <label class="form-check-label" for="acknowledgement">
-                                                <p>I have read and agree to the platform <a href="docs/Terms_of_Use_V3_2_Revised.pdf" target="_blank" class="bold">Terms and Conditions</a></p>
+                                                <p>I have read and agree to the platform <a href="{{ url('storage/'.$terms_of_use) }}" target="_blank" class="bold">Terms and Conditions</a></p>
                                             </label>
                                         </div>
                                     </div>

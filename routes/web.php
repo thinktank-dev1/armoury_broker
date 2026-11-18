@@ -48,6 +48,7 @@ use App\Livewire\Account\Admin\Vendors\ViewVendor;
 use App\Livewire\Account\Admin\ListUsers;
 use App\Livewire\Account\Admin\Withdrawals;
 use App\Livewire\Account\Admin\Disputes;
+use App\Livewire\Account\Admin\LegalDocs;
 
 use App\Livewire\Account\Products\ProductForm;
 use App\Livewire\Account\MyArmoury\MyArmoury;
@@ -159,6 +160,8 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::get('admin/withdrawals', Withdrawals::class);
 
         Route::get('admin/disputes', Disputes::class);
+
+        Route::get('admin/legal-docs', LegalDocs::class);
     });
 });
 Route::get('/{url_name}', VendorDetail::class);
