@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Notifications\ChannelManager;
 use App\Notifications\Channel\CommunicationChannel;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 
 use App\Models\LegalDoc;
 
@@ -25,17 +26,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $docs = LegalDoc::get();
+        
         $terms_of_use = null;
         $privacy_policy = null;
 
-        foreach ($docs as $doc) {
-            if ($doc->name === 'terms_of_use') {
-                $terms_of_use = $doc->link_url;
-            }
+        if (Schema::hasTable('legal_docs')) {
+            $docs = LegalDoc::get();
+            foreach ($docs as $doc) {
+                if ($doc->name === 'terms_of_use') {
+                    $terms_of_use = $doc->link_url;
+                }
 
-            if ($doc->name === 'privacy_policy') {
-                $privacy_policy = $doc->link_url;
+                if ($doc->name === 'privacy_policy') {
+                    $privacy_policy = $doc->link_url;
+                }
             }
         }
 
