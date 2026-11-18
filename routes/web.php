@@ -8,6 +8,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\EnsureHasVendor;
 
 use App\Http\Controllers\ProcessPayment;
+use App\Http\Controllers\ProxyController;
 
 use App\Livewire\Auth\Login;
 use App\Http\Controllers\SocialAuthController;
@@ -134,6 +135,8 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::get('cart/{id}', Checkout::class);
         Route::get('cart/{id}/{order_id}', Checkout::class);
         Route::get('pf-payment/{id}/{status}', PaymentNotice::class);
+
+        Route::get('/pudo/download/{type}/{parcelId}', [ProxyController::class, 'download'])->name('pudo.download');
     });
 
     Route::middleware([AdminMiddleware::class])->group(function (){

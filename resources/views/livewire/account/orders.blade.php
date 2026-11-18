@@ -174,8 +174,19 @@
                                                 <th class="text-end">Waybill</th>
                                                 <td class="">
                                                     <b>{{ $item->waybill }}</b>
+                                                    @if($item->parcel_id)
+                                                        <a href="{{ url('pudo/download/waybill/'.$item->parcel_id) }}" class="btn btn-primary btn-sm ms-3" target="_blank">View</a>
+                                                    @endif
                                                 </td>
                                             </tr>
+                                            @if($item->parcel_id)
+                                            <tr class="mb-1">
+                                                <th class="text-end">Waybill Sticker</th>
+                                                <td class="">
+                                                    <a href="{{ url('pudo/download/sticker/'.$item->parcel_id) }}" class="btn btn-primary btn-sm" target="_blank">View Sticker</a>
+                                                </td>
+                                            </tr>
+                                            @endif
                                             @endif
                                             <tr class="mb-1">
                                                 <th class="text-end">Collection From</th>

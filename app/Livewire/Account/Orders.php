@@ -37,6 +37,8 @@ class Orders extends Component
     public $grievance_types = [];
     public $cur_dsp_id;
 
+    public $waybill_link;
+
     public function mount(){
         $this->filter = "all_orders";
 
